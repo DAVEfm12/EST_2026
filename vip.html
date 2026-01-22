@@ -79,35 +79,44 @@
   <!-- ===================================================== -->
   <!--                 BENEFICIOS                            -->
   <!-- ===================================================== -->
-  <section class="container py-5" id="beneficios" data-aos="fade-up">
+<section class="container py-5" id="beneficios" data-aos="fade-up">
 
-    <h2 class="text-center section-title">Beneficios Exclusivos</h2>
+  <h2 class="text-center section-title text-warning">
+    Catálogo de Beneficios VIP
+  </h2>
 
-    <div class="row g-4 mt-4">
+  <p class="text-center text-white-50 mb-4">
+    Administración de beneficios exclusivos (CRUD)
+  </p>
 
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
-        <div class="card p-4 h-100">
-          <h3 class="card-title">Atención Preferente</h3>
-          <p>Acceso directo sin filas y horarios personalizados.</p>
-        </div>
+  <!-- FORMULARIO -->
+  <div class="card bg-dark border-warning p-4 mb-5">
+    <h4 class="mb-3">Agregar / Editar Beneficio</h4>
+
+    <form id="formBeneficio">
+      <input type="hidden" id="beneficioIndex">
+
+      <div class="mb-3">
+        <label class="form-label">Título del beneficio</label>
+        <input type="text" id="beneficioTitulo" class="form-control" required>
       </div>
 
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-        <div class="card p-4 h-100">
-          <h3 class="card-title">Zona Lounge VIP</h3>
-          <p>Espacio privado con aromaterapia, música premium y ambiente especial.</p>
-        </div>
+      <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea id="beneficioDescripcion" class="form-control" rows="2" required></textarea>
       </div>
 
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="450">
-        <div class="card p-4 h-100">
-          <h3 class="card-title">Cortesías Exclusivas</h3>
-          <p>Bebida especial y un detalle Gourmet en cada visita VIP.</p>
-        </div>
-      </div>
+      <button type="submit" class="btn btn-warning w-100">
+        Guardar Beneficio
+      </button>
+    </form>
+  </div>
 
-    </div>
-  </section>
+  <!-- LISTADO -->
+  <div class="row g-4" id="listaBeneficios"></div>
+
+</section>
+
 
 <!-- ===================================================== -->
 <!--                 CARRUSEL VIP                          -->
@@ -382,5 +391,82 @@ if (!CONFIG.modulos.academia) {
   document.getElementById("menuAcademia")?.remove();
 }
 </script>
+<script>
+let beneficios = [
+  {
+    titulo: "Atención Preferente",
+    descripcion: "Acceso directo sin filas y horarios personalizados."
+  },
+  {
+    titulo: "Zona Lounge VIP",
+    descripcion: "Espacio privado con aromaterapia, música premium y ambiente especial."
+  },
+  {
+    titulo: "Cortesías Exclusivas",
+    descripcion: "Bebida especial y un detalle Gourmet en cada visita VIP."
+  }
+];
+
+let editBeneficio = null;
+
+function renderBeneficios() {
+  const contenedor = document.getElementById("listaBeneficios");
+  contenedor.innerHTML = "";
+
+  beneficios.forEach((b, index) => {
+    contenedor.innerHTML += `
+      <div class="col-md-4">
+        <div class="card bg-dark border-warning h-100 p-4 text-center">
+          <h5 class="fw-bold text-warning">${b.titulo}</h5>
+          <p class="text-white-50">${b.descripcion}</p>
+
+          <div class="mt-3">
+            <button class="btn btn-sm btn-info me-2" onclick="editarBeneficio(${index})">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="eliminarBeneficio(${index})">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+document.getElementById("formBeneficio").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const titulo = document.getElementById("beneficioTitulo").value;
+  const descripcion = document.getElementById("beneficioDescripcion").value;
+
+  if (editBeneficio === null) {
+    beneficios.push({ titulo, descripcion });
+  } else {
+    beneficios[editBeneficio] = { titulo, descripcion };
+    editBeneficio = null;
+  }
+
+  this.reset();
+  renderBeneficios();
+});
+
+function editarBeneficio(index) {
+  const b = beneficios[index];
+  document.getElementById("beneficioTitulo").value = b.titulo;
+  document.getElementById("beneficioDescripcion").value = b.descripcion;
+  editBeneficio = index;
+}
+
+function eliminarBeneficio(index) {
+  if (confirm("¿Eliminar este beneficio VIP?")) {
+    beneficios.splice(index, 1);
+    renderBeneficios();
+  }
+}
+
+renderBeneficios();
+</script>
+
 </body>
 </html>
