@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin | Catálogo de Beneficios VIP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-white">
+
+<div class="container py-5">
+
+  <!-- TÍTULO -->
+  <h1 class="text-warning fw-bold text-center mb-4">
+    Administración · Catálogo de Beneficios VIP
+  </h1>
+
+  <p class="text-center text-white-50 mb-5">
+    Gestión de beneficios exclusivos
+  </p>
+
+  <!-- FORMULARIO -->
+  <div class="card bg-black border-warning mb-5">
+    <div class="card-body">
+      <h5 class="card-title text-warning mb-3">Agregar / Editar Beneficio</h5>
+
+      <form id="beneficioForm">
+        <input type="hidden" id="beneficioIndex">
+
+        <div class="mb-3">
+          <label class="form-label">Título del beneficio</label>
+          <input type="text" id="titulo" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Descripción</label>
+          <textarea id="descripcion" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-warning">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+        <button type="reset" class="btn btn-outline-light ms-2" onclick="resetForm()">
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LISTADO -->
+  <h4 class="text-warning mb-3">Listado de Beneficios</h4>
+
+  <table class="table table-dark table-bordered align-middle">
+    <thead>
+      <tr class="text-warning">
+        <th>#</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tablaBeneficios"></tbody>
+  </table>
+
+</div>
+
+<script>
+let beneficios = JSON.parse(localStorage.getItem("beneficiosVIP")) || [];
+
+function renderTabla() {
+  const tabla = document.getElementById("tablaBeneficios");
+  tabla.innerHTML = "";
+
+  beneficios.forEach((b, index) => {
+    tabla.innerHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${b.titulo}</td>
+        <td>${b.descripcion}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" onclick="editar(${index})">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="eliminar(${index})">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+document.getElementById("beneficioForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const titulo = document.getElementById("titulo").value;
+  const descripcion = document.getElementById("descripcion").value;
+  const index = document.getElementById("beneficioIndex").value;
+
+  if(index === ""){
+    beneficios.push({ titulo, descripcion });
+  } else {
+    beneficios[index] = { titulo, descripcion };
+  }
+
+  localStorage.setItem("beneficiosVIP", JSON.stringify(beneficios));
+  resetForm();
+  renderTabla();
+});
+
+function editar(index){
+  document.getElementById("titulo").value = beneficios[index].titulo;
+  document.getElementById("descripcion").value = beneficios[index].descripcion;
+  document.getElementById("beneficioIndex").value = index;
+}
+
+function eliminar(index){
+  if(confirm("¿Eliminar este beneficio?")){
+    beneficios.splice(index, 1);
+    localStorage.setItem("beneficiosVIP", JSON.stringify(beneficios));
+    renderTabla();
+  }
+}
+
+function resetForm(){
+  document.getElementById("beneficioForm").reset();
+  document.getElementById("beneficioIndex").value = "";
+}
+
+renderTabla();
+</script>
+
+</body>
+</html>
