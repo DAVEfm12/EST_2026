@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | LOCO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="css/inicio.css">
+</head>
+
+<body class="bg-black text-white">
+
+<div class="container py-5">
+
+  <h2 class="text-warning fw-bold mb-4">
+    Dashboard — <span id="tipoNegocio"></span>
+  </h2>
+
+  <!-- TARJETAS RESUMEN -->
+  <div class="row g-4 mb-4">
+
+    <div class="col-md-4">
+      <div class="bg-dark p-4 rounded-4 border border-warning text-center">
+        <h6 class="text-white-50">Citas Hoy</h6>
+        <h2 class="text-warning" id="totalCitas">0</h2>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="bg-dark p-4 rounded-4 border border-warning text-center">
+        <h6 class="text-white-50">Ingresos Hoy</h6>
+        <h2 class="text-warning">$<span id="totalPagos">0</span></h2>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="bg-dark p-4 rounded-4 border border-warning text-center">
+        <h6 class="text-white-50">Próxima Cita</h6>
+        <p class="text-warning fw-bold" id="proximaCita">—</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TABLA DE CITAS -->
+  <div class="bg-dark p-4 rounded-4 border border-warning shadow-lg">
+    <h5 class="text-warning mb-3">Citas del día</h5>
+
+    <table class="table table-dark table-bordered border-warning align-middle text-center">
+      <thead>
+        <tr class="text-warning">
+          <th>Cliente</th>
+          <th>Servicio</th>
+          <th>Hora</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="tablaCitas">
+        <!-- JS -->
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- JS -->
+<script src="js/config.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
