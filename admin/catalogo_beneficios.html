@@ -2,91 +2,154 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Admin | Catálogo de Beneficios VIP</title>
+  <title>Administración | Catálogo de Beneficios</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: radial-gradient(circle at top, #111 0%, #000 60%);
+    }
+    .card {
+      border-radius: 1rem;
+    }
+    .table thead {
+      background-color: #111;
+    }
+    .badge-beneficio {
+      background-color: #ffc107;
+      color: #000;
+      font-weight: 600;
+    }
+    .empty-state {
+      border: 2px dashed #444;
+      border-radius: 1rem;
+    }
+  </style>
 </head>
 
-<body class="bg-dark text-white">
+<body class="text-white">
 
 <div class="container py-5">
 
-  <!-- TÍTULO -->
-  <h1 class="text-warning fw-bold text-center mb-4">
-    Administración · Catálogo de Beneficios VIP
-  </h1>
-
-  <p class="text-center text-white-50 mb-5">
-    Gestión de beneficios exclusivos
-  </p>
-
-  <!-- FORMULARIO -->
-  <div class="card bg-black border-warning mb-5">
-    <div class="card-body">
-      <h5 class="card-title text-warning mb-3">Agregar / Editar Beneficio</h5>
-
-      <form id="beneficioForm">
-        <input type="hidden" id="beneficioIndex">
-
-        <div class="mb-3">
-          <label class="form-label">Título del beneficio</label>
-          <input type="text" id="titulo" class="form-control" required>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Descripción</label>
-          <textarea id="descripcion" class="form-control" rows="3" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-warning">
-          <i class="fas fa-save"></i> Guardar
-        </button>
-        <button type="reset" class="btn btn-outline-light ms-2" onclick="resetForm()">
-          Cancelar
-        </button>
-      </form>
-    </div>
+  <!-- HEADER -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold text-warning mb-2">
+      <i class="fas fa-crown"></i> Catálogo de Beneficios
+    </h1>
+    <p class="text-white-50">
+      Panel de administración · Gestión interna
+    </p>
   </div>
 
-  <!-- LISTADO -->
-  <h4 class="text-warning mb-3">Listado de Beneficios</h4>
+  <div class="row g-4">
 
-  <table class="table table-dark table-bordered align-middle">
-    <thead>
-      <tr class="text-warning">
-        <th>#</th>
-        <th>Título</th>
-        <th>Descripción</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody id="tablaBeneficios"></tbody>
-  </table>
+    <!-- FORMULARIO -->
+    <div class="col-lg-4">
+      <div class="card bg-black border-warning h-100">
+        <div class="card-body">
+          <h5 class="text-warning mb-4">
+            <i class="fas fa-plus-circle"></i> Gestión de Beneficio
+          </h5>
+
+          <form id="formBeneficio">
+            <input type="hidden" id="indexBeneficio">
+
+            <div class="mb-3">
+              <label class="form-label">Título</label>
+              <input type="text" id="titulo" class="form-control" placeholder="Ej. Atención Preferente" required>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Descripción</label>
+              <textarea id="descripcion" class="form-control" rows="4"
+                placeholder="Describe claramente el beneficio" required></textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-warning fw-bold">
+                <i class="fas fa-save"></i> Guardar beneficio
+              </button>
+              <button type="button" class="btn btn-outline-light" onclick="resetForm()">
+                Cancelar edición
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="col-lg-8">
+      <div class="card bg-black border-warning h-100">
+        <div class="card-body">
+
+          <h5 class="text-warning mb-4">
+            <i class="fas fa-list"></i> Beneficios registrados
+          </h5>
+
+          <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle">
+              <thead>
+                <tr class="text-warning">
+                  <th>#</th>
+                  <th>Beneficio</th>
+                  <th>Descripción</th>
+                  <th class="text-center">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaBeneficios"></tbody>
+            </table>
+          </div>
+
+          <div id="emptyState" class="empty-state text-center p-5 d-none">
+            <i class="fas fa-box-open fa-3x text-secondary mb-3"></i>
+            <p class="text-white-50 mb-0">
+              No hay beneficios registrados aún
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 </div>
 
 <script>
-let beneficios = JSON.parse(localStorage.getItem("beneficiosVIP")) || [];
+let beneficios = JSON.parse(localStorage.getItem("beneficios")) || [];
 
 function renderTabla() {
   const tabla = document.getElementById("tablaBeneficios");
+  const empty = document.getElementById("emptyState");
   tabla.innerHTML = "";
+
+  if (beneficios.length === 0) {
+    empty.classList.remove("d-none");
+    return;
+  }
+
+  empty.classList.add("d-none");
 
   beneficios.forEach((b, index) => {
     tabla.innerHTML += `
       <tr>
         <td>${index + 1}</td>
-        <td>${b.titulo}</td>
-        <td>${b.descripcion}</td>
         <td>
-          <button class="btn btn-sm btn-warning me-2" onclick="editar(${index})">
+          <span class="badge badge-beneficio">${b.titulo}</span>
+        </td>
+        <td class="text-white-50">${b.descripcion}</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-outline-warning me-2" onclick="editar(${index})">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-sm btn-danger" onclick="eliminar(${index})">
+          <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${index})">
             <i class="fas fa-trash"></i>
           </button>
         </td>
@@ -95,44 +158,44 @@ function renderTabla() {
   });
 }
 
-document.getElementById("beneficioForm").addEventListener("submit", function(e){
+document.getElementById("formBeneficio").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const titulo = document.getElementById("titulo").value;
-  const descripcion = document.getElementById("descripcion").value;
-  const index = document.getElementById("beneficioIndex").value;
+  const titulo = document.getElementById("titulo").value.trim();
+  const descripcion = document.getElementById("descripcion").value.trim();
+  const index = document.getElementById("indexBeneficio").value;
 
-  if(index === ""){
-    beneficios.push({ titulo, descripcion });
+  if (index === "") {
+    beneficios.push({ titulo, descripcion }); // CREATE
   } else {
-    beneficios[index] = { titulo, descripcion };
+    beneficios[index] = { titulo, descripcion }; // UPDATE
   }
 
-  localStorage.setItem("beneficiosVIP", JSON.stringify(beneficios));
+  localStorage.setItem("beneficios", JSON.stringify(beneficios));
   resetForm();
   renderTabla();
 });
 
-function editar(index){
+function editar(index) {
   document.getElementById("titulo").value = beneficios[index].titulo;
   document.getElementById("descripcion").value = beneficios[index].descripcion;
-  document.getElementById("beneficioIndex").value = index;
+  document.getElementById("indexBeneficio").value = index;
 }
 
-function eliminar(index){
-  if(confirm("¿Eliminar este beneficio?")){
-    beneficios.splice(index, 1);
-    localStorage.setItem("beneficiosVIP", JSON.stringify(beneficios));
+function eliminar(index) {
+  if (confirm("¿Deseas eliminar este beneficio del catálogo?")) {
+    beneficios.splice(index, 1); // DELETE
+    localStorage.setItem("beneficios", JSON.stringify(beneficios));
     renderTabla();
   }
 }
 
-function resetForm(){
-  document.getElementById("beneficioForm").reset();
-  document.getElementById("beneficioIndex").value = "";
+function resetForm() {
+  document.getElementById("formBeneficio").reset();
+  document.getElementById("indexBeneficio").value = "";
 }
 
-renderTabla();
+renderTabla(); // READ
 </script>
 
 </body>
