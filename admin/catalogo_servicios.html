@@ -13,6 +13,13 @@
 
 <div class="container py-5">
 
+  <!-- 🔙 BOTÓN DASHBOARD -->
+  <div class="mb-4">
+    <a href="./Dashboard.html" class="btn btn-outline-light">
+      <i class="fas fa-arrow-left"></i> Ir al Dashboard
+    </a>
+  </div>
+  <!-- TÍTULO -->
   <h1 class="text-warning fw-bold text-center mb-2">
     Catálogo de Servicios
   </h1>
@@ -69,7 +76,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-/* ===== DATOS SIMULADOS (SIN BACKEND) ===== */
+/* ===== DATOS SIMULADOS ===== */
 let servicios = [
   { id: 1, nombre: "Uñas Acrílicas", descripcion: "Aplicación profesional con diseño", precio: 500 },
   { id: 2, nombre: "Maquillaje Profesional", descripcion: "Eventos y sesiones especiales", precio: 800 }
@@ -92,10 +99,10 @@ function renderServicios() {
 
           <div class="d-flex gap-2">
             <button class="btn btn-sm btn-outline-warning" onclick="editarServicio(${s.id})">
-              <i class="fas fa-edit"></i>
+              <i class="fas fa-edit"></i> Editar
             </button>
             <button class="btn btn-sm btn-outline-danger" onclick="eliminarServicio(${s.id})">
-              <i class="fas fa-trash"></i>
+              <i class="fas fa-trash"></i> Eliminar
             </button>
           </div>
         </div>
