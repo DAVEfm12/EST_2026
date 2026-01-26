@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Sistema de Belleza | Catálogo de Instructores</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,6 +17,10 @@
     }
     .card {
       border-radius: 1rem;
+    }
+    .doc-label {
+      font-size: .85rem;
+      color: #bbb;
     }
   </style>
 </head>
@@ -38,7 +42,7 @@
       <i class="fas fa-user-graduate"></i> Catálogo de Instructores
     </h1>
     <p class="text-white-50">
-      Administración de instructores del sistema
+      Administración de instructores y documentación oficial
     </p>
   </div>
 
@@ -70,7 +74,7 @@
               <input type="number" id="experiencia" class="form-control" min="0" required>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-3">
               <label class="form-label">Estatus</label>
               <select id="estatus" class="form-select">
                 <option value="Activo">Activo</option>
@@ -78,9 +82,35 @@
               </select>
             </div>
 
+            <hr class="border-warning">
+
+            <h6 class="text-warning mb-3">
+              <i class="fas fa-folder-open"></i> Documentación
+            </h6>
+
+            <div class="mb-2">
+              <label class="doc-label">Identificación (INE / Pasaporte)</label>
+              <input type="file" id="docIdentificacion" class="form-control">
+            </div>
+
+            <div class="mb-2">
+              <label class="doc-label">Certificación</label>
+              <input type="file" id="docCertificacion" class="form-control">
+            </div>
+
+            <div class="mb-2">
+              <label class="doc-label">Currículum (CV)</label>
+              <input type="file" id="docCV" class="form-control">
+            </div>
+
+            <div class="mb-4">
+              <label class="doc-label">Foto del Instructor</label>
+              <input type="file" id="foto" class="form-control">
+            </div>
+
             <div class="d-grid gap-2">
               <button type="submit" class="btn btn-warning fw-bold">
-                <i class="fas fa-save"></i> Guardar
+                <i class="fas fa-save"></i> Guardar Instructor
               </button>
               <button type="button" class="btn btn-outline-light" onclick="resetForm()">
                 Cancelar
@@ -107,8 +137,9 @@
                   <th>#</th>
                   <th>Nombre</th>
                   <th>Especialidad</th>
-                  <th>Experiencia</th>
+                  <th>Exp.</th>
                   <th>Estatus</th>
+                  <th>Documentos</th>
                   <th class="text-center">Acciones</th>
                 </tr>
               </thead>
@@ -125,39 +156,9 @@
 </div>
 
 <script>
-/* ===============================
-   DATOS INICIALES
-   =============================== */
-const instructoresIniciales = [
-  {
-    nombre: "Ana López",
-    especialidad: "Maquillaje Profesional",
-    experiencia: 5,
-    estatus: "Activo"
-  },
-  {
-    nombre: "Carlos Méndez",
-    especialidad: "Uñas Acrílicas",
-    experiencia: 8,
-    estatus: "Activo"
-  },
-  {
-    nombre: "María Torres",
-    especialidad: "Peinados y Colorimetría",
-    experiencia: 6,
-    estatus: "Inactivo"
-  }
-];
+let instructores = JSON.parse(localStorage.getItem("instructores")) || [];
 
-if (!localStorage.getItem("instructores")) {
-  localStorage.setItem("instructores", JSON.stringify(instructoresIniciales));
-}
-
-let instructores = JSON.parse(localStorage.getItem("instructores"));
-
-/* ===============================
-   READ
-   =============================== */
+/* ===== READ ===== */
 function renderTabla() {
   const tabla = document.getElementById("tablaInstructores");
   tabla.innerHTML = "";
@@ -174,6 +175,12 @@ function renderTabla() {
             ${i.estatus}
           </span>
         </td>
+        <td>
+          <span class="badge bg-info">INE</span>
+          <span class="badge bg-warning text-dark">Cert</span>
+          <span class="badge bg-primary">CV</span>
+          <span class="badge bg-secondary">Foto</span>
+        </td>
         <td class="text-center">
           <button class="btn btn-sm btn-outline-warning me-2" onclick="editar(${index})">
             <i class="fas fa-edit"></i> Editar
@@ -187,22 +194,29 @@ function renderTabla() {
   });
 }
 
-/* ===============================
-   CREATE / UPDATE
-   =============================== */
+/* ===== CREATE / UPDATE ===== */
 document.getElementById("formInstructor").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const nombre = document.getElementById("nombre").value;
-  const especialidad = document.getElementById("especialidad").value;
-  const experiencia = document.getElementById("experiencia").value;
-  const estatus = document.getElementById("estatus").value;
-  const index = document.getElementById("indexInstructor").value;
+  const instructor = {
+    nombre: nombre.value,
+    especialidad: especialidad.value,
+    experiencia: experiencia.value,
+    estatus: estatus.value,
+    docs: {
+      ine: docIdentificacion.value,
+      cert: docCertificacion.value,
+      cv: docCV.value,
+      foto: foto.value
+    }
+  };
 
-  if (index === "") {
-    instructores.push({ nombre, especialidad, experiencia, estatus });
+  const index = indexInstructor.value;
+
+  if(index === ""){
+    instructores.push(instructor);
   } else {
-    instructores[index] = { nombre, especialidad, experiencia, estatus };
+    instructores[index] = instructor;
   }
 
   localStorage.setItem("instructores", JSON.stringify(instructores));
@@ -210,35 +224,30 @@ document.getElementById("formInstructor").addEventListener("submit", function(e)
   renderTabla();
 });
 
-/* ===============================
-   EDIT
-   =============================== */
-function editar(index) {
+/* ===== EDIT ===== */
+function editar(index){
   const i = instructores[index];
-  document.getElementById("nombre").value = i.nombre;
-  document.getElementById("especialidad").value = i.especialidad;
-  document.getElementById("experiencia").value = i.experiencia;
-  document.getElementById("estatus").value = i.estatus;
-  document.getElementById("indexInstructor").value = index;
+
+  nombre.value = i.nombre;
+  especialidad.value = i.especialidad;
+  experiencia.value = i.experiencia;
+  estatus.value = i.estatus;
+  indexInstructor.value = index;
 }
 
-/* ===============================
-   DELETE
-   =============================== */
-function eliminar(index) {
-  if (confirm("¿Deseas eliminar este instructor?")) {
-    instructores.splice(index, 1);
+/* ===== DELETE ===== */
+function eliminar(index){
+  if(confirm("¿Eliminar este instructor y su documentación?")){
+    instructores.splice(index,1);
     localStorage.setItem("instructores", JSON.stringify(instructores));
     renderTabla();
   }
 }
 
-/* ===============================
-   RESET
-   =============================== */
-function resetForm() {
-  document.getElementById("formInstructor").reset();
-  document.getElementById("indexInstructor").value = "";
+/* ===== RESET ===== */
+function resetForm(){
+  formInstructor.reset();
+  indexInstructor.value = "";
 }
 
 renderTabla();
