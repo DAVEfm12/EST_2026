@@ -15,13 +15,42 @@
       background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
       color: white;
     }
+
     .card {
       border-radius: 1rem;
     }
+
     .curso-img {
       height: 180px;
       object-fit: cover;
       border-radius: .8rem;
+    }
+
+    /* 🎨 GOLDEN ROSE */
+    .golden {
+      color: #D4AF37;
+    }
+
+    .golden-soft {
+      color: #E6B7C2;
+    }
+
+    .precio {
+      color: #D4AF37;
+      font-size: 1.2rem;
+    }
+
+    .form-label {
+      color: #D4AF37;
+    }
+
+    .card p {
+      color: #E6B7C2;
+      margin-bottom: .4rem;
+    }
+
+    .card strong {
+      color: #D4AF37;
     }
   </style>
 </head>
@@ -39,10 +68,10 @@
 
   <!-- TÍTULO -->
   <div class="text-center mb-5">
-    <h1 class="fw-bold text-warning">
+    <h1 class="fw-bold golden">
       <i class="fas fa-book-open"></i> Catálogo de Cursos
     </h1>
-    <p class="text-white-50">
+    <p class="golden-soft">
       Administración académica de cursos del sistema
     </p>
   </div>
@@ -54,7 +83,7 @@
       <div class="card bg-black border-warning h-100">
         <div class="card-body">
 
-          <h5 class="text-warning mb-4">
+          <h5 class="golden mb-4">
             <i class="fas fa-plus-circle"></i> Agregar / Editar Curso
           </h5>
 
@@ -87,7 +116,7 @@
 
             <div class="mb-3">
               <label class="form-label">Duración</label>
-              <input type="text" id="duracion" class="form-control" placeholder="Ej. 20 horas">
+              <input type="text" id="duracion" class="form-control">
             </div>
 
             <div class="mb-3">
@@ -133,9 +162,6 @@
 </div>
 
 <script>
-/* ===============================
-   DATOS INICIALES
-   =============================== */
 const cursosIniciales = [
   {
     nombre: "Maquillaje Profesional",
@@ -165,9 +191,6 @@ if (!localStorage.getItem("cursos")) {
 
 let cursos = JSON.parse(localStorage.getItem("cursos"));
 
-/* ===============================
-   READ
-   =============================== */
 function renderCursos() {
   const contenedor = document.getElementById("listaCursos");
   contenedor.innerHTML = "";
@@ -178,12 +201,13 @@ function renderCursos() {
         <div class="card bg-black border-warning h-100">
           ${c.imagen ? `<img src="${c.imagen}" class="curso-img w-100 mb-3">` : ""}
           <div class="card-body">
-            <h5 class="text-warning fw-bold">${c.nombre}</h5>
-            <p class="text-white-50">${c.descripcion}</p>
+            <h5 class="golden fw-bold">${c.nombre}</h5>
+            <p class="golden-soft">${c.descripcion}</p>
             <p><strong>Categoría:</strong> ${c.categoria}</p>
             <p><strong>Nivel:</strong> ${c.nivel}</p>
             <p><strong>Duración:</strong> ${c.duracion}</p>
-            <p class="fw-bold">$${c.precio}</p>
+            <p class="precio">$${c.precio}</p>
+
             <span class="badge ${c.estatus === 'Activo' ? 'bg-success' : 'bg-secondary'}">
               ${c.estatus}
             </span>
@@ -203,15 +227,12 @@ function renderCursos() {
   });
 }
 
-/* ===============================
-   CREATE / UPDATE
-   =============================== */
 document.getElementById("formCurso").addEventListener("submit", function(e){
   e.preventDefault();
 
   const reader = new FileReader();
-  const file = document.getElementById("imagen").files[0];
-  const index = document.getElementById("indexCurso").value;
+  const file = imagen.files[0];
+  const index = indexCurso.value;
 
   reader.onload = function() {
     const curso = {
@@ -225,24 +246,15 @@ document.getElementById("formCurso").addEventListener("submit", function(e){
       imagen: file ? reader.result : (index !== "" ? cursos[index].imagen : "")
     };
 
-    if (index === "") {
-      cursos.push(curso);
-    } else {
-      cursos[index] = curso;
-    }
-
+    index === "" ? cursos.push(curso) : cursos[index] = curso;
     localStorage.setItem("cursos", JSON.stringify(cursos));
     resetForm();
     renderCursos();
   };
 
-  if (file) reader.readAsDataURL(file);
-  else reader.onload();
+  file ? reader.readAsDataURL(file) : reader.onload();
 });
 
-/* ===============================
-   EDIT
-   =============================== */
 function editar(index) {
   const c = cursos[index];
   indexCurso.value = index;
@@ -255,9 +267,6 @@ function editar(index) {
   estatus.value = c.estatus;
 }
 
-/* ===============================
-   DELETE
-   =============================== */
 function eliminar(index) {
   if (confirm("¿Eliminar este curso?")) {
     cursos.splice(index, 1);
@@ -266,12 +275,9 @@ function eliminar(index) {
   }
 }
 
-/* ===============================
-   RESET
-   =============================== */
 function resetForm() {
-  document.getElementById("formCurso").reset();
-  document.getElementById("indexCurso").value = "";
+  formCurso.reset();
+  indexCurso.value = "";
 }
 
 renderCursos();
