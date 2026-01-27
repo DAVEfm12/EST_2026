@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema de Belleza | Catálogo de Cursos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: white;
+    }
+    .card {
+      border-radius: 1rem;
+    }
+    .curso-img {
+      height: 180px;
+      object-fit: cover;
+      border-radius: .8rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container py-5">
+
+  <!-- BOTÓN DASHBOARD -->
+  <div class="mb-4">
+    <a href="PANEL_ADMIN.html" class="btn btn-outline-light">
+      <i class="fas fa-arrow-left"></i> Ir al Panel
+    </a>
+  </div>
+
+  <!-- TÍTULO -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold text-warning">
+      <i class="fas fa-book-open"></i> Catálogo de Cursos
+    </h1>
+    <p class="text-white-50">
+      Administración académica de cursos del sistema
+    </p>
+  </div>
+
+  <div class="row g-4">
+
+    <!-- FORMULARIO -->
+    <div class="col-lg-4">
+      <div class="card bg-black border-warning h-100">
+        <div class="card-body">
+
+          <h5 class="text-warning mb-4">
+            <i class="fas fa-plus-circle"></i> Agregar / Editar Curso
+          </h5>
+
+          <form id="formCurso">
+            <input type="hidden" id="indexCurso">
+
+            <div class="mb-3">
+              <label class="form-label">Nombre del curso</label>
+              <input type="text" id="nombre" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Descripción</label>
+              <textarea id="descripcion" class="form-control" required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Categoría</label>
+              <input type="text" id="categoria" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Nivel</label>
+              <select id="nivel" class="form-select">
+                <option>Básico</option>
+                <option>Intermedio</option>
+                <option>Avanzado</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Duración</label>
+              <input type="text" id="duracion" class="form-control" placeholder="Ej. 20 horas">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Precio</label>
+              <input type="number" id="precio" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Imagen del curso</label>
+              <input type="file" id="imagen" class="form-control" accept="image/*">
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Estatus</label>
+              <select id="estatus" class="form-select">
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-warning fw-bold">
+                <i class="fas fa-save"></i> Guardar Curso
+              </button>
+              <button type="button" class="btn btn-outline-light" onclick="resetForm()">
+                Cancelar
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTADO -->
+    <div class="col-lg-8">
+      <div class="row g-4" id="listaCursos"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+/* ===============================
+   DATOS INICIALES
+   =============================== */
+const cursosIniciales = [
+  {
+    nombre: "Maquillaje Profesional",
+    descripcion: "Curso completo de maquillaje para eventos",
+    categoria: "Maquillaje",
+    nivel: "Básico",
+    duracion: "20 horas",
+    precio: 2500,
+    estatus: "Activo",
+    imagen: "IMG/Maq_Profesional.jpg"
+  },
+  {
+    nombre: "Uñas Acrílicas Avanzado",
+    descripcion: "Diseños profesionales y técnicas modernas",
+    categoria: "Uñas",
+    nivel: "Avanzado",
+    duracion: "30 horas",
+    precio: 3200,
+    estatus: "Activo",
+    imagen: "IMG/uñas_acrílicas_avanzadas.jpg"
+  }
+];
+
+if (!localStorage.getItem("cursos")) {
+  localStorage.setItem("cursos", JSON.stringify(cursosIniciales));
+}
+
+let cursos = JSON.parse(localStorage.getItem("cursos"));
+
+/* ===============================
+   READ
+   =============================== */
+function renderCursos() {
+  const contenedor = document.getElementById("listaCursos");
+  contenedor.innerHTML = "";
+
+  cursos.forEach((c, index) => {
+    contenedor.innerHTML += `
+      <div class="col-md-6">
+        <div class="card bg-black border-warning h-100">
+          ${c.imagen ? `<img src="${c.imagen}" class="curso-img w-100 mb-3">` : ""}
+          <div class="card-body">
+            <h5 class="text-warning fw-bold">${c.nombre}</h5>
+            <p class="text-white-50">${c.descripcion}</p>
+            <p><strong>Categoría:</strong> ${c.categoria}</p>
+            <p><strong>Nivel:</strong> ${c.nivel}</p>
+            <p><strong>Duración:</strong> ${c.duracion}</p>
+            <p class="fw-bold">$${c.precio}</p>
+            <span class="badge ${c.estatus === 'Activo' ? 'bg-success' : 'bg-secondary'}">
+              ${c.estatus}
+            </span>
+
+            <div class="mt-3 d-flex gap-2">
+              <button class="btn btn-sm btn-outline-warning" onclick="editar(${index})">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${index})">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/* ===============================
+   CREATE / UPDATE
+   =============================== */
+document.getElementById("formCurso").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const reader = new FileReader();
+  const file = document.getElementById("imagen").files[0];
+  const index = document.getElementById("indexCurso").value;
+
+  reader.onload = function() {
+    const curso = {
+      nombre: nombre.value,
+      descripcion: descripcion.value,
+      categoria: categoria.value,
+      nivel: nivel.value,
+      duracion: duracion.value,
+      precio: precio.value,
+      estatus: estatus.value,
+      imagen: file ? reader.result : (index !== "" ? cursos[index].imagen : "")
+    };
+
+    if (index === "") {
+      cursos.push(curso);
+    } else {
+      cursos[index] = curso;
+    }
+
+    localStorage.setItem("cursos", JSON.stringify(cursos));
+    resetForm();
+    renderCursos();
+  };
+
+  if (file) reader.readAsDataURL(file);
+  else reader.onload();
+});
+
+/* ===============================
+   EDIT
+   =============================== */
+function editar(index) {
+  const c = cursos[index];
+  indexCurso.value = index;
+  nombre.value = c.nombre;
+  descripcion.value = c.descripcion;
+  categoria.value = c.categoria;
+  nivel.value = c.nivel;
+  duracion.value = c.duracion;
+  precio.value = c.precio;
+  estatus.value = c.estatus;
+}
+
+/* ===============================
+   DELETE
+   =============================== */
+function eliminar(index) {
+  if (confirm("¿Eliminar este curso?")) {
+    cursos.splice(index, 1);
+    localStorage.setItem("cursos", JSON.stringify(cursos));
+    renderCursos();
+  }
+}
+
+/* ===============================
+   RESET
+   =============================== */
+function resetForm() {
+  document.getElementById("formCurso").reset();
+  document.getElementById("indexCurso").value = "";
+}
+
+renderCursos();
+</script>
+
+</body>
+</html>
