@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Punto de Venta | Belleza</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+body{
+  background:linear-gradient(135deg,#0f0f0f,#1a1a1a);
+  color:#fff;
+}
+.card{
+  background:#000;
+  border:2px solid #D4AF37;
+  border-radius:1rem;
+}
+.gold{color:#D4AF37;}
+.rose{color:#e6b8a2;}
+.btn-gold{
+  background:#D4AF37;
+  color:#000;
+  font-weight:bold;
+}
+.btn-gold:hover{background:#bfa233;}
+.table-dark td,.table-dark th{vertical-align:middle;}
+</style>
+</head>
+
+<body>
+<div class="container py-5">
+
+<a href="PANEL_ADMIN.html" class="btn btn-outline-light mb-4">
+<i class="fas fa-arrow-left"></i> Volver al Panel
+</a>
+
+<div class="text-center mb-4">
+<h1 class="gold fw-bold"><i class="fas fa-cash-register"></i> Punto de Venta</h1>
+<p class="text-white-50">Cobro de servicios por cita previa</p>
+</div>
+
+<div class="row g-4">
+
+<!-- FORMULARIO -->
+<div class="col-lg-4">
+<div class="card p-4 h-100">
+
+<h5 class="gold mb-3"><i class="fas fa-receipt"></i> Datos del Cliente</h5>
+
+<label class="rose form-label">Cliente</label>
+<input id="cliente" class="form-control mb-3" required>
+
+<label class="rose form-label">Cita</label>
+<input id="cita" class="form-control mb-3" placeholder="CITA-001" required>
+
+<label class="rose form-label">Servicio</label>
+<select id="servicio" class="form-select mb-3"></select>
+
+<button class="btn btn-gold w-100 mb-3" onclick="agregarServicio()">
+<i class="fas fa-plus"></i> Agregar Servicio
+</button>
+
+<label class="rose form-label">Método de Pago</label>
+<select id="pago" class="form-select mb-3" onchange="mostrarTransferencia()">
+<option>Efectivo</option>
+<option>Transferencia</option>
+<option>Tarjeta</option>
+</select>
+
+<div id="transferencia" class="alert alert-secondary d-none">
+<strong>Banco Azteca</strong><br>
+Cuenta: 1278459632<br>
+CLABE: 127180012784596325<br>
+OXXO Pay disponible
+</div>
+
+<button class="btn btn-success w-100" onclick="registrarVenta()">
+<i class="fas fa-check-circle"></i> Cobrar
+</button>
+
+</div>
+</div>
+
+<!-- CARRITO -->
+<div class="col-lg-8">
+<div class="card p-4 h-100">
+
+<h5 class="gold mb-3"><i class="fas fa-shopping-cart"></i> Servicios Seleccionados</h5>
+
+<div class="table-responsive">
+<table class="table table-dark table-hover">
+<thead class="rose">
+<tr>
+<th>Servicio</th>
+<th>Precio</th>
+<th></th>
+</tr>
+</thead>
+<tbody id="carrito"></tbody>
+</table>
+</div>
+
+<h4 class="gold text-end">
+Total: $<span id="total">0</span>
+</h4>
+
+<hr>
+
+<h5 class="gold mt-3"><i class="fas fa-list"></i> Historial del Día</h5>
+
+<div class="table-responsive">
+<table class="table table-dark table-sm">
+<thead class="rose">
+<tr>
+<th>Cita</th>
+<th>Cliente</th>
+<th>Total</th>
+<th>Pago</th>
+<th>Fecha</th>
+</tr>
+</thead>
+<tbody id="historial"></tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+const servicios = [
+{name:"Corte Mariposa",precio:150},
+{name:"Corte Bob",precio:150},
+{name:"Corte en Capas",precio:150},
+{name:"Servicio Completo Cabello",precio:300},
+{name:"Balayage",precio:2000},
+{name:"Baby Lights",precio:2000},
+{name:"Aplicación de Tinte",precio:500},
+{name:"Aplicación de Tinte VIP",precio:1200},
+{name:"Uñas Acrílicas #2",precio:350},
+{name:"Uñas Acrílicas #3 o #4",precio:500},
+{name:"Uñas Acrílicas XXL",precio:700},
+{name:"Uñas VIP",precio:1250},
+{name:"Pedicura Gel",precio:500},
+{name:"Pedicura Spa VIP",precio:1500}
+];
+
+const select = document.getElementById("servicio");
+servicios.forEach((s,i)=>{
+select.innerHTML += `<option value="${i}">${s.name} - $${s.precio}</option>`;
+});
+
+let carrito = [];
+
+function agregarServicio(){
+const s = servicios[servicio.value];
+carrito.push(s);
+renderCarrito();
+}
+
+function eliminar(index){
+carrito.splice(index,1);
+renderCarrito();
+}
+
+function renderCarrito(){
+carritoHTML = "";
+let total = 0;
+carrito.forEach((s,i)=>{
+total += s.precio;
+carritoHTML += `
+<tr>
+<td>${s.name}</td>
+<td class="gold">$${s.precio}</td>
+<td><button class="btn btn-danger btn-sm" onclick="eliminar(${i})">
+<i class="fas fa-trash"></i></button></td>
+</tr>`;
+});
+carrito.innerHTML = carritoHTML;
+document.getElementById("total").textContent = total;
+}
+
+function mostrarTransferencia(){
+transferencia.classList.toggle("d-none",pago.value!=="Transferencia");
+}
+
+function registrarVenta(){
+if(carrito.length===0) return alert("Agrega al menos un servicio");
+
+const venta={
+cliente:cliente.value,
+cita:cita.value,
+total:carrito.reduce((s,v)=>s+v.precio,0),
+pago:pago.value,
+fecha:new Date().toLocaleString()
+};
+
+const ventas=JSON.parse(localStorage.getItem("ventas"))||[];
+ventas.push(venta);
+localStorage.setItem("ventas",JSON.stringify(ventas));
+
+carrito=[];
+renderCarrito();
+cliente.value="";
+cita.value="";
+renderHistorial();
+alert("Cobro registrado correctamente ✔️");
+}
+
+function renderHistorial(){
+const ventas=JSON.parse(localStorage.getItem("ventas"))||[];
+historial.innerHTML="";
+ventas.forEach(v=>{
+historial.innerHTML+=`
+<tr>
+<td>${v.cita}</td>
+<td>${v.cliente}</td>
+<td class="gold">$${v.total}</td>
+<td>${v.pago}</td>
+<td>${v.fecha}</td>
+</tr>`;
+});
+}
+renderHistorial();
+</script>
+
+</body>
+</html>
