@@ -59,9 +59,29 @@ body{
 <label class="rose form-label">Servicio</label>
 <select id="servicio" class="form-select mb-3"></select>
 
+<label class="rose form-label">Material</label>
+<select id="material" class="form-select mb-3"></select>
+
+<button class="btn btn-outline-warning w-100 mb-3" onclick="agregarMaterial()">
+<i class="fas fa-box"></i> Agregar Material
+</button>
+
+
 <button class="btn btn-gold w-100 mb-3" onclick="agregarServicio()">
 <i class="fas fa-plus"></i> Agregar Servicio
 </button>
+<hr class="border-secondary">
+
+<h6 class="rose">Cobro Extra (opcional)</h6>
+
+<input id="extraDescripcion" class="form-control mb-2" placeholder="Ej. Diseño especial mano alzada">
+
+<input id="extraMonto" type="number" class="form-control mb-3" placeholder="Monto extra">
+
+<button class="btn btn-outline-info w-100 mb-3" onclick="agregarExtra()">
+<i class="fas fa-plus-circle"></i> Agregar Cobro Extra
+</button>
+
 
 <label class="rose form-label">Método de Pago</label>
 <select id="pago" class="form-select mb-3" onchange="mostrarTransferencia()">
@@ -155,6 +175,23 @@ servicios.forEach((s,i)=>{
 select.innerHTML += `<option value="${i}">${s.name} - $${s.precio}</option>`;
 });
 
+const materiales = [
+  {name:"Guantes desechables",precio:5},
+  {name:"Lima desechable",precio:20},
+  {name:"Gel color (2 capas)",precio:50},
+  {name:"Brillo final",precio:25},
+  {name:"Acrílico",precio:100},
+  {name:"Monómero",precio:100},
+  {name:"Tips",precio:15},
+  {name:"Cristal Swarovski G",precio:10},
+  {name:"Diseño por uña",precio:25}
+];
+
+const selectMaterial = document.getElementById("material");
+materiales.forEach((m,i)=>{
+  selectMaterial.innerHTML += `<option value="${i}">${m.name} - $${m.precio}</option>`;
+});
+
 let carrito = [];
 
 function agregarServicio(){
@@ -162,6 +199,31 @@ const s = servicios[servicio.value];
 carrito.push(s);
 renderCarrito();
 }
+
+function agregarMaterial(){
+    const m = materiales[material.value];
+    carrito.push(m);
+    renderCarrito();
+}
+function agregarExtra(){
+  const desc = extraDescripcion.value.trim();
+  const monto = parseFloat(extraMonto.value);
+
+  if(desc === "" || isNaN(monto) || monto <= 0){
+    alert("Ingresa descripción y monto válido para el cobro extra");
+    return;
+  }
+
+  carrito.push({
+    name: "Extra: " + desc,
+    precio: monto
+  });
+
+  extraDescripcion.value = "";
+  extraMonto.value = "";
+  renderCarrito();
+}
+
 
 function eliminar(index){
 carrito.splice(index,1);
