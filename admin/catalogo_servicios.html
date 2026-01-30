@@ -7,66 +7,133 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --golden-rose: #e6b8a2;
+      --deep-black: #000000;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--deep-black), #121212);
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Estilo de Tarjetas de Servicio */
+    .service-card {
+      background-color: var(--deep-black);
+      border: 2px solid var(--gold);
+      border-radius: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+    }
+
+    /* Formulario en Modal */
+    .modal-content {
+      background-color: var(--deep-black);
+      border: 2px solid var(--gold);
+      border-radius: 1.5rem;
+    }
+
+    .form-label {
+      color: var(--golden-rose); /* Rosa Dorado */
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      background-color: var(--deep-black) !important;
+      border: 1px solid #333;
+      color: var(--gold) !important; /* Texto en Oro */
+      border-radius: 0.75rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--golden-rose);
+      box-shadow: 0 0 8px rgba(230, 184, 162, 0.3);
+    }
+
+    /* Botones */
+    .btn-gold {
+      background-color: var(--gold);
+      color: var(--deep-black);
+      font-weight: bold;
+      border-radius: 0.75rem;
+    }
+
+    .btn-gold:hover {
+      background-color: var(--golden-rose);
+      color: var(--deep-black);
+    }
+
+    .text-rose { color: var(--golden-rose); }
+    .text-gold { color: var(--gold); }
+  </style>
 </head>
 
-<body class="bg-black text-white">
+<body>
 
 <div class="container py-5">
 
-  <!-- 🔙 BOTÓN DASHBOARD -->
   <div class="mb-4">
-    <a href="PANEL_ADMIN.html" class="btn btn-outline-light">
-      <i class="fas fa-arrow-left"></i> Ir al Panel
+    <a href="./PANEL_ADMIN.html" class="btn btn-outline-light border-0">
+      <i class="fas fa-arrow-left"></i> Volver al Panel
     </a>
   </div>
-  <!-- TÍTULO -->
-  <h1 class="text-warning fw-bold text-center mb-2">
-    Catálogo de Servicios
-  </h1>
-  <p class="text-center text-white-50 mb-4">
-    Administración de servicios
-  </p>
 
-  <!-- BOTÓN CREAR -->
-  <div class="text-end mb-4">
-    <button class="btn btn-warning fw-bold" data-bs-toggle="modal" data-bs-target="#modalServicio">
-      <i class="fas fa-plus"></i> Agregar Servicio
+  <div class="text-center mb-5">
+    <h1 class="text-gold fw-bold display-5">Catálogo de Servicios</h1>
+    <p class="text-rose">Administración de tratamientos y estética premium</p>
+  </div>
+
+  <div class="text-center mb-5">
+    <button class="btn btn-gold px-5 py-2 shadow" data-bs-toggle="modal" data-bs-target="#modalServicio" onclick="limpiarFormulario()">
+      <i class="fas fa-plus-circle me-2"></i> Nuevo Servicio
     </button>
   </div>
 
-  <!-- LISTADO -->
   <div class="row g-4" id="listaServicios">
-    <!-- JS -->
-  </div>
+    </div>
 
 </div>
 
-<!-- MODAL CREAR / EDITAR -->
 <div class="modal fade" id="modalServicio" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-white border border-warning">
+    <div class="modal-content p-3">
 
-      <div class="modal-header">
-        <h5 class="modal-title text-warning" id="modalTitulo">Nuevo Servicio</h5>
-        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-gold fw-bold" id="modalTitulo">Nuevo Servicio</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body">
         <input type="hidden" id="servicioId">
 
-        <label class="form-label">Nombre</label>
-        <input class="form-control bg-black text-white border-warning mb-3" id="nombre">
+        <div class="mb-3">
+          <label class="form-label">Nombre del Servicio</label>
+          <input class="form-control" id="nombre" placeholder="Ej. Balayage Pro">
+        </div>
 
-        <label class="form-label">Descripción</label>
-        <textarea class="form-control bg-black text-white border-warning mb-3" id="descripcion"></textarea>
+        <div class="mb-3">
+          <label class="form-label">Descripción</label>
+          <textarea class="form-control" id="descripcion" rows="3" placeholder="Detalles del servicio..."></textarea>
+        </div>
 
-        <label class="form-label">Precio</label>
-        <input type="number" class="form-control bg-black text-white border-warning" id="precio">
+        <div class="mb-3">
+          <label class="form-label">Precio ($)</label>
+          <input type="number" class="form-control" id="precio" placeholder="0.00">
+        </div>
       </div>
 
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button class="btn btn-warning fw-bold" onclick="guardarServicio()">Guardar</button>
+      <div class="modal-footer border-0">
+        <button class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-gold" onclick="guardarServicio()">Confirmar Cambios</button>
       </div>
 
     </div>
@@ -76,15 +143,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-/* ===== DATOS SIMULADOS ===== */
-let servicios = [
+let servicios = JSON.parse(localStorage.getItem("servicios")) || [
   { id: 1, nombre: "Uñas Acrílicas", descripcion: "Aplicación profesional con diseño", precio: 500 },
   { id: 2, nombre: "Maquillaje Profesional", descripcion: "Eventos y sesiones especiales", precio: 800 }
 ];
 
 let editando = false;
 
-/* ===== READ ===== */
 function renderServicios() {
   const contenedor = document.getElementById("listaServicios");
   contenedor.innerHTML = "";
@@ -92,16 +157,16 @@ function renderServicios() {
   servicios.forEach(s => {
     contenedor.innerHTML += `
       <div class="col-md-4">
-        <div class="bg-dark p-4 rounded-4 border border-warning h-100">
-          <h5 class="fw-bold text-warning">${s.nombre}</h5>
-          <p class="text-white-50">${s.descripcion}</p>
-          <p class="fw-bold">$${s.precio}</p>
+        <div class="service-card p-4 h-100">
+          <h5 class="fw-bold text-gold">${s.nombre}</h5>
+          <p class="small text-rose opacity-75">${s.descripcion}</p>
+          <h4 class="text-white fw-bold mb-4">$${s.precio}</h4>
 
           <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-outline-warning" onclick="editarServicio(${s.id})">
+            <button class="btn btn-sm btn-outline-warning border-0" onclick="editarServicio(${s.id})">
               <i class="fas fa-edit"></i> Editar
             </button>
-            <button class="btn btn-sm btn-outline-danger" onclick="eliminarServicio(${s.id})">
+            <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminarServicio(${s.id})">
               <i class="fas fa-trash"></i> Eliminar
             </button>
           </div>
@@ -111,56 +176,46 @@ function renderServicios() {
   });
 }
 
-/* ===== CREATE / UPDATE ===== */
 function guardarServicio() {
   const nombre = document.getElementById("nombre").value;
   const descripcion = document.getElementById("descripcion").value;
   const precio = document.getElementById("precio").value;
   const id = document.getElementById("servicioId").value;
 
+  if (!nombre || !precio) return alert("Por favor llena los campos básicos.");
+
   if (editando) {
-    const servicio = servicios.find(s => s.id == id);
-    servicio.nombre = nombre;
-    servicio.descripcion = descripcion;
-    servicio.precio = precio;
+    const index = servicios.findIndex(s => s.id == id);
+    servicios[index] = { id: Number(id), nombre, descripcion, precio };
   } else {
-    servicios.push({
-      id: Date.now(),
-      nombre,
-      descripcion,
-      precio
-    });
+    servicios.push({ id: Date.now(), nombre, descripcion, precio });
   }
 
+  localStorage.setItem("servicios", JSON.stringify(servicios));
   limpiarFormulario();
   renderServicios();
   bootstrap.Modal.getInstance(document.getElementById("modalServicio")).hide();
 }
 
-/* ===== UPDATE ===== */
 function editarServicio(id) {
-  const servicio = servicios.find(s => s.id === id);
-
+  const s = servicios.find(s => s.id === id);
   document.getElementById("modalTitulo").innerText = "Editar Servicio";
-  document.getElementById("nombre").value = servicio.nombre;
-  document.getElementById("descripcion").value = servicio.descripcion;
-  document.getElementById("precio").value = servicio.precio;
-  document.getElementById("servicioId").value = servicio.id;
-
+  document.getElementById("nombre").value = s.nombre;
+  document.getElementById("descripcion").value = s.descripcion;
+  document.getElementById("precio").value = s.precio;
+  document.getElementById("servicioId").value = s.id;
   editando = true;
-
   new bootstrap.Modal(document.getElementById("modalServicio")).show();
 }
 
-/* ===== DELETE ===== */
 function eliminarServicio(id) {
-  if (confirm("¿Eliminar este servicio?")) {
+  if (confirm("¿Deseas eliminar este servicio de la lista?")) {
     servicios = servicios.filter(s => s.id !== id);
+    localStorage.setItem("servicios", JSON.stringify(servicios));
     renderServicios();
   }
 }
 
-/* ===== UTILS ===== */
 function limpiarFormulario() {
   editando = false;
   document.getElementById("modalTitulo").innerText = "Nuevo Servicio";
