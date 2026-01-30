@@ -5,42 +5,114 @@
   <title>Sistema de Belleza | Panel Administrativo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
-    body {
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-      color: #ffffff;
-      min-height: 100vh;
+    /* VARIABLES DE COLOR VIBRANTE */
+    :root {
+      --gold: #D4AF37;
+      --gold-bright: #FFD700;
+      --golden-rose: #FF9A8B; /* Un rosa dorado más vivo */
+      --deep-black: #050505;
+      --neon-gold: rgba(212, 175, 55, 0.4);
     }
 
+    body {
+      background: radial-gradient(circle at center, #1a1a1a 0%, var(--deep-black) 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* TÍTULO CON EFECTO NEÓN */
+    .main-title {
+      font-weight: 800;
+      letter-spacing: 3px;
+      background: linear-gradient(to right, var(--gold), var(--golden-rose), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    }
+
+    /* TARJETAS DASHBOARD RECARGADAS */
     .dashboard-card {
-      background-color: #000;
-      border: 2px solid #ffc107;
-      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
       height: 100%;
     }
 
-    .dashboard-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 25px rgba(255, 193, 7, 0.25);
+    .dashboard-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
     }
 
+    .dashboard-card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .dashboard-card:hover {
+      transform: scale(1.05);
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 30px var(--neon-gold);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* ICONOS CON GRADIENTES */
     .dashboard-icon {
-      font-size: 3.5rem;
-      color: #ffc107;
-      margin-bottom: 1rem;
+      font-size: 3.8rem;
+      margin-bottom: 1.2rem;
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), var(--golden-rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+    }
+
+    /* ESTILO ESPECIAL PARA PUNTO DE VENTA (EL MÁS LLAMATIVO) */
+    .card-pos {
+      border: 2px solid var(--gold);
+      background: linear-gradient(145deg, rgba(20,20,20,1) 0%, rgba(45,35,10,1) 100%);
+    }
+    
+    .card-pos .dashboard-icon {
+        background: linear-gradient(135deg, #00ff87, #60efff); /* Color dinero vibrante */
+        -webkit-background-clip: text;
+    }
+
+    h4 {
+      color: var(--gold);
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .text-description {
+      color: #ccc;
+      font-size: 0.85rem;
+      line-height: 1.4;
     }
 
     footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #aaa;
+      margin-top: 5rem;
+      padding-bottom: 2rem;
+    }
+
+    .hr-luxury {
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      border: none;
+      opacity: 0.6;
     }
   </style>
 </head>
@@ -49,82 +121,84 @@
 
 <div class="container py-5">
 
-  <!-- ENCABEZADO -->
   <div class="text-center mb-5">
-    <h1 class="fw-bold text-warning">
-      <i class="fas fa-spa"></i> Sistema de Belleza
+    <h1 class="main-title mb-2">
+      <i class="fas fa-gem"></i> SISTEMA DE BELLEZA
     </h1>
-    <p class="text-white-50">
-      Panel Administrativo · Gestión de Catálogos
+    <p class="text-uppercase small fw-bold" style="color: var(--golden-rose); letter-spacing: 4px;">
+      Master Administration Panel
     </p>
+    <hr class="hr-luxury mx-auto w-50">
   </div>
 
-  <!-- DASHBOARD -->
   <div class="row g-4 justify-content-center">
 
-    <!-- CARD SERVICIOS -->
-    <div class="col-md-6 col-lg-5">
-      <div class="dashboard-card p-4 text-center"
-           onclick="window.location.href='catalogo_servicios.html'">
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-card card-pos p-4 text-center" onclick="window.location.href='punto_venta.html'">
         <div class="dashboard-icon">
-          <i class="fas fa-concierge-bell"></i>
+          <i class="fas fa-wallet"></i>
         </div>
-        <h4 class="fw-bold mb-2">Catálogo de Servicios</h4>
-        <p class="text-white-50 mb-0">
-          Administración de los servicios ofrecidos por el sistema.
+        <h4 class="fw-bold mb-2">Punto de Venta</h4>
+        <p class="text-description mb-0">
+          Terminal de cobro inteligente. Registra ventas y procesa pagos al instante.
         </p>
       </div>
     </div>
 
-    <!-- CARD BENEFICIOS -->
-    <div class="col-md-6 col-lg-5">
-      <div class="dashboard-card p-4 text-center"
-           onclick="window.location.href='catalogo_beneficios.html'">
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-card p-4 text-center" onclick="window.location.href='catalogo_servicios.html'">
         <div class="dashboard-icon">
-          <i class="fas fa-gift"></i>
+          <i class="fas fa-magic"></i>
         </div>
-        <h4 class="fw-bold mb-2">Catálogo de Beneficios</h4>
-        <p class="text-white-50 mb-0">
-          Gestión de beneficios exclusivos para clientes VIP.
+        <h4 class="fw-bold mb-2">Servicios</h4>
+        <p class="text-description mb-0">
+          Edita el menú de estética, ajusta precios y tiempos de atención.
         </p>
       </div>
     </div>
 
-    <!-- CARD INSTRUCTORES -->
-    <div class="col-md-6 col-lg-5">
-      <div class="dashboard-card p-4 text-center"
-           onclick="window.location.href='catalogo_instructores.html'">
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-card p-4 text-center" onclick="window.location.href='catalogo_beneficios.html'">
         <div class="dashboard-icon">
-          <i class="fas fa-user-graduate"></i>
+          <i class="fas fa-crown"></i>
         </div>
-        <h4 class="fw-bold mb-2">Catálogo de Instructores</h4>
-        <p class="text-white-50 mb-0">
-          Administración de instructores, especialidades y estatus.
+        <h4 class="fw-bold mb-2">Beneficios VIP</h4>
+        <p class="text-description mb-0">
+          Crea experiencias exclusivas y recompensas para tus clientes leales.
         </p>
       </div>
     </div>
 
-    <!-- CARD CURSOS -->
-    <div class="col-md-6 col-lg-5">
-      <div class="dashboard-card p-4 text-center"
-           onclick="window.location.href='catalogo_cursos.html'">
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-card p-4 text-center" onclick="window.location.href='catalogo_instruc.html'">
         <div class="dashboard-icon">
-          <i class="fas fa-book-open"></i>
+          <i class="fas fa-star"></i>
         </div>
-        <h4 class="fw-bold mb-2">Catálogo de Cursos</h4>
-        <p class="text-white-50 mb-0">
-          Gestión académica de cursos, niveles, imágenes y precios.
+        <h4 class="fw-bold mb-2">Instructores</h4>
+        <p class="text-description mb-0">
+          Gestión de talento humano, certificaciones y especialidades del staff.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-card p-4 text-center" onclick="window.location.href='catalogo_cursos.html'">
+        <div class="dashboard-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h4 class="fw-bold mb-2">Academia</h4>
+        <p class="text-description mb-0">
+          Control total de cursos ofertados, niveles y administración educativa.
         </p>
       </div>
     </div>
 
   </div>
 
-  <!-- FOOTER -->
   <footer class="text-center">
-    <hr class="border-warning opacity-25">
-    <p class="mb-0">
-      © 2026 · Sistema de Belleza · Panel Administrativo
+    <div class="hr-luxury mx-auto w-75 mb-4"></div>
+    <p class="mb-0 fw-bold" style="color: var(--gold); font-size: 0.8rem; letter-spacing: 2px;">
+      LK STUDIO · LUXURY MANAGEMENT SYSTEM · 2026
     </p>
   </footer>
 
