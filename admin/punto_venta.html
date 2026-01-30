@@ -1,295 +1,295 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Punto de Venta | Belleza</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Punto de Venta | Belleza & Nails</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-<style>
-body{
-  background:linear-gradient(135deg,#0f0f0f,#1a1a1a);
-  color:#fff;
-}
-.card{
-  background:#000;
-  border:2px solid #D4AF37;
-  border-radius:1rem;
-}
-.gold{color:#D4AF37;}
-.rose{color:#e6b8a2;}
-.btn-gold{
-  background:#D4AF37;
-  color:#000;
-  font-weight:bold;
-}
-.btn-gold:hover{background:#bfa233;}
-.table-dark td,.table-dark th{vertical-align:middle;}
-</style>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .card {
+            background: #000;
+            border: 2px solid #D4AF37;
+            border-radius: 1rem;
+        }
+        .gold { color: #D4AF37; }
+        .rose { color: #e6b8a2; }
+        .btn-gold {
+            background: #D4AF37;
+            color: #000;
+            font-weight: bold;
+        }
+        .btn-gold:hover { background: #bfa233; color: #000; }
+        .table-dark { --bs-table-bg: transparent; }
+        .badge-servicio { background-color: #D4AF37; color: #000; }
+        .badge-material { background-color: #17a2b8; color: #fff; }
+        .badge-extra { background-color: #dc3545; color: #fff; }
+    </style>
 </head>
 
 <body>
 <div class="container py-5">
 
-<a href="PANEL_ADMIN.html" class="btn btn-outline-light mb-4">
-<i class="fas fa-arrow-left"></i> Volver al Panel
-</a>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="PANEL_ADMIN.html" class="btn btn-outline-light">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+        <h1 class="gold fw-bold m-0"><i class="fas fa-cash-register"></i> Punto de Venta</h1>
+        <div class="text-end">
+            <span id="fecha-actual" class="rose"></span>
+        </div>
+    </div>
 
-<div class="text-center mb-4">
-<h1 class="gold fw-bold"><i class="fas fa-cash-register"></i> Punto de Venta</h1>
-<p class="text-white-50">Cobro de servicios por cita previa</p>
-</div>
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card p-4">
+                <h5 class="gold mb-3"><i class="fas fa-receipt"></i> Registro de Cobro</h5>
 
-<div class="row g-4">
+                <div class="mb-3">
+                    <label class="rose form-label small">Cliente</label>
+                    <input id="inputCliente" class="form-control" placeholder="Nombre del cliente">
+                </div>
 
-<!-- FORMULARIO -->
-<div class="col-lg-4">
-<div class="card p-4 h-100">
+                <div class="mb-3">
+                    <label class="rose form-label small">Folio Cita</label>
+                    <input id="inputCita" class="form-control" placeholder="CITA-000">
+                </div>
 
-<h5 class="gold mb-3"><i class="fas fa-receipt"></i> Datos del Cliente</h5>
+                <hr class="border-secondary">
 
-<label class="rose form-label">Cliente</label>
-<input id="cliente" class="form-control mb-3" required>
+                <label class="rose form-label small">Seleccionar Servicio</label>
+                <div class="input-group mb-3">
+                    <select id="selectServicio" class="form-select"></select>
+                    <button class="btn btn-gold" onclick="agregarServicio()">+</button>
+                </div>
 
-<label class="rose form-label">Cita</label>
-<input id="cita" class="form-control mb-3" placeholder="CITA-001" required>
+                <label class="rose form-label small">Material Adicional</label>
+                <div class="input-group mb-3">
+                    <select id="selectMaterial" class="form-select"></select>
+                    <button class="btn btn-outline-info" onclick="agregarMaterial()">+</button>
+                </div>
 
-<label class="rose form-label">Servicio</label>
-<select id="servicio" class="form-select mb-3"></select>
+                <hr class="border-secondary">
 
-<label class="rose form-label">Material</label>
-<select id="material" class="form-select mb-3"></select>
+                <h6 class="rose small mb-2">Cobro Extra Específico</h6>
+                <input id="extraDesc" class="form-control mb-2 form-control-sm" placeholder="Concepto (ej. Piedras extra)">
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-dark text-white border-secondary">$</span>
+                    <input id="extraMonto" type="number" class="form-control form-control-sm" placeholder="0.00">
+                    <button class="btn btn-outline-danger btn-sm" onclick="agregarExtra()">Añadir</button>
+                </div>
 
-<button class="btn btn-outline-warning w-100 mb-3" onclick="agregarMaterial()">
-<i class="fas fa-box"></i> Agregar Material
-</button>
+                <hr class="border-secondary">
 
+                <label class="rose form-label small">Método de Pago</label>
+                <select id="metodoPago" class="form-select mb-3" onchange="toggleTransferencia()">
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Transferencia">Transferencia</option>
+                    <option value="Tarjeta">Tarjeta</option>
+                </select>
 
-<button class="btn btn-gold w-100 mb-3" onclick="agregarServicio()">
-<i class="fas fa-plus"></i> Agregar Servicio
-</button>
-<hr class="border-secondary">
+                <div id="infoTransferencia" class="alert alert-secondary d-none small">
+                    <strong>Banco Azteca</strong><br>
+                    CLABE: 127180012784596325
+                </div>
 
-<h6 class="rose">Cobro Extra (opcional)</h6>
+                <button class="btn btn-success w-100 fw-bold" onclick="finalizarVenta()">
+                    <i class="fas fa-check-circle"></i> REGISTRAR Y COBRAR
+                </button>
+            </div>
+        </div>
 
-<input id="extraDescripcion" class="form-control mb-2" placeholder="Ej. Diseño especial mano alzada">
+        <div class="col-lg-8">
+            <div class="card p-4 mb-4">
+                <h5 class="gold mb-3"><i class="fas fa-shopping-cart"></i> Detalle del Cobro Actual</h5>
+                <div class="table-responsive" style="min-height: 200px;">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr class="rose small">
+                                <th>Tipo</th>
+                                <th>Concepto</th>
+                                <th>Precio</th>
+                                <th class="text-end">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaCarrito"></tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 border-top pt-3">
+                    <h3 class="gold m-0">TOTAL: $<span id="displayTotal">0</span></h3>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="vaciarCarrito()">Limpiar Carrito</button>
+                </div>
+            </div>
 
-<input id="extraMonto" type="number" class="form-control mb-3" placeholder="Monto extra">
-
-<button class="btn btn-outline-info w-100 mb-3" onclick="agregarExtra()">
-<i class="fas fa-plus-circle"></i> Agregar Cobro Extra
-</button>
-
-
-<label class="rose form-label">Método de Pago</label>
-<select id="pago" class="form-select mb-3" onchange="mostrarTransferencia()">
-<option>Efectivo</option>
-<option>Transferencia</option>
-<option>Tarjeta</option>
-</select>
-
-<div id="transferencia" class="alert alert-secondary d-none">
-<strong>Banco Azteca</strong><br>
-Cuenta: 1278459632<br>
-CLABE: 127180012784596325<br>
-OXXO Pay disponible
-</div>
-
-<button class="btn btn-success w-100" onclick="registrarVenta()">
-<i class="fas fa-check-circle"></i> Cobrar
-</button>
-
-</div>
-</div>
-
-<!-- CARRITO -->
-<div class="col-lg-8">
-<div class="card p-4 h-100">
-
-<h5 class="gold mb-3"><i class="fas fa-shopping-cart"></i> Servicios Seleccionados</h5>
-
-<div class="table-responsive">
-<table class="table table-dark table-hover">
-<thead class="rose">
-<tr>
-<th>Servicio</th>
-<th>Precio</th>
-<th></th>
-</tr>
-</thead>
-<tbody id="carrito"></tbody>
-</table>
-</div>
-
-<h4 class="gold text-end">
-Total: $<span id="total">0</span>
-</h4>
-
-<hr>
-
-<h5 class="gold mt-3"><i class="fas fa-list"></i> Historial del Día</h5>
-
-<div class="table-responsive">
-<table class="table table-dark table-sm">
-<thead class="rose">
-<tr>
-<th>Cita</th>
-<th>Cliente</th>
-<th>Total</th>
-<th>Pago</th>
-<th>Fecha</th>
-</tr>
-</thead>
-<tbody id="historial"></tbody>
-</table>
-</div>
-
-</div>
-</div>
-
-</div>
+            <div class="card p-4">
+                <h5 class="rose mb-3 small"><i class="fas fa-history"></i> Últimos Movimientos del Día</h5>
+                <div class="table-responsive">
+                    <table class="table table-dark table-sm small">
+                        <thead>
+                            <tr class="text-white-50">
+                                <th>Cita</th>
+                                <th>Cliente</th>
+                                <th>Total</th>
+                                <th>Pago</th>
+                                <th>Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaHistorial"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
+// --- DATOS ---
 const servicios = [
-{name:"Corte Mariposa",precio:150},
-{name:"Corte Bob",precio:150},
-{name:"Corte en Capas",precio:150},
-{name:"Servicio Completo Cabello",precio:300},
-{name:"Balayage",precio:2000},
-{name:"Baby Lights",precio:2000},
-{name:"Aplicación de Tinte",precio:500},
-{name:"Aplicación de Tinte VIP",precio:1200},
-{name:"Uñas Acrílicas #2",precio:350},
-{name:"Uñas Acrílicas #3 o #4",precio:500},
-{name:"Uñas Acrílicas XXL",precio:700},
-{name:"Uñas VIP",precio:1250},
-{name:"Pedicura Gel",precio:500},
-{name:"Pedicura Spa VIP",precio:1500}
+    {name:"Corte Mariposa", precio:150},
+    {name:"Corte Bob", precio:150},
+    {name:"Balayage", precio:2000},
+    {name:"Uñas Acrílicas #2", precio:350},
+    {name:"Uñas Acrílicas XXL", precio:700},
+    {name:"Pedicura Spa VIP", precio:1500}
 ];
-
-const select = document.getElementById("servicio");
-servicios.forEach((s,i)=>{
-select.innerHTML += `<option value="${i}">${s.name} - $${s.precio}</option>`;
-});
 
 const materiales = [
-  {name:"Guantes desechables",precio:5},
-  {name:"Lima desechable",precio:20},
-  {name:"Gel color (2 capas)",precio:50},
-  {name:"Brillo final",precio:25},
-  {name:"Acrílico",precio:100},
-  {name:"Monómero",precio:100},
-  {name:"Tips",precio:15},
-  {name:"Cristal Swarovski G",precio:10},
-  {name:"Diseño por uña",precio:25}
+    {name:"Guantes desechables", precio:5},
+    {name:"Lima desechable", precio:20},
+    {name:"Gel color", precio:50},
+    {name:"Cristal Swarovski", precio:10},
+    {name:"Diseño mano alzada", precio:45}
 ];
-
-const selectMaterial = document.getElementById("material");
-materiales.forEach((m,i)=>{
-  selectMaterial.innerHTML += `<option value="${i}">${m.name} - $${m.precio}</option>`;
-});
 
 let carrito = [];
 
-function agregarServicio(){
-const s = servicios[servicio.value];
-carrito.push(s);
-renderCarrito();
-}
+// --- INICIALIZACIÓN ---
+document.addEventListener('DOMContentLoaded', () => {
+    const selS = document.getElementById("selectServicio");
+    servicios.forEach((s, i) => selS.innerHTML += `<option value="${i}">${s.name} ($${s.precio})</option>`);
 
-function agregarMaterial(){
-    const m = materiales[material.value];
-    carrito.push(m);
+    const selM = document.getElementById("selectMaterial");
+    materiales.forEach((m, i) => selM.innerHTML += `<option value="${i}">${m.name} ($${m.precio})</option>`);
+
+    document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString();
+    actualizarHistorial();
+});
+
+// --- FUNCIONES LÓGICAS ---
+
+function agregarServicio() {
+    const item = servicios[document.getElementById("selectServicio").value];
+    carrito.push({ tipo: "Servicio", desc: item.name, precio: item.precio });
     renderCarrito();
 }
-function agregarExtra(){
-  const desc = extraDescripcion.value.trim();
-  const monto = parseFloat(extraMonto.value);
 
-  if(desc === "" || isNaN(monto) || monto <= 0){
-    alert("Ingresa descripción y monto válido para el cobro extra");
-    return;
-  }
-
-  carrito.push({
-    name: "Extra: " + desc,
-    precio: monto
-  });
-
-  extraDescripcion.value = "";
-  extraMonto.value = "";
-  renderCarrito();
+function agregarMaterial() {
+    const item = materiales[document.getElementById("selectMaterial").value];
+    carrito.push({ tipo: "Material", desc: item.name, precio: item.precio });
+    renderCarrito();
 }
 
-
-function eliminar(index){
-carrito.splice(index,1);
-renderCarrito();
+function agregarExtra() {
+    const d = document.getElementById("extraDesc").value;
+    const m = parseFloat(document.getElementById("extraMonto").value);
+    
+    if(!d || isNaN(m)) return alert("Escribe descripción y monto del extra");
+    
+    carrito.push({ tipo: "Extra", desc: d, precio: m });
+    document.getElementById("extraDesc").value = "";
+    document.getElementById("extraMonto").value = "";
+    renderCarrito();
 }
 
-function renderCarrito(){
-carritoHTML = "";
-let total = 0;
-carrito.forEach((s,i)=>{
-total += s.precio;
-carritoHTML += `
-<tr>
-<td>${s.name}</td>
-<td class="gold">$${s.precio}</td>
-<td><button class="btn btn-danger btn-sm" onclick="eliminar(${i})">
-<i class="fas fa-trash"></i></button></td>
-</tr>`;
-});
-carrito.innerHTML = carritoHTML;
-document.getElementById("total").textContent = total;
+function eliminarItem(index) {
+    carrito.splice(index, 1);
+    renderCarrito();
 }
 
-function mostrarTransferencia(){
-transferencia.classList.toggle("d-none",pago.value!=="Transferencia");
+function renderCarrito() {
+    const tbody = document.getElementById("tablaCarrito");
+    const displayTotal = document.getElementById("displayTotal");
+    tbody.innerHTML = "";
+    let total = 0;
+
+    carrito.forEach((item, i) => {
+        total += item.precio;
+        let badgeClass = item.tipo === "Servicio" ? "badge-servicio" : (item.tipo === "Material" ? "badge-material" : "badge-extra");
+        
+        tbody.innerHTML += `
+            <tr>
+                <td><span class="badge ${badgeClass}">${item.tipo}</span></td>
+                <td>${item.desc}</td>
+                <td class="gold">$${item.precio}</td>
+                <td class="text-end">
+                    <button class="btn btn-sm text-danger" onclick="eliminarItem(${i})"><i class="fas fa-times"></i></button>
+                </td>
+            </tr>
+        `;
+    });
+    displayTotal.innerText = total;
 }
 
-function registrarVenta(){
-if(carrito.length===0) return alert("Agrega al menos un servicio");
-
-const venta={
-cliente:cliente.value,
-cita:cita.value,
-total:carrito.reduce((s,v)=>s+v.precio,0),
-pago:pago.value,
-fecha:new Date().toLocaleString()
-};
-
-const ventas=JSON.parse(localStorage.getItem("ventas"))||[];
-ventas.push(venta);
-localStorage.setItem("ventas",JSON.stringify(ventas));
-
-carrito=[];
-renderCarrito();
-cliente.value="";
-cita.value="";
-renderHistorial();
-alert("Cobro registrado correctamente ✔️");
+function vaciarCarrito() {
+    carrito = [];
+    renderCarrito();
 }
 
-function renderHistorial(){
-const ventas=JSON.parse(localStorage.getItem("ventas"))||[];
-historial.innerHTML="";
-ventas.forEach(v=>{
-historial.innerHTML+=`
-<tr>
-<td>${v.cita}</td>
-<td>${v.cliente}</td>
-<td class="gold">$${v.total}</td>
-<td>${v.pago}</td>
-<td>${v.fecha}</td>
-</tr>`;
-});
+function toggleTransferencia() {
+    const m = document.getElementById("metodoPago").value;
+    document.getElementById("infoTransferencia").classList.toggle("d-none", m !== "Transferencia");
 }
-renderHistorial();
+
+function finalizarVenta() {
+    const cliente = document.getElementById("inputCliente").value;
+    if(!cliente || carrito.length === 0) return alert("Ingresa el cliente y al menos un concepto");
+
+    const total = carrito.reduce((acc, obj) => acc + obj.precio, 0);
+    const nuevaVenta = {
+        cita: document.getElementById("inputCita").value || "N/A",
+        cliente: cliente,
+        total: total,
+        pago: document.getElementById("metodoPago").value,
+        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+
+    // Guardar en LocalStorage
+    let ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
+    ventas.unshift(nuevaVenta);
+    localStorage.setItem("ventas_dia", JSON.stringify(ventas));
+
+    // Resetear formulario
+    vaciarCarrito();
+    document.getElementById("inputCliente").value = "";
+    document.getElementById("inputCita").value = "";
+    actualizarHistorial();
+    alert("¡Venta registrada con éxito!");
+}
+
+function actualizarHistorial() {
+    const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
+    const tbody = document.getElementById("tablaHistorial");
+    tbody.innerHTML = "";
+    
+    ventas.slice(0, 5).forEach(v => { // Mostrar solo las últimas 5
+        tbody.innerHTML += `
+            <tr>
+                <td>${v.cita}</td>
+                <td>${v.cliente}</td>
+                <td class="gold">$${v.total}</td>
+                <td>${v.pago}</td>
+                <td>${v.hora}</td>
+            </tr>
+        `;
+    });
+}
 </script>
-
 </body>
 </html>
