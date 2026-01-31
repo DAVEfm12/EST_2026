@@ -2,78 +2,285 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Reservaciones | LK Studio</title>
+  <title>Reserva tu Cita | LK Studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-bright: #FFD700;
+      --golden-rose: #FF9A8B; 
+      --deep-black: #050505;
+      --onyx: #121212;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #1a1a1a 0%, var(--deep-black) 100%);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      padding-top: 80px;
+    }
+
+    /* NAVBAR CUSTOM */
+    .navbar {
+      background: rgba(5, 5, 5, 0.95) !important;
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--gold);
+    }
+    .navbar-brand span { color: var(--gold-bright); text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+    .nav-link { color: #fff !important; font-weight: 500; transition: 0.3s; }
+    .nav-link:hover, .nav-link.active { color: var(--golden-rose) !important; }
+
+    /* HEADER */
+    .booking-header {
+      padding: 60px 0;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 154, 139, 0.3);
+    }
+    .booking-header h1 { letter-spacing: 5px; font-weight: 800; }
+
+    /* CALENDARIO */
+    .calendar-card {
+      background: var(--onyx);
+      border-radius: 30px;
+      padding: 30px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    .fc { --fc-border-color: #222; }
+    .fc-toolbar-title { color: var(--gold-bright) !important; font-weight: 700; text-transform: uppercase; }
+    .fc-button-primary {
+      background-color: transparent !important;
+      border: 1px solid var(--gold) !important;
+      color: var(--gold) !important;
+      font-weight: bold !important;
+    }
+    .fc-button-primary:hover {
+      background-color: var(--gold) !important;
+      color: #000 !important;
+    }
+    .fc-daygrid-day:hover { background: rgba(255, 154, 139, 0.05) !important; cursor: pointer; }
+    .fc-day-today { background: rgba(212, 175, 55, 0.05) !important; }
+
+    /* EVENTOS */
+    .event-occupied {
+      background: #222 !important;
+      border: 1px solid #444 !important;
+      color: #666 !important;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    /* MODAL ADVERTENCIA (ESTILO IMAGEN) */
+    .warning-icon-circle {
+      width: 85px;
+      height: 85px;
+      border: 4px solid #FFE5B4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: #F8BB86;
+      font-size: 45px;
+      font-weight: 400;
+    }
+    .btn-yes { background-color: #3085d6; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-weight: 600; }
+    .btn-no { background-color: #d33; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-weight: 600; }
+
+    /* MODAL FORMULARIO VIP */
+    .modal-content-vip {
+      background: var(--onyx);
+      border: 1px solid var(--golden-rose);
+      border-radius: 25px;
+      color: #fff;
+    }
+    .form-control, .form-select {
+      background-color: #000 !important;
+      border: 1px solid #333 !important;
+      color: #fff !important;
+      padding: 12px;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--gold) !important;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    }
+    .btn-confirm {
+      background: linear-gradient(45deg, var(--gold), var(--golden-rose));
+      border: none;
+      color: #000;
+      font-weight: 800;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+    .btn-confirm:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 154, 139, 0.4); }
+  </style>
 </head>
+<body>
 
-<body class="bg-black text-white" style="padding-top:90px;">
-
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-black shadow-lg border-bottom border-warning">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="index.html">
       <img src="assets/img/LK.png" width="45" class="me-2">
-      <span class="fw-bold text-warning" id="nombreNegocio">LK Studio</span>
+      <span class="fw-bold">LK Studio</span>
     </a>
-
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse justify-content-end" id="menu">
-      <ul class="navbar-nav me-3 gap-lg-3">
+      <ul class="navbar-nav gap-lg-3">
         <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="vip.html">Zona VIP</a></li>
         <li class="nav-item"><a class="nav-link" href="instructora.html">Instructora</a></li>
         <li class="nav-item"><a class="nav-link active" href="reservaciones.html">Reservaciones</a></li>
-        <li class="nav-item" id="menuAcademia">
-          <a class="nav-link" href="academia.html">Academia</a>
-        </li>
       </ul>
     </div>
   </div>
 </nav>
 
+<header class="booking-header">
+  <h1 class="text-white">RESERVA TU <span style="color: var(--golden-rose);">EXPERIENCIA</span></h1>
+  <p style="color: var(--gold);">Elegancia y perfección en cada detalle</p>
+</header>
 
-<div class="container py-5">
-  <h2 class="text-warning fw-bold text-center mb-4">Agendar Cita</h2>
-  <p class="text-center text-white-50 mb-5">
-    Reserva tu cita de forma rápida y sencilla
-  </p>
-
+<div class="container pb-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-lg-10">
+      <div class="calendar-card animate__animated animate__fadeIn">
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <form id="formCita" class="bg-dark p-4 rounded-4 border border-warning shadow-lg">
+<div class="modal fade" id="warningModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-white text-center p-5 border-0" style="border-radius: 15px;">
+      <div class="warning-icon-circle">!</div>
+      <h2 style="color: #545454; font-weight: 600;">Fecha no permitida</h2>
+      <p class="text-muted fs-5">Por favor, selecciona una fecha futura para tu cita.</p>
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <button type="button" class="btn-yes" data-bs-dismiss="modal">Yes</button>
+        <button type="button" class="btn-no" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <label class="form-label">Servicio</label>
-        <select class="form-select mb-3 bg-black text-white border-warning" id="servicio" required>
-        <!-- se llena por JS -->
-        </select>
-
-        <label class="form-label">Fecha</label>
-        <input type="date" class="form-control mb-3 bg-black text-white border-warning" id="fecha" required>
-
-        <label class="form-label">Hora</label>
-        <input type="time" class="form-control mb-3 bg-black text-white border-warning" id="hora" required>
-
-        <button class="btn btn-warning w-100 fw-bold">
-          Confirmar Cita
-        </button>
-
-        <div id="msg" class="mt-3 text-success d-none"></div>
-      </form>
-
+<div class="modal fade" id="formModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content modal-content-vip shadow-2xl">
+      <div class="modal-header border-0 p-4 pb-0">
+        <h3 class="modal-title fw-bold" style="color: var(--gold);">DETALLES DE RESERVA</h3>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form id="formCita">
+          <div class="row g-4">
+            <div class="col-12">
+              <label class="form-label small text-uppercase fw-bold text-secondary">Selecciona tu Servicio</label>
+              <select class="form-select" id="servicio" required>
+                <optgroup label="-- CABELLO --">
+                  <option>CORTE MARIPOSA</option>
+                  <option>CORTE BOB</option>
+                  <option>CORTE EN CAPAS</option>
+                  <option>LAVADO, CORTE Y MOLDEO</option>
+                  <option>BALAYAGE</option>
+                  <option>BABY LIGHTS</option>
+                  <option>APLICACION DE TINTE VIP</option>
+                </optgroup>
+                <optgroup label="-- UÑAS Y MANOS --">
+                  <option>UÑAS Largo #2</option>
+                  <option>UÑAS Largo #3 y 4</option>
+                  <option>UÑAS XXL</option>
+                  <option>MANICURA VIP (Diseño + Cortesía)</option>
+                </optgroup>
+                <optgroup label="-- PEDICURA --">
+                  <option>PEDICURA INMERSION GEL</option>
+                  <option>PEDICURA SPA VIP (Masaje + Coctel)</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small text-uppercase fw-bold text-secondary">Fecha</label>
+              <input type="date" class="form-control" id="fechaForm" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small text-uppercase fw-bold text-secondary">Hora</label>
+              <input type="time" class="form-control" id="horaForm" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label small text-uppercase fw-bold text-secondary">Nombre de la Clienta</label>
+              <input type="text" class="form-control" placeholder="Escribe tu nombre completo" required>
+            </div>
+            <div class="col-12 text-center mt-4">
+              <button type="submit" class="btn btn-confirm w-100 py-3 rounded-pill">
+                RESERVAR AHORA <i class="fas fa-gem ms-2"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- JS -->
-<script src="js/config.js"></script>
-<script src="js/menu.js"></script>
-<script src="js/reservaciones.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales/es.global.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const warningModal = new bootstrap.Modal(document.getElementById('warningModal'));
+    const formModal = new bootstrap.Modal(document.getElementById('formModal'));
+    
+    const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
+    const eventosOcupados = reservaciones.map(res => ({
+      title: 'OCUPADO',
+      start: res.fecha,
+      className: 'event-occupied'
+    }));
+
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'es',
+      headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
+      events: eventosOcupados,
+      
+      dateClick: function(info) {
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        const clickedDate = new Date(info.dateStr + 'T00:00:00');
+
+        if (clickedDate < today) {
+          warningModal.show();
+        } else {
+          document.getElementById('fechaForm').value = info.dateStr;
+          formModal.show();
+        }
+      }
+    });
+
+    calendar.render();
+
+    document.getElementById('formCita').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("¡Gracias! Tu solicitud de cita ha sido enviada.");
+      formModal.hide();
+    });
+  });
+</script>
 
 </body>
 </html>
