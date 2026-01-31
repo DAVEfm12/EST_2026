@@ -8,7 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
   <style>
     :root {
@@ -16,7 +17,7 @@
       --gold-bright: #FFD700;
       --golden-rose: #FF9A8B; 
       --deep-black: #050505;
-      --onyx: #121212;
+      --onyx: #0f0f0f;
     }
 
     body {
@@ -26,104 +27,118 @@
       padding-top: 80px;
     }
 
-    /* NAVBAR CUSTOM */
+    /* NAVBAR LUXURY */
     .navbar {
       background: rgba(5, 5, 5, 0.95) !important;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       border-bottom: 2px solid var(--gold);
     }
-    .navbar-brand span { color: var(--gold-bright); text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
-    .nav-link { color: #fff !important; font-weight: 500; transition: 0.3s; }
-    .nav-link:hover, .nav-link.active { color: var(--golden-rose) !important; }
+    .navbar-brand span { 
+      color: var(--gold-bright); 
+      font-weight: 800; 
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+    .nav-link.active { color: var(--golden-rose) !important; font-weight: 600; }
 
-    /* HEADER */
+    /* HEADER RESERVAS */
     .booking-header {
-      padding: 60px 0;
+      padding: 80px 0;
       text-align: center;
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1200&q=80');
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1200&q=80');
       background-size: cover;
       background-position: center;
       margin-bottom: 40px;
-      border-bottom: 1px solid rgba(255, 154, 139, 0.3);
+      border-bottom: 1px solid var(--gold);
     }
-    .booking-header h1 { letter-spacing: 5px; font-weight: 800; }
+    .booking-header h1 { 
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      letter-spacing: 3px;
+      background: linear-gradient(to right, #fff, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-    /* CALENDARIO */
+    /* CALENDARIO ESTILO OSCURO */
     .calendar-card {
       background: var(--onyx);
-      border-radius: 30px;
+      border-radius: 20px;
       padding: 30px;
       border: 1px solid rgba(212, 175, 55, 0.2);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.9);
     }
 
-    .fc { --fc-border-color: #222; }
-    .fc-toolbar-title { color: var(--gold-bright) !important; font-weight: 700; text-transform: uppercase; }
+    .fc { --fc-border-color: #333; --fc-page-bg-color: transparent; }
+    .fc-toolbar-title { color: #fff !important; font-family: 'Playfair Display', serif; }
     .fc-button-primary {
-      background-color: transparent !important;
+      background: var(--onyx) !important;
       border: 1px solid var(--gold) !important;
       color: var(--gold) !important;
-      font-weight: bold !important;
+      text-transform: uppercase;
+      font-weight: 600 !important;
+      transition: 0.3s !important;
     }
     .fc-button-primary:hover {
-      background-color: var(--gold) !important;
+      background: var(--gold) !important;
       color: #000 !important;
     }
-    .fc-daygrid-day:hover { background: rgba(255, 154, 139, 0.05) !important; cursor: pointer; }
-    .fc-day-today { background: rgba(212, 175, 55, 0.05) !important; }
+    .fc-day-today { background: rgba(212, 175, 55, 0.1) !important; }
+    .fc-col-header-cell { background: #000; padding: 10px 0 !important; color: var(--golden-rose); }
 
     /* EVENTOS */
     .event-occupied {
-      background: #222 !important;
+      background: #1a1a1a !important;
       border: 1px solid #444 !important;
       color: #666 !important;
-      font-size: 0.75rem;
-      font-weight: bold;
+      text-decoration: line-through;
     }
 
-    /* MODAL ADVERTENCIA (ESTILO IMAGEN) */
-    .warning-icon-circle {
-      width: 85px;
-      height: 85px;
-      border: 4px solid #FFE5B4;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      color: #F8BB86;
-      font-size: 45px;
-      font-weight: 400;
-    }
-    .btn-yes { background-color: #3085d6; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-weight: 600; }
-    .btn-no { background-color: #d33; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-weight: 600; }
-
-    /* MODAL FORMULARIO VIP */
-    .modal-content-vip {
+    /* MODALES LUXURY */
+    .modal-content {
       background: var(--onyx);
-      border: 1px solid var(--golden-rose);
-      border-radius: 25px;
+      border: 1px solid var(--gold);
       color: #fff;
+      border-radius: 0;
     }
+    .modal-header { border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+    
+    /* MODAL WARNING (SWAL STYLE) */
+    .warning-circle {
+      width: 70px; height: 70px;
+      border: 3px solid var(--golden-rose);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--golden-rose);
+      font-size: 40px;
+    }
+
+    /* FORMULARIO */
     .form-control, .form-select {
       background-color: #000 !important;
       border: 1px solid #333 !important;
       color: #fff !important;
+      border-radius: 0;
       padding: 12px;
     }
-    .form-control:focus, .form-select:focus {
-      border-color: var(--gold) !important;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    .form-control:focus {
+      border-color: var(--golden-rose) !important;
+      box-shadow: none;
     }
     .btn-confirm {
       background: linear-gradient(45deg, var(--gold), var(--golden-rose));
       border: none;
       color: #000;
       font-weight: 800;
-      letter-spacing: 1px;
-      transition: 0.3s;
+      padding: 15px;
+      letter-spacing: 2px;
+      transition: 0.4s;
     }
-    .btn-confirm:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 154, 139, 0.4); }
+    .btn-confirm:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+    }
   </style>
 </head>
 <body>
@@ -132,10 +147,10 @@
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="index.html">
       <img src="assets/img/LK.png" width="45" class="me-2">
-      <span class="fw-bold">LK Studio</span>
+      <span class="fw-bold">LK STUDIO</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler border-0" data-bs-toggle="collapse" data-bs-target="#menu">
+      <i class="fas fa-bars text-warning"></i>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="menu">
       <ul class="navbar-nav gap-lg-3">
@@ -149,14 +164,16 @@
 </nav>
 
 <header class="booking-header">
-  <h1 class="text-white">RESERVA TU <span style="color: var(--golden-rose);">EXPERIENCIA</span></h1>
-  <p style="color: var(--gold);">Elegancia y perfección en cada detalle</p>
+  <div class="container animate__animated animate__fadeIn">
+    <h1 class="text-white">RESERVA TU <span style="color: var(--golden-rose);">EXPERIENCIA</span></h1>
+    <p style="color: var(--gold);" class="text-uppercase letter-spacing-2">Arte · Precisión · Lujo</p>
+  </div>
 </header>
 
 <div class="container pb-5">
   <div class="row justify-content-center">
     <div class="col-lg-10">
-      <div class="calendar-card animate__animated animate__fadeIn">
+      <div class="calendar-card animate__animated animate__fadeInUp">
         <div id="calendar"></div>
       </div>
     </div>
@@ -165,67 +182,57 @@
 
 <div class="modal fade" id="warningModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-white text-center p-5 border-0" style="border-radius: 15px;">
-      <div class="warning-icon-circle">!</div>
-      <h2 style="color: #545454; font-weight: 600;">Fecha no permitida</h2>
-      <p class="text-muted fs-5">Por favor, selecciona una fecha futura para tu cita.</p>
-      <div class="d-flex justify-content-center gap-3 mt-4">
-        <button type="button" class="btn-yes" data-bs-dismiss="modal">Yes</button>
-        <button type="button" class="btn-no" data-bs-dismiss="modal">No</button>
-      </div>
+    <div class="modal-content p-5 text-center">
+      <div class="warning-circle">!</div>
+      <h3 class="fw-bold">Fecha no válida</h3>
+      <p class="text-white-50">Por favor, selecciona una fecha a partir de mañana para agendar tu cita premium.</p>
+      <button type="button" class="btn btn-confirm mt-3" data-bs-dismiss="modal">ENTENDIDO</button>
     </div>
   </div>
 </div>
 
 <div class="modal fade" id="formModal" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content modal-content-vip shadow-2xl">
-      <div class="modal-header border-0 p-4 pb-0">
-        <h3 class="modal-title fw-bold" style="color: var(--gold);">DETALLES DE RESERVA</h3>
+    <div class="modal-content shadow-lg">
+      <div class="modal-header">
+        <h4 class="modal-title fw-bold" style="color: var(--gold);">DETALLES DE TU SERVICIO</h4>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body p-4">
         <form id="formCita">
           <div class="row g-4">
             <div class="col-12">
-              <label class="form-label small text-uppercase fw-bold text-secondary">Selecciona tu Servicio</label>
+              <label class="small text-uppercase fw-bold mb-2">Selecciona la Especialidad</label>
               <select class="form-select" id="servicio" required>
-                <optgroup label="-- CABELLO --">
-                  <option>CORTE MARIPOSA</option>
-                  <option>CORTE BOB</option>
-                  <option>CORTE EN CAPAS</option>
+                <optgroup label="DISEÑO CAPILAR">
+                  <option>CORTE MARIPOSA / BOB / CAPAS</option>
                   <option>LAVADO, CORTE Y MOLDEO</option>
-                  <option>BALAYAGE</option>
-                  <option>BABY LIGHTS</option>
+                  <option>BALAYAGE & BABY LIGHTS</option>
                   <option>APLICACION DE TINTE VIP</option>
                 </optgroup>
-                <optgroup label="-- UÑAS Y MANOS --">
-                  <option>UÑAS Largo #2</option>
-                  <option>UÑAS Largo #3 y 4</option>
-                  <option>UÑAS XXL</option>
-                  <option>MANICURA VIP (Diseño + Cortesía)</option>
-                </optgroup>
-                <optgroup label="-- PEDICURA --">
-                  <option>PEDICURA INMERSION GEL</option>
-                  <option>PEDICURA SPA VIP (Masaje + Coctel)</option>
+                <optgroup label="NAIL SYSTEM">
+                  <option>UÑAS ACRÍLICAS (S-M)</option>
+                  <option>UÑAS XL / XXL</option>
+                  <option>MANICURA VIP + DISEÑO</option>
+                  <option>PEDICURA SPA VIP</option>
                 </optgroup>
               </select>
             </div>
             <div class="col-md-6">
-              <label class="form-label small text-uppercase fw-bold text-secondary">Fecha</label>
+              <label class="small text-uppercase fw-bold mb-2">Fecha Seleccionada</label>
               <input type="date" class="form-control" id="fechaForm" readonly>
             </div>
             <div class="col-md-6">
-              <label class="form-label small text-uppercase fw-bold text-secondary">Hora</label>
+              <label class="small text-uppercase fw-bold mb-2">Hora de Preferencia</label>
               <input type="time" class="form-control" id="horaForm" required>
             </div>
             <div class="col-12">
-              <label class="form-label small text-uppercase fw-bold text-secondary">Nombre de la Clienta</label>
-              <input type="text" class="form-control" placeholder="Escribe tu nombre completo" required>
+              <label class="small text-uppercase fw-bold mb-2">Nombre de la Clienta</label>
+              <input type="text" class="form-control" id="nombreCita" placeholder="Nombre completo" required>
             </div>
-            <div class="col-12 text-center mt-4">
-              <button type="submit" class="btn btn-confirm w-100 py-3 rounded-pill">
-                RESERVAR AHORA <i class="fas fa-gem ms-2"></i>
+            <div class="col-12">
+              <button type="submit" class="btn btn-confirm w-100 py-3 mt-3">
+                CONFIRMAR RESERVACIÓN <i class="fas fa-check-circle ms-2"></i>
               </button>
             </div>
           </div>
@@ -245,25 +252,24 @@
     const warningModal = new bootstrap.Modal(document.getElementById('warningModal'));
     const formModal = new bootstrap.Modal(document.getElementById('formModal'));
     
-    const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
-    const eventosOcupados = reservaciones.map(res => ({
-      title: 'OCUPADO',
-      start: res.fecha,
-      className: 'event-occupied'
-    }));
-
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       locale: 'es',
-      headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
-      events: eventosOcupados,
-      
+      headerToolbar: { 
+        left: 'prev,next today', 
+        center: 'title', 
+        right: '' 
+      },
+      // Simulación de fechas ocupadas
+      events: [
+        { title: 'OCUPADO', start: '2025-05-15', className: 'event-occupied' }
+      ],
       dateClick: function(info) {
         const today = new Date();
         today.setHours(0,0,0,0);
         const clickedDate = new Date(info.dateStr + 'T00:00:00');
 
-        if (clickedDate < today) {
+        if (clickedDate <= today) {
           warningModal.show();
         } else {
           document.getElementById('fechaForm').value = info.dateStr;
@@ -274,9 +280,20 @@
 
     calendar.render();
 
+    // ENVÍO DE FORMULARIO A WHATSAPP
     document.getElementById('formCita').addEventListener('submit', function(e) {
       e.preventDefault();
-      alert("¡Gracias! Tu solicitud de cita ha sido enviada.");
+      
+      const servicio = document.getElementById('servicio').value;
+      const fecha = document.getElementById('fechaForm').value;
+      const hora = document.getElementById('horaForm').value;
+      const nombre = document.getElementById('nombreCita').value;
+
+      const mensaje = `✨ *NUEVA CITA LK STUDIO* ✨\n\n👤 *Cliente:* ${nombre}\n💅 *Servicio:* ${servicio}\n📅 *Fecha:* ${fecha}\n⏰ *Hora:* ${hora}\n\n_Por favor confirmar disponibilidad._`;
+      
+      const url = `https://wa.me/527443861188?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+      
       formModal.hide();
     });
   });
