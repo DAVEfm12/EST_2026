@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Elite Salon | Reservaciones</title>
+  <title>Elite Salon | Reservaciones VIP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,9 +13,9 @@
     :root {
       --gold: #D4AF37;
       --gold-bright: #FFD700;
-      --rose-gold: #E6B8A2; /* Color Golden Rose */
+      --rose-gold: #E6B8A2; /* Golden Rose */
       --deep-black: #050505;
-      --onyx: #0f0f0f;
+      --onyx: #0a0a0a;
     }
 
     body {
@@ -25,71 +25,88 @@
       min-height: 100vh;
     }
 
-    /* Estadísticas Modernas */
+    /* Estadísticas */
     .stat-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 1.2rem;
       padding: 25px;
-      border: 1px solid rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
       transition: 0.3s;
     }
     .stat-card:hover { border-color: var(--rose-gold); transform: translateY(-5px); }
 
     .card-luxury {
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(15px);
+      background: var(--onyx);
       border: 1px solid var(--gold);
       border-radius: 1.5rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
     }
 
-    /* Inputs Corregidos - Letras Blancas */
+    /* Inputs - Texto siempre visible */
     .form-control, .form-select {
       background-color: #000 !important;
-      border: 1px solid #444 !important;
-      color: #ffffff !important; /* Texto blanco para legibilidad */
-      font-weight: 300;
+      border: 1px solid #333 !important;
+      color: #ffffff !important; 
+      font-weight: 400;
     }
-    .form-control::placeholder { color: #666; }
-    .form-label { color: var(--rose-gold) !important; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; }
+    .form-control:focus { border-color: var(--gold); box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+    .form-label { color: var(--rose-gold) !important; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
 
-    /* Tabla Estilo Luxury */
+    /* TABLA - AJUSTE DE COLOR SOLICITADO */
     .table-container {
-      background: rgba(0,0,0,0.5);
+      background: #000;
       border-radius: 1.5rem;
-      padding: 20px;
+      padding: 10px;
       border: 1px solid #222;
     }
-    .table { color: #ffffff !important; }
-    .table thead th { color: var(--gold) !important; border-bottom: 2px solid var(--gold); text-transform: uppercase; font-size: 0.7rem; }
-    .table tbody tr { background: rgba(255,255,255,0.02); border-bottom: 8px solid var(--deep-black); }
+    .table { background-color: #000 !important; margin-bottom: 0; }
+    .table thead th { 
+      color: var(--rose-gold) !important; 
+      border-bottom: 2px solid var(--gold); 
+      background: #000; 
+      padding: 15px;
+    }
     
+    /* Nombre de clienta en DORADO para que se vea sobre NEGRO */
+    .nombre-clienta { 
+      color: var(--gold) !important; 
+      font-weight: 800; 
+      font-size: 1.1rem;
+      text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    }
+
+    .servicio-sub { color: var(--rose-gold); font-size: 0.75rem; font-weight: 500; }
+
     /* Buscador */
     .search-box {
         background: #000;
-        border: 1px solid var(--rose-gold);
+        border: 2px solid var(--gold);
         border-radius: 50px;
-        padding: 5px 20px;
+        padding: 8px 25px;
         color: white;
+        width: 250px;
     }
 
     /* Badges */
     .badge-pago {
-      padding: 6px 12px;
-      border-radius: 50px;
-      font-size: 0.65rem;
-      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      text-transform: uppercase;
     }
-    .st-pagado { background: #00ff7f22; color: #00ff7f; border: 1px solid #00ff7f; }
-    .st-pendiente { background: #ffc10722; color: #ffc107; border: 1px solid #ffc107; }
-    .st-cancelado { background: #ff453a22; color: #ff453a; border: 1px solid #ff453a; }
+    .st-pagado { background: var(--gold); color: #000; }
+    .st-pendiente { border: 1px solid var(--rose-gold); color: var(--rose-gold); }
+    .st-cancelado { background: #ff453a; color: #fff; }
 
     .btn-pro {
-      background: linear-gradient(45deg, var(--gold), var(--rose-gold));
+      background: linear-gradient(45deg, var(--gold), #f3cf58);
       border: none; color: #000; font-weight: 800;
+      border-radius: 12px;
       transition: 0.3s;
     }
-    .btn-pro:hover { filter: brightness(1.2); transform: scale(1.02); }
+    .btn-pro:hover { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); transform: scale(1.02); }
 
     .text-gold { color: var(--gold) !important; }
     .text-rose { color: var(--rose-gold) !important; }
@@ -102,65 +119,64 @@
   
   <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
     <div>
-      <h1 class="fw-bold mb-0" style="color: var(--gold); letter-spacing: 2px;">LK <span class="text-white">STUDIO</span></h1>
-      <p class="text-rose mb-0 small fw-bold">RESERVACIONES & GESTIÓN VIP</p>
+      <h1 class="fw-bold mb-0" style="color: var(--gold); letter-spacing: 3px; filter: drop-shadow(0 0 10px rgba(212,175,55,0.4));">LK STUDIO</h1>
+      <p class="text-rose mb-0 small fw-bold"><i class="fas fa-gem me-2"></i>RESERVACIONES DE LUJO</p>
     </div>
-    <div class="d-flex gap-2">
-        <input type="text" id="busqueda" class="search-box" placeholder="Buscar cliente..." onkeyup="buscarCliente()">
-        <a href="./PANEL_ADMIN.html" class="btn btn-outline-warning btn-sm d-flex align-items-center">
-          <i class="fas fa-arrow-left me-2"></i> VOLVER
+    <div class="d-flex gap-3">
+        <input type="text" id="busqueda" class="search-box" placeholder="Buscar clienta..." onkeyup="buscarCliente()">
+        <a href="./PANEL_ADMIN.html" class="btn btn-outline-warning d-flex align-items-center rounded-pill">
+          <i class="fas fa-home me-2"></i> PANEL
         </a>
     </div>
   </div>
 
-  <div class="row g-4 mb-5 animate__animated animate__fadeInUp">
+  <div class="row g-4 mb-5 animate__animated animate__fadeIn">
     <div class="col-md-4"><div class="stat-card text-center">
-      <small class="text-rose fw-bold uppercase">Citas Hoy</small>
-      <h2 id="totalCitas" class="fw-bold text-white mb-0">0</h2>
+      <small class="text-rose fw-bold">CITAS REGISTRADAS</small>
+      <h2 id="totalCitas" class="fw-bold text-white mb-0 mt-2">0</h2>
+    </div></div>
+    <div class="col-md-4"><div class="stat-card text-center" style="border-color: var(--rose-gold);">
+      <small class="text-gold fw-bold">RECAUDADO (PAGADOS)</small>
+      <h2 id="totalIngresos" class="fw-bold text-white mb-0 mt-2">$0.00</h2>
     </div></div>
     <div class="col-md-4"><div class="stat-card text-center">
-      <small class="text-gold fw-bold">Ingresos Confirmados</small>
-      <h2 id="totalIngresos" class="fw-bold text-white mb-0">$0.00</h2>
-    </div></div>
-    <div class="col-md-4"><div class="stat-card text-center">
-      <small class="text-danger fw-bold">Por Cobrar</small>
-      <h2 id="totalPendientes" class="fw-bold text-white mb-0">0</h2>
+      <small class="text-danger fw-bold">PENDIENTES DE COBRO</small>
+      <h2 id="totalPendientes" class="fw-bold text-white mb-0 mt-2">0</h2>
     </div></div>
   </div>
 
   <div class="row g-4">
     <div class="col-xl-4">
-      <div class="card card-luxury p-4">
+      <div class="card card-luxury p-4 border-2">
         <form id="formReserva">
           <input type="hidden" id="indexReserva">
-          <h5 class="text-gold mb-4 fw-bold text-center border-bottom border-secondary pb-3">REGISTRO DE CITA</h5>
+          <h5 class="text-gold mb-4 fw-bold text-center"><i class="fas fa-calendar-plus me-2"></i>NUEVA AGENDA</h5>
           
           <div class="mb-3">
-            <label class="form-label">Nombre de la Clienta</label>
-            <input type="text" id="cliente" class="form-control" placeholder="Ej. Maria Lopez" required>
+            <label class="form-label">Clienta</label>
+            <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Servicio a realizar</label>
+            <label class="form-label">Servicio VIP</label>
             <select id="servicio" class="form-select" onchange="actualizarPrecio()" required>
-              <option value="" data-precio="0" selected disabled>Seleccione...</option>
+              <option value="" data-precio="0" selected disabled>Seleccionar...</option>
               <optgroup label="CABELLO">
-                <option value="Corte Mariposa" data-precio="150">Corte Mariposa - $150</option>
-                <option value="Balayage Elite" data-precio="2500">Balayage Elite - $2,500</option>
+                <option value="Corte Mariposa" data-precio="150">Corte Mariposa</option>
+                <option value="Balayage Elite" data-precio="2500">Balayage Elite</option>
               </optgroup>
               <optgroup label="UÑAS">
-                <option value="Uñas Acrílicas #2" data-precio="350">Acrílicas #2 - $350</option>
-                <option value="Uñas XXL" data-precio="700">Uñas XXL - $700</option>
-                <option value="Softgel" data-precio="500">Softgel - $500</option>
+                <option value="Uñas Acrílicas #2" data-precio="350">Acrílicas #2</option>
+                <option value="Uñas XXL" data-precio="700">Uñas XXL</option>
               </optgroup>
               <optgroup label="SPA">
-                <option value="Pedicura SPA" data-precio="1250">Pedicura SPA VIP - $1,250</option>
+                <option value="Pedicura SPA" data-precio="1250">Pedicura SPA VIP</option>
               </optgroup>
             </select>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Especialista</label>
+            <label class="form-label">Especialista a Cargo</label>
             <select id="selectInstructor" class="form-select" required></select>
           </div>
 
@@ -177,11 +193,11 @@
 
           <div class="row g-2 mb-4">
             <div class="col-6">
-              <label class="form-label">Monto $</label>
+              <label class="form-label">Inversión $</label>
               <input type="number" id="costo" class="form-control fw-bold text-gold" required>
             </div>
             <div class="col-6">
-              <label class="form-label">Estatus</label>
+              <label class="form-label">Estado Pago</label>
               <select id="pago" class="form-select">
                 <option value="Pendiente">PENDIENTE</option>
                 <option value="Pagado">PAGADO</option>
@@ -191,24 +207,24 @@
           </div>
 
           <button type="submit" class="btn btn-pro w-100 py-3 shadow-lg">
-            <i class="fas fa-calendar-check me-2"></i>GUARDAR RESERVACIÓN
+            <i class="fas fa-save me-2"></i>CONFIRMAR CITA
           </button>
         </form>
       </div>
     </div>
 
     <div class="col-xl-8">
-      <div class="table-container shadow-lg animate__animated animate__fadeIn">
+      <div class="table-container shadow-lg">
         <div class="table-responsive">
-          <table class="table align-middle" id="mainTable">
+          <table class="table align-middle">
             <thead>
               <tr>
                 <th>CLIENTA</th>
-                <th>FECHA & HORA</th>
+                <th>PROGRAMACIÓN</th>
                 <th>EXPERTA</th>
-                <th>MONTO</th>
-                <th>ESTADO</th>
-                <th class="text-center">ACCIONES</th>
+                <th>INVERSIÓN</th>
+                <th>PAGO</th>
+                <th class="text-center">OPCIONES</th>
               </tr>
             </thead>
             <tbody id="tablaReservas"></tbody>
@@ -231,11 +247,10 @@ function actualizarPrecio() {
 
 function buscarCliente() {
     let input = document.getElementById("busqueda").value.toLowerCase();
-    let filas = document.getElementById("tablaReservas").getElementsByTagName("tr");
-    for (let i = 0; i < filas.length; i++) {
-        let texto = filas[i].innerText.toLowerCase();
-        filas[i].style.display = texto.includes(input) ? "" : "none";
-    }
+    let filas = document.querySelectorAll("#tablaReservas tr");
+    filas.forEach(f => {
+        f.style.display = f.innerText.toLowerCase().includes(input) ? "" : "none";
+    });
 }
 
 function actualizarDashboard() {
@@ -247,7 +262,7 @@ function actualizarDashboard() {
 
 function cargarInstructores() {
   const select = document.getElementById("selectInstructor");
-  select.innerHTML = instructores.map(i => `<option value="${i.nombre}">${i.nombre}</option>`).join('') || '<option value="Staff General">Staff General</option>';
+  select.innerHTML = instructores.map(i => `<option value="${i.nombre}">${i.nombre}</option>`).join('') || '<option value="Staff">Personal LK</option>';
 }
 
 function renderReservas() {
@@ -258,22 +273,24 @@ function renderReservas() {
     let statusStyle = (r.pago === 'Pagado') ? 'st-pagado' : (r.pago === 'Cancelado' ? 'st-cancelado' : 'st-pendiente');
 
     tabla.innerHTML += `
-      <tr class="animate__animated animate__fadeIn">
+      <tr>
         <td>
-          <div class="fw-bold text-white">${r.cliente}</div>
-          <div class="text-gold small" style="font-size: 0.7rem;">${r.servicio}</div>
+          <div class="nombre-clienta">${r.cliente.toUpperCase()}</div>
+          <div class="servicio-sub"><i class="fas fa-cut me-1"></i>${r.servicio}</div>
         </td>
         <td>
-          <div class="small text-white">${r.fecha}</div>
+          <div class="text-white small fw-bold">${r.fecha}</div>
           <div class="text-rose small">${r.hora} hrs</div>
         </td>
-        <td class="small text-secondary"><i class="fas fa-star me-1 text-warning"></i> ${r.instructor}</td>
+        <td><span class="text-white small fw-bold"><i class="fas fa-user-sparkles text-gold me-1"></i> ${r.instructor}</span></td>
         <td class="fw-bold text-gold">$${r.costo}</td>
         <td><span class="badge-pago ${statusStyle}">${r.pago}</span></td>
         <td class="text-center">
-          <button class="btn btn-sm text-info" onclick="editar(${index})"><i class="fas fa-pen"></i></button>
-          <button class="btn btn-sm text-success" onclick="enviarRecordatorio(${index})"><i class="fab fa-whatsapp"></i></button>
-          <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
+          <div class="btn-group">
+              <button class="btn btn-sm btn-outline-warning" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-sm btn-outline-success" onclick="enviarRecordatorio(${index})"><i class="fab fa-whatsapp"></i></button>
+              <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
+          </div>
         </td>
       </tr>
     `;
@@ -283,8 +300,8 @@ function renderReservas() {
 
 function enviarRecordatorio(i) {
     const r = reservaciones[i];
-    const msj = `Hola ${r.cliente}, te recordamos tu cita en LK Studio el día ${r.fecha} a las ${r.hora} para tu servicio de ${r.servicio}. ¡Te esperamos!`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(msj)}`, '_blank');
+    const msj = `Hola ${r.cliente}, LK Studio te recuerda tu cita: %0A📅 ${r.fecha}%0A⏰ ${r.hora} hrs%0A✨ ${r.servicio}%0A¡Te esperamos!`;
+    window.open(`https://wa.me/?text=${msj}`, '_blank');
 }
 
 document.getElementById("formReserva").addEventListener("submit", function(e){
@@ -304,7 +321,7 @@ document.getElementById("formReserva").addEventListener("submit", function(e){
   else reservaciones[id] = r;
 
   localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
-  document.getElementById("formReserva").reset();
+  this.reset();
   document.getElementById("indexReserva").value = "";
   renderReservas();
 });
@@ -319,10 +336,11 @@ function editar(i) {
   document.getElementById("hora").value = r.hora;
   document.getElementById("costo").value = r.costo;
   document.getElementById("pago").value = r.pago;
+  window.scrollTo(0,0);
 }
 
 function eliminar(i) {
-  if(confirm("¿Eliminar reservación?")) {
+  if(confirm("¿Deseas eliminar esta cita de la agenda?")) {
     reservaciones.splice(i, 1);
     localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
     renderReservas();
