@@ -2,187 +2,197 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Punto de Venta | Belleza & Nails</title>
+    <title>POS Elite | LK Studio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
     <style>
-        body {
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-            color: #fff;
-            min-height: 100vh;
-        }
-        .card {
-            background: #000;
-            border: 2px solid #D4AF37;
-            border-radius: 1rem;
-        }
-        .gold { color: #D4AF37; }
-        .rose { color: #e6b8a2; }
-        .btn-gold {
-            background: #D4AF37;
-            color: #000;
-            font-weight: bold;
-        }
-        .btn-gold:hover { background: #bfa233; color: #000; }
-        .table-dark { --bs-table-bg: transparent; }
-        .badge-servicio { background-color: #D4AF37; color: #000; }
-        .badge-material { background-color: #17a2b8; color: #fff; }
-        .badge-extra { background-color: #dc3545; color: #fff; }
+        :root { --gold: #D4AF37; --gold-bright: #FFD700; --dark: #0a0a0a; }
+        body { background: radial-gradient(circle at top, #1a1a1a, #050505); color: #fff; font-family: 'Poppins', sans-serif; min-height: 100vh; }
+        .card { background: rgba(0,0,0,0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 1.5rem; backdrop-filter: blur(10px); }
+        .gold { color: var(--gold); }
+        .btn-gold { background: linear-gradient(45deg, var(--gold), #f3cf58); color: #000; font-weight: bold; border: none; border-radius: 10px; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+        .form-control, .form-select { background: #111 !important; border: 1px solid #333 !important; color: #fff !important; }
+        .badge-servicio { background: var(--gold); color: #000; }
+        .table { --bs-table-bg: transparent; color: #eee; }
+        .sticky-summary { position: sticky; top: 20px; }
+        .input-group-text { background: #222; border: 1px solid #333; color: var(--gold); }
     </style>
 </head>
-
 <body>
-<div class="container py-5">
 
+<div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <a href="PANEL_ADMIN.html" class="btn btn-outline-light">
-            <i class="fas fa-arrow-left"></i> Volver
-        </a>
-        <h1 class="gold fw-bold m-0"><i class="fas fa-cash-register"></i> Punto de Venta</h1>
+        <div>
+            <h2 class="gold fw-bold m-0"><i class="fas fa-crown"></i> LK STUDIO POS</h2>
+            <small class="text-secondary text-uppercase">Terminal de Cobro Profesional</small>
+        </div>
         <div class="text-end">
-            <span id="fecha-actual" class="rose"></span>
+            <a href="PANEL_ADMIN.html" class="btn btn-sm btn-outline-warning rounded-pill px-3 me-2">Panel</a>
+            <span id="fecha-actual" class="badge border border-warning gold"></span>
         </div>
     </div>
 
     <div class="row g-4">
         <div class="col-lg-4">
-            <div class="card p-4">
-                <h5 class="gold mb-3"><i class="fas fa-receipt"></i> Registro de Cobro</h5>
+            <div class="card p-4 shadow-lg">
+                <h5 class="gold mb-4 border-bottom border-secondary pb-2">Registro de Venta</h5>
+                
+                <div class="mb-3">
+                    <label class="small text-secondary fw-bold">CLIENTE / BUSCAR CITA</label>
+                    <div class="input-group">
+                        <input id="inputCliente" class="form-control" placeholder="Nombre de clienta">
+                        <button class="btn btn-outline-warning" onclick="buscarCitaHoy()" title="Cargar desde agenda">
+                            <i class="fas fa-sync"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row g-2 mb-4">
+                    <div class="col-6">
+                        <label class="small text-secondary fw-bold">FOLIO</label>
+                        <input id="inputCita" class="form-control form-control-sm" placeholder="ID-000">
+                    </div>
+                    <div class="col-6">
+                        <label class="small text-secondary fw-bold">MÉTODO</label>
+                        <select id="metodoPago" class="form-select form-select-sm" onchange="toggleTransferencia()">
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="Tarjeta">Tarjeta</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="mb-3">
-                    <label class="rose form-label small">Cliente</label>
-                    <input id="inputCliente" class="form-control" placeholder="Nombre del cliente">
+                    <label class="small text-secondary fw-bold">AÑADIR SERVICIO</label>
+                    <div class="input-group">
+                        <select id="selectServicio" class="form-select"></select>
+                        <button class="btn btn-gold" onclick="agregarServicio()"><i class="fas fa-plus"></i></button>
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="rose form-label small">Folio Cita</label>
-                    <input id="inputCita" class="form-control" placeholder="CITA-000">
+                    <label class="small text-secondary fw-bold">MATERIAL / EXTRAS</label>
+                    <div class="input-group">
+                        <select id="selectMaterial" class="form-select"></select>
+                        <button class="btn btn-outline-info" onclick="agregarMaterial()"><i class="fas fa-plus"></i></button>
+                    </div>
                 </div>
 
-                <hr class="border-secondary">
-
-                <label class="rose form-label small">Seleccionar Servicio</label>
-                <div class="input-group mb-3">
-                    <select id="selectServicio" class="form-select"></select>
-                    <button class="btn btn-gold" onclick="agregarServicio()">+</button>
-                </div>
-
-                <label class="rose form-label small">Material Adicional</label>
-                <div class="input-group mb-3">
-                    <select id="selectMaterial" class="form-select"></select>
-                    <button class="btn btn-outline-info" onclick="agregarMaterial()">+</button>
-                </div>
-
-                <hr class="border-secondary">
-
-                <h6 class="rose small mb-2">Cobro Extra Específico</h6>
-                <input id="extraDesc" class="form-control mb-2 form-control-sm" placeholder="Concepto (ej. Piedras extra)">
-                <div class="input-group mb-3">
-                    <span class="input-group-text bg-dark text-white border-secondary">$</span>
-                    <input id="extraMonto" type="number" class="form-control form-control-sm" placeholder="0.00">
-                    <button class="btn btn-outline-danger btn-sm" onclick="agregarExtra()">Añadir</button>
-                </div>
-
-                <hr class="border-secondary">
-
-                <label class="rose form-label small">Método de Pago</label>
-                <select id="metodoPago" class="form-select mb-3" onchange="toggleTransferencia()">
-                    <option value="Efectivo">Efectivo</option>
-                    <option value="Transferencia">Transferencia</option>
-                    <option value="Tarjeta">Tarjeta</option>
-                </select>
-
-                <div id="infoTransferencia" class="alert alert-secondary d-none small">
-                    <strong>Banco Azteca</strong><br>
+                <div id="infoTransferencia" class="alert alert-dark border-secondary d-none small">
+                    <i class="fas fa-university me-2"></i> <strong>Banco Azteca</strong><br>
                     CLABE: 127180012784596325
                 </div>
 
-                <button class="btn btn-success w-100 fw-bold" onclick="finalizarVenta()">
-                    <i class="fas fa-check-circle"></i> REGISTRAR Y COBRAR
+                <div class="bg-black p-3 rounded-3 mb-4">
+                    <label class="small text-warning fw-bold">CALCULADORA DE CAMBIO</label>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text">$</span>
+                        <input id="pagaCon" type="number" class="form-control" placeholder="Paga con..." oninput="calcularCambio()">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <small>Cambio:</small>
+                        <strong class="text-success" id="cambioResult">$0.00</strong>
+                    </div>
+                </div>
+
+                <button class="btn btn-gold w-100 py-3 mb-2" onclick="finalizarVenta()">
+                    <i class="fas fa-file-invoice-dollar me-2"></i> FINALIZAR Y COBRAR
                 </button>
             </div>
         </div>
 
         <div class="col-lg-8">
-            <div class="card p-4 mb-4">
-                <h5 class="gold mb-3"><i class="fas fa-shopping-cart"></i> Detalle del Cobro Actual</h5>
-                <div class="table-responsive" style="min-height: 200px;">
-                    <table class="table table-dark">
-                        <thead>
-                            <tr class="rose small">
-                                <th>Tipo</th>
-                                <th>Concepto</th>
-                                <th>Precio</th>
-                                <th class="text-end">Acción</th>
+            <div class="card p-4 mb-4 sticky-summary shadow">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="gold m-0"><i class="fas fa-shopping-bag me-2"></i>Resumen de Cobro</h5>
+                    <button class="btn btn-sm btn-outline-danger border-0" onclick="vaciarCarrito()">
+                        <i class="fas fa-trash me-1"></i> Limpiar
+                    </button>
+                </div>
+
+                <div class="table-responsive" style="min-height: 250px;">
+                    <table class="table table-hover align-middle">
+                        <thead class="text-secondary small">
+                            <tr>
+                                <th>CONCEPTO</th>
+                                <th>TIPO</th>
+                                <th>PRECIO</th>
+                                <th class="text-end">BORRAR</th>
                             </tr>
                         </thead>
                         <tbody id="tablaCarrito"></tbody>
                     </table>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mt-3 border-top pt-3">
-                    <h3 class="gold m-0">TOTAL: $<span id="displayTotal">0</span></h3>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="vaciarCarrito()">Limpiar Carrito</button>
+
+                <div class="d-flex justify-content-between align-items-end pt-3 border-top">
+                    <div>
+                        <span class="text-secondary small d-block">Subtotal de servicios</span>
+                        <h2 class="gold fw-bold mb-0">TOTAL: $<span id="displayTotal">0.00</span></h2>
+                    </div>
+                    <div class="text-end text-secondary small">
+                        LK Studio & Academy<br>Servicio VIP garantizado
+                    </div>
                 </div>
             </div>
 
-            <div class="card p-4">
-                <h5 class="rose mb-3 small"><i class="fas fa-history"></i> Últimos Movimientos del Día</h5>
-                <div class="table-responsive">
-                    <table class="table table-dark table-sm small">
-                        <thead>
-                            <tr class="text-white-50">
-                                <th>Cita</th>
-                                <th>Cliente</th>
-                                <th>Total</th>
-                                <th>Pago</th>
-                                <th>Hora</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaHistorial"></tbody>
-                    </table>
-                </div>
+            <div class="card p-4 border-0 bg-dark opacity-75">
+                <h6 class="text-secondary mb-3"><i class="fas fa-history me-2"></i>CORTES RECIENTES</h6>
+                <div id="historialRapido" class="row g-2"></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-// --- DATOS ---
+// --- DATOS MAESTROS ---
 const servicios = [
     {name:"Corte Mariposa", precio:150},
-    {name:"Corte Bob", precio:150},
-    {name:"Balayage", precio:2000},
     {name:"Uñas Acrílicas #2", precio:350},
-    {name:"Uñas Acrílicas XXL", precio:700},
-    {name:"Pedicura Spa VIP", precio:1500}
+    {name:"Uñas XXL (Cristales)", precio:850},
+    {name:"Balayage VIP", precio:2500},
+    {name:"Maquillaje Social", precio:650},
+    {name:"Pedicura Spa", precio:450}
 ];
 
 const materiales = [
-    {name:"Guantes desechables", precio:5},
-    {name:"Lima desechable", precio:20},
-    {name:"Gel color", precio:50},
-    {name:"Cristal Swarovski", precio:10},
-    {name:"Diseño mano alzada", precio:45}
+    {name:"Decoración Extra", precio:50},
+    {name:"Diseño Mano Alzada", precio:100},
+    {name:"Reparación Uña", precio:40},
+    {name:"Retiro de Gel", precio:80}
 ];
 
 let carrito = [];
 
-// --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
     const selS = document.getElementById("selectServicio");
     servicios.forEach((s, i) => selS.innerHTML += `<option value="${i}">${s.name} ($${s.precio})</option>`);
-
+    
     const selM = document.getElementById("selectMaterial");
     materiales.forEach((m, i) => selM.innerHTML += `<option value="${i}">${m.name} ($${m.precio})</option>`);
-
-    document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString();
+    
+    document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
     actualizarHistorial();
 });
 
-// --- FUNCIONES LÓGICAS ---
+// --- LÓGICA DE NEGOCIO ---
+
+function buscarCitaHoy() {
+    const agenda = JSON.parse(localStorage.getItem("reservaciones")) || [];
+    const hoy = new Date().toISOString().split('T')[0];
+    
+    // Buscar la primera cita de hoy que coincida con el nombre ingresado (o traer la más reciente)
+    const coincidencia = agenda.find(c => c.fecha === hoy);
+    
+    if(coincidencia) {
+        document.getElementById("inputCliente").value = coincidencia.cliente;
+        document.getElementById("inputCita").value = "CITA-" + Math.floor(Math.random()*900 + 100);
+        alert("Cita de hoy encontrada: " + coincidencia.cliente);
+    } else {
+        alert("No hay citas registradas para hoy en la agenda.");
+    }
+}
 
 function agregarServicio() {
     const item = servicios[document.getElementById("selectServicio").value];
@@ -192,20 +202,29 @@ function agregarServicio() {
 
 function agregarMaterial() {
     const item = materiales[document.getElementById("selectMaterial").value];
-    carrito.push({ tipo: "Material", desc: item.name, precio: item.precio });
+    carrito.push({ tipo: "Extra", desc: item.name, precio: item.precio });
     renderCarrito();
 }
 
-function agregarExtra() {
-    const d = document.getElementById("extraDesc").value;
-    const m = parseFloat(document.getElementById("extraMonto").value);
+function renderCarrito() {
+    const tbody = document.getElementById("tablaCarrito");
+    tbody.innerHTML = "";
+    let total = 0;
     
-    if(!d || isNaN(m)) return alert("Escribe descripción y monto del extra");
-    
-    carrito.push({ tipo: "Extra", desc: d, precio: m });
-    document.getElementById("extraDesc").value = "";
-    document.getElementById("extraMonto").value = "";
-    renderCarrito();
+    carrito.forEach((item, i) => {
+        total += item.precio;
+        tbody.innerHTML += `
+            <tr class="animate__animated animate__fadeIn">
+                <td><span class="fw-bold">${item.desc}</span></td>
+                <td><span class="badge ${item.tipo === 'Servicio' ? 'badge-servicio' : 'bg-info'}">${item.tipo}</span></td>
+                <td class="gold fw-bold">$${item.precio.toFixed(2)}</td>
+                <td class="text-end">
+                    <button class="btn btn-sm text-danger" onclick="eliminarItem(${i})"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>`;
+    });
+    document.getElementById("displayTotal").innerText = total.toFixed(2);
+    calcularCambio();
 }
 
 function eliminarItem(index) {
@@ -213,33 +232,19 @@ function eliminarItem(index) {
     renderCarrito();
 }
 
-function renderCarrito() {
-    const tbody = document.getElementById("tablaCarrito");
-    const displayTotal = document.getElementById("displayTotal");
-    tbody.innerHTML = "";
-    let total = 0;
-
-    carrito.forEach((item, i) => {
-        total += item.precio;
-        let badgeClass = item.tipo === "Servicio" ? "badge-servicio" : (item.tipo === "Material" ? "badge-material" : "badge-extra");
-        
-        tbody.innerHTML += `
-            <tr>
-                <td><span class="badge ${badgeClass}">${item.tipo}</span></td>
-                <td>${item.desc}</td>
-                <td class="gold">$${item.precio}</td>
-                <td class="text-end">
-                    <button class="btn btn-sm text-danger" onclick="eliminarItem(${i})"><i class="fas fa-times"></i></button>
-                </td>
-            </tr>
-        `;
-    });
-    displayTotal.innerText = total;
-}
-
 function vaciarCarrito() {
     carrito = [];
     renderCarrito();
+}
+
+function calcularCambio() {
+    const total = parseFloat(document.getElementById("displayTotal").innerText);
+    const paga = parseFloat(document.getElementById("pagaCon").value) || 0;
+    const cambio = paga - total;
+    const res = document.getElementById("cambioResult");
+    
+    res.innerText = `$${(cambio > 0 ? cambio : 0).toFixed(2)}`;
+    res.className = cambio >= 0 ? "text-success" : "text-danger";
 }
 
 function toggleTransferencia() {
@@ -249,45 +254,47 @@ function toggleTransferencia() {
 
 function finalizarVenta() {
     const cliente = document.getElementById("inputCliente").value;
-    if(!cliente || carrito.length === 0) return alert("Ingresa el cliente y al menos un concepto");
+    const total = parseFloat(document.getElementById("displayTotal").innerText);
 
-    const total = carrito.reduce((acc, obj) => acc + obj.precio, 0);
-    const nuevaVenta = {
-        cita: document.getElementById("inputCita").value || "N/A",
-        cliente: cliente,
-        total: total,
+    if(!cliente || carrito.length === 0) {
+        return alert("Error: Cliente vacío o carrito sin productos.");
+    }
+
+    const venta = {
+        cliente,
+        total,
         pago: document.getElementById("metodoPago").value,
-        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        id: document.getElementById("inputCita").value || "POS-" + Date.now().toString().slice(-4)
     };
 
-    // Guardar en LocalStorage
     let ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
-    ventas.unshift(nuevaVenta);
+    ventas.unshift(venta);
     localStorage.setItem("ventas_dia", JSON.stringify(ventas));
 
-    // Resetear formulario
+    alert("✅ Venta registrada: $" + total.toFixed(2));
+    
+    // Limpiar todo
     vaciarCarrito();
     document.getElementById("inputCliente").value = "";
-    document.getElementById("inputCita").value = "";
+    document.getElementById("pagaCon").value = "";
     actualizarHistorial();
-    alert("¡Venta registrada con éxito!");
 }
 
 function actualizarHistorial() {
     const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
-    const tbody = document.getElementById("tablaHistorial");
-    tbody.innerHTML = "";
+    const div = document.getElementById("historialRapido");
+    div.innerHTML = "";
     
-    ventas.slice(0, 5).forEach(v => { // Mostrar solo las últimas 5
-        tbody.innerHTML += `
-            <tr>
-                <td>${v.cita}</td>
-                <td>${v.cliente}</td>
-                <td class="gold">$${v.total}</td>
-                <td>${v.pago}</td>
-                <td>${v.hora}</td>
-            </tr>
-        `;
+    ventas.slice(0, 4).forEach(v => {
+        div.innerHTML += `
+            <div class="col-6 col-md-3">
+                <div class="p-2 border border-secondary rounded text-center small">
+                    <div class="gold fw-bold">$${v.total}</div>
+                    <div class="text-truncate">${v.cliente}</div>
+                    <div class="text-muted" style="font-size:10px">${v.hora} - ${v.pago}</div>
+                </div>
+            </div>`;
     });
 }
 </script>
