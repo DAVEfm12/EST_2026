@@ -35,72 +35,72 @@
       padding: 25px;
       border: 1px solid var(--gold);
       box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
-      transition: 0.3s;
     }
-    .stat-card h2 { color: var(--gold-bright); font-family: 'Cinzel', serif; }
 
     /* Tarjeta Formulario */
     .card-luxury {
       background: var(--soft-black);
       border: 2px solid var(--rose-gold);
       border-radius: 1.5rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
     }
 
-    /* Inputs - Texto Oro Brillante sobre Negro */
-    .form-label { 
-      color: var(--rose-gold) !important; 
-      font-size: 0.75rem; 
-      font-weight: 700; 
-      text-transform: uppercase;
-    }
+    /* Inputs */
+    .form-label { color: var(--rose-gold) !important; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
     .form-control, .form-select {
       background-color: #000 !important;
       border: 1px solid #333 !important;
-      color: var(--gold-bright) !important; 
-      border-radius: 10px;
+      color: var(--gold-bright) !important;
     }
 
-    /* --- AJUSTE DE TABLA SOLICITADO --- */
+    /* --- ESTILOS DE LA TABLA SOLICITADOS --- */
     .table-container {
-      background: #000 !important; /* Fondo Negro Puro */
+      background: #000; /* Fondo general Negro */
       border-radius: 1.5rem;
-      padding: 20px;
+      overflow: hidden;
       border: 1px solid var(--gold);
     }
-    
+
     .table { 
+      margin-bottom: 0; 
       background-color: #000 !important; 
-      color: white !important; 
     }
 
-    /* Títulos de la tabla en Rosa Oro */
+    /* Encabezados en Golden Rose */
     .table thead th { 
       color: var(--rose-gold) !important; 
       font-family: 'Cinzel', serif;
-      border-bottom: 2px solid var(--gold); 
-      background: #000 !important;
-      padding: 15px;
+      background-color: #000 !important;
+      border-bottom: 2px solid var(--gold);
+      padding: 20px 15px;
       text-transform: uppercase;
       font-size: 0.85rem;
     }
 
-    /* Nombre de clienta en Dorado Brillante sobre Negro */
+    /* Filas de datos en Negro */
+    .table tbody tr {
+      background-color: #000 !important;
+      border-bottom: 1px solid #222;
+      transition: 0.3s;
+    }
+
+    .table tbody tr:hover {
+      background-color: #080808 !important; /* Efecto sutil al pasar el mouse */
+    }
+
+    .table td {
+      background-color: #000 !important;
+      padding: 15px !important;
+      color: #fff;
+    }
+
     .nombre-clienta { 
       color: var(--gold-bright) !important; 
       font-weight: 700; 
       font-size: 1.1rem;
       font-family: 'Cinzel', serif;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
 
-    /* Filas de la tabla */
-    .table tbody tr {
-      border-bottom: 1px solid #222;
-      background-color: #000 !important;
-    }
-    
-    .servicio-sub { color: var(--rose-gold); font-size: 0.8rem; opacity: 0.9; }
+    .servicio-sub { color: var(--rose-gold); font-size: 0.8rem; }
 
     /* Buscador */
     .search-box {
@@ -109,28 +109,23 @@
         border-radius: 50px;
         padding: 8px 25px;
         color: var(--gold-bright);
-        width: 250px;
     }
 
     /* Botones */
     .btn-pro {
       background: linear-gradient(45deg, var(--gold), var(--gold-bright));
-      border: none; color: #000; font-weight: 800;
-      border-radius: 50px;
+      color: #000; font-weight: 800; border-radius: 50px;
     }
-    .btn-pro:hover { transform: scale(1.02); box-shadow: 0 0 15px var(--gold); }
 
-    /* Badges de Pago */
     .badge-pago {
       padding: 6px 12px;
       border-radius: 50px;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 800;
-      text-transform: uppercase;
     }
     .st-pagado { background: var(--gold); color: #000; }
     .st-pendiente { border: 1px solid var(--rose-gold); color: var(--rose-gold); }
-    .st-cancelado { background: #800; color: #fff; }
+    .st-cancelado { background: #600; color: #fff; }
   </style>
 </head>
 
@@ -138,32 +133,15 @@
 
 <div class="container-fluid py-5 px-lg-5">
   
-  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
     <div class="text-center text-md-start mb-4 mb-md-0">
       <h1 class="luxury-font fw-bold mb-0" style="color: var(--gold); font-size: 3rem;">LK STUDIO</h1>
-      <p class="text-rose mb-0 fw-bold"><i class="fas fa-gem me-2"></i>RESERVACIONES DE ALTO NIVEL</p>
+      <p class="text-rose mb-0 fw-bold"><i class="fas fa-gem me-2"></i>AGENDA DE SERVICIOS ELITE</p>
     </div>
     <div class="d-flex gap-3 align-items-center">
-        <input type="text" id="busqueda" class="search-box" placeholder="Buscar por nombre..." onkeyup="buscarCliente()">
-        <a href="./PANEL_ADMIN.html" class="btn btn-outline-warning rounded-pill">
-          <i class="fas fa-home me-2"></i> REGRESAR
-        </a>
+        <input type="text" id="busqueda" class="search-box" placeholder="Buscar clienta..." onkeyup="buscarCliente()">
+        <a href="./PANEL_ADMIN.html" class="btn btn-outline-light rounded-pill px-4">PANEL</a>
     </div>
-  </div>
-
-  <div class="row g-4 mb-5 animate__animated animate__fadeIn">
-    <div class="col-md-4"><div class="stat-card text-center">
-      <small style="color: var(--rose-gold);">TOTAL DE CITAS</small>
-      <h2 id="totalCitas" class="fw-bold mb-0 mt-2">0</h2>
-    </div></div>
-    <div class="col-md-4"><div class="stat-card text-center">
-      <small style="color: var(--gold-bright);">INGRESOS CONFIRMADOS</small>
-      <h2 id="totalIngresos" class="fw-bold mb-0 mt-2">$0.00</h2>
-    </div></div>
-    <div class="col-md-4"><div class="stat-card text-center">
-      <small style="color: var(--rose-gold);">POR COBRAR</small>
-      <h2 id="totalPendientes" class="fw-bold mb-0 mt-2">0</h2>
-    </div></div>
   </div>
 
   <div class="row g-4">
@@ -171,60 +149,48 @@
       <div class="card card-luxury p-4">
         <form id="formReserva">
           <input type="hidden" id="indexReserva">
-          <h5 class="text-gold mb-4 fw-bold text-center luxury-font">AGENDAR CITA VIP</h5>
+          <h5 class="text-gold mb-4 fw-bold text-center luxury-font">RESERVAR CITA</h5>
           
           <div class="mb-3">
-            <label class="form-label">Clienta</label>
-            <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
+            <label class="form-label">Clienta VIP</label>
+            <input type="text" id="cliente" class="form-control" required>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Servicio</label>
             <select id="servicio" class="form-select" onchange="actualizarPrecio()" required>
               <option value="" data-precio="0" selected disabled>Seleccionar...</option>
-              <optgroup label="CABELLO">
-                <option value="Corte Mariposa" data-precio="150">Corte Mariposa</option>
-                <option value="Balayage Elite" data-precio="2500">Balayage Elite</option>
-              </optgroup>
-              <optgroup label="UÑAS">
-                <option value="Uñas Acrílicas #2" data-precio="350">Acrílicas #2</option>
-                <option value="Pedicura SPA VIP" data-precio="1250">Pedicura SPA VIP</option>
-              </optgroup>
+              <option value="Corte Mariposa" data-precio="150">Corte Mariposa</option>
+              <option value="Balayage Elite" data-precio="2500">Balayage Elite</option>
+              <option value="Uñas Acrílicas #2" data-precio="350">Uñas Acrílicas #2</option>
+              <option value="Pedicura SPA VIP" data-precio="1250">Pedicura SPA VIP</option>
             </select>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Especialista</label>
+            <label class="form-label">Experta</label>
             <select id="selectInstructor" class="form-select" required></select>
           </div>
 
           <div class="row g-2 mb-3">
-            <div class="col-6">
-              <label class="form-label">Fecha</label>
-              <input type="date" id="fecha" class="form-control" required>
-            </div>
-            <div class="col-6">
-              <label class="form-label">Hora</label>
-              <input type="time" id="hora" class="form-control" required>
-            </div>
+            <div class="col-6"><label class="form-label">Fecha</label><input type="date" id="fecha" class="form-control" required></div>
+            <div class="col-6"><label class="form-label">Hora</label><input type="time" id="hora" class="form-control" required></div>
           </div>
 
-          <div class="row g-2 mb-4">
-            <div class="col-6">
-              <label class="form-label">Costo $</label>
-              <input type="number" id="costo" class="form-control fw-bold" required>
-            </div>
-            <div class="col-6">
-              <label class="form-label">Estado</label>
-              <select id="pago" class="form-select">
-                <option value="Pendiente">PENDIENTE</option>
-                <option value="Pagado">PAGADO</option>
-                <option value="Cancelado">CANCELADO</option>
-              </select>
-            </div>
+          <div class="mb-4">
+            <label class="form-label">Inversión $</label>
+            <input type="number" id="costo" class="form-control fw-bold" required>
           </div>
 
-          <button type="submit" class="btn btn-pro w-100 py-3">CONFIRMAR CITA</button>
+          <div class="mb-4">
+            <label class="form-label">Estado de Pago</label>
+            <select id="pago" class="form-select">
+                <option value="Pendiente">Pendiente</option>
+                <option value="Pagado">Pagado</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-pro w-100 py-3">CONFIRMAR RESERVA</button>
         </form>
       </div>
     </div>
@@ -238,12 +204,13 @@
                 <th>CLIENTA / SERVICIO</th>
                 <th>HORARIO</th>
                 <th>EXPERTA</th>
-                <th>COSTO</th>
+                <th>INVERSIÓN</th>
                 <th>ESTADO</th>
-                <th class="text-center">ACCIONES</th>
+                <th class="text-center">GESTIÓN</th>
               </tr>
             </thead>
-            <tbody id="tablaReservas"></tbody>
+            <tbody id="tablaReservas">
+                </tbody>
           </table>
         </div>
       </div>
@@ -255,30 +222,15 @@
 let reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
 let instructores = JSON.parse(localStorage.getItem("instructores")) || [];
 
+function cargarInstructores() {
+  const select = document.getElementById("selectInstructor");
+  select.innerHTML = instructores.map(i => `<option value="${i.nombre}">${i.nombre}</option>`).join('') || '<option>Christian</option><option>Staff</option>';
+}
+
 function actualizarPrecio() {
   const select = document.getElementById("servicio");
   const precio = select.options[select.selectedIndex].getAttribute("data-precio");
   document.getElementById("costo").value = precio;
-}
-
-function buscarCliente() {
-    let input = document.getElementById("busqueda").value.toLowerCase();
-    let filas = document.querySelectorAll("#tablaReservas tr");
-    filas.forEach(f => {
-        f.style.display = f.innerText.toLowerCase().includes(input) ? "" : "none";
-    });
-}
-
-function actualizarDashboard() {
-  document.getElementById("totalCitas").innerText = reservaciones.length;
-  const pagado = reservaciones.filter(r => r.pago === 'Pagado').reduce((acc, curr) => acc + parseFloat(curr.costo || 0), 0);
-  document.getElementById("totalIngresos").innerText = `$${pagado.toLocaleString()}`;
-  document.getElementById("totalPendientes").innerText = reservaciones.filter(r => r.pago === 'Pendiente').length;
-}
-
-function cargarInstructores() {
-  const select = document.getElementById("selectInstructor");
-  select.innerHTML = instructores.map(i => `<option value="${i.nombre}">${i.nombre}</option>`).join('') || '<option value="Staff">Personal LK</option>';
 }
 
 function renderReservas() {
@@ -286,7 +238,7 @@ function renderReservas() {
   tabla.innerHTML = "";
   
   reservaciones.forEach((r, index) => {
-    let statusStyle = (r.pago === 'Pagado') ? 'st-pagado' : (r.pago === 'Cancelado' ? 'st-cancelado' : 'st-pendiente');
+    let statusStyle = (r.pago === 'Pagado') ? 'st-pagado' : 'st-pendiente';
 
     tabla.innerHTML += `
       <tr>
@@ -296,28 +248,20 @@ function renderReservas() {
         </td>
         <td>
           <div class="text-white small fw-bold">${r.fecha}</div>
-          <div class="text-rose small" style="color: var(--rose-gold);">${r.hora} hrs</div>
+          <div class="text-rose-gold small" style="color: var(--rose-gold)">${r.hora} hrs</div>
         </td>
-        <td class="text-white small">${r.instructor}</td>
+        <td><span class="text-white fw-bold">${r.instructor}</span></td>
         <td class="fw-bold text-gold">$${r.costo}</td>
         <td><span class="badge-pago ${statusStyle}">${r.pago}</span></td>
         <td class="text-center">
           <div class="btn-group">
               <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
-              <button class="btn btn-sm btn-outline-success border-0" onclick="enviarRecordatorio(${index})"><i class="fab fa-whatsapp"></i></button>
               <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
           </div>
         </td>
       </tr>
     `;
   });
-  actualizarDashboard();
-}
-
-function enviarRecordatorio(i) {
-    const r = reservaciones[i];
-    const msj = `Hola ${r.cliente}, LK Studio te recuerda tu cita: %0A📅 ${r.fecha}%0A⏰ ${r.hora} hrs%0A✨ ${r.servicio}%0A¡Te esperamos!`;
-    window.open(`https://wa.me/?text=${msj}`, '_blank');
 }
 
 document.getElementById("formReserva").addEventListener("submit", function(e){
@@ -331,36 +275,26 @@ document.getElementById("formReserva").addEventListener("submit", function(e){
     costo: document.getElementById("costo").value,
     pago: document.getElementById("pago").value
   };
-
   const id = document.getElementById("indexReserva").value;
   if(id === "") reservaciones.push(r);
   else reservaciones[id] = r;
-
   localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
   this.reset();
-  document.getElementById("indexReserva").value = "";
   renderReservas();
 });
 
-function editar(i) {
-  const r = reservaciones[i];
-  document.getElementById("indexReserva").value = i;
-  document.getElementById("cliente").value = r.cliente;
-  document.getElementById("servicio").value = r.servicio;
-  document.getElementById("selectInstructor").value = r.instructor;
-  document.getElementById("fecha").value = r.fecha;
-  document.getElementById("hora").value = r.hora;
-  document.getElementById("costo").value = r.costo;
-  document.getElementById("pago").value = r.pago;
-  window.scrollTo({ top: 150, behavior: 'smooth' });
-}
-
 function eliminar(i) {
-  if(confirm("¿Deseas eliminar esta cita?")) {
+  if(confirm("¿Eliminar cita?")) {
     reservaciones.splice(i, 1);
     localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
     renderReservas();
   }
+}
+
+function buscarCliente() {
+    let input = document.getElementById("busqueda").value.toLowerCase();
+    let filas = document.querySelectorAll("#tablaReservas tr");
+    filas.forEach(f => f.style.display = f.innerText.toLowerCase().includes(input) ? "" : "none");
 }
 
 cargarInstructores();
