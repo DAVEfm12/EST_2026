@@ -34,7 +34,7 @@
     }
 
     .booking-header {
-      padding: 80px 0;
+      padding: 60px 0;
       text-align: center;
       background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1200&q=80');
       background-size: cover;
@@ -43,7 +43,7 @@
 
     .booking-header h1 { 
       font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
+      font-size: 3rem;
       background: linear-gradient(to right, #fff, var(--gold));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -52,28 +52,26 @@
     .calendar-card {
       background: var(--onyx);
       border-radius: 20px;
-      padding: 30px;
+      padding: 20px;
       border: 1px solid rgba(212, 175, 55, 0.2);
     }
 
-    /* FullCalendar Sync Styles */
-    .fc-toolbar-title { color: #fff !important; font-family: 'Playfair Display', serif; }
-    .fc-button-primary {
-      background: var(--onyx) !important;
-      border: 1px solid var(--gold) !important;
-      color: var(--gold) !important;
-    }
-    .fc-button-primary:hover { background: var(--gold) !important; color: #000 !important; }
-
     .modal-content {
       background: var(--onyx);
-      border: 1px solid var(--gold);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
     }
 
     .form-control, .form-select {
       background-color: #000 !important;
-      border: 1px solid #333 !important;
+      border: 1px solid #444 !important;
       color: #fff !important;
+      padding: 10px;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--golden-rose) !important;
+      box-shadow: 0 0 10px rgba(255, 154, 139, 0.3);
     }
 
     .btn-confirm {
@@ -82,7 +80,16 @@
       color: #000;
       font-weight: 800;
       padding: 15px;
+      border-radius: 10px;
+      transition: 0.3s;
     }
+
+    .btn-confirm:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+
+    label { color: var(--gold-bright); font-size: 0.85rem; }
   </style>
 </head>
 <body>
@@ -98,15 +105,15 @@
 
 <header class="booking-header">
   <div class="container animate__animated animate__fadeIn">
-    <h1 class="text-white">RESERVA TU <span style="color: var(--golden-rose);">EXPERIENCIA</span></h1>
-    <p style="color: var(--gold);" class="text-uppercase">Gestión de Citas en Tiempo Real</p>
+    <h1>RESERVA TU <span style="color: var(--golden-rose);">CITA ELITE</span></h1>
+    <p style="color: #ccc;">Selecciona un día para comenzar tu transformación</p>
   </div>
 </header>
 
-<div class="container pb-5">
+<div class="container pb-5 mt-4">
   <div class="row justify-content-center">
     <div class="col-lg-10">
-      <div class="calendar-card animate__animated animate__fadeInUp">
+      <div class="calendar-card shadow-lg">
         <div id="calendar"></div>
       </div>
     </div>
@@ -117,35 +124,62 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header border-bottom border-secondary">
-        <h4 class="modal-title fw-bold" style="color: var(--gold);">DATOS DE RESERVACIÓN</h4>
+        <h4 class="modal-title fw-bold" style="color: var(--gold);">
+          <i class="fas fa-calendar-check me-2"></i>NUEVA RESERVACIÓN
+        </h4>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body p-4">
         <form id="formCita">
-          <div class="row g-4">
-            <div class="col-12">
-              <label class="small text-uppercase fw-bold mb-2">Servicio</label>
-              <select class="form-select" id="servicio" required>
-                <option value="Corte Mariposa">CORTE MARIPOSA</option>
-                <option value="Uñas Acrílicas">UÑAS ACRÍLICAS</option>
-                <option value="Balayage VIP">BALAYAGE VIP</option>
-                <option value="Manicura SPA">MANICURA SPA</option>
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="text-uppercase fw-bold mb-1">Nombre Completo de la Clienta</label>
+              <input type="text" class="form-control" id="nombreCita" placeholder="Ej. Alejandra Silva" required>
+            </div>
+            <div class="col-md-4">
+              <label class="text-uppercase fw-bold mb-1">Teléfono</label>
+              <input type="tel" class="form-control" id="telCita" placeholder="000 000 0000" required>
+            </div>
+
+            <div class="col-md-6">
+              <label class="text-uppercase fw-bold mb-1">Categoría</label>
+              <select class="form-select" id="categoria" required onchange="actualizarServicios()">
+                <option value="">Seleccione Categoría...</option>
+                <option value="UÑAS">UÑAS</option>
+                <option value="CORTE">CORTE</option>
+                <option value="COLOR">COLOR</option>
+                <option value="MAQUILLAJE">MAQUILLAJE</option>
+                <option value="PEINADOS">PEINADOS</option>
               </select>
             </div>
             <div class="col-md-6">
-              <label class="small text-uppercase fw-bold mb-2">Fecha</label>
+              <label class="text-uppercase fw-bold mb-1">Servicio Específico</label>
+              <select class="form-select" id="servicio" required disabled>
+                <option value="">Primero elija una categoría...</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="text-uppercase fw-bold mb-1">Fecha</label>
               <input type="date" class="form-control" id="fechaForm" readonly>
             </div>
-            <div class="col-md-6">
-              <label class="small text-uppercase fw-bold mb-2">Hora</label>
+            <div class="col-md-4">
+              <label class="text-uppercase fw-bold mb-1">Hora</label>
               <input type="time" class="form-control" id="horaForm" required>
             </div>
-            <div class="col-12">
-              <label class="small text-uppercase fw-bold mb-2">Tu Nombre</label>
-              <input type="text" class="form-control" id="nombreCita" placeholder="Nombre completo" required>
+            <div class="col-md-4">
+              <label class="text-uppercase fw-bold mb-1">Instructor / Especialista</label>
+              <select class="form-select" id="instructor" required>
+                <option value="Any">Cualquiera disponible</option>
+                <option value="Karla Luna">Karla Luna</option>
+                <option value="Staff Senior">Staff Senior</option>
+              </select>
             </div>
-            <div class="col-12">
-              <button type="submit" class="btn btn-confirm w-100 mt-3">CONFIRMAR Y AGENDAR</button>
+
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-confirm w-100">
+                AGENDAR CITA AHORA <i class="fas fa-gem ms-2"></i>
+              </button>
             </div>
           </div>
         </form>
@@ -159,26 +193,57 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales/es.global.min.js"></script>
 
 <script>
+  // BASE DE DATOS DE SERVICIOS
+  const serviciosData = {
+    "UÑAS": [
+      "UÑAS ACRILICAS", "UÑAS GEL SEMIPERMANENTE", "UÑAS SOFTGEL LARGO", "UÑAS TECHGEL", 
+      "UÑAS ACRIGEL", "UÑAS DUAL SYSTEM", "UÑAS ESTRUCTURAL", "UÑAS DUALSYSTEM XXL", 
+      "UÑAS ACRISOFT", "UÑAS ACRISOFT XXL"
+    ],
+    "CORTE": [
+      "CORTE ESTILO MARIPOSA", "CORTE ESTILO BOB", "CORTE COMPLETO (LAVADO + CORTE + MOLDEO)"
+    ],
+    "COLOR": [
+      "BALAYAGE", "BABYLIGHT", "MECHAS", "COLOR COMPLETO", "BAÑO DE COLOR", 
+      "PLANCHADO SEMI-PERMANENTE", "PLANCHADO PERMANENTE", "BASE PERMANENTE", 
+      "TINTE VIP (MOLDEO + TRATAMIENTO)"
+    ],
+    "MAQUILLAJE": [
+      "CASUAL", "FOLKLORE", "BODY PAINT", "ARTISTICO", "XV AÑOS", "NOVIAS"
+    ],
+    "PEINADOS": [
+      "CASUAL", "FOLKLORE", "XV AÑOS", "NOVIAS", "TRENSAS", "ONDAS DE AGUAS"
+    ]
+  };
+
+  // FUNCIÓN PARA ACTUALIZAR SERVICIOS SEGÚN CATEGORÍA
+  function actualizarServicios() {
+    const categoria = document.getElementById('categoria').value;
+    const servicioSelect = document.getElementById('servicio');
+    
+    servicioSelect.innerHTML = '<option value="">Seleccione un servicio...</option>';
+    
+    if (categoria && serviciosData[categoria]) {
+      servicioSelect.disabled = false;
+      serviciosData[categoria].forEach(s => {
+        let option = document.createElement('option');
+        option.value = s;
+        option.textContent = s;
+        servicioSelect.appendChild(option);
+      });
+    } else {
+      servicioSelect.disabled = true;
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar');
     const formModal = new bootstrap.Modal(document.getElementById('formModal'));
-
-    // CARGAR RESERVACIONES EXISTENTES PARA MOSTRARLAS EN EL CALENDARIO DEL CLIENTE
-    const getEvents = () => {
-      const stored = JSON.parse(localStorage.getItem("reservaciones")) || [];
-      return stored.map(res => ({
-        title: 'OCUPADO',
-        start: `${res.fecha}T${res.hora}`,
-        backgroundColor: '#333',
-        borderColor: '#444'
-      }));
-    };
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       locale: 'es',
       headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
-      events: getEvents(),
       dateClick: function(info) {
         document.getElementById('fechaForm').value = info.dateStr;
         formModal.show();
@@ -186,27 +251,28 @@
     });
     calendar.render();
 
-    // GUARDAR EN LOCALSTORAGE (LO QUE LEE TU MASTER AGENDA)
+    // GUARDAR EN LOCALSTORAGE
     document.getElementById('formCita').addEventListener('submit', function(e) {
       e.preventDefault();
       
       const nuevaReserva = {
         cliente: document.getElementById('nombreCita').value,
+        telefono: document.getElementById('telCita').value,
+        categoria: document.getElementById('categoria').value,
         servicio: document.getElementById('servicio').value,
         fecha: document.getElementById('fechaForm').value,
         hora: document.getElementById('horaForm').value,
-        pago: 'Pendiente', // Estatus por defecto para que salga naranja en tu agenda
-        instructor: 'Por asignar',
-        costo: '0'
+        instructor: document.getElementById('instructor').value,
+        pago: 'Pendiente', 
+        costo: 'Por definir'
       };
 
-      // Obtener lo que ya hay, agregar lo nuevo y guardar
       const actuales = JSON.parse(localStorage.getItem("reservaciones")) || [];
       actuales.push(nuevaReserva);
       localStorage.setItem("reservaciones", JSON.stringify(actuales));
 
-      alert("¡Cita agendada con éxito! Ya puedes verla en el sistema.");
-      location.reload(); // Recarga para mostrar el nuevo evento "Ocupado"
+      alert("✨ ¡Cita registrada exitosamente en LK Studio!");
+      location.reload();
     });
   });
 </script>
