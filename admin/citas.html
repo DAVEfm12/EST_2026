@@ -9,6 +9,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
   <style>
     :root {
@@ -34,116 +35,79 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.6);
     }
 
-    /* FullCalendar Custom UI */
-    .fc { font-family: 'Poppins', sans-serif; }
-    .fc-toolbar-title { 
-        color: var(--gold-bright) !important; 
-        font-weight: 800 !important; 
-        letter-spacing: 1px;
-    }
-    
+    /* UI de FullCalendar personalizada */
+    .fc-toolbar-title { color: var(--gold-bright) !important; font-weight: 800 !important; }
     .fc-button {
       background: transparent !important;
       border: 1px solid var(--gold) !important;
       color: var(--gold) !important;
       border-radius: 12px !important;
-      text-transform: uppercase;
-      font-size: 0.75rem !important;
       font-weight: 600 !important;
-      transition: 0.3s !important;
     }
-
-    .fc-button:hover {
-      background: var(--gold) !important;
-      color: #000 !important;
-      box-shadow: 0 0 15px var(--gold);
-    }
-
-    .fc-button-active {
+    .fc-button:hover, .fc-button-active {
       background: var(--gold) !important;
       color: #000 !important;
     }
 
     .fc-daygrid-day-number { color: #eee; text-decoration: none; padding: 10px !important; }
-    .fc-col-header-cell-cushion { color: var(--gold); text-transform: uppercase; font-size: 0.8rem; }
-    .fc-day-today { background: rgba(212, 175, 55, 0.05) !important; }
+    .fc-col-header-cell-cushion { color: var(--gold); text-transform: uppercase; }
 
-    /* Eventos Estilizados */
-    .fc-event {
-      border: none !important;
-      border-radius: 6px !important;
-      padding: 3px 8px !important;
-      font-weight: 500 !important;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    }
+    /* Estilos de Eventos según estado */
+    .event-pagado { background: linear-gradient(45deg, #1d976c, #93f9b9) !important; color: #000 !important; border: none !important; }
+    .event-pendiente { background: linear-gradient(45deg, #f09819, #edde5d) !important; color: #000 !important; border: none !important; }
+    .event-cancelado { background: linear-gradient(45deg, #cb2d3e, #ef473a) !important; color: #fff !important; border: none !important; }
 
-    .event-pagado { background: linear-gradient(45deg, #1d976c, #93f9b9) !important; color: #000 !important; }
-    .event-pendiente { background: linear-gradient(45deg, #f09819, #edde5d) !important; color: #000 !important; }
-    .event-cancelado { background: linear-gradient(45deg, #cb2d3e, #ef473a) !important; color: #fff !important; }
-
-    /* Modal Estilo VIP */
+    /* Modal estilo LK Studio */
     .modal-content {
       background: #111;
       border: 1px solid var(--gold);
       border-radius: 20px;
     }
     .modal-header { border-bottom: 1px solid #222; }
-    .modal-footer { border-top: 1px solid #222; }
-
+    .text-gold { color: var(--gold); }
+    
     .btn-pro {
       background: linear-gradient(45deg, var(--gold), var(--gold-bright));
-      border: none;
-      color: #000;
-      font-weight: 800;
-      border-radius: 15px;
-      transition: 0.4s;
+      border: none; color: #000; font-weight: 800; border-radius: 15px;
     }
-    .btn-pro:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
 
-    .legend-card {
-      background: rgba(0,0,0,0.3);
-      border: 1px solid #333;
-      border-radius: 20px;
-    }
+    .legend-card { background: rgba(0,0,0,0.4); border-radius: 20px; border: 1px solid #333; }
   </style>
 </head>
 <body>
 
 <div class="container py-5">
-  <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
+  <div class="d-flex justify-content-between align-items-center mb-5">
     <div>
-      <h1 class="fw-extrabold mb-0" style="color: var(--gold); letter-spacing: -1px;">MASTER <span class="text-white">AGENDA</span></h1>
-      <p class="text-secondary small text-uppercase">Gestión de Tiempos y Servicios Elite</p>
+      <h1 class="fw-bold mb-0" style="color: var(--gold);">MASTER <span class="text-white">AGENDA</span></h1>
+      <p class="text-secondary small">Panel de Control de Reservaciones</p>
     </div>
-    <a href="PANEL_ADMIN.html" class="btn btn-outline-warning btn-sm px-4 rounded-pill border-0">
-      <i class="fas fa-chevron-left me-2"></i> ir al Panel
+    <a href="PANEL_ADMIN.html" class="btn btn-outline-warning rounded-pill px-4">
+      <i class="fas fa-arrow-left me-2"></i> Volver al Panel
     </a>
   </div>
 
   <div class="row">
     <div class="col-lg-3">
-      <div class="legend-card p-4 mb-4">
-        <h6 class="text-gold fw-bold mb-4">ESTATUS DE CITA</h6>
-        <div class="d-flex align-items-center mb-3">
-          <div style="width:12px; height:12px; background: #93f9b9; border-radius:50%; margin-right:15px; box-shadow: 0 0 10px #1d976c"></div>
-          <small class="text-white-50">Completado / Pagado</small>
+      <div class="legend-card p-4 mb-4 animate__animated animate__fadeInLeft">
+        <h6 class="text-gold fw-bold mb-4">ESTADO DE CITAS</h6>
+        <div class="d-flex align-items-center mb-3 text-white-50 small">
+          <div class="rounded-circle me-3" style="width:12px; height:12px; background:#93f9b9;"></div> Pagado / Listo
         </div>
-        <div class="d-flex align-items-center mb-3">
-          <div style="width:12px; height:12px; background: #edde5d; border-radius:50%; margin-right:15px; box-shadow: 0 0 10px #f09819"></div>
-          <small class="text-white-50">Cita Pendiente</small>
+        <div class="d-flex align-items-center mb-3 text-white-50 small">
+          <div class="rounded-circle me-3" style="width:12px; height:12px; background:#edde5d;"></div> Pendiente
         </div>
-        <div class="d-flex align-items-center mb-4">
-          <div style="width:12px; height:12px; background: #ef473a; border-radius:50%; margin-right:15px; box-shadow: 0 0 10px #cb2d3e"></div>
-          <small class="text-white-50">Servicio Cancelado</small>
+        <div class="d-flex align-items-center mb-4 text-white-50 small">
+          <div class="rounded-circle me-3" style="width:12px; height:12px; background:#ef473a;"></div> Cancelado
         </div>
-        <button class="btn btn-pro w-100 py-3" onclick="location.href='Gestión_Reservaciones.html'">
-            <i class="fas fa-plus-circle me-2"></i> NUEVA CITA
+        <button class="btn btn-pro w-100 py-3" onclick="location.href='reservaciones.html'">
+          <i class="fas fa-plus me-2"></i> NUEVA CITA
         </button>
       </div>
     </div>
 
     <div class="col-lg-9">
-      <div class="calendar-container animate__animated animate__fadeInRight">
+      <div class="calendar-container animate__animated animate__fadeIn">
         <div id="calendar"></div>
       </div>
     </div>
@@ -152,32 +116,36 @@
 
 <div class="modal fade" id="eventModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content text-white">
       <div class="modal-header">
-        <h5 class="modal-title text-gold" id="modalTitle">Detalles de la Cita</h5>
+        <h5 class="modal-title text-gold"><i class="fas fa-info-circle me-2"></i>Detalles de Cita</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <div class="d-flex flex-column gap-3">
-            <div class="d-flex align-items-center">
-                <i class="fas fa-user text-gold me-3" style="width:20px"></i>
-                <span id="modalCliente" class="fw-bold fs-5"></span>
-            </div>
-            <div class="d-flex align-items-center">
-                <i class="fas fa-cut text-secondary me-3" style="width:20px"></i>
-                <span id="modalServicio"></span>
-            </div>
-            <div class="d-flex align-items-center">
-                <i class="fas fa-user-sparkles text-secondary me-3" style="width:20px"></i>
-                <span id="modalEspecialista"></span>
-            </div>
-            <div class="d-flex align-items-center">
-                <i class="fas fa-tag text-success me-3" style="width:20px"></i>
-                <span id="modalCosto" class="badge bg-success"></span>
-            </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-user text-gold me-3" style="width:20px"></i>
+            <div><small class="text-muted d-block">Clienta</small><span id="modalCliente" class="fw-bold fs-5"></span></div>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-phone text-secondary me-3" style="width:20px"></i>
+            <div><small class="text-muted d-block">Teléfono</small><span id="modalTel"></span></div>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-star text-gold me-3" style="width:20px"></i>
+            <div><small class="text-muted d-block">Categoría</small><span id="modalCat" class="badge bg-dark text-gold"></span></div>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-cut text-secondary me-3" style="width:20px"></i>
+            <div><small class="text-muted d-block">Servicio</small><span id="modalServicio"></span></div>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-user-sparkles text-secondary me-3" style="width:20px"></i>
+            <div><small class="text-muted d-block">Especialista</small><span id="modalEspecialista"></span></div>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer border-0">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
@@ -193,22 +161,26 @@
     const calendarEl = document.getElementById('calendar');
     const myModal = new bootstrap.Modal(document.getElementById('eventModal'));
     
-    const reservacionesGuardadas = JSON.parse(localStorage.getItem("reservaciones")) || [];
+    // Recuperar reservaciones guardadas
+    const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
 
-    const eventos = reservacionesGuardadas.map(res => {
-        let colorClase = res.pago === 'Pagado' ? 'event-pagado' : 
-                         (res.pago === 'Cancelado' ? 'event-cancelado' : 'event-pendiente');
-
-        return {
-            title: res.cliente,
-            start: `${res.fecha}T${res.hora}`,
-            className: colorClase,
-            extendedProps: {
-                servicio: res.servicio,
-                especialista: res.instructor,
-                monto: res.costo
-            }
-        };
+    const eventos = reservaciones.map(res => {
+      // Determinar color según el estado del pago
+      let colorClase = res.pago === 'Pagado' ? 'event-pagado' : 
+                       (res.pago === 'Cancelado' ? 'event-cancelado' : 'event-pendiente');
+      
+      return {
+        title: res.cliente,
+        start: `${res.fecha}T${res.hora}`,
+        className: colorClase,
+        extendedProps: {
+          telefono: res.telefono || 'N/A',
+          categoria: res.categoria || 'N/A',
+          servicio: res.servicio,
+          especialista: res.instructor,
+          costo: res.costo
+        }
+      };
     });
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -220,18 +192,18 @@
         right: 'dayGridMonth,timeGridWeek,listMonth'
       },
       events: eventos,
-      
       eventClick: function(info) {
+        const p = info.event.extendedProps;
         document.getElementById('modalCliente').innerText = info.event.title;
-        document.getElementById('modalServicio').innerText = info.event.extendedProps.servicio;
-        document.getElementById('modalEspecialista').innerText = info.event.extendedProps.especialista;
-        document.getElementById('modalCosto').innerText = '$' + info.event.extendedProps.monto;
+        document.getElementById('modalTel').innerText = p.telefono;
+        document.getElementById('modalCat').innerText = p.categoria;
+        document.getElementById('modalServicio').innerText = p.servicio;
+        document.getElementById('modalEspecialista').innerText = p.especialista;
         myModal.show();
       },
-
       dateClick: function(info) {
-        if(confirm("¿Agendar cita el " + info.dateStr + "?")) {
-            window.location.href = 'Gestión_Reservaciones.html?fecha=' + info.dateStr;
+        if(confirm("¿Deseas ir a crear una nueva cita para el día " + info.dateStr + "?")) {
+          window.location.href = 'reservaciones.html'; // Redirige a tu página de creación
         }
       }
     });
