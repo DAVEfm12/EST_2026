@@ -14,8 +14,8 @@
   <style>
     :root {
       --gold: #D4AF37;
-      --gold-bright: #FFD700;
-      --golden-rose: #FF9A8B; 
+      --gold-bright: #F1D592;
+      --golden-rose: #E6B8A2; 
       --deep-black: #050505;
       --onyx: #0f0f0f;
     }
@@ -27,6 +27,39 @@
       padding-top: 80px;
     }
 
+    /* PERSONALIZACIÓN FULLCALENDAR (ADDIÓS AZUL) */
+    .fc { --fc-border-color: #333; --fc-page-bg-color: transparent; }
+    
+    /* Títulos y días */
+    .fc .fc-toolbar-title { color: var(--gold); font-family: 'Playfair Display', serif; text-transform: uppercase; }
+    .fc .fc-col-header-cell-cushion { color: var(--golden-rose); text-transform: uppercase; font-size: 0.8rem; }
+    .fc .fc-daygrid-day-number { color: #fff; font-weight: 300; padding: 10px; }
+    
+    /* Botones del Calendario */
+    .fc .fc-button-primary {
+      background-color: var(--onyx) !important;
+      border: 1px solid var(--gold) !important;
+      color: var(--gold) !important;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .fc .fc-button-primary:hover {
+      background-color: var(--gold) !important;
+      color: #000 !important;
+    }
+    .fc .fc-button-active {
+      background-color: var(--gold) !important;
+      border-color: var(--gold) !important;
+      color: #000 !important;
+    }
+
+    /* Celda de hoy */
+    .fc .fc-day-today {
+      background: rgba(212, 175, 55, 0.1) !important;
+    }
+
+    /* Navbar */
     .navbar {
       background: rgba(5, 5, 5, 0.95) !important;
       backdrop-filter: blur(15px);
@@ -36,84 +69,87 @@
     .booking-header {
       padding: 60px 0;
       text-align: center;
-      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1200&q=80');
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1200&q=80');
       background-size: cover;
       border-bottom: 1px solid var(--gold);
     }
 
     .booking-header h1 { 
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      background: linear-gradient(to right, #fff, var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gold);
     }
 
     .calendar-card {
       background: var(--onyx);
       border-radius: 20px;
-      padding: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 30px;
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
     }
 
+    /* Modal Estilo VIP */
     .modal-content {
-      background: var(--onyx);
+      background: var(--deep-black);
       border: 2px solid var(--gold);
       border-radius: 20px;
     }
 
-    .form-control, .form-select {
-      background-color: #000 !important;
-      border: 1px solid #444 !important;
-      color: #fff !important;
-      padding: 10px;
+    .form-label-vip {
+      color: var(--golden-rose);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
     }
 
-    .form-control:focus, .form-select:focus {
-      border-color: var(--golden-rose) !important;
-      box-shadow: 0 0 10px rgba(255, 154, 139, 0.3);
+    .form-control, .form-select {
+      background-color: #000 !important;
+      border: 1px solid #333 !important;
+      color: var(--gold-bright) !important;
+      border-radius: 10px;
     }
 
     .btn-confirm {
-      background: linear-gradient(45deg, var(--gold), var(--golden-rose));
+      background: linear-gradient(45deg, var(--gold), var(--gold-bright));
       border: none;
       color: #000;
-      font-weight: 800;
+      font-weight: 900;
       padding: 15px;
-      border-radius: 10px;
+      border-radius: 50px;
       transition: 0.3s;
+      text-transform: uppercase;
     }
 
     .btn-confirm:hover {
-      transform: scale(1.02);
-      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      background: var(--golden-rose);
+      transform: translateY(-3px);
     }
 
-    label { color: var(--gold-bright); font-size: 0.85rem; }
   </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="index.html">
-      <img src="assets/img/LK.png" width="45" class="me-2">
-      <span class="fw-bold text-warning">LK STUDIO</span>
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <span class="fw-bold" style="color: var(--gold); letter-spacing: 2px;">LK STUDIO</span>
     </a>
   </div>
 </nav>
 
 <header class="booking-header">
   <div class="container animate__animated animate__fadeIn">
-    <h1>RESERVA TU <span style="color: var(--golden-rose);">CITA ELITE</span></h1>
-    <p style="color: #ccc;">Selecciona un día para comenzar tu transformación</p>
+    <h1>RESERVA TU <span style="color: var(--golden-rose);">CITA VIP</span></h1>
+    <p style="color: var(--gold-bright); font-weight: 600;">ELIGE UNA FECHA EN EL CALENDARIO</p>
   </div>
 </header>
 
-<div class="container pb-5 mt-4">
+<div class="container pb-5 mt-5">
   <div class="row justify-content-center">
     <div class="col-lg-10">
-      <div class="calendar-card shadow-lg">
+      <div class="calendar-card">
         <div id="calendar"></div>
       </div>
     </div>
@@ -124,8 +160,8 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header border-bottom border-secondary">
-        <h4 class="modal-title fw-bold" style="color: var(--gold);">
-          <i class="fas fa-calendar-check me-2"></i>NUEVA RESERVACIÓN
+        <h4 class="modal-title fw-bold" style="color: var(--gold); font-family: 'Playfair Display', serif;">
+          <i class="fas fa-gem me-2"></i>NUEVA AGENDA ELITE
         </h4>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
@@ -133,52 +169,50 @@
         <form id="formCita">
           <div class="row g-3">
             <div class="col-md-8">
-              <label class="text-uppercase fw-bold mb-1">Nombre Completo de la Clienta</label>
-              <input type="text" class="form-control" id="nombreCita" placeholder="Ej. Alejandra Silva" required>
+              <label class="form-label-vip">Nombre de la Clienta</label>
+              <input type="text" class="form-control" id="nombreCita" required>
             </div>
             <div class="col-md-4">
-              <label class="text-uppercase fw-bold mb-1">Teléfono</label>
-              <input type="tel" class="form-control" id="telCita" placeholder="000 000 0000" required>
+              <label class="form-label-vip">WhatsApp</label>
+              <input type="tel" class="form-control" id="telCita" required>
             </div>
 
             <div class="col-md-6">
-              <label class="text-uppercase fw-bold mb-1">Categoría</label>
+              <label class="form-label-vip">Categoría</label>
               <select class="form-select" id="categoria" required onchange="actualizarServicios()">
-                <option value="">Seleccione Categoría...</option>
+                <option value="">Seleccione...</option>
                 <option value="UÑAS">UÑAS</option>
                 <option value="CORTE">CORTE</option>
                 <option value="COLOR">COLOR</option>
-                <option value="MAQUILLAJE">MAQUILLAJE</option>
-                <option value="PEINADOS">PEINADOS</option>
               </select>
             </div>
             <div class="col-md-6">
-              <label class="text-uppercase fw-bold mb-1">Servicio Específico</label>
+              <label class="form-label-vip">Servicio</label>
               <select class="form-select" id="servicio" required disabled>
-                <option value="">Primero elija una categoría...</option>
+                <option value="">Elija categoría...</option>
               </select>
             </div>
 
             <div class="col-md-4">
-              <label class="text-uppercase fw-bold mb-1">Fecha</label>
+              <label class="form-label-vip">Fecha Seleccionada</label>
               <input type="date" class="form-control" id="fechaForm" readonly>
             </div>
             <div class="col-md-4">
-              <label class="text-uppercase fw-bold mb-1">Hora</label>
+              <label class="form-label-vip">Hora</label>
               <input type="time" class="form-control" id="horaForm" required>
             </div>
             <div class="col-md-4">
-              <label class="text-uppercase fw-bold mb-1">Instructor / Especialista</label>
+              <label class="form-label-vip">Experta</label>
               <select class="form-select" id="instructor" required>
-                <option value="Any">Cualquiera disponible</option>
+                <option value="Staff LK">Cualquiera disponible</option>
                 <option value="Karla Luna">Karla Luna</option>
-                <option value="Staff Senior">Staff Senior</option>
+                <option value="Christian">Christian</option>
               </select>
             </div>
 
             <div class="col-12 mt-4">
-              <button type="submit" class="btn btn-confirm w-100">
-                AGENDAR CITA AHORA <i class="fas fa-gem ms-2"></i>
+              <button type="submit" class="btn btn-confirm w-100 shadow-lg">
+                CONFIRMAR CITA EN AGENDA
               </button>
             </div>
           </div>
@@ -193,47 +227,23 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales/es.global.min.js"></script>
 
 <script>
-  // BASE DE DATOS DE SERVICIOS
   const serviciosData = {
-    "UÑAS": [
-      "UÑAS ACRILICAS", "UÑAS GEL SEMIPERMANENTE", "UÑAS SOFTGEL LARGO", "UÑAS TECHGEL", 
-      "UÑAS ACRIGEL", "UÑAS DUAL SYSTEM", "UÑAS ESTRUCTURAL", "UÑAS DUALSYSTEM XXL", 
-      "UÑAS ACRISOFT", "UÑAS ACRISOFT XXL"
-    ],
-    "CORTE": [
-      "CORTE ESTILO MARIPOSA", "CORTE ESTILO BOB", "CORTE COMPLETO (LAVADO + CORTE + MOLDEO)"
-    ],
-    "COLOR": [
-      "BALAYAGE", "BABYLIGHT", "MECHAS", "COLOR COMPLETO", "BAÑO DE COLOR", 
-      "PLANCHADO SEMI-PERMANENTE", "PLANCHADO PERMANENTE", "BASE PERMANENTE", 
-      "TINTE VIP (MOLDEO + TRATAMIENTO)"
-    ],
-    "MAQUILLAJE": [
-      "CASUAL", "FOLKLORE", "BODY PAINT", "ARTISTICO", "XV AÑOS", "NOVIAS"
-    ],
-    "PEINADOS": [
-      "CASUAL", "FOLKLORE", "XV AÑOS", "NOVIAS", "TRENSAS", "ONDAS DE AGUAS"
-    ]
+    "UÑAS": ["UÑAS ACRILICAS #2", "TECHGEL", "SOFTGEL", "RETOQUE"],
+    "CORTE": ["CORTE MARIPOSA", "CORTE BOB", "CORTE Y MOLDEO"],
+    "COLOR": ["BALAYAGE", "BABYLIGHTS", "COLOR COMPLETO"]
   };
 
-  // FUNCIÓN PARA ACTUALIZAR SERVICIOS SEGÚN CATEGORÍA
   function actualizarServicios() {
-    const categoria = document.getElementById('categoria').value;
-    const servicioSelect = document.getElementById('servicio');
-    
-    servicioSelect.innerHTML = '<option value="">Seleccione un servicio...</option>';
-    
-    if (categoria && serviciosData[categoria]) {
-      servicioSelect.disabled = false;
-      serviciosData[categoria].forEach(s => {
-        let option = document.createElement('option');
-        option.value = s;
-        option.textContent = s;
-        servicioSelect.appendChild(option);
+    const cat = document.getElementById('categoria').value;
+    const sel = document.getElementById('servicio');
+    sel.innerHTML = '<option value="">Seleccione servicio...</option>';
+    if (cat) {
+      sel.disabled = false;
+      serviciosData[cat].forEach(s => {
+        let opt = document.createElement('option');
+        opt.value = s; opt.textContent = s; sel.appendChild(opt);
       });
-    } else {
-      servicioSelect.disabled = true;
-    }
+    } else { sel.disabled = true; }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -251,27 +261,23 @@
     });
     calendar.render();
 
-    // GUARDAR EN LOCALSTORAGE
     document.getElementById('formCita').addEventListener('submit', function(e) {
       e.preventDefault();
-      
       const nuevaReserva = {
         cliente: document.getElementById('nombreCita').value,
-        telefono: document.getElementById('telCita').value,
-        categoria: document.getElementById('categoria').value,
         servicio: document.getElementById('servicio').value,
         fecha: document.getElementById('fechaForm').value,
         hora: document.getElementById('horaForm').value,
         instructor: document.getElementById('instructor').value,
-        pago: 'Pendiente', 
-        costo: 'Por definir'
+        pago: 'Pendiente',
+        costo: '350' // Ejemplo
       };
 
       const actuales = JSON.parse(localStorage.getItem("reservaciones")) || [];
       actuales.push(nuevaReserva);
       localStorage.setItem("reservaciones", JSON.stringify(actuales));
 
-      alert("✨ ¡Cita registrada exitosamente en LK Studio!");
+      alert("✨ ¡Cita agendada! Revisa tu Panel de Administración.");
       location.reload();
     });
   });
