@@ -6,114 +6,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
     <style>
         :root { 
             --gold: #D4AF37; 
             --gold-bright: #FFD700; 
-            --golden-rose: #FF9A8B; /* Color Golden Rose */
-            --deep-black: #050505;
-            --onyx: #0f0f0f;
+            --golden-rose: #E6B8A2; /* Tono Rosa Oro Elegante */
+            --dark-bg: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         body { 
-            background: radial-gradient(circle at top, #1a1a1a, var(--deep-black)); 
+            background: radial-gradient(circle at center, #1a1a1a 0%, var(--dark-bg) 100%); 
             color: #fff; 
             font-family: 'Poppins', sans-serif; 
             min-height: 100vh; 
         }
 
-        /* Estilo de Tarjetas */
+        /* Tarjetas con efecto cristal y bordes dorados/rose */
         .card { 
-            background: rgba(15, 15, 15, 0.8); 
+            background: rgba(10, 10, 10, 0.8); 
             border: 1px solid var(--gold); 
             border-radius: 1.5rem; 
-            backdrop-filter: blur(10px); 
+            backdrop-filter: blur(15px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .gold { color: var(--gold); }
         .rose { color: var(--golden-rose); }
 
-        /* Botón Golden Rose Principal */
-        .btn-rose {
-            background: linear-gradient(45deg, var(--golden-rose), #f7cac9);
-            color: #000;
-            font-weight: 800;
-            border: none;
-            border-radius: 12px;
+        /* Botón con degradado de Dorado a Rosa Oro */
+        .btn-gold { 
+            background: linear-gradient(45deg, var(--gold), var(--golden-rose)); 
+            color: #000; 
+            font-weight: 800; 
+            border: none; 
+            border-radius: 12px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: 0.3s;
         }
-        .btn-rose:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 154, 139, 0.4);
+
+        .btn-gold:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 5px 20px rgba(230, 184, 162, 0.4); 
             color: #000;
         }
 
-        /* Botón Dorado */
-        .btn-gold { 
-            background: linear-gradient(45deg, var(--gold), var(--gold-bright)); 
-            color: #000; 
-            font-weight: bold; 
-            border: none; 
-            border-radius: 10px; 
-        }
-        .btn-gold:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); 
+        .btn-outline-rose {
+            border: 1px solid var(--golden-rose);
+            color: var(--golden-rose);
+            border-radius: 10px;
         }
 
-        /* Inputs Estilo Negro */
+        .btn-outline-rose:hover {
+            background: var(--golden-rose);
+            color: #000;
+        }
+
+        /* Inputs Estilo Dark */
         .form-control, .form-select { 
             background: #000 !important; 
             border: 1px solid #333 !important; 
             color: #fff !important; 
+            border-radius: 10px;
         }
+
         .form-control:focus {
             border-color: var(--golden-rose) !important;
-            box-shadow: 0 0 8px rgba(255, 154, 139, 0.2);
+            box-shadow: 0 0 0 0.25rem rgba(230, 184, 162, 0.25);
         }
 
-        .badge-servicio { background: var(--gold); color: #000; font-weight: bold; }
-        .badge-rose { background: var(--golden-rose); color: #000; font-weight: bold; }
+        .badge-servicio { 
+            background: linear-gradient(45deg, var(--gold), #f3cf58); 
+            color: #000; 
+            font-weight: 600;
+        }
 
         .table { --bs-table-bg: transparent; color: #eee; border-color: #222; }
-        .input-group-text { background: #222; border: 1px solid #333; color: var(--gold); }
 
-        /* Historial */
+        .input-group-text { 
+            background: #111; 
+            border: 1px solid #333; 
+            color: var(--gold); 
+        }
+
+        /* Historial rápido decorado */
         .historial-item {
-            background: #000;
-            border-left: 3px solid var(--golden-rose);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #222;
             transition: 0.3s;
         }
-        .historial-item:hover { border-left-color: var(--gold); }
+        .historial-item:hover {
+            border-color: var(--golden-rose);
+        }
     </style>
 </head>
 <body>
 
 <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4 animate__animated animate__fadeIn">
+    <div class="d-flex justify-content-between align-items-center mb-5 border-bottom border-dark pb-3">
         <div>
-            <h2 class="gold fw-bold m-0"><i class="fas fa-gem"></i> LK STUDIO <span class="rose">POS</span></h2>
-            <small class="text-secondary text-uppercase" style="letter-spacing: 2px;">Sistema de Cobro Elite</small>
+            <h2 class="gold fw-bold m-0" style="letter-spacing: 2px;">
+                <i class="fas fa-gem me-2"></i>LK STUDIO <span class="rose">POS</span>
+            </h2>
+            <small class="text-secondary text-uppercase" style="letter-spacing: 3px;">Luxury Experience Point of Sale</small>
         </div>
         <div class="text-end">
-            <a href="PANEL_ADMIN.html" class="btn btn-sm btn-outline-light rounded-pill px-3 me-2 border-secondary">Panel</a>
-            <span id="fecha-actual" class="badge border border-warning gold p-2"></span>
+            <a href="PANEL_ADMIN.html" class="btn btn-sm btn-outline-rose rounded-pill px-4 me-2">
+                <i class="fas fa-th-large me-1"></i> PANEL
+            </a>
+            <span id="fecha-actual" class="badge bg-dark text-gold border border-warning py-2 px-3"></span>
         </div>
     </div>
 
     <div class="row g-4">
         <div class="col-lg-4">
             <div class="card p-4">
-                <h5 class="rose mb-4 border-bottom border-secondary pb-2 fw-bold">Registro de Venta</h5>
+                <h5 class="rose mb-4 fw-bold"><i class="fas fa-cash-register me-2"></i>REGISTRO DE COBRO</h5>
                 
                 <div class="mb-3">
-                    <label class="small text-secondary fw-bold mb-1">CLIENTE / CITA</label>
+                    <label class="small text-gold fw-bold mb-1">CLIENTA</label>
                     <div class="input-group">
-                        <input id="inputCliente" class="form-control" placeholder="Nombre de clienta">
-                        <button class="btn btn-gold" onclick="buscarCitaHoy()">
+                        <input id="inputCliente" class="form-control" placeholder="Nombre completo">
+                        <button class="btn btn-outline-warning" onclick="buscarCitaHoy()" title="Cargar desde agenda">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -121,21 +136,21 @@
 
                 <div class="row g-2 mb-4">
                     <div class="col-6">
-                        <label class="small text-secondary fw-bold mb-1">FOLIO</label>
+                        <label class="small text-gold fw-bold mb-1">FOLIO CITA</label>
                         <input id="inputCita" class="form-control form-control-sm" placeholder="ID-000">
                     </div>
                     <div class="col-6">
-                        <label class="small text-secondary fw-bold mb-1">PAGO</label>
+                        <label class="small text-gold fw-bold mb-1">MÉTODO PAGO</label>
                         <select id="metodoPago" class="form-select form-select-sm" onchange="toggleTransferencia()">
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Transferencia">Transferencia</option>
-                            <option value="Tarjeta">Tarjeta</option>
+                            <option value="Efectivo">EFECTIVO</option>
+                            <option value="Transferencia">TRANSFERENCIA</option>
+                            <option value="Tarjeta">TARJETA</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="small text-secondary fw-bold mb-1">AÑADIR SERVICIO</label>
+                    <label class="small text-gold fw-bold mb-1">SELECCIONAR SERVICIO</label>
                     <div class="input-group">
                         <select id="selectServicio" class="form-select"></select>
                         <button class="btn btn-gold" onclick="agregarServicio()"><i class="fas fa-plus"></i></button>
@@ -143,94 +158,95 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="small text-secondary fw-bold mb-1">EXTRAS</label>
+                    <label class="small text-gold fw-bold mb-1">MATERIAL / EXTRAS</label>
                     <div class="input-group">
                         <select id="selectMaterial" class="form-select"></select>
-                        <button class="btn btn-outline-light" onclick="agregarMaterial()"><i class="fas fa-plus"></i></button>
+                        <button class="btn btn-outline-rose" onclick="agregarMaterial()"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
 
                 <div id="infoTransferencia" class="alert alert-dark border-secondary d-none small">
-                    <strong class="rose">Banco Azteca</strong><br>
-                    <span class="gold">CLABE: 127180012784596325</span>
+                    <i class="fas fa-university me-2 rose"></i> <strong class="rose">BANCO AZTECA</strong><br>
+                    <span class="text-white-50">CLABE: 127180012784596325</span>
                 </div>
 
-                <div class="bg-black p-3 rounded-3 mb-4 border border-secondary">
-                    <label class="small gold fw-bold">CALCULADORA</label>
+                <div class="bg-black p-3 rounded-4 mb-4 border border-dark">
+                    <label class="small text-gold fw-bold mb-2 d-block">RECIBIDO</label>
                     <div class="input-group input-group-sm mb-2">
-                        <span class="input-group-text">$</span>
-                        <input id="pagaCon" type="number" class="form-control" placeholder="Efectivo recibido" oninput="calcularCambio()">
+                        <span class="input-group-text bg-dark border-secondary">$</span>
+                        <input id="pagaCon" type="number" class="form-control" placeholder="Monto entregado" oninput="calcularCambio()">
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <small class="text-secondary">Cambio:</small>
-                        <strong class="rose" id="cambioResult">$0.00</strong>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-secondary">CAMBIO:</small>
+                        <h4 class="rose fw-bold m-0" id="cambioResult">$0.00</h4>
                     </div>
                 </div>
 
-                <button class="btn btn-rose w-100 py-3 mb-2" onclick="finalizarVenta()">
-                    <i class="fas fa-print me-2"></i> REGISTRAR Y COBRAR
+                <button class="btn btn-gold w-100 py-3 shadow" onclick="finalizarVenta()">
+                    <i class="fas fa-check-circle me-2"></i> COMPLETAR TRANSACCIÓN
                 </button>
             </div>
         </div>
 
         <div class="col-lg-8">
             <div class="card p-4 mb-4 shadow">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="gold m-0 fw-bold"><i class="fas fa-shopping-cart me-2"></i>Resumen de Cobro</h5>
-                    <button class="btn btn-sm btn-outline-danger border-0" onclick="vaciarCarrito()">
-                        <i class="fas fa-trash"></i>
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-dark pb-2">
+                    <h5 class="gold fw-bold m-0"><i class="fas fa-receipt me-2"></i>RESUMEN DE CUENTA</h5>
+                    <button class="btn btn-sm text-secondary" onclick="vaciarCarrito()">
+                        <i class="fas fa-eraser me-1"></i> LIMPIAR
                     </button>
                 </div>
 
-                <div class="table-responsive" style="min-height: 250px;">
-                    <table class="table align-middle">
-                        <thead class="text-secondary small">
+                <div class="table-responsive" style="min-height: 280px;">
+                    <table class="table table-hover align-middle">
+                        <thead class="text-gold small uppercase">
                             <tr>
-                                <th>CONCEPTO</th>
-                                <th>TIPO</th>
-                                <th>PRECIO</th>
-                                <th class="text-end">ACCIÓN</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>CATEGORÍA</th>
+                                <th>TOTAL</th>
+                                <th class="text-end">ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody id="tablaCarrito"></tbody>
                     </table>
                 </div>
 
-                <div class="d-flex justify-content-between align-items-end pt-3 border-top border-secondary">
+                <div class="d-flex justify-content-between align-items-center pt-4 border-top border-dark mt-3">
                     <div>
-                        <span class="text-secondary small d-block">Total a pagar</span>
-                        <h1 class="rose fw-bold mb-0" style="font-size: 3rem;">$<span id="displayTotal">0.00</span></h1>
+                        <span class="text-secondary small d-block uppercase" style="letter-spacing: 1px;">Total a Pagar</span>
+                        <h1 class="rose fw-bold mb-0" style="font-size: 3.5rem;">$<span id="displayTotal">0.00</span></h1>
                     </div>
-                    <div class="text-end text-secondary small">
-                        <strong>LK Studio Elite</strong><br>
-                        Calle Principal #123
+                    <div class="text-end border-start border-dark ps-4 d-none d-md-block">
+                        <img src="assets/img/LK.png" width="60" class="opacity-50 mb-2">
+                        <p class="text-secondary small mb-0">GRACIAS POR TU PREFERENCIA<br>LK STUDIO ACADEMY</p>
                     </div>
                 </div>
             </div>
 
-            <div class="card p-4 border-0 bg-dark shadow-sm">
-                <h6 class="text-secondary mb-3 small fw-bold">MOVIMIENTOS RECIENTES</h6>
-                <div id="historialRapido" class="row g-2"></div>
+            <div class="card p-4 bg-transparent border-dark">
+                <h6 class="text-gold small fw-bold mb-3 uppercase"><i class="fas fa-clock me-2"></i>VENTAS RECIENTES</h6>
+                <div id="historialRapido" class="row g-3"></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+// --- CONFIGURACIÓN DE DATOS ---
 const servicios = [
-    {name:"Corte Mariposa", precio:150},
     {name:"Uñas Acrílicas #2", precio:350},
-    {name:"Uñas XXL (Cristales)", precio:850},
-    {name:"Balayage VIP", precio:2500},
-    {name:"Maquillaje Social", precio:650},
-    {name:"Pedicura Spa", precio:450}
+    {name:"Uñas Techgel", precio:450},
+    {name:"Corte Mariposa", precio:180},
+    {name:"Balayage VIP", precio:2800},
+    {name:"Maquillaje Novias", precio:1200},
+    {name:"Peinado Folklore", precio:550}
 ];
 
 const materiales = [
-    {name:"Decoración Extra", precio:50},
-    {name:"Diseño Mano Alzada", precio:100},
-    {name:"Reparación Uña", precio:40},
-    {name:"Retiro de Gel", precio:80}
+    {name:"Piedras Swarovski (x10)", precio:150},
+    {name:"Efecto Espejo/Holograma", precio:80},
+    {name:"Limpieza Profunda", precio:100},
+    {name:"Diseño XL Mano Alzada", precio:250}
 ];
 
 let carrito = [];
@@ -238,11 +254,28 @@ let carrito = [];
 document.addEventListener('DOMContentLoaded', () => {
     const selS = document.getElementById("selectServicio");
     servicios.forEach((s, i) => selS.innerHTML += `<option value="${i}">${s.name} ($${s.precio})</option>`);
+    
     const selM = document.getElementById("selectMaterial");
     materiales.forEach((m, i) => selM.innerHTML += `<option value="${i}">${m.name} ($${m.precio})</option>`);
-    document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' });
+    
+    document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
     actualizarHistorial();
 });
+
+// --- FUNCIONES POS ---
+
+function buscarCitaHoy() {
+    const agenda = JSON.parse(localStorage.getItem("reservaciones")) || [];
+    const hoy = new Date().toISOString().split('T')[0];
+    const coincidencia = agenda.find(c => c.fecha === hoy);
+    
+    if(coincidencia) {
+        document.getElementById("inputCliente").value = coincidencia.cliente;
+        document.getElementById("inputCita").value = "CITA-" + Math.floor(Math.random()*900 + 100);
+    } else {
+        alert("No se encontraron citas para el día de hoy.");
+    }
+}
 
 function agregarServicio() {
     const item = servicios[document.getElementById("selectServicio").value];
@@ -266,7 +299,7 @@ function renderCarrito() {
         tbody.innerHTML += `
             <tr class="animate__animated animate__fadeIn">
                 <td><span class="fw-bold">${item.desc}</span></td>
-                <td><span class="badge ${item.tipo === 'Servicio' ? 'badge-servicio' : 'badge-rose'}">${item.tipo}</span></td>
+                <td><span class="badge ${item.tipo === 'Servicio' ? 'badge-servicio' : 'bg-dark border border-secondary rose'}">${item.tipo}</span></td>
                 <td class="gold fw-bold">$${item.precio.toFixed(2)}</td>
                 <td class="text-end">
                     <button class="btn btn-sm text-danger" onclick="eliminarItem(${i})"><i class="fas fa-times-circle"></i></button>
@@ -277,22 +310,40 @@ function renderCarrito() {
     calcularCambio();
 }
 
+function eliminarItem(index) {
+    carrito.splice(index, 1);
+    renderCarrito();
+}
+
+function vaciarCarrito() {
+    carrito = [];
+    renderCarrito();
+}
+
 function calcularCambio() {
     const total = parseFloat(document.getElementById("displayTotal").innerText);
     const paga = parseFloat(document.getElementById("pagaCon").value) || 0;
     const cambio = paga - total;
     const res = document.getElementById("cambioResult");
+    
     res.innerText = `$${(cambio > 0 ? cambio : 0).toFixed(2)}`;
-    res.style.color = cambio >= 0 ? "var(--golden-rose)" : "red";
+    res.className = cambio >= 0 ? "rose fw-bold m-0" : "text-danger fw-bold m-0";
+}
+
+function toggleTransferencia() {
+    const m = document.getElementById("metodoPago").value;
+    document.getElementById("infoTransferencia").classList.toggle("d-none", m !== "Transferencia");
 }
 
 function finalizarVenta() {
     const cliente = document.getElementById("inputCliente").value;
     const total = parseFloat(document.getElementById("displayTotal").innerText);
-    if(!cliente || carrito.length === 0) return alert("Completa los datos");
+
+    if(!cliente || carrito.length === 0) return alert("Por favor, llena los datos del cliente.");
 
     const venta = {
-        cliente, total, 
+        cliente,
+        total,
         pago: document.getElementById("metodoPago").value,
         hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
@@ -301,7 +352,7 @@ function finalizarVenta() {
     ventas.unshift(venta);
     localStorage.setItem("ventas_dia", JSON.stringify(ventas));
 
-    alert("Venta Registrada Correctamente ✨");
+    alert("✨ Cobro realizado exitosamente por $" + total.toFixed(2));
     vaciarCarrito();
     document.getElementById("inputCliente").value = "";
     document.getElementById("pagaCon").value = "";
@@ -312,33 +363,17 @@ function actualizarHistorial() {
     const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
     const div = document.getElementById("historialRapido");
     div.innerHTML = "";
+    
     ventas.slice(0, 4).forEach(v => {
         div.innerHTML += `
             <div class="col-6 col-md-3">
-                <div class="p-2 historial-item rounded text-center small">
+                <div class="p-3 historial-item rounded-4 text-center">
                     <div class="rose fw-bold">$${v.total}</div>
-                    <div class="text-truncate text-secondary">${v.cliente}</div>
-                    <div class="gold" style="font-size:9px">${v.hora} - ${v.pago}</div>
+                    <div class="text-truncate small text-gold">${v.cliente}</div>
+                    <div class="text-muted" style="font-size:10px">${v.hora} - ${v.pago}</div>
                 </div>
             </div>`;
     });
-}
-
-function buscarCitaHoy() {
-    const agenda = JSON.parse(localStorage.getItem("reservaciones")) || [];
-    const hoy = new Date().toISOString().split('T')[0];
-    const coincidencia = agenda.find(c => c.fecha === hoy);
-    if(coincidencia) {
-        document.getElementById("inputCliente").value = coincidencia.cliente;
-        document.getElementById("inputCita").value = "CITA-" + Math.floor(Math.random()*900);
-    } else { alert("No hay citas registradas hoy"); }
-}
-
-function eliminarItem(i) { carrito.splice(i, 1); renderCarrito(); }
-function vaciarCarrito() { carrito = []; renderCarrito(); }
-function toggleTransferencia() {
-    const m = document.getElementById("metodoPago").value;
-    document.getElementById("infoTransferencia").classList.toggle("d-none", m !== "Transferencia");
 }
 </script>
 </body>
