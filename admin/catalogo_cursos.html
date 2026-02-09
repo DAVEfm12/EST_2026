@@ -2,324 +2,401 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>LK Studio | Gestión de Instructores VIP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Sistema de Belleza | Catálogo Académico Elite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --gold: #D4AF37;
-      --gold-dark: #b38f1d;
+      --gold-bright: #F1D592;
       --golden-rose: #e6b8a2;
       --deep-black: #050505;
-      --pure-white: #ffffff;
+      --soft-black: #121212;
+      --glass: rgba(255, 255, 255, 0.03);
     }
 
     body {
-      background: radial-gradient(circle at top, #1a1a1a 0%, var(--deep-black) 100%);
+      background: radial-gradient(circle at top, var(--soft-black), var(--deep-black));
       color: #ffffff;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Tarjeta del Formulario (Negra) */
-    .card-form {
-      background: rgba(10, 10, 10, 0.95);
-      border: 2px solid var(--gold);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    h1, h2, h5, .luxury-font {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 2px;
     }
 
-    /* TABLA BLANCA (Contraste solicitado) */
-    .table-container-white {
-      background: var(--pure-white);
-      border-radius: 20px;
-      padding: 15px;
-      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
-      border: 3px solid var(--gold);
+    /* TARJETAS DE CURSO */
+    .card-luxury {
+      background: var(--soft-black);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: 100%;
+      position: relative;
     }
 
-    .table {
-      background: var(--pure-white) !important;
-      margin-bottom: 0;
+    .card-luxury:hover {
+      border-color: var(--gold);
+      box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+      transform: translateY(-8px);
     }
 
-    /* Letras Negras y Doradas en la tabla */
-    .table thead th {
-      background: var(--pure-white);
-      color: var(--deep-black) !important;
-      border-bottom: 3px solid var(--gold);
-      text-transform: uppercase;
-      font-weight: 800;
-      font-size: 0.75rem;
+    .curso-img {
+      height: 180px;
+      object-fit: cover;
+      border-radius: 1.5rem 1.5rem 0 0;
+      filter: grayscale(30%);
+      transition: 0.5s;
     }
 
-    .instructor-name {
-      color: var(--deep-black) !important;
-      font-weight: 700;
-      font-size: 1.1rem;
+    .card-luxury:hover .curso-img {
+      filter: grayscale(0%);
     }
 
-    .specialty-text {
-      color: var(--gold-dark) !important;
-      font-weight: 600;
+    /* FORMULARIO STICKY */
+    .sticky-form {
+      position: sticky;
+      top: 20px;
+      z-index: 100;
     }
 
-    .table td {
-      color: #333 !important; /* Letras oscuras sobre fondo blanco */
-      padding: 15px 10px;
-      vertical-align: middle;
-    }
-
-    /* Formulario Estilo Golden Rose */
+    /* INPUTS */
     .form-label {
-      color: var(--golden-rose) !important;
-      font-weight: 700;
+      color: var(--golden-rose);
+      font-weight: 600;
       font-size: 0.75rem;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .form-control, .form-select {
-      background-color: #000 !important;
-      border: 1px solid #444 !important;
-      color: var(--gold) !important;
-      border-radius: 10px;
+      background-color: rgba(0,0,0,0.5) !important;
+      border: 1px solid #2a2a2a;
+      color: var(--gold-bright) !important;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
     }
 
     .form-control:focus {
-      border-color: var(--golden-rose);
-      box-shadow: 0 0 10px rgba(230, 184, 162, 0.3);
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
     }
 
-    /* Botones */
+    /* BOTONES */
     .btn-gold {
-      background: linear-gradient(45deg, var(--gold), #f1d592);
-      color: #000;
-      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold), #b38f1d);
+      color: var(--deep-black);
+      font-weight: bold;
       border: none;
-      border-radius: 50px;
-      padding: 12px;
+      border-radius: 0.75rem;
+      text-transform: uppercase;
       transition: 0.3s;
     }
 
     .btn-gold:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+      background: var(--golden-rose);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     }
 
-    /* Iconos de documentos */
-    .doc-icon {
-      font-size: 1.2rem;
-      margin-right: 5px;
+    .precio-tag {
+      font-size: 1.4rem;
+      font-family: 'Cinzel', serif;
+      color: var(--gold-bright);
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
     }
-    .present { color: var(--gold-dark); }
-    .absent { color: #e0e0e0; }
 
-    /* Badge de Estatus */
-    .status-badge {
-      background: var(--deep-black);
-      color: var(--gold);
-      border: 1px solid var(--gold);
-      padding: 5px 10px;
+    .badge-luxury {
+      background: rgba(230, 184, 162, 0.1);
+      color: var(--golden-rose);
+      border: 1px solid var(--golden-rose);
+      font-size: 0.7rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 50px;
-      font-size: 0.65rem;
-      font-weight: bold;
     }
 
-    @media (max-width: 768px) {
-      .display-mobile-none { display: none; }
+    /* FILTROS */
+    .filter-box {
+      background: var(--glass);
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      border: 1px solid #222;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 992px) {
+      .sticky-form { position: relative; top: 0; margin-bottom: 3rem; }
     }
   </style>
 </head>
 
 <body>
 
-<div class="container-fluid py-5 px-lg-5">
-
-  <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
-    <a href="./PANEL_ADMIN.html" class="btn btn-outline-light btn-sm rounded-pill px-4" style="color: var(--golden-rose); border-color: var(--golden-rose);">
-      <i class="fas fa-chevron-left me-2"></i> VOLVER AL PANEL
+<div class="container py-4">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
+    <a href="PANEL_ADMIN.html" class="btn btn-outline-rose btn-sm mb-3 mb-md-0">
+      <i class="fas fa-arrow-left me-2"></i> REGRESAR AL DASHBOARD
     </a>
-    <h4 class="text-gold m-0 luxury-font fw-bold display-mobile-none">SISTEMA ACADÉMICO</h4>
+    <div class="text-center text-md-end">
+      <h6 class="text-gold m-0 luxury-font">LK STUDIO & ACADEMY</h6>
+      <small class="text-white-50">Control Académico de Lujo</small>
+    </div>
   </div>
 
-  <div class="text-center mb-5 animate__animated animate__zoomIn">
-    <h1 class="fw-bold" style="color: var(--gold); letter-spacing: 2px;">INSTRUCTORES & EXPEDIENTES</h1>
-    <p class="text-rose fw-bold" style="color: var(--golden-rose) !important;">CONTROL DE PERSONAL VIP LK STUDIO</p>
+  <div class="text-center mb-5">
+    <h1 class="fw-bold text-gold display-5 animate__animated animate__fadeIn">
+      <i class="fas fa-crown"></i> CATÁLOGO ACADÉMICO
+    </h1>
+    <p class="text-rose opacity-75">Define el futuro de tus estudiantes con programas de alto impacto.</p>
   </div>
 
   <div class="row g-4">
-    <div class="col-xl-4 col-lg-5">
-      <div class="card-form p-4">
-        <h5 class="text-gold mb-4 fw-bold border-bottom border-secondary pb-3">
-          <i class="fas fa-user-plus me-2"></i> REGISTRO PROFESIONAL
+    <div class="col-lg-4">
+      <div class="card card-luxury p-4 sticky-form">
+        <h5 class="text-gold mb-4 text-center">
+          <i class="fas fa-plus-circle me-2"></i>CONFIGURAR CURSO
         </h5>
 
-        <form id="formInstructor">
-          <input type="hidden" id="indexInstructor">
-          
+        <form id="formCurso">
+          <input type="hidden" id="indexCurso">
+
           <div class="mb-3">
-            <label class="form-label">Nombre del Instructor</label>
-            <input type="text" id="nombre" class="form-control" placeholder="Nombre y Apellidos" required>
+            <label class="form-label">Nombre del Curso</label>
+            <input type="text" id="nombre" class="form-control" placeholder="Ej. Lash Artist Pro" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Descripción Detallada</label>
+            <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del programa..." required></textarea>
           </div>
 
           <div class="row">
-            <div class="col-7 mb-3">
+            <div class="col-6 mb-3">
               <label class="form-label">Especialidad</label>
-              <input type="text" id="especialidad" class="form-control" placeholder="Ej. Uñas / Cabello" required>
+              <input type="text" id="categoria" class="form-control" placeholder="Ej. Pestañas" required>
             </div>
-            <div class="col-5 mb-3">
-              <label class="form-label">Años Exp.</label>
-              <input type="number" id="experiencia" class="form-control" value="1" required>
+            <div class="col-6 mb-3">
+              <label class="form-label">Nivel Académico</label>
+              <select id="nivel" class="form-select">
+                <option>Básico</option>
+                <option>Intermedio</option>
+                <option>Avanzado</option>
+                <option>Master</option>
+              </select>
             </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6 mb-3">
+              <label class="form-label">Duración Total</label>
+              <input type="text" id="duracion" class="form-control" placeholder="Ej. 3 Días">
+            </div>
+            <div class="col-6 mb-3">
+              <label class="form-label">Inversión ($)</label>
+              <input type="number" id="precio" class="form-control" placeholder="0.00">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Portada (Imagen)</label>
+            <input type="file" id="imagen" class="form-control" accept="image/*">
           </div>
 
           <div class="mb-4">
-            <label class="form-label">Estatus de Contrato</label>
+            <label class="form-label">Disponibilidad</label>
             <select id="estatus" class="form-select">
-              <option value="Activo">ACTIVO</option>
-              <option value="Inactivo">INACTIVO</option>
+              <option value="Activo">Inscripciones Abiertas</option>
+              <option value="Inactivo">Cerrado / Próximamente</option>
             </select>
           </div>
 
-          <div class="mb-4 p-3 border border-secondary rounded">
-            <label class="form-label d-block mb-3 border-bottom border-secondary pb-2">EXPEDIENTE DIGITAL (Subir archivos)</label>
-            <div class="row g-2">
-                <div class="col-6"><input type="file" id="f_acta" class="form-control form-control-sm" title="Acta"></div>
-                <div class="col-6"><input type="file" id="f_curp" class="form-control form-control-sm" title="CURP"></div>
-                <div class="col-6"><input type="file" id="f_ine" class="form-control form-control-sm" title="INE"></div>
-                <div class="col-6"><input type="file" id="f_dom" class="form-control form-control-sm" title="Domicilio"></div>
-                <div class="col-12"><input type="file" id="f_cv" class="form-control form-control-sm" title="CV"></div>
-            </div>
-          </div>
-
           <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-gold py-3 shadow">
-              <i class="fas fa-save me-2"></i> GUARDAR INSTRUCTOR
+            <button type="submit" class="btn btn-gold py-3">
+              <i class="fas fa-check-circle me-2"></i> REGISTRAR PROGRAMA
             </button>
-            <button type="button" class="btn btn-sm text-rose mt-2" onclick="resetForm()">DESCARTAR</button>
+            <button type="button" class="btn btn-link text-rose text-decoration-none btn-sm" onclick="resetForm()">
+              Descartar cambios
+            </button>
           </div>
         </form>
       </div>
     </div>
 
-    <div class="col-xl-8 col-lg-7">
-      <div class="table-container-white animate__animated animate__fadeInRight">
-        <h5 class="fw-bold mb-4" style="color: var(--deep-black);">CATÁLOGO DE INSTRUCTORES</h5>
-        
-        <div class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead>
-              <tr>
-                <th>IDENTIDAD</th>
-                <th>ESPECIALIDAD</th>
-                <th class="display-mobile-none">DOCUMENTOS</th>
-                <th>ESTADO</th>
-                <th class="text-center">OPCIONES</th>
-              </tr>
-            </thead>
-            <tbody id="tablaInstructores">
-                </tbody>
-          </table>
+    <div class="col-lg-8">
+      <div class="filter-box d-flex justify-content-between align-items-center">
+        <div>
+          <span class="text-white-50 small me-2">Categoría:</span>
+          <select id="filterCategory" class="form-select form-select-sm d-inline-block w-auto" onchange="renderCursos()">
+            <option value="Todos">Todas las Especialidades</option>
+          </select>
         </div>
+        <span id="contadorCursos" class="text-gold small fw-bold"></span>
       </div>
+
+      <div class="row g-4" id="listaCursos">
+        </div>
     </div>
+
   </div>
 </div>
 
 <script>
-let instructores = JSON.parse(localStorage.getItem("instructores")) || [];
+// Base de datos inicial
+const dataDefault = [
+  {
+    nombre: "Microblading 3D Master",
+    descripcion: "Perfeccionamiento de trazos hiperrealistas y diseño de cejas.",
+    categoria: "Cejas",
+    nivel: "Master",
+    duracion: "40 horas",
+    precio: 8500,
+    estatus: "Activo",
+    imagen: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&q=80&w=400"
+  },
+  {
+    nombre: "Técnicas de Acrílico",
+    descripcion: "Estructuras clásicas y decorados comerciales para salón.",
+    categoria: "Uñas",
+    nivel: "Básico",
+    duracion: "15 horas",
+    precio: 3200,
+    estatus: "Activo",
+    imagen: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400"
+  }
+];
 
-function renderTabla() {
-  const tabla = document.getElementById("tablaInstructores");
-  tabla.innerHTML = "";
+if (!localStorage.getItem("cursos_v2")) {
+  localStorage.setItem("cursos_v2", JSON.stringify(dataDefault));
+}
 
-  instructores.forEach((i, index) => {
-    const checkDoc = (doc) => i.docs && i.docs[doc] ? 'present' : 'absent';
+let cursos = JSON.parse(localStorage.getItem("cursos_v2"));
 
-    tabla.innerHTML += `
-      <tr>
-        <td>
-          <div class="instructor-name">${i.nombre}</div>
-          <small class="text-muted fw-bold">${i.experiencia} años de trayectoria</small>
-        </td>
-        <td>
-          <span class="specialty-text"><i class="fas fa-certificate me-1"></i>${i.especialidad}</span>
-        </td>
-        <td class="display-mobile-none">
-          <div class="d-flex">
-            <i class="fas fa-file-invoice doc-icon ${checkDoc('acta')}" title="Acta"></i>
-            <i class="fas fa-fingerprint doc-icon ${checkDoc('curp')}" title="CURP"></i>
-            <i class="fas fa-id-card doc-icon ${checkDoc('ine')}" title="INE"></i>
-            <i class="fas fa-home doc-icon ${checkDoc('domicilio')}" title="Domicilio"></i>
-            <i class="fas fa-file-pdf doc-icon ${checkDoc('cv')}" title="CV"></i>
+function renderCursos() {
+  const contenedor = document.getElementById("listaCursos");
+  const filtro = document.getElementById("filterCategory").value;
+  const filterSelect = document.getElementById("filterCategory");
+  const contador = document.getElementById("contadorCursos");
+  
+  contenedor.innerHTML = "";
+  
+  // Actualizar categorías en el filtro
+  const categorias = ["Todos", ...new Set(cursos.map(c => c.categoria))];
+  const currentFiltro = filterSelect.value;
+  filterSelect.innerHTML = categorias.map(cat => `<option value="${cat}" ${cat === currentFiltro ? 'selected' : ''}>${cat}</option>`).join('');
+
+  const cursosFiltrados = filtro === "Todos" ? cursos : cursos.filter(c => c.categoria === filtro);
+  contador.innerText = `${cursosFiltrados.length} Programas Vigentes`;
+
+  cursosFiltrados.forEach((c, index) => {
+    const realIndex = cursos.indexOf(c); // Para que editar/eliminar use el index correcto
+    contenedor.innerHTML += `
+      <div class="col-md-6 animate__animated animate__fadeIn">
+        <div class="card card-luxury">
+          <img src="${c.imagen}" class="curso-img w-100">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge-luxury">${c.categoria.toUpperCase()}</span>
+                <span class="text-white-50 small"><i class="far fa-clock me-1"></i>${c.duracion}</span>
+            </div>
+            <h5 class="text-gold fw-bold mb-2">${c.nombre}</h5>
+            <p class="text-white-50 small mb-3">${c.descripcion.substring(0, 80)}...</p>
+            
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <div class="precio-tag">$${c.precio}</div>
+                <div class="d-flex gap-1">
+                    <button class="btn btn-sm btn-outline-rose border-0" onclick="editar(${realIndex})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${realIndex})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-3 border-top border-secondary pt-2">
+                <small class="text-gold small"><i class="fas fa-signal me-1"></i> Nivel: ${c.nivel}</small>
+            </div>
           </div>
-        </td>
-        <td>
-          <span class="status-badge">${i.estatus.toUpperCase()}</span>
-        </td>
-        <td class="text-center">
-          <button class="btn btn-sm text-dark me-1" onclick="editar(${index})"><i class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
-        </td>
-      </tr>
+        </div>
+      </div>
     `;
   });
 }
 
-document.getElementById("formInstructor").addEventListener("submit", function(e){
+document.getElementById("formCurso").addEventListener("submit", function(e){
   e.preventDefault();
-  
-  const instructor = {
-    nombre: document.getElementById("nombre").value,
-    especialidad: document.getElementById("especialidad").value,
-    experiencia: document.getElementById("experiencia").value,
-    estatus: document.getElementById("estatus").value,
-    docs: {
-        acta: document.getElementById("f_acta").files.length > 0,
-        curp: document.getElementById("f_curp").files.length > 0,
-        ine: document.getElementById("f_ine").files.length > 0,
-        domicilio: document.getElementById("f_dom").files.length > 0,
-        cv: document.getElementById("f_cv").files.length > 0
+  const file = document.getElementById("imagen").files[0];
+  const index = document.getElementById("indexCurso").value;
+
+  const guardarData = (imgSrc) => {
+    const curso = {
+      nombre: document.getElementById("nombre").value,
+      descripcion: document.getElementById("descripcion").value,
+      categoria: document.getElementById("categoria").value,
+      nivel: document.getElementById("nivel").value,
+      duracion: document.getElementById("duracion").value,
+      precio: document.getElementById("precio").value,
+      estatus: document.getElementById("estatus").value,
+      imagen: imgSrc || (index !== "" ? cursos[index].imagen : "https://via.placeholder.com/400x200?text=LK+Academy")
+    };
+
+    if(index === "") {
+      cursos.push(curso);
+    } else {
+      cursos[index] = curso;
     }
+    
+    localStorage.setItem("cursos_v2", JSON.stringify(cursos));
+    resetForm();
+    renderCursos();
   };
 
-  const index = document.getElementById("indexInstructor").value;
-  if(index === "") instructores.push(instructor);
-  else instructores[index] = instructor;
-
-  localStorage.setItem("instructores", JSON.stringify(instructores));
-  resetForm();
-  renderTabla();
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => guardarData(reader.result);
+    reader.readAsDataURL(file);
+  } else {
+    guardarData();
+  }
 });
 
-function editar(index){
-  const i = instructores[index];
-  document.getElementById("nombre").value = i.nombre;
-  document.getElementById("especialidad").value = i.especialidad;
-  document.getElementById("experiencia").value = i.experiencia;
-  document.getElementById("estatus").value = i.estatus;
-  document.getElementById("indexInstructor").value = index;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function editar(index) {
+  const c = cursos[index];
+  document.getElementById("indexCurso").value = index;
+  document.getElementById("nombre").value = c.nombre;
+  document.getElementById("descripcion").value = c.descripcion;
+  document.getElementById("categoria").value = c.categoria;
+  document.getElementById("nivel").value = c.nivel;
+  document.getElementById("duracion").value = c.duracion;
+  document.getElementById("precio").value = c.precio;
+  document.getElementById("estatus").value = c.estatus;
+  
+  document.querySelector(".btn-gold").innerHTML = '<i class="fas fa-sync me-2"></i> ACTUALIZAR PROGRAMA';
+  window.scrollTo({ top: 150, behavior: 'smooth' });
 }
 
-function eliminar(index){
-  if(confirm("¿Eliminar este instructor de la base de datos?")) {
-    instructores.splice(index,1);
-    localStorage.setItem("instructores", JSON.stringify(instructores));
-    renderTabla();
+function eliminar(index) {
+  if (confirm("¿Seguro que deseas eliminar este programa académico?")) {
+    cursos.splice(index, 1);
+    localStorage.setItem("cursos_v2", JSON.stringify(cursos));
+    renderCursos();
   }
 }
 
-function resetForm(){
-  document.getElementById("formInstructor").reset();
-  document.getElementById("indexInstructor").value = "";
+function resetForm() {
+  document.getElementById("formCurso").reset();
+  document.getElementById("indexCurso").value = "";
+  document.querySelector(".btn-gold").innerHTML = '<i class="fas fa-check-circle me-2"></i> REGISTRAR PROGRAMA';
 }
 
-renderTabla();
+renderCursos();
 </script>
 
 </body>
