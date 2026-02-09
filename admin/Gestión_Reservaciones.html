@@ -1,89 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Sistema de Belleza | Reservaciones</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="UTF-8">
+    <title>Reservaciones | LK Studio Elite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
-  <style>
-    :root {
-      --gold: #D4AF37;
-      --gold-bright: #FFD700;
-      --gold-dark: #aa8c2c;
-      --deep-black: #050505;
-      --onyx: #0f0f0f;
-    }
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-bright: #FFD700;
+            --rose-gold: #E6B8A2;
+            --deep-black: #050505;
+            --onyx: #121212;
+        }
 
-    body {
-      background: radial-gradient(circle at top right, #1a1a1a 0%, var(--deep-black) 100%);
-      color: #ffffff;
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-    }
+        body {
+            background: radial-gradient(circle at top right, #1a1a1a 0%, var(--deep-black) 100%);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
 
-    /* Estadísticas */
-    .stat-card {
-      background: linear-gradient(145deg, #0a0a0a, #151515);
-      border-left: 5px solid var(--gold);
-      border-radius: 1rem;
-      padding: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.1);
-    }
+        /* Estadísticas */
+        .stat-card {
+            background: linear-gradient(145deg, #0a0a0a, #151515);
+            border-left: 4px solid var(--gold);
+            border-radius: 1rem;
+            padding: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--gold-bright); }
 
-    .card-luxury {
-      background: rgba(10, 10, 10, 0.9);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: 2rem;
-    }
+        .card-luxury {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 1.5rem;
+        }
 
-    /* Formulario */
-    .form-control, .form-select {
-      background-color: #000 !important;
-      border: 1px solid #222;
-      color: var(--gold-bright) !important;
-    }
-    .form-control:focus { border-color: var(--gold); box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
-    .form-label { color: var(--gold); font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        /* Formulario */
+        .form-control, .form-select {
+            background-color: #000 !important;
+            border: 1px solid #333 !important;
+            color: #fff !important;
+        }
+        .form-control:focus { border-color: var(--gold); box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+        .form-label { color: var(--rose-gold); font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
 
-    /* Tabla Estilo Onyx */
-    .table-container {
-      background: #080808;
-      border-radius: 1.5rem;
-      padding: 15px;
-      border: 1px solid #1a1a1a;
-    }
-    .table { color: #eee; border-collapse: separate; border-spacing: 0 8px; }
-    .table thead th { background: #000; color: var(--gold); border: none; font-size: 0.7rem; letter-spacing: 1px; }
-    .table tbody tr { background: #111; transition: 0.3s; }
-    .table tbody tr:hover { background: #181818; transform: scale(1.005); }
-    .table td { border: none; padding: 15px; vertical-align: middle; }
+        /* Tabla Estilo Onyx */
+        .table-container {
+            background: rgba(8, 8, 8, 0.5);
+            border-radius: 1.5rem;
+            padding: 20px;
+            border: 1px solid #222;
+        }
+        .table { color: #eee; border-collapse: separate; border-spacing: 0 10px; }
+        .table thead th { border: none; color: var(--gold); font-size: 0.75rem; text-transform: uppercase; padding-bottom: 15px; }
+        .table tbody tr { background: rgba(255,255,255,0.03); border-radius: 10px; transition: 0.3s; }
+        .table tbody tr:hover { background: rgba(212, 175, 55, 0.05); }
+        .table td { border: none; padding: 15px; vertical-align: middle; }
 
-    /* Badges de Pago */
-    .badge-pago {
-      padding: 5px 12px;
-      border-radius: 4px;
-      font-size: 0.65rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      display: inline-block;
-    }
-    .st-pagado { background: rgba(0, 255, 127, 0.1); color: #00ff7f; border: 1px solid #00ff7f; }
-    .st-pendiente { background: rgba(255, 193, 7, 0.1); color: #ffc107; border: 1px solid #ffc107; }
-    .st-cancelado { background: rgba(255, 69, 58, 0.1); color: #ff453a; border: 1px solid #ff453a; }
+        /* Corregido: Color del Cliente */
+        .cliente-nombre { color: #ffffff !important; font-weight: bold; font-size: 1rem; }
+        .servicio-nombre { color: var(--gold); font-size: 0.75rem; }
 
-    .btn-pro {
-      background: linear-gradient(45deg, var(--gold-dark), var(--gold-bright));
-      border: none; color: #000; font-weight: bold;
-    }
-    
-    optgroup { background: #000; color: var(--gold); }
-    option { background: #111; color: #fff; }
-  </style>
+        /* Badges de Pago */
+        .badge-pago {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border: 1px solid;
+        }
+        .st-pagado { background: rgba(0, 255, 127, 0.1); color: #00ff7f; border-color: #00ff7f; }
+        .st-pendiente { background: rgba(255, 193, 7, 0.1); color: #ffc107; border-color: #ffc107; }
+        .st-cancelado { background: rgba(255, 69, 58, 0.1); color: #ff453a; border-color: #ff453a; }
+
+        .btn-pro {
+            background: linear-gradient(45deg, var(--gold), var(--gold-bright));
+            border: none; color: #000; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1px;
+            border-radius: 10px;
+        }
+        .btn-pro:hover { filter: brightness(1.1); transform: scale(1.02); }
+
+        optgroup { background: #000; color: var(--gold); }
+    </style>
 </head>
 
 <body>
@@ -92,27 +100,33 @@
   
   <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
     <div>
-      <h1 class="fw-bold mb-0" style="color: var(--gold); letter-spacing: 1px;">GESTION DE <span class="text-white">RESERVACIÓNES</span></h1>
-      <p class="text-secondary mb-0 small">SISTEMA DE GESTIÓN DE SALÓN DE BELLEZA VIP</p>
+      <h1 class="fw-bold mb-0" style="color: var(--gold); letter-spacing: 1px;">GESTIÓN DE <span class="text-white">CITAS</span></h1>
+      <p class="text-secondary mb-0 small" style="color: var(--rose-gold) !important;">SISTEMA DE CONTROL DE RESERVACIONES VIP</p>
     </div>
-    <a href="./PANEL_ADMIN.html" class="btn btn-outline-warning btn-sm border-secondary text-white">
-      <i class="fas fa-th-large me-2"></i> PANEL CENTRAL
+    <a href="./PANEL_ADMIN.html" class="btn btn-outline-warning btn-sm border-secondary text-white px-4 rounded-pill">
+      <i class="fas fa-arrow-left me-2"></i> VOLVER AL PANEL
     </a>
   </div>
 
   <div class="row g-4 mb-5">
-    <div class="col-md-4"><div class="stat-card">
-      <small class="text-secondary">CITAS TOTALES</small>
-      <h2 id="totalCitas" class="fw-bold text-white mb-0">0</h2>
-    </div></div>
-    <div class="col-md-4"><div class="stat-card">
-      <small class="text-secondary">COBRADO (PAGADOS)</small>
-      <h2 id="totalIngresos" class="fw-bold text-gold mb-0">$0.00</h2>
-    </div></div>
-    <div class="col-md-4"><div class="stat-card">
-      <small class="text-secondary">POR COBRAR (PENDIENTES)</small>
-      <h2 id="totalPendientes" class="fw-bold text-warning mb-0">0</h2>
-    </div></div>
+    <div class="col-md-4">
+        <div class="stat-card">
+          <small class="text-secondary fw-bold">CITAS REGISTRADAS</small>
+          <h2 id="totalCitas" class="fw-bold text-white mb-0 mt-1">0</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-card" style="border-left-color: #00ff7f;">
+          <small class="text-secondary fw-bold">TOTAL PAGADO</small>
+          <h2 id="totalIngresos" class="fw-bold mb-0 mt-1" style="color: #00ff7f;">$0.00</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-card" style="border-left-color: var(--rose-gold);">
+          <small class="text-secondary fw-bold">CITAS PENDIENTES</small>
+          <h2 id="totalPendientes" class="fw-bold mb-0 mt-1" style="color: var(--rose-gold);">0</h2>
+        </div>
+    </div>
   </div>
 
   <div class="row g-4">
@@ -120,57 +134,37 @@
       <div class="card card-luxury p-4 animate__animated animate__fadeInLeft">
         <form id="formReserva">
           <input type="hidden" id="indexReserva">
-          <h6 class="text-gold mb-4 fw-bold"><i class="fas fa-cart-plus me-2"></i>NUEVA RESERVACIÓN</h6>
+          <h5 class="gold mb-4 fw-bold text-center border-bottom border-secondary pb-3"><i class="fas fa-calendar-plus me-2"></i>RESERVAR SERVICIO</h5>
           
           <div class="mb-3">
-            <label class="form-label">Cliente</label>
-            <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
+            <label class="form-label">Nombre de la Clienta</label>
+            <input type="text" id="cliente" class="form-control" placeholder="Ej. Maria Lopez" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Seleccionar Servicio</label>
+            <label class="form-label">Servicio a realizar</label>
             <select id="servicio" class="form-select" onchange="actualizarPrecio()" required>
-              <option value="" data-precio="0" selected disabled>Seleccione un servicio...</option>
-              
-              <optgroup label="-- CORTE DAMA --">
-                <option value="Corte Mariposa" data-precio="150">Mariposa (Corte) - $150</option>
-                <option value="Corte Bob" data-precio="150">Bob (Corte) - $150</option>
-                <option value="Corte Capas" data-precio="150">Capas (Corte) - $150</option>
-                <option value="Servicio Completo Cabello" data-precio="300">Completo (Lavado/Corte/Moldeo) - $300</option>
+              <option value="" data-precio="0" selected disabled>Seleccione servicio...</option>
+              <optgroup label="CORTES">
+                <option value="Corte Mariposa" data-precio="150">Corte Mariposa - $150</option>
+                <option value="Corte Bob" data-precio="150">Corte Bob - $150</option>
               </optgroup>
-
-              <optgroup label="-- COLOR CABELLO --">
+              <optgroup label="COLOR">
                 <option value="Balayage" data-precio="2000">Balayage - $2,000</option>
                 <option value="Baby Lights" data-precio="2000">Baby Lights - $2,000</option>
-                <option value="Tinte Básico" data-precio="500">Aplicación de Tinte - $500</option>
-                <option value="Tinte VIP" data-precio="1200">Tinte VIP (Incluye Moldeo/Trat.) - $1,200</option>
               </optgroup>
-
-              <optgroup label="-- UÑAS ACRÍLICAS --">
-                <option value="Uñas Largo #2" data-precio="350">Largo #2 - $350</option>
-                <option value="Uñas Largo #3 y 4" data-precio="500">Largo #3 y 4 - $500</option>
-                <option value="Uñas XXL" data-precio="700">XXL - $700</option>
-                <option value="Uñas VIP Manicura" data-precio="1250">Uñas VIP (Manicura/Diseño/Cortesía) - $1,250</option>
+              <optgroup label="UÑAS">
+                <option value="Uñas Acrílicas #2" data-precio="350">Acrílicas #2 - $350</option>
+                <option value="Uñas XXL" data-precio="700">Acrílicas XXL - $700</option>
               </optgroup>
-
-              <optgroup label="-- OTROS SISTEMAS UÑAS --">
-                <option value="Dual System" data-precio="500">Dual System - $500</option>
-                <option value="Dual System XXL" data-precio="700">Dual System XXL - $700</option>
-                <option value="Softgel" data-precio="500">Softgel - $500</option>
-                <option value="Softgel XXL" data-precio="700">Softgel XXL - $700</option>
-                <option value="Acrisof" data-precio="500">Acrisof - $500</option>
-                <option value="Acrisof XXL" data-precio="700">Acrisof XXL - $700</option>
-              </optgroup>
-
-              <optgroup label="-- PEDICURA --">
-                <option value="Pedicura Inmersión" data-precio="500">Pedicura (Gel/2 Tonos) - $500</option>
-                <option value="Pedicura SPA VIP" data-precio="1250">Pedicura SPA VIP (Completo) - $1,250</option>
+              <optgroup label="PEDICURA">
+                <option value="Pedicura SPA VIP" data-precio="1250">SPA VIP - $1,250</option>
               </optgroup>
             </select>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Especialista</label>
+            <label class="form-label">Especialista / Instructor</label>
             <select id="selectInstructor" class="form-select" required></select>
           </div>
 
@@ -187,11 +181,11 @@
 
           <div class="row g-2 mb-4">
             <div class="col-6">
-              <label class="form-label">Costo Total ($)</label>
-              <input type="number" id="costo" class="form-control" style="background: #111 !important; border-color: var(--gold);" required>
+              <label class="form-label">Costo ($)</label>
+              <input type="number" id="costo" class="form-control fw-bold" style="color: var(--gold-bright) !important;" required>
             </div>
             <div class="col-6">
-              <label class="form-label">Estatus de Pago</label>
+              <label class="form-label">Estatus</label>
               <select id="pago" class="form-select">
                 <option value="Pendiente">PENDIENTE</option>
                 <option value="Pagado">PAGADO</option>
@@ -200,7 +194,9 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-pro w-100 py-3">AGREGAR RESERVACIÓN</button>
+          <button type="submit" class="btn btn-pro w-100 py-3 shadow-lg">
+             <i class="fas fa-check-circle me-2"></i>CONFIRMAR CITA
+          </button>
         </form>
       </div>
     </div>
@@ -213,9 +209,9 @@
               <tr>
                 <th>CLIENTE / SERVICIO</th>
                 <th>FECHA / HORA</th>
-                <th>EXPERTO</th>
+                <th>ESPECIALISTA</th>
                 <th>MONTO</th>
-                <th>PAGO</th>
+                <th>ESTATUS</th>
                 <th class="text-center">GESTIÓN</th>
               </tr>
             </thead>
@@ -231,7 +227,6 @@
 let reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
 let instructores = JSON.parse(localStorage.getItem("instructores")) || [];
 
-// Lógica de Precios Automáticos (Tipo Carrito)
 function actualizarPrecio() {
   const select = document.getElementById("servicio");
   const precio = select.options[select.selectedIndex].getAttribute("data-precio");
@@ -247,32 +242,38 @@ function actualizarDashboard() {
 
 function cargarInstructores() {
   const select = document.getElementById("selectInstructor");
-  select.innerHTML = instructores.map(i => `<option value="${i.nombre}">${i.nombre}</option>`).join('') || '<option value="Staff General">Staff General</option>';
+  if (instructores.length > 0) {
+    select.innerHTML = instructores.map(i => `<option value="${i.nombre}">${i.nombre}</option>`).join('');
+  } else {
+    select.innerHTML = '<option value="Staff General">Staff General</option>';
+  }
 }
 
 function renderReservas() {
   const tabla = document.getElementById("tablaReservas");
   tabla.innerHTML = "";
   
-  reservaciones.forEach((r, index) => {
+  reservaciones.sort((a, b) => new Date(a.fecha) - new Date(b.fecha)).forEach((r, index) => {
     let statusStyle = (r.pago === 'Pagado') ? 'st-pagado' : (r.pago === 'Cancelado' ? 'st-cancelado' : 'st-pendiente');
 
     tabla.innerHTML += `
       <tr>
         <td>
-          <div class="fw-bold text-black">${r.cliente}</div>
-          <div class="text-gold small" style="font-size: 0.65rem;">${r.servicio}</div>
+          <div class="cliente-nombre">${r.cliente}</div>
+          <div class="servicio-nombre"><i class="fas fa-magic me-1"></i>${r.servicio}</div>
         </td>
         <td>
-          <div class="small text-white">${r.fecha}</div>
+          <div class="small text-white fw-bold">${r.fecha}</div>
           <div class="text-secondary small">${r.hora} hrs</div>
         </td>
-        <td class="small text-secondary"><i class="fas fa-user-circle me-1"></i> ${r.instructor}</td>
-        <td class="fw-bold text-gold">$${r.costo}</td>
+        <td class="small text-secondary">
+          <span class="badge bg-dark border border-secondary p-2"><i class="fas fa-user-sparkles me-1 gold"></i> ${r.instructor}</span>
+        </td>
+        <td class="fw-bold gold">$${parseFloat(r.costo).toLocaleString()}</td>
         <td><span class="badge-pago ${statusStyle}">${r.pago}</span></td>
         <td class="text-center">
-          <button class="btn btn-sm text-info me-2" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
+          <button class="btn btn-sm text-info me-2 p-2" onclick="editar(${index})"><i class="fas fa-pencil-alt"></i></button>
+          <button class="btn btn-sm text-danger p-2" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
         </td>
       </tr>
     `;
@@ -316,7 +317,7 @@ function editar(i) {
 }
 
 function eliminar(i) {
-  if(confirm("¿Eliminar este registro permanente?")) {
+  if(confirm("¿Estás seguro de eliminar esta reservación?")) {
     reservaciones.splice(i, 1);
     localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
     renderReservas();
