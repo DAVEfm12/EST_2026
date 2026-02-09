@@ -47,13 +47,12 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.8);
     }
 
-    /* Inputs - Oro y Negro */
+    /* Inputs - Texto Oro Brillante sobre Negro */
     .form-label { 
       color: var(--rose-gold) !important; 
       font-size: 0.75rem; 
       font-weight: 700; 
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
     .form-control, .form-select {
       background-color: #000 !important;
@@ -61,33 +60,49 @@
       color: var(--gold-bright) !important; 
       border-radius: 10px;
     }
-    .form-control:focus { border-color: var(--gold); box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
 
-    /* Tabla Elite */
+    /* --- AJUSTE DE TABLA SOLICITADO --- */
     .table-container {
-      background: #000;
+      background: #000 !important; /* Fondo Negro Puro */
       border-radius: 1.5rem;
       padding: 20px;
       border: 1px solid var(--gold);
     }
-    .table { background-color: transparent !important; color: white; }
-    .table thead th { 
-      color: var(--gold) !important; 
-      font-family: 'Cinzel', serif;
-      border-bottom: 1px solid var(--rose-gold); 
-      background: transparent; 
-      padding: 15px;
-    }
     
+    .table { 
+      background-color: #000 !important; 
+      color: white !important; 
+    }
+
+    /* Títulos de la tabla en Rosa Oro */
+    .table thead th { 
+      color: var(--rose-gold) !important; 
+      font-family: 'Cinzel', serif;
+      border-bottom: 2px solid var(--gold); 
+      background: #000 !important;
+      padding: 15px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    /* Nombre de clienta en Dorado Brillante sobre Negro */
     .nombre-clienta { 
       color: var(--gold-bright) !important; 
       font-weight: 700; 
       font-size: 1.1rem;
       font-family: 'Cinzel', serif;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
+
+    /* Filas de la tabla */
+    .table tbody tr {
+      border-bottom: 1px solid #222;
+      background-color: #000 !important;
+    }
+    
     .servicio-sub { color: var(--rose-gold); font-size: 0.8rem; opacity: 0.9; }
 
-    /* Buscador Luxury */
+    /* Buscador */
     .search-box {
         background: #000;
         border: 1px solid var(--rose-gold);
@@ -100,32 +115,22 @@
     /* Botones */
     .btn-pro {
       background: linear-gradient(45deg, var(--gold), var(--gold-bright));
-      border: none; 
-      color: #000; 
-      font-weight: 800;
-      border-radius: 50px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .btn-pro:hover { background: var(--rose-gold); transform: scale(1.02); }
-
-    .btn-outline-rose {
-      border: 1px solid var(--rose-gold);
-      color: var(--rose-gold);
+      border: none; color: #000; font-weight: 800;
       border-radius: 50px;
     }
-    .btn-outline-rose:hover { background: var(--rose-gold); color: #000; }
+    .btn-pro:hover { transform: scale(1.02); box-shadow: 0 0 15px var(--gold); }
 
-    /* Estados de Pago */
+    /* Badges de Pago */
     .badge-pago {
       padding: 6px 12px;
       border-radius: 50px;
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       font-weight: 800;
+      text-transform: uppercase;
     }
     .st-pagado { background: var(--gold); color: #000; }
     .st-pendiente { border: 1px solid var(--rose-gold); color: var(--rose-gold); }
-    .st-cancelado { background: #600; color: #fff; }
+    .st-cancelado { background: #800; color: #fff; }
   </style>
 </head>
 
@@ -136,27 +141,27 @@
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
     <div class="text-center text-md-start mb-4 mb-md-0">
       <h1 class="luxury-font fw-bold mb-0" style="color: var(--gold); font-size: 3rem;">LK STUDIO</h1>
-      <p class="text-rose mb-0 fw-bold"><i class="fas fa-gem me-2"></i>AGENDA DE SERVICIOS ELITE</p>
+      <p class="text-rose mb-0 fw-bold"><i class="fas fa-gem me-2"></i>RESERVACIONES DE ALTO NIVEL</p>
     </div>
     <div class="d-flex gap-3 align-items-center">
-        <input type="text" id="busqueda" class="search-box" placeholder="Buscar clienta..." onkeyup="buscarCliente()">
-        <a href="./PANEL_ADMIN.html" class="btn btn-outline-rose">
-          <i class="fas fa-th-large me-2"></i> PANEL
+        <input type="text" id="busqueda" class="search-box" placeholder="Buscar por nombre..." onkeyup="buscarCliente()">
+        <a href="./PANEL_ADMIN.html" class="btn btn-outline-warning rounded-pill">
+          <i class="fas fa-home me-2"></i> REGRESAR
         </a>
     </div>
   </div>
 
   <div class="row g-4 mb-5 animate__animated animate__fadeIn">
     <div class="col-md-4"><div class="stat-card text-center">
-      <small class="text-rose fw-bold">CITAS EN AGENDA</small>
+      <small style="color: var(--rose-gold);">TOTAL DE CITAS</small>
       <h2 id="totalCitas" class="fw-bold mb-0 mt-2">0</h2>
     </div></div>
     <div class="col-md-4"><div class="stat-card text-center">
-      <small class="text-gold fw-bold">TOTAL RECAUDADO</small>
+      <small style="color: var(--gold-bright);">INGRESOS CONFIRMADOS</small>
       <h2 id="totalIngresos" class="fw-bold mb-0 mt-2">$0.00</h2>
     </div></div>
     <div class="col-md-4"><div class="stat-card text-center">
-      <small class="text-rose fw-bold">CITAS PENDIENTES</small>
+      <small style="color: var(--rose-gold);">POR COBRAR</small>
       <h2 id="totalPendientes" class="fw-bold mb-0 mt-2">0</h2>
     </div></div>
   </div>
@@ -166,17 +171,17 @@
       <div class="card card-luxury p-4">
         <form id="formReserva">
           <input type="hidden" id="indexReserva">
-          <h5 class="text-gold mb-4 fw-bold text-center luxury-font"><i class="fas fa-star me-2"></i>RESERVAR CITA</h5>
+          <h5 class="text-gold mb-4 fw-bold text-center luxury-font">AGENDAR CITA VIP</h5>
           
           <div class="mb-3">
-            <label class="form-label">Clienta VIP</label>
+            <label class="form-label">Clienta</label>
             <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Servicio Seleccionado</label>
+            <label class="form-label">Servicio</label>
             <select id="servicio" class="form-select" onchange="actualizarPrecio()" required>
-              <option value="" data-precio="0" selected disabled>Seleccionar servicio...</option>
+              <option value="" data-precio="0" selected disabled>Seleccionar...</option>
               <optgroup label="CABELLO">
                 <option value="Corte Mariposa" data-precio="150">Corte Mariposa</option>
                 <option value="Balayage Elite" data-precio="2500">Balayage Elite</option>
@@ -206,11 +211,11 @@
 
           <div class="row g-2 mb-4">
             <div class="col-6">
-              <label class="form-label">Inversión $</label>
-              <input type="number" id="costo" class="form-control fw-bold" style="color: var(--gold-bright) !important;" required>
+              <label class="form-label">Costo $</label>
+              <input type="number" id="costo" class="form-control fw-bold" required>
             </div>
             <div class="col-6">
-              <label class="form-label">Estatus Pago</label>
+              <label class="form-label">Estado</label>
               <select id="pago" class="form-select">
                 <option value="Pendiente">PENDIENTE</option>
                 <option value="Pagado">PAGADO</option>
@@ -219,9 +224,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-pro w-100 py-3">
-            <i class="fas fa-calendar-check me-2"></i>CONFIRMAR RESERVA
-          </button>
+          <button type="submit" class="btn btn-pro w-100 py-3">CONFIRMAR CITA</button>
         </form>
       </div>
     </div>
@@ -233,11 +236,11 @@
             <thead>
               <tr>
                 <th>CLIENTA / SERVICIO</th>
-                <th>FECHA Y HORA</th>
+                <th>HORARIO</th>
                 <th>EXPERTA</th>
-                <th>TOTAL</th>
+                <th>COSTO</th>
                 <th>ESTADO</th>
-                <th class="text-center">GESTIÓN</th>
+                <th class="text-center">ACCIONES</th>
               </tr>
             </thead>
             <tbody id="tablaReservas"></tbody>
@@ -289,20 +292,20 @@ function renderReservas() {
       <tr>
         <td>
           <div class="nombre-clienta text-uppercase">${r.cliente}</div>
-          <div class="servicio-sub"><i class="fas fa-sparkles me-1 text-gold"></i>${r.servicio}</div>
+          <div class="servicio-sub">${r.servicio}</div>
         </td>
         <td>
           <div class="text-white small fw-bold">${r.fecha}</div>
-          <div class="text-rose small">${r.hora} hrs</div>
+          <div class="text-rose small" style="color: var(--rose-gold);">${r.hora} hrs</div>
         </td>
-        <td><span class="text-white small fw-bold"><i class="fas fa-user-circle text-gold me-1"></i> ${r.instructor}</span></td>
+        <td class="text-white small">${r.instructor}</td>
         <td class="fw-bold text-gold">$${r.costo}</td>
         <td><span class="badge-pago ${statusStyle}">${r.pago}</span></td>
         <td class="text-center">
           <div class="btn-group">
-              <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${index})"><i class="fas fa-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
               <button class="btn btn-sm btn-outline-success border-0" onclick="enviarRecordatorio(${index})"><i class="fab fa-whatsapp"></i></button>
-              <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${index})"><i class="fas fa-times"></i></button>
+              <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
           </div>
         </td>
       </tr>
