@@ -2,207 +2,229 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Elite Salon | Catálogo de Beneficios VIP</title>
+  <title>Elite Beauty | Catálogo de Beneficios VIP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
+    /* Paleta de Colores Específica */
     :root {
-      --gold: #D4AF37;
-      --gold-bright: #FFD700;
-      --golden-rose: #e6b8a2;
-      --deep-black: #050505;
-      --soft-black: #0f0f0f;
+      --gold: #D4AF37;         /* Oro Real */
+      --gold-light: #F1D592;   /* Oro Brillante */
+      --golden-rose: #e6b8a2;  /* Rosa Dorado */
+      --deep-black: #050505;   /* Negro Profundo */
+      --soft-black: #121212;   /* Negro Azabache */
       --glass: rgba(255, 255, 255, 0.03);
     }
 
     body {
-      background: radial-gradient(circle at top right, #1a1a1a, var(--deep-black));
+      background-color: var(--deep-black);
+      background-image: radial-gradient(circle at 50% -20%, #2a2215 0%, var(--deep-black) 80%);
       color: #ffffff;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* Scrollbar Personalizado */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--deep-black); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-
-    /* Tarjetas con Efecto Glass */
-    .card-luxury {
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 1.5rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease;
+    h1, h2, h5, .luxury-font {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 2px;
     }
 
-    /* Inputs Estilo Dark */
+    /* Estilo de Tarjetas Luxury */
+    .card-luxury {
+      background: var(--soft-black);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .card-luxury:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+      transform: translateY(-5px);
+    }
+
+    /* Formulario: Estilización */
     .form-label {
-      color: var(--golden-rose);
-      font-size: 0.75rem;
-      font-weight: 700;
+      color: var(--golden-rose); 
+      font-weight: 600;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      margin-left: 5px;
     }
 
     .form-control, .form-select {
-      background: #000 !important;
-      border: 1px solid #333 !important;
-      color: var(--gold) !important;
-      padding: 0.8rem;
-      border-radius: 10px;
+      background-color: rgba(0,0,0,0.5) !important;
+      border: 1px solid #2a2a2a;
+      color: var(--gold-light) !important;
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
     }
 
     .form-control:focus {
-      border-color: var(--gold-bright) !important;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
     }
 
-    /* Tabla Estilizada */
-    .table { color: #fff !important; margin-bottom: 0; }
-    .table-luxury thead th {
-      background: rgba(212, 175, 55, 0.05);
-      color: var(--gold);
-      border-bottom: 2px solid var(--gold);
-      padding: 1.2rem;
-    }
-
-    .table tbody tr {
-      border-bottom: 1px solid #222;
-      transition: background 0.3s;
-    }
-
-    .table tbody tr:hover { background: rgba(255,255,255,0.02); }
-
-    /* Botones Pro */
+    /* Botones Premium */
     .btn-gold {
-      background: linear-gradient(45deg, var(--gold), #f3cf58);
-      color: #000;
-      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold), #b38f1d);
+      color: var(--deep-black);
+      font-weight: bold;
       border: none;
-      border-radius: 50px;
+      border-radius: 1rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+      transition: all 0.3s ease;
     }
 
     .btn-gold:hover {
-      filter: brightness(1.1);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+      background: var(--golden-rose);
+      box-shadow: 0 0 20px rgba(230, 184, 162, 0.4);
       transform: scale(1.02);
     }
 
-    /* Buscador */
-    .search-container {
-      position: relative;
-      max-width: 400px;
-      margin: 0 auto 2rem;
+    .btn-outline-rose {
+      color: var(--golden-rose);
+      border: 1px solid var(--golden-rose);
+      border-radius: 1rem;
+      font-weight: 500;
     }
 
-    .search-input {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--gold);
+    .btn-outline-rose:hover {
+      background-color: var(--golden-rose);
+      color: var(--deep-black);
+    }
+
+    /* Tabla Estilizada */
+    .table-luxury {
+      border-collapse: separate;
+      border-spacing: 0 10px;
+    }
+
+    .table-luxury thead th {
+      border: none;
+      color: var(--gold);
+      background: transparent;
+      padding-bottom: 20px;
+    }
+
+    .table-luxury tbody tr {
+      background: var(--glass);
+      transition: 0.3s;
+    }
+
+    .table-luxury tbody tr td {
+      border: none;
+      padding: 20px;
+    }
+
+    .table-luxury tbody tr td:first-child { border-radius: 1.5rem 0 0 1.5rem; }
+    .table-luxury tbody tr td:last-child { border-radius: 0 1.5rem 1.5rem 0; }
+
+    .table-luxury tbody tr:hover {
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .badge-vip {
+      background: linear-gradient(45deg, var(--gold), var(--golden-rose));
+      color: var(--deep-black);
+      padding: 0.5rem 1rem;
       border-radius: 50px;
-      padding: 10px 20px 10px 45px;
-      color: white;
+      font-weight: bold;
+      font-size: 0.75rem;
     }
 
-    .search-icon {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
+    /* Iconos */
+    .icon-container {
+      width: 45px;
+      height: 45px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--gold);
     }
 
-    /* Badges de Categoría */
-    .badge-cat {
-        font-size: 0.65rem;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    .cat-gold { background: var(--gold); color: black; }
-    .cat-platinum { background: #e5e4e2; color: black; }
-    .cat-black { background: #333; color: white; border: 1px solid var(--gold); }
-
+    .text-rose { color: var(--golden-rose); }
+    .text-gold { color: var(--gold); }
+    
+    /* Scrollbar Personalizada */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--deep-black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
   </style>
 </head>
 
 <body>
 
-<div class="container py-5 animate__animated animate__fadeIn">
-  
+<div class="container py-5">
   <div class="d-flex justify-content-between align-items-center mb-5">
-    <a href="PANEL_ADMIN.html" class="btn btn-outline-rose rounded-pill px-4 btn-sm">
-      <i class="fas fa-chevron-left me-2"></i> Volver al Panel
+    <a href="PANEL_ADMIN.html" class="btn btn-outline-rose px-4">
+      <i class="fas fa-chevron-left me-2"></i> Dashboard
     </a>
     <div class="text-end">
-        <span class="text-rose fw-bold me-2">Total Beneficios:</span>
-        <span id="contadorBeneficios" class="badge rounded-pill bg-dark border border-warning text-gold">0</span>
+      <span class="text-gold d-block fw-bold luxury-font">CATÁLOGO EXCLUSIVO</span>
+      <span class="text-white-50 small">Actualizado: Feb 2026</span>
     </div>
   </div>
-
-  <div class="text-center mb-5">
-    <h1 class="fw-bold text-gold display-4 mb-2" style="letter-spacing: -1px;">
-       <span class="text-white">MEMBERSHIP</span> CATALOG
+  
+  <div class="text-center mb-5 animate__animated animate__fadeIn">
+    <h1 class="fw-bold text-gold display-4">
+      <i class="fas fa-gem me-3"></i>PRIVILEGIOS VIP
     </h1>
-    <div class="d-flex justify-content-center align-items-center">
-        <div style="height: 1px; width: 50px; background: var(--gold);"></div>
-        <i class="fas fa-diamond mx-3 text-gold small"></i>
-        <div style="height: 1px; width: 50px; background: var(--gold);"></div>
-    </div>
+    <p class="text-rose opacity-75 mx-auto mt-3" style="max-width: 600px;">
+      Define y gestiona los beneficios que hacen que la experiencia en nuestro salón sea inolvidable y exclusiva.
+    </p>
   </div>
 
-  <div class="search-container">
-      <i class="fas fa-search search-icon"></i>
-      <input type="text" id="buscador" class="search-input" placeholder="Buscar beneficio por nombre..." onkeyup="filtrarTabla()">
-  </div>
-
-  <div class="row g-4">
+  <div class="row g-5">
 
     <div class="col-lg-4">
-      <div class="card card-luxury border-top-0">
-          <div style="height: 4px; background: linear-gradient(to right, var(--gold), var(--golden-rose)); border-radius: 1.5rem 1.5rem 0 0;"></div>
+      <div class="card card-luxury sticky-top" style="top: 2rem;">
         <div class="card-body p-4">
-          <h5 class="text-gold mb-4 fw-bold">
-            <i class="fas fa-plus-circle me-2"></i> <span id="formTitle">Nuevo Privilegio</span>
+          <h5 class="text-gold mb-4 d-flex align-items-center">
+            <div class="icon-container me-3"><i class="fas fa-magic"></i></div>
+            Configurar
           </h5>
 
           <form id="formBeneficio">
             <input type="hidden" id="indexBeneficio">
 
             <div class="mb-3">
-              <label class="form-label">Título del Beneficio</label>
-              <input type="text" id="titulo" class="form-control" placeholder="Ej. Retoque Express" required>
+              <label class="form-label">Beneficio</label>
+              <input type="text" id="titulo" class="form-control" placeholder="Ej. Copa de Mimosa de Bienvenida" required>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Nivel de Membrecía</label>
-                <select id="nivel" class="form-select">
-                    <option value="Gold">Gold</option>
-                    <option value="Platinum">Platinum</option>
-                    <option value="Black Edition">Black Edition</option>
-                </select>
+              <label class="form-label">Categoría / Icono</label>
+              <select id="icono" class="form-select">
+                <option value="fa-wine-glass-alt">🍷 Bebidas & Bar</option>
+                <option value="fa-sparkles">✨ Estética & Glow</option>
+                <option value="fa-clock">⏰ Tiempo & Prioridad</option>
+                <option value="fa-gift">🎁 Regalos & Muestras</option>
+                <option value="fa-couch">🛋️ Confort & Lounge</option>
+              </select>
             </div>
 
             <div class="mb-4">
-              <label class="form-label">Alcance del beneficio</label>
-              <textarea id="descripcion" class="form-control" rows="3" placeholder="Define qué incluye..." required></textarea>
+              <label class="form-label">Descripción del Privilegio</label>
+              <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalla en qué consiste el beneficio..." required></textarea>
             </div>
 
             <div class="d-grid gap-2">
               <button type="submit" class="btn btn-gold py-3 shadow">
-                <i class="fas fa-check-circle me-2"></i> REGISTRAR BENEFICIO
+                <i class="fas fa-check-circle me-2"></i> GUARDAR CAMBIOS
               </button>
-              <button type="button" id="btnCancel" class="btn btn-sm text-rose opacity-50 d-none" onclick="resetForm()">
-                Cancelar Edición
+              <button type="button" id="btnCancel" class="btn btn-link text-rose text-decoration-none d-none" onclick="resetForm()">
+                Descartar cambios
               </button>
             </div>
           </form>
@@ -211,26 +233,26 @@
     </div>
 
     <div class="col-lg-8">
-      <div class="card card-luxury overflow-hidden">
-        <div class="card-body p-0">
+      <div class="card card-luxury">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="text-gold m-0">CATÁLOGO VIGENTE</h5>
+            <span id="contador" class="badge bg-dark text-gold border border-gold">0 Beneficios</span>
+          </div>
+
           <div class="table-responsive">
-            <table class="table table-luxury align-middle">
+            <table class="table table-dark table-luxury align-middle">
               <thead>
                 <tr>
-                  <th class="ps-4">Beneficio</th>
-                  <th>Nivel</th>
-                  <th>Detalles</th>
-                  <th class="text-center">Gestión</th>
+                  <th style="width: 60%">Concepto y Detalle</th>
+                  <th style="width: 20%">Estado</th>
+                  <th class="text-end" style="width: 20%">Acciones</th>
                 </tr>
               </thead>
               <tbody id="tablaBeneficios">
                 </tbody>
             </table>
           </div>
-        </div>
-        <div id="noResults" class="text-center py-5 d-none">
-            <i class="fas fa-search-minus text-rose display-1 mb-3"></i>
-            <p class="text-rose">No se encontraron beneficios con ese nombre.</p>
         </div>
       </div>
     </div>
@@ -239,50 +261,53 @@
 </div>
 
 <script>
-/* --- BASE DE DATOS LOCAL --- */
-const baseBeneficios = [
+/* ===============================
+    DATOS LOCALES
+   =============================== */
+const dataDefault = [
   {
-    titulo: "Atención Preferente",
-    nivel: "Platinum",
-    descripcion: "Cero tiempo de espera y reserva prioritaria en festivos."
+    titulo: "Barra Libre de Infusiones",
+    descripcion: "Disfruta de nuestra selección premium de té y café mientras realizamos tu servicio.",
+    icono: "fa-wine-glass-alt"
   },
   {
-    titulo: "Drink de Bienvenida",
-    nivel: "Gold",
-    descripcion: "Copa de cortesía y barra de snacks premium en cada visita."
-  },
-  {
-    titulo: "Cabina Privada",
-    nivel: "Black Edition",
-    descripcion: "Privacidad absoluta con atención de 2 especialistas simultáneos."
+    titulo: "Acceso a Estación de Carga",
+    descripcion: "Cargadores ultra-rápidos disponibles en cada estación para todos tus dispositivos.",
+    icono: "fa-sparkles"
   }
 ];
 
-if (!localStorage.getItem("beneficios")) {
-  localStorage.setItem("beneficios", JSON.stringify(baseBeneficios));
+if (!localStorage.getItem("beneficios_v2")) {
+  localStorage.setItem("beneficios_v2", JSON.stringify(dataDefault));
 }
 
-let beneficios = JSON.parse(localStorage.getItem("beneficios"));
+let beneficios = JSON.parse(localStorage.getItem("beneficios_v2"));
 
-/* --- FUNCIONES DE RENDER --- */
+/* ===============================
+    RENDER
+   =============================== */
 function renderTabla() {
   const tabla = document.getElementById("tablaBeneficios");
-  const contador = document.getElementById("contadorBeneficios");
+  const contador = document.getElementById("contador");
   tabla.innerHTML = "";
-  contador.innerText = beneficios.length;
+  contador.innerText = `${beneficios.length} Privilegios`;
 
   beneficios.forEach((b, index) => {
-    let nivelClass = b.nivel === 'Gold' ? 'cat-gold' : (b.nivel === 'Platinum' ? 'cat-platinum' : 'cat-black');
-    
     tabla.innerHTML += `
       <tr class="animate__animated animate__fadeIn">
-        <td class="ps-4">
-            <div class="fw-bold text-gold">${b.titulo}</div>
-            <div class="text-muted small">REF: #00${index + 1}</div>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="icon-container me-3">
+              <i class="fas ${b.icono || 'fa-gem'}"></i>
+            </div>
+            <div>
+              <div class="text-gold fw-bold">${b.titulo}</div>
+              <div class="text-rose small opacity-75">${b.descripcion}</div>
+            </div>
+          </div>
         </td>
-        <td><span class="badge-cat ${nivelClass}">${b.nivel}</span></td>
-        <td class="text-white-50 small" style="max-width: 250px;">${b.descripcion}</td>
-        <td class="text-center">
+        <td><span class="badge-vip">ACTIVO VIP</span></td>
+        <td class="text-end">
           <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${index})">
             <i class="fas fa-edit"></i>
           </button>
@@ -295,42 +320,43 @@ function renderTabla() {
   });
 }
 
-/* --- LOGICA DEL FORMULARIO --- */
+/* ===============================
+    ACCIONES
+   =============================== */
 document.getElementById("formBeneficio").addEventListener("submit", function(e){
   e.preventDefault();
 
   const titulo = document.getElementById("titulo").value;
-  const nivel = document.getElementById("nivel").value;
   const descripcion = document.getElementById("descripcion").value;
+  const icono = document.getElementById("icono").value;
   const index = document.getElementById("indexBeneficio").value;
 
   if (index === "") {
-    beneficios.unshift({ titulo, nivel, descripcion });
+    beneficios.push({ titulo, descripcion, icono });
   } else {
-    beneficios[index] = { titulo, nivel, descripcion };
+    beneficios[index] = { titulo, descripcion, icono };
   }
 
-  localStorage.setItem("beneficios", JSON.stringify(beneficios));
+  localStorage.setItem("beneficios_v2", JSON.stringify(beneficios));
   resetForm();
   renderTabla();
 });
 
 function editar(index) {
-  const b = beneficios[index];
-  document.getElementById("titulo").value = b.titulo;
-  document.getElementById("nivel").value = b.nivel;
-  document.getElementById("descripcion").value = b.descripcion;
+  document.getElementById("titulo").value = beneficios[index].titulo;
+  document.getElementById("descripcion").value = beneficios[index].descripcion;
+  document.getElementById("icono").value = beneficios[index].icono;
   document.getElementById("indexBeneficio").value = index;
   
-  document.getElementById("formTitle").innerText = "Editando Privilegio";
   document.getElementById("btnCancel").classList.remove('d-none');
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  document.querySelector('.card-luxury h5').innerHTML = '<div class="icon-container me-3 text-warning"><i class="fas fa-pencil-alt"></i></div> Editando';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function eliminar(index) {
-  if (confirm("¿Seguro que deseas eliminar este privilegio exclusivo?")) {
+  if (confirm("¿Seguro que deseas eliminar este privilegio VIP?")) {
     beneficios.splice(index, 1);
-    localStorage.setItem("beneficios", JSON.stringify(beneficios));
+    localStorage.setItem("beneficios_v2", JSON.stringify(beneficios));
     renderTabla();
   }
 }
@@ -338,27 +364,8 @@ function eliminar(index) {
 function resetForm() {
   document.getElementById("formBeneficio").reset();
   document.getElementById("indexBeneficio").value = "";
-  document.getElementById("formTitle").innerText = "Nuevo Privilegio";
   document.getElementById("btnCancel").classList.add('d-none');
-}
-
-/* --- BUSCADOR --- */
-function filtrarTabla() {
-    const busqueda = document.getElementById("buscador").value.toLowerCase();
-    const filas = document.querySelectorAll("#tablaBeneficios tr");
-    let hayResultados = false;
-
-    filas.forEach(fila => {
-        const texto = fila.innerText.toLowerCase();
-        if(texto.includes(busqueda)) {
-            fila.style.display = "";
-            hayResultados = true;
-        } else {
-            fila.style.display = "none";
-        }
-    });
-
-    document.getElementById("noResults").classList.toggle('d-none', hayResultados);
+  document.querySelector('.card-luxury h5').innerHTML = '<div class="icon-container me-3"><i class="fas fa-magic"></i></div> Configurar';
 }
 
 renderTabla();
