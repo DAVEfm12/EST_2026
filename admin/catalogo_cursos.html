@@ -2,108 +2,141 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Sistema de Belleza | Catálogo de Cursos</title>
+  <title>LK Studio | Catálogo de Cursos Elite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    /* PALETA: NEGRO, DORADO, GOLDEN ROSE */
     :root {
       --gold: #D4AF37;
+      --gold-light: #F1D592;
       --golden-rose: #e6b8a2;
-      --deep-black: #000000;
+      --deep-black: #050505;
       --soft-black: #0f0f0f;
     }
 
+    /* Fondo con efecto de brillos (Glitter) */
     body {
-      background: radial-gradient(circle at top, var(--soft-black), var(--deep-black));
+      background-color: var(--deep-black);
+      background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+        radial-gradient(circle at top, #1a1a1a 0%, var(--deep-black) 100%);
+      background-size: 550px 550px, 350px 350px, 250px 250px, 100% 100%;
+      background-position: 0 0, 40px 60px, 130px 270px, center;
       color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       min-height: 100vh;
+      animation: glitter 10s linear infinite;
     }
 
-    /* TARJETAS */
+    @keyframes glitter {
+      from { background-position: 0 0, 40px 60px, 130px 270px, center; }
+      to { background-position: 550px 550px, 590px 610px, 680px 820px, center; }
+    }
+
+    h1, h2, .luxury-font {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 3px;
+    }
+
+    /* TARJETAS VIP */
     .card-luxury {
-      background-color: var(--deep-black);
-      border: 2px solid var(--gold);
-      border-radius: 1.5rem;
-      transition: all 0.3s ease;
+      background: rgba(15, 15, 15, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--gold);
+      border-radius: 2rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
       overflow: hidden;
     }
 
     .card-luxury:hover {
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-      transform: translateY(-5px);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+      transform: translateY(-8px);
+      border-color: var(--golden-rose);
     }
 
     .curso-img {
-      height: 200px;
+      height: 220px;
       object-fit: cover;
       border-bottom: 2px solid var(--gold);
+      transition: 0.5s;
     }
 
-    /* TIPOGRAFÍA */
-    .text-gold { color: var(--gold); }
-    .text-rose { color: var(--golden-rose); }
-    
+    .card-luxury:hover .curso-img {
+      transform: scale(1.1);
+    }
+
+    /* INPUTS DORADOS */
     .form-label {
       color: var(--golden-rose);
-      font-weight: 500;
-      font-size: 0.85rem;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .form-control, .form-select {
+      background-color: rgba(0,0,0,0.7) !important;
+      border: 1px solid #333 !important;
+      color: var(--gold-light) !important;
+      border-radius: 1rem;
+      padding: 0.8rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+
+    /* BOTONES DE GALA */
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), #b38f1d);
+      color: var(--deep-black) !important;
+      font-weight: 800;
+      border: none;
+      border-radius: 50px;
       text-transform: uppercase;
       letter-spacing: 1px;
-    }
-
-    /* INPUTS */
-    .form-control, .form-select {
-      background-color: var(--deep-black) !important;
-      border: 1px solid #333;
-      color: var(--gold) !important; /* Usuario escribe en Dorado */
-      border-radius: 0.75rem;
-    }
-
-    .form-control:focus, .form-select:focus {
-      border-color: var(--golden-rose);
-      box-shadow: 0 0 10px rgba(230, 184, 162, 0.2);
-    }
-
-    /* BOTONES */
-    .btn-gold {
-      background: linear-gradient(45deg, #bfa233, var(--gold));
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 0.75rem;
+      transition: 0.3s;
     }
 
     .btn-gold:hover {
       background: var(--golden-rose);
-      color: black;
-    }
-
-    .btn-outline-rose {
-      border: 1px solid var(--golden-rose);
-      color: var(--golden-rose);
-      border-radius: 0.75rem;
-    }
-
-    .btn-outline-rose:hover {
-      background: var(--golden-rose);
-      color: black;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+      transform: scale(1.05);
     }
 
     .precio-tag {
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 1.8rem;
+      font-family: 'Cinzel', serif;
       color: var(--gold);
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
     }
 
-    .badge-status {
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      background: transparent;
+    .badge-nivel {
+      background: rgba(230, 184, 162, 0.1);
+      color: var(--golden-rose);
+      border: 1px solid var(--golden-rose);
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+
+    /* Animación de carga */
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -111,54 +144,52 @@
 <body>
 
 <div class="container py-5">
-
-  <div class="mb-4">
-    <a href="PANEL_ADMIN.html" class="btn btn-outline-rose btn-sm">
-      <i class="fas fa-chevron-left"></i> Volver al Panel
+  <div class="mb-5">
+    <a href="PANEL_ADMIN.html" class="btn btn-outline-rose px-4 rounded-pill">
+      <i class="fas fa-arrow-left me-2"></i> PANEL CENTRAL
     </a>
   </div>
 
-  <div class="text-center mb-5">
-    <h1 class="fw-bold text-gold display-4">
-      <i class="fas fa-graduation-cap"></i> CATÁLOGO DE CURSOS
-    </h1>
-    <div class="mx-auto" style="width: 80px; height: 3px; background: var(--gold); margin-bottom: 10px;"></div>
-    <p class="text-rose">Administración académica y financiera de la academia</p>
+  <div class="text-center mb-5 fade-in-up">
+    <h1 class="fw-bold text-gold display-3">ACADEMY CATALOG</h1>
+    <div class="d-flex justify-content-center align-items-center">
+        <div style="width: 50px; height: 1px; background: var(--gold);"></div>
+        <i class="fas fa-gem mx-3 text-rose"></i>
+        <div style="width: 50px; height: 1px; background: var(--gold);"></div>
+    </div>
+    <p class="text-rose mt-3 opacity-75">Diseño y Gestión de Cursos de Alta Gama</p>
   </div>
 
-  <div class="row g-4">
-
+  <div class="row g-5">
     <div class="col-lg-4">
-      <div class="card card-luxury p-3">
-        <div class="card-body">
-          <h5 class="text-gold mb-4 text-center">
-            <i class="fas fa-edit"></i> Gestión de Curso
-          </h5>
-
+      <div class="card card-luxury sticky-top" style="top: 2rem;">
+        <div class="card-body p-4">
+          <h5 class="text-gold mb-4 luxury-font text-center">Configurar Curso</h5>
+          
           <form id="formCurso">
             <input type="hidden" id="indexCurso">
 
             <div class="mb-3">
-              <label class="form-label">Nombre del Curso</label>
-              <input type="text" id="nombre" class="form-control" required>
+              <label class="form-label">Nombre del Programa</label>
+              <input type="text" id="nombre" class="form-control" placeholder="Ej. Master en Pestañas" required>
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Descripción Breve</label>
+              <label class="form-label">Resumen Ejecutivo</label>
               <textarea id="descripcion" class="form-control" rows="2" required></textarea>
             </div>
 
             <div class="row">
               <div class="col-6 mb-3">
                 <label class="form-label">Categoría</label>
-                <input type="text" id="categoria" class="form-control" placeholder="Ej. Uñas" required>
+                <input type="text" id="categoria" class="form-control" placeholder="Uñas">
               </div>
               <div class="col-6 mb-3">
                 <label class="form-label">Nivel</label>
                 <select id="nivel" class="form-select">
                   <option>Básico</option>
                   <option>Intermedio</option>
-                  <option>Avanzado</option>
+                  <option>Especializado</option>
                 </select>
               </div>
             </div>
@@ -166,33 +197,25 @@
             <div class="row">
               <div class="col-6 mb-3">
                 <label class="form-label">Duración</label>
-                <input type="text" id="duracion" class="form-control" placeholder="Ej. 10 hrs">
+                <input type="text" id="duracion" class="form-control" placeholder="12 hrs">
               </div>
               <div class="col-6 mb-3">
-                <label class="form-label">Precio ($)</label>
-                <input type="number" id="precio" class="form-control">
+                <label class="form-label">Inversión ($)</label>
+                <input type="number" id="precio" class="form-control" placeholder="0.00">
               </div>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Portada del Curso</label>
-              <input type="file" id="imagen" class="form-control" accept="image/*">
             </div>
 
             <div class="mb-4">
-              <label class="form-label">Estatus</label>
-              <select id="estatus" class="form-select">
-                <option value="Activo">Activo</option>
-                <option value="Inactivo">Inactivo</option>
-              </select>
+              <label class="form-label">Imagen de Portada</label>
+              <input type="file" id="imagen" class="form-control" accept="image/*">
             </div>
 
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-gold py-2">
-                <i class="fas fa-save me-2"></i> GUARDAR CURSO
+              <button type="submit" class="btn btn-gold py-3">
+                <i class="fas fa-crown me-2"></i> PUBLICAR CURSO
               </button>
-              <button type="button" class="btn btn-link text-rose text-decoration-none btn-sm" onclick="resetForm()">
-                Limpiar campos
+              <button type="button" class="btn btn-link text-rose text-decoration-none" onclick="resetForm()">
+                Limpiar Editor
               </button>
             </div>
           </form>
@@ -204,30 +227,21 @@
       <div class="row g-4" id="listaCursos">
         </div>
     </div>
-
   </div>
 </div>
 
 <script>
-// Datos base
-const cursosIniciales = [
+let cursos = JSON.parse(localStorage.getItem("cursos")) || [
   {
-    nombre: "Maquillaje Profesional",
-    descripcion: "Técnicas avanzadas para novias y eventos nocturnos.",
-    categoria: "Maquillaje",
-    nivel: "Intermedio",
-    duracion: "20 horas",
-    precio: 2500,
-    estatus: "Activo",
-    imagen: "https://via.placeholder.com/400x200?text=Maquillaje+Pro"
+    nombre: "Microblading Artist",
+    descripcion: "Certificación internacional en diseño de cejas hiperrealistas.",
+    categoria: "Cejas",
+    nivel: "Especializado",
+    duracion: "40 horas",
+    precio: 8500,
+    imagen: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400"
   }
 ];
-
-if (!localStorage.getItem("cursos")) {
-  localStorage.setItem("cursos", JSON.stringify(cursosIniciales));
-}
-
-let cursos = JSON.parse(localStorage.getItem("cursos"));
 
 function renderCursos() {
   const contenedor = document.getElementById("listaCursos");
@@ -235,31 +249,29 @@ function renderCursos() {
 
   cursos.forEach((c, index) => {
     contenedor.innerHTML += `
-      <div class="col-md-6">
+      <div class="col-md-6 fade-in-up">
         <div class="card card-luxury h-100">
-          ${c.imagen ? `<img src="${c.imagen}" class="curso-img w-100">` : ""}
-          <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-                <h5 class="text-gold fw-bold m-0">${c.nombre}</h5>
-                <span class="badge badge-status small">${c.nivel}</span>
+          <img src="${c.imagen}" class="curso-img">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <span class="badge badge-nivel">${c.nivel.toUpperCase()}</span>
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm text-gold" onclick="editar(${index})"><i class="fas fa-pen"></i></button>
+                <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
+              </div>
             </div>
-            <p class="text-rose small mb-3">${c.descripcion}</p>
             
-            <div class="mb-3">
-                <small class="text-white-50 d-block">Categoría: <span class="text-white">${c.categoria}</span></small>
-                <small class="text-white-50 d-block">Duración: <span class="text-white">${c.duracion}</span></small>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center mt-auto">
-                <span class="precio-tag">$${c.precio}</span>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${index})">
-                        <i class="fas fa-pencil-alt"></i>
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${index})">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+            <h4 class="luxury-font text-white mb-2">${c.nombre}</h4>
+            <p class="text-rose small opacity-75 mb-4">${c.descripcion}</p>
+            
+            <div class="mt-auto pt-3 border-top border-secondary">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <small class="text-white-50 d-block">Duración: ${c.duracion}</small>
+                  <small class="text-white-50 d-block">Rama: ${c.categoria}</small>
                 </div>
+                <span class="precio-tag">$${c.precio}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -273,7 +285,7 @@ document.getElementById("formCurso").addEventListener("submit", function(e){
   const file = document.getElementById("imagen").files[0];
   const index = document.getElementById("indexCurso").value;
 
-  const procesar = (imgSrc) => {
+  const save = (imgData) => {
     const curso = {
       nombre: document.getElementById("nombre").value,
       descripcion: document.getElementById("descripcion").value,
@@ -281,16 +293,12 @@ document.getElementById("formCurso").addEventListener("submit", function(e){
       nivel: document.getElementById("nivel").value,
       duracion: document.getElementById("duracion").value,
       precio: document.getElementById("precio").value,
-      estatus: document.getElementById("estatus").value,
-      imagen: imgSrc || (index !== "" ? cursos[index].imagen : "https://via.placeholder.com/400x200?text=Curso+Belleza")
+      imagen: imgData || (index !== "" ? cursos[index].imagen : "https://via.placeholder.com/400x220?text=Beauty+Course")
     };
 
-    if(index === "") {
-        cursos.push(curso);
-    } else {
-        cursos[index] = curso;
-    }
-    
+    if(index === "") cursos.push(curso);
+    else cursos[index] = curso;
+
     localStorage.setItem("cursos", JSON.stringify(cursos));
     resetForm();
     renderCursos();
@@ -298,10 +306,10 @@ document.getElementById("formCurso").addEventListener("submit", function(e){
 
   if (file) {
     const reader = new FileReader();
-    reader.onload = () => procesar(reader.result);
+    reader.onload = () => save(reader.result);
     reader.readAsDataURL(file);
   } else {
-    procesar();
+    save();
   }
 });
 
@@ -314,12 +322,11 @@ function editar(index) {
   document.getElementById("nivel").value = c.nivel;
   document.getElementById("duracion").value = c.duracion;
   document.getElementById("precio").value = c.precio;
-  document.getElementById("estatus").value = c.estatus;
-  window.scrollTo(0,0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function eliminar(index) {
-  if (confirm("¿Seguro que deseas eliminar este curso académico?")) {
+  if (confirm("¿Deseas retirar este curso del catálogo de lujo?")) {
     cursos.splice(index, 1);
     localStorage.setItem("cursos", JSON.stringify(cursos));
     renderCursos();
