@@ -100,7 +100,7 @@
         <div class="d-flex align-items-center mb-4 text-white-50 small">
           <div class="rounded-circle me-3" style="width:12px; height:12px; background:#ef473a;"></div> Cancelado
         </div>
-        <button class="btn btn-pro w-100 py-3" onclick="location.href='reservaciones.html'">
+        <button class="btn btn-pro w-100 py-3" onclick="location.href='Gestión_Reservaciones.html'">
           <i class="fas fa-plus me-2"></i> NUEVA CITA
         </button>
       </div>
@@ -162,7 +162,7 @@
     const myModal = new bootstrap.Modal(document.getElementById('eventModal'));
     
     // Recuperar reservaciones guardadas
-    const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
+    const reservaciones = JSON.parse(localStorage.getItem("Gestión_Reservaciones")) || [];
 
     const eventos = reservaciones.map(res => {
       // Determinar color según el estado del pago
@@ -203,7 +203,7 @@
       },
       dateClick: function(info) {
         if(confirm("¿Deseas ir a crear una nueva cita para el día " + info.dateStr + "?")) {
-          window.location.href = 'reservaciones.html'; // Redirige a tu página de creación
+          window.location.href = 'Gestión_Reservaciones.html'; // Redirige a tu página de creación
         }
       }
     });
