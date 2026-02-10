@@ -26,7 +26,6 @@
             padding-top: 90px;
         }
 
-        /* NAVBAR IGUAL AL DE RESERVACIONES */
         .navbar {
             background: var(--deep-black) !important;
             border-bottom: 2px solid var(--gold);
@@ -34,8 +33,8 @@
 
         .header-section {
             text-align: center;
-            padding: 50px 0;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80');
+            padding: 80px 0;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             border-bottom: 1px solid var(--gold);
             margin-bottom: 50px;
@@ -44,10 +43,12 @@
         .header-section h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
+            font-weight: 700;
             color: var(--gold);
+            letter-spacing: 2px;
         }
 
-        /* CURSOS CARDS ELITE */
+        /* CARDS DINÁMICAS */
         .course-card {
             background: var(--onyx);
             border: 1px solid rgba(212, 175, 55, 0.3);
@@ -55,47 +56,74 @@
             overflow: hidden;
             transition: 0.4s;
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .course-card:hover {
             transform: translateY(-10px);
             border-color: var(--gold);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+        }
+
+        .course-img-wrapper {
+            position: relative;
+            overflow: hidden;
         }
 
         .course-img {
-            height: 220px;
+            height: 250px;
             object-fit: cover;
             width: 100%;
             border-bottom: 2px solid var(--gold);
+            transition: 0.5s;
+        }
+
+        .course-card:hover .course-img {
+            transform: scale(1.1);
         }
 
         .course-body {
-            padding: 25px;
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .course-badge {
             background: var(--gold);
             color: #000;
             font-weight: 800;
-            font-size: 0.7rem;
-            padding: 5px 12px;
+            font-size: 0.65rem;
+            padding: 6px 15px;
             border-radius: 50px;
             text-transform: uppercase;
+            align-self: flex-start;
+            margin-bottom: 15px;
         }
 
         .course-title {
             font-family: 'Playfair Display', serif;
             color: var(--golden-rose);
-            margin-top: 15px;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .course-desc {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         .price-tag {
             font-size: 1.8rem;
             color: var(--gold-bright);
-            font-weight: 700;
-            margin: 15px 0;
+            font-weight: 800;
+            margin-top: auto;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
         }
 
         .btn-enroll {
@@ -103,85 +131,106 @@
             border: 1px solid var(--gold);
             color: var(--gold);
             border-radius: 50px;
-            padding: 10px 25px;
-            font-weight: 600;
+            padding: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: 0.3s;
-            width: 100%;
         }
 
         .btn-enroll:hover {
             background: var(--gold);
             color: #000;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .duration-info {
+            color: var(--golden-rose);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="../index.html">
-            <img src="../assets/img/lk.png" width="45" class="me-2">
-            <span class="fw-bold text-warning">LK ACADEMY</span>
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <span class="fw-bold" style="color: var(--gold); letter-spacing: 1px;">LK ACADEMY</span>
         </a>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav gap-3">
-                <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link active" href="#">Cursos</a></li>
-                <li class="nav-item"><a class="nav-link" href="PANEL_ADMIN.html">Panel Admin</a></li>
-            </ul>
+        <div class="ms-auto">
+            <a href="PANEL_ADMIN.html" class="btn btn-outline-warning btn-sm rounded-pill">
+                <i class="fas fa-lock me-2"></i>ADMIN
+            </a>
         </div>
     </div>
 </nav>
 
 <header class="header-section">
     <div class="container animate__animated animate__fadeIn">
-        <h1>MÁSTER CLASS <span style="color: var(--golden-rose);">CERTIFICADAS</span></h1>
-        <p class="text-white-50 fs-5">Formando a las próximas líderes de la industria de la belleza</p>
+        <h1 class="mb-3">MÁSTER CLASS <span style="color: var(--golden-rose);">CERTIFICADAS</span></h1>
+        <p class="text-white-50 fs-5 mx-auto" style="max-width: 600px;">Eleva tu carrera profesional con las técnicas más avanzadas de la industria.</p>
     </div>
 </header>
 
 <div class="container pb-5">
     <div class="row g-4" id="listaCursos">
-        <div class="col-md-4">
-            <div class="course-card">
-                <img src="https://images.unsplash.com/photo-1632345031435-81979cd75a39?auto=format&fit=crop&w=500&q=80" class="course-img">
-                <div class="course-body">
-                    <span class="course-badge">Principiante a Pro</span>
-                    <h3 class="course-title">Estructuras en Acrílico</h3>
-                    <p class="text-white-50 small">Aprende técnica Dual System, Sculptural y limado perfecto.</p>
-                    <div class="price-tag">$2,500 MXN</div>
-                    <button class="btn btn-enroll">MÁS INFORMACIÓN</button>
-                </div>
-            </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="course-card">
-                <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=500&q=80" class="course-img">
-                <div class="course-body">
-                    <span class="course-badge">Avanzado</span>
-                    <h3 class="course-title">Colorimetría Master</h3>
-                    <p class="text-white-50 small">Especialización en Balayage y BabyLights con técnica europea.</p>
-                    <div class="price-tag">$4,800 MXN</div>
-                    <button class="btn btn-enroll">MÁS INFORMACIÓN</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="course-card">
-                <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=500&q=80" class="course-img">
-                <div class="course-body">
-                    <span class="course-badge">Especialidad</span>
-                    <h3 class="course-title">Maquillaje Editorial</h3>
-                    <p class="text-white-50 small">Técnicas de piel blindada, novias y pasarela.</p>
-                    <div class="price-tag">$3,200 MXN</div>
-                    <button class="btn btn-enroll">MÁS INFORMACIÓN</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
+<script>
+    // 1. Obtener los cursos del LocalStorage (misma llave que el panel admin)
+    const cursos = JSON.parse(localStorage.getItem("cursos_v3")) || [];
+
+    function cargarCursos() {
+        const contenedor = document.getElementById("listaCursos");
+        
+        if (cursos.length === 0) {
+            contenedor.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <h3 class="text-white-50">Próximamente nuevos cursos...</h3>
+                </div>`;
+            return;
+        }
+
+        contenedor.innerHTML = ""; // Limpiar
+
+        cursos.forEach((curso, index) => {
+            contenedor.innerHTML += `
+                <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp" style="animation-delay: ${index * 0.1}s">
+                    <div class="course-card">
+                        <div class="course-img-wrapper">
+                            <img src="${curso.imagen}" class="course-img" alt="${curso.nombre}">
+                        </div>
+                        <div class="course-body">
+                            <div class="duration-info">
+                                <i class="far fa-clock me-1"></i> ${curso.duracion} • ${curso.nivel}
+                            </div>
+                            <span class="course-badge">${curso.categoria}</span>
+                            <h3 class="course-title">${curso.nombre}</h3>
+                            <p class="course-desc">${curso.descripcion}</p>
+                            <div class="price-tag">$${parseFloat(curso.precio).toLocaleString()} MXN</div>
+                            <button class="btn btn-enroll" onclick="contactarWhatsApp('${curso.nombre}')">
+                                <i class="fab fa-whatsapp me-2"></i>Inscribirme
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function contactarWhatsApp(cursoNombre) {
+        const mensaje = `Hola LK Studio, me interesa inscribirme al curso: ${cursoNombre}. ¿Me podrían dar más información?`;
+        const url = `https://wa.me/521XXXXXXXXXX?text=${encodeURIComponent(mensaje)}`; // Cambia las X por tu número
+        window.open(url, '_blank');
+    }
+
+    // Ejecutar al cargar la página
+    document.addEventListener("DOMContentLoaded", cargarCursos);
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
