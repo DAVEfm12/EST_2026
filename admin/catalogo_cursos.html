@@ -7,13 +7,14 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
   <style>
     :root {
       --gold: #D4AF37;
       --gold-light: #F1D592;
-      --golden-rose: #e6b8a2; /* Rosa suave elegante */
+      --golden-rose: #E6B8A2;
       --deep-black: #050505;
       --soft-black: #121212;
     }
@@ -35,25 +36,59 @@
       overflow: hidden;
       transition: 0.4s;
       height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .card-luxury:hover {
       transform: translateY(-10px);
       box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+      border-color: var(--golden-rose);
     }
 
     .curso-img {
-      height: 200px;
+      height: 220px;
       object-fit: cover;
       border-bottom: 2px solid var(--gold);
     }
 
-    /* --- PREVISUALIZACIÓN DE IMAGEN --- */
+    /* --- FORMULARIO --- */
+    .form-container {
+      background: var(--soft-black);
+      border: 2px solid var(--gold); /* Cambiado a dorado para jerarquía */
+      border-radius: 25px;
+      padding: 30px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .form-label {
+      color: var(--golden-rose) !important;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+    }
+
+    .form-control, .form-select {
+      background: #000 !important;
+      border: 1px solid #333 !important;
+      color: var(--gold-light) !important;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .form-control:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    }
+
+    /* --- PREVISUALIZACIÓN --- */
     .preview-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px dashed var(--golden-rose);
+      background: #000;
+      border: 2px dashed var(--gold);
       border-radius: 15px;
-      height: 150px;
+      height: 160px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -62,38 +97,15 @@
     }
     .preview-card img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* --- FORMULARIO --- */
-    .form-container {
-      background: var(--soft-black);
-      border: 2px solid var(--golden-rose);
-      border-radius: 25px;
-      padding: 25px;
-    }
-
-    .form-label {
-      color: var(--golden-rose);
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-    }
-
-    .form-control, .form-select {
-      background: #000 !important;
-      border: 1px solid #333 !important;
-      color: var(--gold-light) !important;
-      border-radius: 10px;
-    }
-
-    .form-control::placeholder { color: #555; }
-
     /* --- BOTONES --- */
     .btn-gold {
       background: linear-gradient(45deg, var(--gold), var(--gold-light));
       color: #000;
-      font-weight: 800;
+      font-weight: 900;
       border: none;
       border-radius: 50px;
-      transition: 0.3s;
+      text-transform: uppercase;
+      padding: 12px;
     }
     
     .btn-gold:hover {
@@ -101,66 +113,65 @@
       transform: scale(1.02);
     }
 
-    .text-gold { color: var(--gold) !important; }
-    .text-rose { color: var(--golden-rose) !important; }
-
-    /* Badge */
     .badge-rose {
-      background: transparent;
+      background: rgba(230, 184, 162, 0.1);
       border: 1px solid var(--golden-rose);
       color: var(--golden-rose);
-      padding: 5px 12px;
+      padding: 5px 15px;
       border-radius: 50px;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
+      font-weight: 700;
     }
 
     .precio-text {
       font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
-      color: var(--gold-light);
+      font-size: 1.6rem;
+      color: var(--gold);
+      font-weight: 700;
     }
   </style>
 </head>
-
 <body>
 
 <div class="container py-5">
-  
-  <div class="d-flex justify-content-between align-items-center mb-5">
+  <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
     <a href="PANEL_ADMIN.html" class="btn btn-outline-light btn-sm rounded-pill px-4" style="color: var(--golden-rose); border-color: var(--golden-rose);">
-      <i class="fas fa-chevron-left me-2"></i> VOLVER AL PANEL
+      <i class="fas fa-arrow-left me-2"></i> REGRESAR AL PANEL
     </a>
-    <h5 class="luxury-font text-gold m-0">ADMIN ACADEMY</h5>
+    <h5 class="luxury-font text-gold m-0">LK ACADEMY ELITE</h5>
   </div>
 
-  <div class="text-center mb-5">
-    <h1 class="luxury-font fw-bold text-gold display-4">CATÁLOGO DE CURSOS</h1>
-    <p class="text-rose fw-bold">Gestión de imagen y contenido académico LK Studio</p>
+  <div class="text-center mb-5 animate__animated animate__fadeInDown">
+    <h1 class="luxury-font fw-bold text-gold display-3">CATÁLOGO DE CURSOS</h1>
+    <div style="width: 100px; height: 3px; background: var(--golden-rose); margin: 15px auto;"></div>
+    <p class="text-rose fw-bold text-uppercase small" style="letter-spacing: 3px;">Gestión Académica de Alto Nivel</p>
   </div>
 
   <div class="row g-5">
     <div class="col-lg-4">
-      <div class="form-container shadow-lg">
-        <h5 class="text-gold mb-4 luxury-font text-center"><i class="fas fa-magic me-2"></i>Editor de Curso</h5>
+      <div class="form-container shadow-lg animate__animated animate__fadeInLeft">
+        <h4 class="text-gold mb-4 luxury-font text-center fw-bold">EDITOR DE CURSO</h4>
         
         <form id="formCurso">
           <input type="hidden" id="indexCurso">
-
-          <label class="form-label">Imagen de Portada</label>
-          <div class="preview-card" id="previewBox">
-            <span class="text-white-50 small" id="previewPlaceholder">Sin imagen seleccionada</span>
+          
+          <div class="mb-3">
+            <label class="form-label">Imagen de Portada</label>
+            <div class="preview-card" id="previewBox">
+              <span class="text-white-50 small">Sin imagen seleccionada</span>
+            </div>
+            <input type="file" id="imagen" class="form-control" accept="image/*" onchange="previewImage(this)">
           </div>
-          <input type="file" id="imagen" class="form-control mb-3" accept="image/*" onchange="previewImage(this)">
 
           <div class="mb-3">
             <label class="form-label">Nombre del Programa</label>
-            <input type="text" id="nombre" class="form-control" placeholder="Ej. Diseño de Cejas" required>
+            <input type="text" id="nombre" class="form-control" placeholder="Ej. Lash Artist Pro" required>
           </div>
 
-          <div class="row">
+          <div class="row g-2">
             <div class="col-6 mb-3">
               <label class="form-label">Categoría</label>
-              <input type="text" id="categoria" class="form-control" placeholder="Pestañas" required>
+              <input type="text" id="categoria" class="form-control" placeholder="Uñas" required>
             </div>
             <div class="col-6 mb-3">
               <label class="form-label">Nivel</label>
@@ -168,31 +179,34 @@
                 <option>Básico</option>
                 <option>Intermedio</option>
                 <option>Avanzado</option>
+                <option>Master</option>
               </select>
             </div>
           </div>
 
-          <div class="row">
+          <div class="row g-2">
             <div class="col-6 mb-3">
               <label class="form-label">Duración</label>
-              <input type="text" id="duracion" class="form-control" placeholder="10 hrs">
+              <input type="text" id="duracion" class="form-control" placeholder="12 hrs">
             </div>
             <div class="col-6 mb-3">
-              <label class="form-label">Costo ($)</label>
-              <input type="number" id="precio" class="form-control" placeholder="0000">
+              <label class="form-label">Inversión ($)</label>
+              <input type="number" id="precio" class="form-control" placeholder="00.00">
             </div>
           </div>
 
           <div class="mb-4">
-            <label class="form-label">Descripción corta</label>
-            <textarea id="descripcion" class="form-control" rows="2"></textarea>
+            <label class="form-label">Descripción del Curso</label>
+            <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del temario..."></textarea>
           </div>
 
           <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-gold py-3">
-              <i class="fas fa-save me-2"></i> GUARDAR CURSO
+            <button type="submit" class="btn btn-gold py-3 shadow">
+              <i class="fas fa-crown me-2"></i> PUBLICAR CURSO
             </button>
-            <button type="button" class="btn btn-sm text-rose" onclick="resetForm()">Limpiar todo</button>
+            <button type="button" class="btn btn-link text-rose text-decoration-none fw-bold" onclick="resetForm()">
+              CANCELAR EDICIÓN
+            </button>
           </div>
         </form>
       </div>
@@ -223,25 +237,39 @@ function previewImage(input) {
 function renderCursos() {
   const contenedor = document.getElementById("listaCursos");
   contenedor.innerHTML = "";
+  
+  if(cursos.length === 0) {
+    contenedor.innerHTML = `
+      <div class="text-center py-5">
+        <i class="fas fa-layer-group fa-3x text-white-50 mb-3"></i>
+        <p class="text-white-50">No hay cursos publicados actualmente.</p>
+      </div>`;
+    return;
+  }
 
   cursos.forEach((c, index) => {
     contenedor.innerHTML += `
-      <div class="col-md-6 animate__animated animate__fadeIn">
+      <div class="col-md-6 animate__animated animate__fadeInUp">
         <div class="card card-luxury">
           <img src="${c.imagen}" class="curso-img">
           <div class="card-body p-4">
-            <div class="d-flex justify-content-between mb-2">
+            <div class="d-flex justify-content-between align-items-center mb-3">
               <span class="badge-rose">${c.categoria.toUpperCase()}</span>
-              <span class="text-white-50 small"><i class="far fa-clock me-1"></i>${c.duracion}</span>
+              <span class="text-white-50 small"><i class="far fa-clock me-1 text-gold"></i>${c.duracion}</span>
             </div>
-            <h4 class="text-gold luxury-font fw-bold mb-3">${c.nombre}</h4>
-            <p class="text-white-50 small mb-4">${c.descripcion}</p>
+            <h4 class="text-gold luxury-font fw-bold mb-2">${c.nombre}</h4>
+            <div class="text-rose small fw-bold mb-3 text-uppercase">Nivel: ${c.nivel}</div>
+            <p class="text-white-50 small mb-4" style="height: 45px; overflow: hidden;">${c.descripcion}</p>
             
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="precio-text">$${c.precio}</div>
-              <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-outline-warning" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <div class="precio-text">$${parseFloat(c.precio).toLocaleString()}</div>
+              <div class="btn-group">
+                <button class="btn btn-outline-warning btn-sm border-0" onclick="editar(${index})">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm border-0" onclick="eliminar(${index})">
+                  <i class="fas fa-trash"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -264,15 +292,19 @@ document.getElementById("formCurso").addEventListener("submit", function(e){
       nivel: document.getElementById("nivel").value,
       duracion: document.getElementById("duracion").value,
       precio: document.getElementById("precio").value,
-      imagen: imgSrc || (index !== "" ? cursos[index].imagen : "https://via.placeholder.com/400x200?text=No+Image")
+      imagen: imgSrc || (index !== "" ? cursos[index].imagen : "https://via.placeholder.com/400x200?text=LK+STUDIO+ACADEMY")
     };
 
-    if(index === "") cursos.push(curso);
-    else cursos[index] = curso;
+    if(index === "") {
+      cursos.push(curso);
+    } else {
+      cursos[index] = curso;
+    }
 
     localStorage.setItem("cursos_v3", JSON.stringify(cursos));
     resetForm();
     renderCursos();
+    alert("¡Curso guardado con éxito!");
   };
 
   if (file) {
@@ -298,7 +330,7 @@ function editar(index) {
 }
 
 function eliminar(index) {
-  if (confirm("¿Eliminar este curso permanentemente?")) {
+  if (confirm("¿Deseas eliminar este curso del catálogo?")) {
     cursos.splice(index, 1);
     localStorage.setItem("cursos_v3", JSON.stringify(cursos));
     renderCursos();
@@ -311,6 +343,7 @@ function resetForm() {
   document.getElementById("previewBox").innerHTML = `<span class="text-white-50 small">Sin imagen seleccionada</span>`;
 }
 
+// Carga inicial
 renderCursos();
 </script>
 
