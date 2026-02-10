@@ -4,17 +4,15 @@
   <meta charset="UTF-8">
   <title>LK Academy | Catálogo de Cursos Elite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --gold: #D4AF37;
-      --gold-light: #F1D592;
-      --golden-rose: #E6B8A2;
+      --gold-bright: #F1D592;
+      --golden-rose: #E6B8A2; 
       --deep-black: #050505;
       --soft-black: #121212;
     }
@@ -28,150 +26,155 @@
 
     .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-    /* --- CARDS DEL CATÁLOGO --- */
-    .card-luxury {
-      background: var(--soft-black);
-      border: 1px solid var(--gold);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: 0.4s;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card-luxury:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-      border-color: var(--golden-rose);
-    }
-
-    .curso-img {
-      height: 220px;
-      object-fit: cover;
-      border-bottom: 2px solid var(--gold);
-    }
-
-    /* --- FORMULARIO --- */
+    /* --- FORMULARIO EDITOR --- */
     .form-container {
       background: var(--soft-black);
-      border: 2px solid var(--gold); /* Cambiado a dorado para jerarquía */
+      border: 2px solid var(--gold);
       border-radius: 25px;
-      padding: 30px;
-      position: sticky;
-      top: 20px;
+      padding: 25px;
     }
 
+    /* Títulos en Dorado Negrita */
+    .titulo-seccion {
+      color: var(--gold) !important;
+      font-weight: 900 !important;
+      text-transform: uppercase;
+    }
+
+    /* Etiquetas en Golden Rose */
     .form-label {
       color: var(--golden-rose) !important;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
-      font-size: 0.7rem;
-      letter-spacing: 1px;
+      font-size: 0.75rem;
     }
 
     .form-control, .form-select {
       background: #000 !important;
       border: 1px solid #333 !important;
-      color: var(--gold-light) !important;
-      border-radius: 12px;
-      padding: 10px;
+      color: var(--gold-bright) !important; /* Texto que escribes en dorado claro */
     }
 
-    .form-control:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    /* --- CARDS DEL CATÁLOGO --- */
+    .card-luxury {
+      background: #ffffff; /* Fondo blanco para que las letras negras resalten */
+      border: 3px solid var(--gold);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: 0.4s;
     }
 
-    /* --- PREVISUALIZACIÓN --- */
+    .curso-img {
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    /* TEXTOS DENTRO DE LA TARJETA EN NEGRO */
+    .card-body { color: #000000 !important; }
+    
+    .curso-nombre {
+      color: #000000 !important;
+      font-weight: 800;
+      font-family: 'Cinzel', serif;
+    }
+
+    .curso-descripcion {
+      color: #333333 !important;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .info-negra {
+      color: #000000 !important;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+
+    .precio-destacado {
+      color: #000000 !important;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+    }
+
+    /* --- BOTONES --- */
+    .btn-gold {
+      background: linear-gradient(45deg, var(--gold), var(--gold-bright));
+      color: #000 !important;
+      font-weight: 800;
+      border: none;
+      border-radius: 50px;
+    }
+
+    .badge-categoria {
+      background: var(--deep-black);
+      color: var(--golden-rose) !important;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
     .preview-card {
       background: #000;
-      border: 2px dashed var(--gold);
+      border: 1px dashed var(--gold);
       border-radius: 15px;
-      height: 160px;
+      height: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      margin-bottom: 15px;
     }
     .preview-card img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* --- BOTONES --- */
-    .btn-gold {
-      background: linear-gradient(45deg, var(--gold), var(--gold-light));
-      color: #000;
-      font-weight: 900;
-      border: none;
-      border-radius: 50px;
-      text-transform: uppercase;
-      padding: 12px;
-    }
-    
-    .btn-gold:hover {
-      background: var(--golden-rose);
-      transform: scale(1.02);
-    }
-
-    .badge-rose {
-      background: rgba(230, 184, 162, 0.1);
-      border: 1px solid var(--golden-rose);
-      color: var(--golden-rose);
-      padding: 5px 15px;
-      border-radius: 50px;
-      font-size: 0.65rem;
-      font-weight: 700;
-    }
-
-    .precio-text {
-      font-family: 'Cinzel', serif;
-      font-size: 1.6rem;
-      color: var(--gold);
-      font-weight: 700;
-    }
   </style>
 </head>
 <body>
 
 <div class="container py-5">
-  <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
+  <div class="d-flex justify-content-between align-items-center mb-5">
     <a href="PANEL_ADMIN.html" class="btn btn-outline-light btn-sm rounded-pill px-4" style="color: var(--golden-rose); border-color: var(--golden-rose);">
-      <i class="fas fa-arrow-left me-2"></i> REGRESAR AL PANEL
+      <i class="fas fa-chevron-left me-2"></i> VOLVER
     </a>
-    <h5 class="luxury-font text-gold m-0">LK ACADEMY ELITE</h5>
-  </div>
-
-  <div class="text-center mb-5 animate__animated animate__fadeInDown">
-    <h1 class="luxury-font fw-bold text-gold display-3">CATÁLOGO DE CURSOS</h1>
-    <div style="width: 100px; height: 3px; background: var(--golden-rose); margin: 15px auto;"></div>
-    <p class="text-rose fw-bold text-uppercase small" style="letter-spacing: 3px;">Gestión Académica de Alto Nivel</p>
+    <h2 class="luxury-font titulo-seccion m-0">ADMIN ACADEMY</h2>
   </div>
 
   <div class="row g-5">
     <div class="col-lg-4">
       <div class="form-container shadow-lg animate__animated animate__fadeInLeft">
-        <h4 class="text-gold mb-4 luxury-font text-center fw-bold">EDITOR DE CURSO</h4>
+        <h5 class="titulo-seccion mb-4 text-center"><i class="fas fa-edit me-2"></i>EDITOR DE CURSOS</h5>
         
         <form id="formCurso">
           <input type="hidden" id="indexCurso">
           
-          <div class="mb-3">
-            <label class="form-label">Imagen de Portada</label>
-            <div class="preview-card" id="previewBox">
-              <span class="text-white-50 small">Sin imagen seleccionada</span>
-            </div>
-            <input type="file" id="imagen" class="form-control" accept="image/*" onchange="previewImage(this)">
+          <div class="preview-card mb-3" id="previewBox">
+            <span class="text-white-50 small">Vista previa de imagen</span>
           </div>
+          
+          <label class="form-label">Subir Portada</label>
+          <input type="file" id="imagen" class="form-control mb-3" accept="image/*" onchange="previewImage(this)">
 
           <div class="mb-3">
             <label class="form-label">Nombre del Programa</label>
-            <input type="text" id="nombre" class="form-control" placeholder="Ej. Lash Artist Pro" required>
+            <input type="text" id="nombre" class="form-control" placeholder="Ej: Master en Pestañas" required>
           </div>
 
-          <div class="row g-2">
+          <div class="row">
             <div class="col-6 mb-3">
               <label class="form-label">Categoría</label>
               <input type="text" id="categoria" class="form-control" placeholder="Uñas" required>
+            </div>
+            <div class="col-6 mb-3">
+              <label class="form-label">Inversión ($)</label>
+              <input type="number" id="precio" class="form-control" placeholder="0.00" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6 mb-3">
+              <label class="form-label">Duración</label>
+              <input type="text" id="duracion" class="form-control" placeholder="8 hrs">
             </div>
             <div class="col-6 mb-3">
               <label class="form-label">Nivel</label>
@@ -179,34 +182,20 @@
                 <option>Básico</option>
                 <option>Intermedio</option>
                 <option>Avanzado</option>
-                <option>Master</option>
               </select>
             </div>
           </div>
 
-          <div class="row g-2">
-            <div class="col-6 mb-3">
-              <label class="form-label">Duración</label>
-              <input type="text" id="duracion" class="form-control" placeholder="12 hrs">
-            </div>
-            <div class="col-6 mb-3">
-              <label class="form-label">Inversión ($)</label>
-              <input type="number" id="precio" class="form-control" placeholder="00.00">
-            </div>
-          </div>
-
           <div class="mb-4">
-            <label class="form-label">Descripción del Curso</label>
-            <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del temario..."></textarea>
+            <label class="form-label">Descripción</label>
+            <textarea id="descripcion" class="form-control" rows="2" placeholder="Detalles del curso..."></textarea>
           </div>
 
           <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-gold py-3 shadow">
-              <i class="fas fa-crown me-2"></i> PUBLICAR CURSO
+            <button type="submit" class="btn btn-gold py-3">
+              <i class="fas fa-save me-2"></i>PUBLICAR CURSO
             </button>
-            <button type="button" class="btn btn-link text-rose text-decoration-none fw-bold" onclick="resetForm()">
-              CANCELAR EDICIÓN
-            </button>
+            <button type="button" class="btn btn-sm text-white-50" onclick="resetForm()">Cancelar</button>
           </div>
         </form>
       </div>
@@ -222,13 +211,12 @@
 <script>
 let cursos = JSON.parse(localStorage.getItem("cursos_v3")) || [];
 
-// Previsualización de imagen
 function previewImage(input) {
   const box = document.getElementById("previewBox");
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = function(e) {
-      box.innerHTML = `<img src="${e.target.result}" id="imgTemp">`;
+      box.innerHTML = `<img src="${e.target.result}">`;
     }
     reader.readAsDataURL(input.files[0]);
   }
@@ -238,38 +226,28 @@ function renderCursos() {
   const contenedor = document.getElementById("listaCursos");
   contenedor.innerHTML = "";
   
-  if(cursos.length === 0) {
-    contenedor.innerHTML = `
-      <div class="text-center py-5">
-        <i class="fas fa-layer-group fa-3x text-white-50 mb-3"></i>
-        <p class="text-white-50">No hay cursos publicados actualmente.</p>
-      </div>`;
-    return;
-  }
-
   cursos.forEach((c, index) => {
     contenedor.innerHTML += `
-      <div class="col-md-6 animate__animated animate__fadeInUp">
-        <div class="card card-luxury">
+      <div class="col-md-6 animate__animated animate__zoomIn">
+        <div class="card card-luxury h-100 shadow-lg">
           <img src="${c.imagen}" class="curso-img">
           <div class="card-body p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <span class="badge-rose">${c.categoria.toUpperCase()}</span>
-              <span class="text-white-50 small"><i class="far fa-clock me-1 text-gold"></i>${c.duracion}</span>
+              <span class="badge-categoria">${c.categoria.toUpperCase()}</span>
+              <span class="info-negra"><i class="far fa-clock me-1"></i>${c.duracion}</span>
             </div>
-            <h4 class="text-gold luxury-font fw-bold mb-2">${c.nombre}</h4>
-            <div class="text-rose small fw-bold mb-3 text-uppercase">Nivel: ${c.nivel}</div>
-            <p class="text-white-50 small mb-4" style="height: 45px; overflow: hidden;">${c.descripcion}</p>
             
-            <div class="d-flex justify-content-between align-items-center mt-auto">
-              <div class="precio-text">$${parseFloat(c.precio).toLocaleString()}</div>
+            <h4 class="curso-nombre mb-2">${c.nombre.toUpperCase()}</h4>
+            <p class="curso-descripcion mb-4">${c.descripcion}</p>
+            
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <small class="info-negra d-block mb-1">INVERSIÓN</small>
+                <div class="precio-destacado">$${c.precio}</div>
+              </div>
               <div class="btn-group">
-                <button class="btn btn-outline-warning btn-sm border-0" onclick="editar(${index})">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-outline-danger btn-sm border-0" onclick="eliminar(${index})">
-                  <i class="fas fa-trash"></i>
-                </button>
+                <button class="btn btn-sm btn-outline-dark" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
               </div>
             </div>
           </div>
@@ -292,19 +270,15 @@ document.getElementById("formCurso").addEventListener("submit", function(e){
       nivel: document.getElementById("nivel").value,
       duracion: document.getElementById("duracion").value,
       precio: document.getElementById("precio").value,
-      imagen: imgSrc || (index !== "" ? cursos[index].imagen : "https://via.placeholder.com/400x200?text=LK+STUDIO+ACADEMY")
+      imagen: imgSrc || (index !== "" ? cursos[index].imagen : "https://via.placeholder.com/400x200")
     };
 
-    if(index === "") {
-      cursos.push(curso);
-    } else {
-      cursos[index] = curso;
-    }
+    if(index === "") cursos.push(curso);
+    else cursos[index] = curso;
 
     localStorage.setItem("cursos_v3", JSON.stringify(cursos));
     resetForm();
     renderCursos();
-    alert("¡Curso guardado con éxito!");
   };
 
   if (file) {
@@ -330,7 +304,7 @@ function editar(index) {
 }
 
 function eliminar(index) {
-  if (confirm("¿Deseas eliminar este curso del catálogo?")) {
+  if (confirm("¿Eliminar este programa?")) {
     cursos.splice(index, 1);
     localStorage.setItem("cursos_v3", JSON.stringify(cursos));
     renderCursos();
@@ -340,10 +314,9 @@ function eliminar(index) {
 function resetForm() {
   document.getElementById("formCurso").reset();
   document.getElementById("indexCurso").value = "";
-  document.getElementById("previewBox").innerHTML = `<span class="text-white-50 small">Sin imagen seleccionada</span>`;
+  document.getElementById("previewBox").innerHTML = `<span class="text-white-50 small">Vista previa de imagen</span>`;
 }
 
-// Carga inicial
 renderCursos();
 </script>
 
