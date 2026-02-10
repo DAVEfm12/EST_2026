@@ -24,10 +24,10 @@
       background: radial-gradient(circle at center, #1a1a1a 0%, var(--deep-black) 100%);
       color: #ffffff;
       font-family: 'Poppins', sans-serif;
-      padding-top: 100px; /* Ajuste por el nuevo menú fijo */
+      padding-top: 100px; 
     }
 
-    /* --- ESTILOS DEL NUEVO MENÚ --- */
+    /* --- ESTILOS DEL MENÚ SIN BOTONES --- */
     .navbar {
       background: var(--deep-black) !important;
       backdrop-filter: blur(15px);
@@ -42,26 +42,14 @@
       color: #fff !important;
       font-weight: 500;
       transition: 0.3s;
+      text-transform: uppercase;
+      font-size: 0.9rem;
     }
     .nav-link:hover, .nav-link.active {
       color: var(--gold) !important;
     }
-    .btn-warning {
-      background-color: var(--gold) !important;
-      border: none;
-      color: #000 !important;
-      font-weight: 700;
-    }
-    .btn-outline-warning {
-      border-color: var(--gold) !important;
-      color: var(--gold) !important;
-    }
-    .btn-outline-warning:hover {
-      background-color: var(--gold) !important;
-      color: #000 !important;
-    }
 
-    /* --- ESTILOS CALENDARIO (ADDIÓS AZUL) --- */
+    /* --- PERSONALIZACIÓN CALENDARIO --- */
     .fc { --fc-border-color: #333; --fc-page-bg-color: transparent; }
     .fc .fc-toolbar-title { color: var(--gold); font-family: 'Playfair Display', serif; text-transform: uppercase; }
     .fc .fc-col-header-cell-cushion { color: var(--golden-rose); text-transform: uppercase; font-size: 0.8rem; }
@@ -79,7 +67,7 @@
     }
     .fc .fc-day-today { background: rgba(212, 175, 55, 0.1) !important; }
 
-    /* --- HEADER Y TARJETAS --- */
+    /* --- HEADER --- */
     .booking-header {
       padding: 60px 0;
       text-align: center;
@@ -102,7 +90,7 @@
       box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
     }
 
-    /* --- MODAL ESTILO VIP --- */
+    /* --- MODAL --- */
     .modal-content {
       background: var(--deep-black);
       border: 2px solid var(--gold);
@@ -144,18 +132,13 @@
     </button>
 
     <div class="collapse navbar-collapse justify-content-end" id="menu">
-      <ul class="navbar-nav me-3 gap-lg-3">
+      <ul class="navbar-nav gap-lg-4">
         <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="vip.html">Zona VIP</a></li>
         <li class="nav-item"><a class="nav-link" href="instructora.html">Instructora</a></li>
         <li class="nav-item"><a class="nav-link active" href="reservaciones.html">Reservaciones</a></li>
         <li class="nav-item" id="menuAcademia"><a class="nav-link" href="academia.html">Academia</a></li>
       </ul>
-
-      <div class="d-flex gap-2 justify-content-center">
-        <button class="btn btn-warning btn-sm px-3" id="btnLogin">Iniciar Sesión</button>
-        <button class="btn btn-outline-warning btn-sm px-3" id="btnRegister">Registrarse</button>
-      </div>
     </div>
   </div>
 </nav>
