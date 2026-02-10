@@ -2,236 +2,184 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Cursos Elite | LK Studio</title>
-    
+    <title>Editor de Cursos | LK Studio Elite</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --gold: #D4AF37;
             --gold-bright: #F1D592;
             --golden-rose: #E6B8A2;
             --deep-black: #050505;
-            --onyx: #0f0f0f;
+            --onyx: #121212;
         }
 
         body {
-            background: radial-gradient(circle at center, #1a1a1a 0%, var(--deep-black) 100%);
+            background-color: var(--deep-black);
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
-            padding-top: 90px;
+            padding: 50px 0;
         }
 
-        .navbar {
-            background: var(--deep-black) !important;
-            border-bottom: 2px solid var(--gold);
-        }
-
-        .header-section {
-            text-align: center;
-            padding: 80px 0;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            border-bottom: 1px solid var(--gold);
-            margin-bottom: 50px;
-        }
-
-        .header-section h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 2px;
-        }
-
-        /* CARDS DINÁMICAS */
-        .course-card {
+        /* CONTENEDOR PRINCIPAL */
+        .form-luxury {
             background: var(--onyx);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: 0.4s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+            max-width: 600px;
+            margin: auto;
         }
 
-        .course-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
-        }
-
-        .course-img-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .course-img {
-            height: 250px;
-            object-fit: cover;
-            width: 100%;
-            border-bottom: 2px solid var(--gold);
-            transition: 0.5s;
-        }
-
-        .course-card:hover .course-img {
-            transform: scale(1.1);
-        }
-
-        .course-body {
-            padding: 30px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .course-badge {
-            background: var(--gold);
-            color: #000;
-            font-weight: 800;
-            font-size: 0.65rem;
-            padding: 6px 15px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            align-self: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .course-title {
-            font-family: 'Playfair Display', serif;
-            color: var(--golden-rose);
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .course-desc {
-            color: #ccc;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .price-tag {
-            font-size: 1.8rem;
-            color: var(--gold-bright);
-            font-weight: 800;
-            margin-top: auto;
-            margin-bottom: 20px;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .btn-enroll {
-            background: transparent;
-            border: 1px solid var(--gold);
+        /* TÍTULO EN DORADO NEGRITA */
+        .form-title {
+            font-family: 'Cinzel', serif;
             color: var(--gold);
-            border-radius: 50px;
-            padding: 12px;
-            font-weight: 700;
+            font-weight: 900;
+            text-align: center;
             text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--golden-rose);
+            padding-bottom: 15px;
+        }
+
+        /* ETIQUETAS (LABELS) EN GOLDEN ROSE - ¡Aquí se ven las letras! */
+        .form-label {
+            color: var(--golden-rose) !important;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.8rem;
             letter-spacing: 1px;
-            transition: 0.3s;
+            margin-bottom: 8px;
+            display: block;
         }
 
-        .btn-enroll:hover {
-            background: var(--gold);
-            color: #000;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        /* CAMPOS DE ENTRADA (INPUTS) */
+        .form-control, .form-select {
+            background-color: var(--gold-bright) !important; /* Fondo claro para contraste */
+            border: 2px solid var(--gold) !important;
+            color: #000000 !important; /* LETRA NEGRA PARA QUE SE VEA AL ESCRIBIR */
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 12px 15px;
         }
 
-        .duration-info {
+        .form-control:focus {
+            box-shadow: 0 0 15px rgba(230, 184, 162, 0.5);
+            border-color: var(--golden-rose) !important;
+        }
+
+        /* PREVISUALIZACIÓN DE IMAGEN */
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            border: 2px dashed var(--golden-rose);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--golden-rose);
-            font-size: 0.75rem;
-            font-weight: 600;
+            overflow: hidden;
+        }
+        .image-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* BOTÓN DE ACCIÓN */
+        .btn-upload {
+            background: linear-gradient(45deg, var(--gold), var(--gold-bright));
+            color: #000 !important;
+            font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            border: none;
+            border-radius: 50px;
+            padding: 15px;
+            width: 100%;
+            margin-top: 20px;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .btn-upload:hover {
+            transform: scale(1.03);
+            background: var(--golden-rose);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        /* TEXTO DE APOYO */
+        .helper-text {
+            color: #888;
+            font-size: 0.75rem;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-            <span class="fw-bold" style="color: var(--gold); letter-spacing: 1px;">LK ACADEMY</span>
-        </a>
-        <div class="ms-auto">
-            <a href="PANEL_ADMIN.html" class="btn btn-outline-warning btn-sm rounded-pill">
-                <i class="fas fa-lock me-2"></i>ADMIN
-            </a>
-        </div>
-    </div>
-</nav>
+<div class="container">
+    <div class="form-luxury animate__animated animate__fadeInUp">
+        <h2 class="form-title">Subir Nuevo Curso</h2>
+        
+        <form id="uploadForm">
+            <label class="form-label">Previsualización de Portada</label>
+            <div class="image-preview" id="imagePreview">
+                <i class="fas fa-camera fa-2x"></i>
+            </div>
 
-<header class="header-section">
-    <div class="container animate__animated animate__fadeIn">
-        <h1 class="mb-3">MÁSTER CLASS <span style="color: var(--golden-rose);">CERTIFICADAS</span></h1>
-        <p class="text-white-50 fs-5 mx-auto" style="max-width: 600px;">Eleva tu carrera profesional con las técnicas más avanzadas de la industria.</p>
-    </div>
-</header>
+            <div class="mb-3">
+                <label class="form-label" for="courseImage">Seleccionar Imagen</label>
+                <input type="file" class="form-control" id="courseImage" accept="image/*" onchange="preview(this)">
+            </div>
 
-<div class="container pb-5">
-    <div class="row g-4" id="listaCursos">
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Nombre del Curso</label>
+                <input type="text" class="form-control" placeholder="Ej: Master en Colorimetría" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Categoría</label>
+                    <select class="form-select">
+                        <option>Uñas</option>
+                        <option>Cabello</option>
+                        <option>Maquillaje</option>
+                        <option>Pestañas</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Inversión ($)</label>
+                    <input type="number" class="form-control" placeholder="0.00" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Descripción del Programa</label>
+                <textarea class="form-control" rows="3" placeholder="¿Qué aprenderán tus alumnas?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-upload">
+                <i class="fas fa-cloud-upload-alt me-2"></i> Publicar Curso Elite
+            </button>
+        </form>
+    </div>
 </div>
 
 <script>
-    // 1. Obtener los cursos del LocalStorage (misma llave que el panel admin)
-    const cursos = JSON.parse(localStorage.getItem("cursos_v3")) || [];
-
-    function cargarCursos() {
-        const contenedor = document.getElementById("listaCursos");
-        
-        if (cursos.length === 0) {
-            contenedor.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <h3 class="text-white-50">Próximamente nuevos cursos...</h3>
-                </div>`;
-            return;
+    function preview(input) {
+        const previewBox = document.getElementById('imagePreview');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewBox.innerHTML = `<img src="${e.target.result}">`;
+            }
+            reader.readAsDataURL(input.files[0]);
         }
-
-        contenedor.innerHTML = ""; // Limpiar
-
-        cursos.forEach((curso, index) => {
-            contenedor.innerHTML += `
-                <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp" style="animation-delay: ${index * 0.1}s">
-                    <div class="course-card">
-                        <div class="course-img-wrapper">
-                            <img src="${curso.imagen}" class="course-img" alt="${curso.nombre}">
-                        </div>
-                        <div class="course-body">
-                            <div class="duration-info">
-                                <i class="far fa-clock me-1"></i> ${curso.duracion} • ${curso.nivel}
-                            </div>
-                            <span class="course-badge">${curso.categoria}</span>
-                            <h3 class="course-title">${curso.nombre}</h3>
-                            <p class="course-desc">${curso.descripcion}</p>
-                            <div class="price-tag">$${parseFloat(curso.precio).toLocaleString()} MXN</div>
-                            <button class="btn btn-enroll" onclick="contactarWhatsApp('${curso.nombre}')">
-                                <i class="fab fa-whatsapp me-2"></i>Inscribirme
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
     }
-
-    function contactarWhatsApp(cursoNombre) {
-        const mensaje = `Hola LK Studio, me interesa inscribirme al curso: ${cursoNombre}. ¿Me podrían dar más información?`;
-        const url = `https://wa.me/521XXXXXXXXXX?text=${encodeURIComponent(mensaje)}`; // Cambia las X por tu número
-        window.open(url, '_blank');
-    }
-
-    // Ejecutar al cargar la página
-    document.addEventListener("DOMContentLoaded", cargarCursos);
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
