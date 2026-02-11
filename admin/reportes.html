@@ -1,0 +1,99 @@
+<style>
+    .kpi-card {
+        background: rgba(255, 255, 255, 0.03);
+        border-left: 4px solid var(--gold);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .status-paid { color: #00ff87; font-weight: bold; }
+    .status-pending { color: #ffcc00; font-weight: bold; }
+    
+    /* Tabla estilo lujo */
+    .table-luxury {
+        color: white;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    .table-luxury thead {
+        background: rgba(212, 175, 55, 0.1);
+        color: var(--gold);
+    }
+</style>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="main-title"><i class="fas fa-chart-line"></i> BALANCE FINANCIERO</h2>
+            <p class="text-muted">Reporte detallado de ingresos y operaciones</p>
+        </div>
+        <div class="d-flex gap-2">
+            <input type="date" class="form-control bg-dark text-white border-secondary">
+            <button class="btn btn-outline-warning text-uppercase fw-bold">Exportar PDF</button>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5 text-center">
+        <div class="col-md-3">
+            <div class="kpi-card">
+                <small class="text-uppercase text-muted">Ingresos Hoy</small>
+                <h3 class="mt-2">$12,450.00</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card" style="border-left-color: #60efff;">
+                <small class="text-uppercase text-muted">Citas Finalizadas</small>
+                <h3 class="mt-2">18</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card" style="border-left-color: #00ff87;">
+                <small class="text-uppercase text-muted">Efectivo en Caja</small>
+                <h3 class="mt-2">$4,200.00</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card" style="border-left-color: #e0aaff;">
+                <small class="text-uppercase text-muted">Ticket Promedio</small>
+                <h3 class="mt-2">$690.00</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive table-luxury p-3">
+        <table class="table table-dark table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Servicio</th>
+                    <th>Método de Pago</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="https://ui-avatars.com/api/?name=Ana+Lara&background=random" class="rounded-circle me-2" width="30"> Ana Lara</td>
+                    <td>Balayage Premium</td>
+                    <td><i class="fas fa-credit-card text-info me-2"></i> Tarjeta</td>
+                    <td><span class="status-paid">● Pagado</span></td>
+                    <td class="fw-bold">$2,500.00</td>
+                </tr>
+                <tr>
+                    <td><img src="https://ui-avatars.com/api/?name=Carlos+M&background=random" class="rounded-circle me-2" width="30"> Carlos Mendoza</td>
+                    <td>Corte de Caballero</td>
+                    <td><i class="fas fa-money-bill-wave text-success me-2"></i> Efectivo</td>
+                    <td><span class="status-paid">● Pagado</span></td>
+                    <td class="fw-bold">$350.00</td>
+                </tr>
+                <tr>
+                    <td><img src="https://ui-avatars.com/api/?name=Lucia+F&background=random" class="rounded-circle me-2" width="30"> Lucía Fernández</td>
+                    <td>Manicura Gelish</td>
+                    <td><i class="fas fa-university text-warning me-2"></i> Transferencia</td>
+                    <td><span class="status-pending">○ Pendiente</span></td>
+                    <td class="fw-bold">$450.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
