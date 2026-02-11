@@ -2,12 +2,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LK Studio | Business Intelligence</title>
+    <title>LK Studio | Business Intelligence Elite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
         :root { 
             --gold: #D4AF37; 
@@ -15,211 +17,214 @@
             --rose: #E6B8A2; 
             --deep: #050505; 
             --soft-black: #121212;
+            --sidebar-width: 280px;
         }
 
         body { 
-            background: radial-gradient(circle at top, #1a1a1a, var(--deep)); 
+            background: radial-gradient(circle at top right, #1a1a1a, var(--deep)); 
             color: white; 
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', sans-serif; 
             min-height: 100vh;
+            margin: 0;
+            display: flex;
         }
 
         .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 1px; }
 
-        /* NAVBAR PROFESIONAL */
-        .navbar-luxury {
-            background: rgba(5, 5, 5, 0.98) !important;
-            border-bottom: 1px solid var(--gold);
-            backdrop-filter: blur(10px);
+        /* --- SIDEBAR CUSTOM --- */
+        #sidebarAdmin {
+            width: var(--sidebar-width);
+            background: var(--deep);
+            border-right: 1px solid var(--gold);
+            height: 100vh;
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
         }
 
         .nav-link {
-            color: white !important;
-            font-weight: 400;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
+            color: rgba(255,255,255,0.7) !important;
+            padding: 12px 25px;
             transition: 0.3s;
+            border-radius: 0 50px 50px 0;
+            margin-right: 15px;
+            font-size: 0.9rem;
         }
 
         .nav-link:hover, .nav-link.active {
+            background: rgba(212, 175, 55, 0.1);
             color: var(--gold-br) !important;
-            text-shadow: 0 0 8px rgba(241, 213, 146, 0.4);
+            padding-left: 35px;
         }
 
-        /* KPI CARDS */
+        .nav-link.active {
+            border-left: 4px solid var(--gold);
+            background: linear-gradient(to right, rgba(212, 175, 55, 0.2), transparent);
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 40px;
+        }
+
+        /* --- KPI CARDS ELITE --- */
         .kpi-card { 
             background: var(--soft-black); 
             border: 1px solid rgba(212, 175, 55, 0.2);
-            border-left: 4px solid var(--gold); 
             padding: 25px; 
-            border-radius: 15px; 
-            transition: 0.4s; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 20px; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kpi-card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--gold);
         }
 
-        .kpi-card:hover { 
-            transform: translateY(-5px); 
-            border-left-color: var(--rose);
-            background: #181818;
-        }
+        .kpi-card:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* TABLA ESTILO PROFESIONAL */
+        .kpi-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--rose); font-weight: 700; }
+
+        /* --- TABLA DE LUJO --- */
         .table-container {
-            background: var(--soft-black);
-            border: 1px solid var(--gold);
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            background: white; 
+            border-radius: 20px; 
+            padding: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .table-luxury { 
-            background: transparent !important; 
-            color: white !important; 
-            margin-bottom: 0;
-        }
-
-        .table-luxury thead { 
-            background: rgba(212, 175, 55, 0.1); 
-            color: var(--rose); 
-        }
-
-        .table-luxury thead th {
-            border-bottom: 1px solid var(--gold) !important;
-            padding: 15px;
+        .table-luxury { color: #000 !important; margin-bottom: 0; }
+        
+        .table-luxury thead th { 
+            background: var(--deep) !important; 
+            color: var(--gold-br) !important; 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            padding: 18px;
+            border: none;
             font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
         }
 
-        .table-luxury tbody td {
-            padding: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.9rem;
-            color: #ddd !important;
-        }
-
-        .text-gold { color: var(--gold) !important; }
-        .text-rose { color: var(--rose) !important; }
-
-        /* BOTONES */
-        .btn-outline-warning {
-            border-color: var(--gold);
-            color: var(--gold);
+        .table-luxury tbody td { 
+            padding: 18px; 
+            border-bottom: 1px solid #eee; 
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
         }
 
-        .btn-outline-warning:hover {
-            background: var(--gold);
-            color: black;
+        .method-badge {
+            font-size: 0.65rem; padding: 4px 10px; border-radius: 50px; font-weight: 800;
         }
 
-        @media print {
-            .navbar, .btn-outline-warning { display: none; }
-            body { background: white; color: black; }
-            .kpi-card { border: 1px solid #000; background: white; color: black; }
+        /* Ajustes Móviles */
+        @media (max-width: 992px) {
+            #sidebarAdmin { transform: translateX(-100%); transition: 0.3s; }
+            .main-content { margin-left: 0; width: 100%; padding: 20px; }
+            #sidebarAdmin.active { transform: translateX(0); }
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg sticky-top navbar-luxury">
-    <div class="container">
-        <a class="navbar-brand luxury-font fw-bold" href="PANEL_ADMIN.html" style="color: var(--gold-br);">
-            <i class="fas fa-crown me-2"></i>LK STUDIO
-        </a>
-        <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <i class="fas fa-bars text-gold"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto text-uppercase">
-                <li class="nav-item"><a class="nav-link" href="PANEL_ADMIN.html">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="citas.html">Citas</a></li>
-                <li class="nav-item"><a class="nav-link" href="punto_venta.html">Caja</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Catálogos</a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="catalogo_servicios.html">Servicios</a></li>
-                        <li><a class="dropdown-item" href="catalogo_instruc.html">Staff</a></li>
-                        <li><a class="dropdown-item" href="catalogo_cursos.html">Academia</a></li>
-                        <li><a class="dropdown-item" href="catalogo_beneficios.html">Beneficios VIP</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link active fw-bold text-gold" href="reportes.html">Reportes</a></li>
-            </ul>
-        </div>
+<nav id="sidebarAdmin">
+    <div class="p-4 mb-4">
+        <h3 class="luxury-font text-gold mb-0">LK STUDIO</h3>
+        <small class="text-white-50">Business Management</small>
+    </div>
+    
+    <div class="nav flex-column mt-2">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large me-3"></i> Dashboard</a>
+        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt me-3"></i> Agenda VIP</a>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-edit me-3"></i> Reservaciones</a>
+        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register me-3"></i> Caja</a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut me-3"></i> Servicios</a>
+        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie me-3"></i> Staff</a>
+        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap me-3"></i> Academia</a>
+        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem me-3"></i> Beneficios</a>
+        <a href="reportes.html" class="nav-link active"><i class="fas fa-chart-line me-3"></i> Reportes</a>
+    </div>
+
+    <div class="mt-auto p-4 border-top border-secondary">
+        <button class="btn btn-sm btn-outline-danger w-100 rounded-pill"><i class="fas fa-power-off me-2"></i>SALIR</button>
     </div>
 </nav>
 
-<div class="container py-5">
-    <div class="row mb-5 align-items-center">
+<main class="main-content">
+    
+    <div class="row align-items-center mb-5 animate__animated animate__fadeInDown">
         <div class="col-md-7">
-            <h1 class="luxury-font text-gold fw-900 mb-0">BUSINESS INTELLIGENCE</h1>
-            <p class="text-rose fw-bold small mb-0">ANÁLISIS DE RENDIMIENTO FINANCIERO LK</p>
+            <h6 class="text-rose fw-bold mb-1" style="letter-spacing: 3px;">ESTADÍSTICAS GLOBALES</h6>
+            <h1 class="luxury-font text-gold display-5 fw-bold">INTELIGENCIA FINANCIERA</h1>
         </div>
         <div class="col-md-5 text-md-end mt-3 mt-md-0">
-            <button class="btn btn-outline-warning rounded-pill px-4" onclick="window.print()">
-                <i class="fas fa-print me-2"></i>IMPRIMIR BALANCE
-            </button>
+            <div class="btn-group shadow">
+                <button class="btn btn-dark border-gold text-gold px-4" onclick="window.print()">
+                    <i class="fas fa-print me-2"></i>IMPRIMIR
+                </button>
+                <button class="btn btn-warning fw-bold px-4 text-black">
+                    <i class="fas fa-download me-2"></i>PDF
+                </button>
+            </div>
         </div>
     </div>
 
-    <div class="row g-4 mb-5">
+    <div class="row g-4 mb-5 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
         <div class="col-md-4">
             <div class="kpi-card">
-                <small class="text-uppercase text-rose fw-bold">Ingresos Totales</small>
-                <h2 class="text-gold fw-bold mb-0" id="totalIngresos">$0.00</h2>
-                <div class="progress mt-2" style="height: 4px; background: rgba(255,255,255,0.1);">
-                    <div class="progress-bar bg-warning" style="width: 100%"></div>
-                </div>
+                <span class="kpi-title">Ingresos Brutos</span>
+                <h2 class="text-gold fw-bold mt-2 mb-0" id="totalIngresos">$0.00</h2>
+                <small class="text-success"><i class="fas fa-caret-up"></i> +4.2% este mes</small>
             </div>
         </div>
         <div class="col-md-4">
             <div class="kpi-card" style="border-left-color: var(--rose);">
-                <small class="text-uppercase text-rose fw-bold">Servicios Registrados</small>
-                <h2 class="text-white fw-bold mb-0" id="totalCitas">0</h2>
-                <div class="progress mt-2" style="height: 4px; background: rgba(255,255,255,0.1);">
-                    <div class="progress-bar" style="width: 100%; background-color: var(--rose);"></div>
-                </div>
+                <span class="kpi-title">Volumen de Citas</span>
+                <h2 class="text-white fw-bold mt-2 mb-0" id="totalCitas">0</h2>
+                <small class="text-white-50">Reservas registradas</small>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="kpi-card" style="border-left-color: #ffffff;">
-                <small class="text-uppercase text-rose fw-bold">Servicio Estrella</small>
-                <h2 class="text-white fw-bold mb-0" id="mejorServicio" style="font-size: 1.4rem;">-</h2>
-                <div class="progress mt-2" style="height: 4px; background: rgba(255,255,255,0.1);">
-                    <div class="progress-bar bg-white" style="width: 100%;"></div>
-                </div>
+            <div class="kpi-card" style="border-left-color: #00ff87;">
+                <span class="kpi-title">Servicio Estrella</span>
+                <h2 class="text-white fw-bold mt-2 mb-0" id="mejorServicio">-</h2>
+                <small class="text-white-50">Mayor demanda</small>
             </div>
         </div>
     </div>
 
-    <div class="table-container">
-        <h5 class="luxury-font text-gold mb-4 p-2"><i class="fas fa-list-ul me-2"></i>Desglose de Operaciones</h5>
-        <div class="table-responsive">
-            <table class="table table-luxury align-middle">
-                <thead>
-                    <tr>
-                        <th>FECHA / HORA</th>
-                        <th>CLIENTA</th>
-                        <th>SERVICIO</th>
-                        <th>EXPERTA</th>
-                        <th class="text-end">TOTAL</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaReporte">
-                    </tbody>
-            </table>
+    <div class="animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="luxury-font text-white mb-0"><i class="fas fa-history me-2 text-gold"></i>Historial de Transacciones</h4>
+            <div class="badge bg-dark border border-secondary p-2 px-3">
+                <i class="fas fa-circle text-success me-2 small"></i>Sistema Live
+            </div>
+        </div>
+        
+        <div class="table-container shadow-lg">
+            <div class="table-responsive">
+                <table class="table table-luxury align-middle">
+                    <thead>
+                        <tr>
+                            <th>Fecha y Registro</th>
+                            <th>Clienta VIP</th>
+                            <th>Servicio / Tratamiento</th>
+                            <th>Métricas</th>
+                            <th class="text-end">Importe Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaReporte">
+                        </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</main>
 
 <script>
     function cargarReportes() {
-        // Obtenemos los datos desde el localStorage (conectado con Gestión de Reservaciones)
         const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
         const tabla = document.getElementById("tablaReporte");
         const totalIngresosElem = document.getElementById("totalIngresos");
@@ -228,51 +233,67 @@
         let sumaTotal = 0;
         tabla.innerHTML = "";
 
-        if(reservaciones.length === 0) {
-            tabla.innerHTML = `<tr><td colspan="5" class="text-center py-5 text-white-50">No hay transacciones registradas todavía.</td></tr>`;
+        if (reservaciones.length === 0) {
+            tabla.innerHTML = `<tr><td colspan="5" class="text-center py-5 text-muted">No hay datos financieros registrados hoy.</td></tr>`;
             return;
         }
 
-        reservaciones.forEach(r => {
+        reservaciones.forEach((r, index) => {
             const costo = parseFloat(r.costo) || 0;
             sumaTotal += costo;
             
+            // Alternamos colores para las filas para máxima legibilidad
+            const bgColor = index % 2 === 0 ? '#ffffff' : '#f9f9f9';
+
             tabla.innerHTML += `
-                <tr class="animate__animated animate__fadeIn">
+                <tr style="background-color: ${bgColor}">
                     <td>
-                        <div class="text-white fw-bold">${r.fecha}</div>
-                        <small class="text-rose">${r.hora} hrs</small>
+                        <div class="fw-bold">${r.fecha}</div>
+                        <div class="text-muted small"><i class="far fa-clock me-1"></i>${r.hora} hrs</div>
                     </td>
-                    <td class="fw-bold text-uppercase text-white">${r.cliente}</td>
-                    <td><span class="badge" style="background: rgba(212,175,55,0.1); color: var(--gold-br); border: 1px solid var(--gold);">${r.servicio}</span></td>
-                    <td><small class="text-white-50">${r.instructor || 'No asignada'}</small></td>
-                    <td class="text-end fw-bold text-gold" style="font-size: 1.1rem;">$${costo.toLocaleString()}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-dark text-gold d-flex align-items-center justify-content-center me-2" style="width: 30px; height: 30px; font-size: 0.7rem;">
+                                ${r.cliente.substring(0,2).toUpperCase()}
+                            </div>
+                            <span class="text-uppercase small fw-bold">${r.cliente}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge bg-black text-gold py-2 px-3" style="font-size: 0.7rem;">${r.servicio}</span>
+                    </td>
+                    <td>
+                        <span class="method-badge" style="background: #e3f2fd; color: #1976d2;">
+                            <i class="fas fa-check-circle me-1"></i>VERIFICADO
+                        </span>
+                    </td>
+                    <td class="text-end fw-bold" style="font-size: 1.1rem; color: #000;">
+                        $${costo.toLocaleString('es-MX', {minimumFractionDigits: 2})}
+                    </td>
                 </tr>
             `;
         });
 
-        // Actualizar Indicadores Superiores
-        totalIngresosElem.innerText = `$${sumaTotal.toLocaleString()}`;
+        // Actualizar KPIs con animación de conteo básica
+        totalIngresosElem.innerText = `$${sumaTotal.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
         totalCitasElem.innerText = reservaciones.length;
         
-        // Lógica para determinar el servicio más solicitado
-        const conteoServicios = {};
-        reservaciones.forEach(r => {
-            conteoServicios[r.servicio] = (conteoServicios[r.servicio] || 0) + 1;
-        });
-
-        let masFrecuente = "-";
-        let maxRepeticiones = 0;
-        for (const servicio in conteoServicios) {
-            if (conteoServicios[servicio] > maxRepeticiones) {
-                maxRepeticiones = conteoServicios[servicio];
-                masFrecuente = servicio;
-            }
+        // Lógica para determinar el servicio más popular
+        if(reservaciones.length > 0) {
+            const conteoServicios = {};
+            reservaciones.forEach(r => {
+                conteoServicios[r.servicio] = (conteoServicios[r.servicio] || 0) + 1;
+            });
+            
+            const masFrecuente = Object.keys(conteoServicios).reduce((a, b) => 
+                conteoServicios[a] > conteoServicios[b] ? a : b
+            );
+            
+            document.getElementById("mejorServicio").innerText = masFrecuente;
         }
-        document.getElementById("mejorServicio").innerText = masFrecuente.toUpperCase();
     }
 
-    // Cargar al iniciar la página
+    // Ejecutar al cargar
     window.onload = cargarReportes;
 </script>
 
