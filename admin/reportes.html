@@ -1,99 +1,280 @@
-<style>
-    .kpi-card {
-        background: rgba(255, 255, 255, 0.03);
-        border-left: 4px solid var(--gold);
-        padding: 20px;
-        border-radius: 10px;
-    }
-    .status-paid { color: #00ff87; font-weight: bold; }
-    .status-pending { color: #ffcc00; font-weight: bold; }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes Financieros | LK Studio</title>
     
-    /* Tabla estilo lujo */
-    .table-luxury {
-        color: white;
-        background: rgba(255, 255, 255, 0.02);
-        border-radius: 15px;
-        overflow: hidden;
-    }
-    .table-luxury thead {
-        background: rgba(212, 175, 55, 0.1);
-        color: var(--gold);
-    }
-</style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-bright: #FFD700;
+            --golden-rose: #FF9A8B; 
+            --deep-black: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            background: radial-gradient(circle at top, #1a1a1a 0%, var(--deep-black) 100%);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        .main-title {
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--gold-bright);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* KPI Cards con estilo Golden Rose */
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--gold);
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--golden-rose);
+            box-shadow: 0 10px 20px rgba(255, 154, 139, 0.1);
+        }
+
+        .kpi-title {
+            color: var(--golden-rose);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 10px;
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tabla Estilo Luxury */
+        .table-container-luxury {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .table-luxury {
+            color: #e0e0e0;
+            margin-bottom: 0;
+        }
+
+        .table-luxury thead th {
+            border-bottom: 1px solid var(--gold);
+            color: var(--gold);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            padding: 15px;
+        }
+
+        .table-luxury tbody td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+
+        /* Estados y Badges */
+        .status-paid { 
+            color: #00ff87; 
+            background: rgba(0, 255, 135, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        .status-pending { 
+            color: var(--golden-rose); 
+            background: rgba(255, 154, 139, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        /* Botones e Inputs Personalizados */
+        .custom-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--gold);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .custom-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--golden-rose);
+            box-shadow: 0 0 10px rgba(255, 154, 139, 0.3);
+            color: white;
+        }
+
+        .btn-gold {
+            background: linear-gradient(45deg, var(--gold), var(--golden-rose));
+            border: none;
+            color: var(--deep-black);
+            font-weight: 700;
+            padding: 10px 25px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-gold:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .icon-circle {
+            width: 35px;
+            height: 35px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
 
 <div class="container py-5">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h2 class="main-title"><i class="fas fa-chart-line"></i> BALANCE FINANCIERO</h2>
-            <p class="text-muted">Reporte detallado de ingresos y operaciones</p>
+    <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
+        <div class="col-lg-6">
+            <h2 class="main-title mb-0 text-uppercase">
+                <i class="fas fa-crown me-2"></i> Reportes Financieros
+            </h2>
+            <p style="color: var(--golden-rose); font-size: 0.85rem; letter-spacing: 3px;">ANÁLISIS DE RENDIMIENTO DE LUJO</p>
         </div>
-        <div class="d-flex gap-2">
-            <input type="date" class="form-control bg-dark text-white border-secondary">
-            <button class="btn btn-outline-warning text-uppercase fw-bold">Exportar PDF</button>
+        <div class="col-lg-6">
+            <div class="d-flex gap-3 justify-content-lg-end mt-3 mt-lg-0">
+                <input type="date" class="form-control custom-input w-50">
+                <button class="btn btn-gold">
+                    <i class="fas fa-file-pdf me-2"></i> EXPORTAR
+                </button>
+            </div>
         </div>
     </div>
 
-    <div class="row g-4 mb-5 text-center">
+    <div class="row g-4 mb-5">
         <div class="col-md-3">
             <div class="kpi-card">
-                <small class="text-uppercase text-muted">Ingresos Hoy</small>
-                <h3 class="mt-2">$12,450.00</h3>
+                <span class="kpi-title text-uppercase">Ingresos Totales</span>
+                <div class="kpi-value">$12,450.00</div>
+                <small class="text-success"><i class="fas fa-arrow-up"></i> +12% vs ayer</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="kpi-card" style="border-left-color: #60efff;">
-                <small class="text-uppercase text-muted">Citas Finalizadas</small>
-                <h3 class="mt-2">18</h3>
+            <div class="kpi-card" style="border-left-color: var(--golden-rose);">
+                <span class="kpi-title text-uppercase">Servicios Hoy</span>
+                <div class="kpi-value">18</div>
+                <small class="text-muted">4 servicios VIP</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="kpi-card" style="border-left-color: #00ff87;">
-                <small class="text-uppercase text-muted">Efectivo en Caja</small>
-                <h3 class="mt-2">$4,200.00</h3>
+            <div class="kpi-card">
+                <span class="kpi-title text-uppercase">En Caja (Efectivo)</span>
+                <div class="kpi-value">$4,200.00</div>
+                <small style="color: var(--gold-bright)">Requiere corte</small>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="kpi-card" style="border-left-color: #e0aaff;">
-                <small class="text-uppercase text-muted">Ticket Promedio</small>
-                <h3 class="mt-2">$690.00</h3>
+            <div class="kpi-card" style="border-left-color: #fff;">
+                <span class="kpi-title text-uppercase">Ticket Promedio</span>
+                <div class="kpi-value">$690.00</div>
+                <small class="text-muted">Por cliente</small>
             </div>
         </div>
     </div>
 
-    <div class="table-responsive table-luxury p-3">
-        <table class="table table-dark table-hover align-middle">
-            <thead>
-                <tr>
-                    <th>Cliente</th>
-                    <th>Servicio</th>
-                    <th>Método de Pago</th>
-                    <th>Estado</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="https://ui-avatars.com/api/?name=Ana+Lara&background=random" class="rounded-circle me-2" width="30"> Ana Lara</td>
-                    <td>Balayage Premium</td>
-                    <td><i class="fas fa-credit-card text-info me-2"></i> Tarjeta</td>
-                    <td><span class="status-paid">● Pagado</span></td>
-                    <td class="fw-bold">$2,500.00</td>
-                </tr>
-                <tr>
-                    <td><img src="https://ui-avatars.com/api/?name=Carlos+M&background=random" class="rounded-circle me-2" width="30"> Carlos Mendoza</td>
-                    <td>Corte de Caballero</td>
-                    <td><i class="fas fa-money-bill-wave text-success me-2"></i> Efectivo</td>
-                    <td><span class="status-paid">● Pagado</span></td>
-                    <td class="fw-bold">$350.00</td>
-                </tr>
-                <tr>
-                    <td><img src="https://ui-avatars.com/api/?name=Lucia+F&background=random" class="rounded-circle me-2" width="30"> Lucía Fernández</td>
-                    <td>Manicura Gelish</td>
-                    <td><i class="fas fa-university text-warning me-2"></i> Transferencia</td>
-                    <td><span class="status-pending">○ Pendiente</span></td>
-                    <td class="fw-bold">$450.00</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row mb-4">
+        <div class="col-12">
+            <h4 class="mb-4" style="color: var(--gold); letter-spacing: 2px;">
+                <i class="fas fa-list-ul me-2"></i> ÚLTIMAS TRANSACCIONES
+            </h4>
+            <div class="table-responsive table-container-luxury">
+                <table class="table table-luxury align-middle">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Servicio Realizado</th>
+                            <th>Método de Pago</th>
+                            <th>Estado</th>
+                            <th class="text-end">Monto Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img src="https://ui-avatars.com/api/?name=Ana+Lara&background=D4AF37&color=fff" class="rounded-circle me-3" width="35">
+                                Ana Lara
+                            </td>
+                            <td><span class="text-muted">Balayage Premium</span></td>
+                            <td>
+                                <span class="icon-circle"><i class="fas fa-credit-card"></i></span>
+                                Tarjeta de Crédito
+                            </td>
+                            <td><span class="status-paid">PAGADO</span></td>
+                            <td class="text-end fw-bold" style="color: var(--gold-bright)">$2,500.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://ui-avatars.com/api/?name=Carlos+M&background=FF9A8B&color=fff" class="rounded-circle me-3" width="35">
+                                Carlos Mendoza
+                            </td>
+                            <td><span class="text-muted">Corte & Barba Master</span></td>
+                            <td>
+                                <span class="icon-circle"><i class="fas fa-money-bill-wave"></i></span>
+                                Efectivo
+                            </td>
+                            <td><span class="status-paid">PAGADO</span></td>
+                            <td class="text-end fw-bold" style="color: var(--gold-bright)">$550.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://ui-avatars.com/api/?name=Lucia+F&background=60efff&color=fff" class="rounded-circle me-3" width="35">
+                                Lucía Fernández
+                            </td>
+                            <td><span class="text-muted">Tratamiento Hidratante</span></td>
+                            <td>
+                                <span class="icon-circle"><i class="fas fa-mobile-alt"></i></span>
+                                Transferencia
+                            </td>
+                            <td><span class="status-pending">PENDIENTE</span></td>
+                            <td class="text-end fw-bold" style="color: var(--gold-bright)">$850.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <p class="small text-muted text-uppercase" style="letter-spacing: 5px;">
+            Generado por <span style="color: var(--gold);">LK Studio System</span> • 2026
+        </p>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
