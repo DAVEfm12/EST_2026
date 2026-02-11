@@ -6,29 +6,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --gold: #D4AF37; --gold-br: #F1D592; --rose: #E6B8A2; --deep: #050505; }
-        body { background: radial-gradient(circle at top, #1a1a1a, var(--deep)); color: white; font-family: 'Poppins', sans-serif; }
-        .luxury-font { font-family: 'Cinzel', serif; }
-        .kpi-card { background: rgba(255,255,255,0.03); border-left: 4px solid var(--gold); padding: 20px; border-radius: 15px; transition: 0.3s; }
-        .kpi-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); }
-        .table-luxury { background: white; border-radius: 15px; overflow: hidden; color: black !important; }
-        .table-luxury thead { background: var(--deep); color: var(--rose); text-transform: uppercase; font-size: 0.8rem; }
-        .text-gold { color: var(--gold); }
+        :root { 
+            --gold: #D4AF37; 
+            --gold-br: #F1D592; 
+            --rose: #E6B8A2; 
+            --deep: #050505; 
+            --soft-black: #121212;
+        }
+
+        body { 
+            background: radial-gradient(circle at top, #1a1a1a, var(--deep)); 
+            color: white; 
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+
+        /* NAVBAR PROFESIONAL */
+        .navbar-luxury {
+            background: rgba(5, 5, 5, 0.98) !important;
+            border-bottom: 1px solid var(--gold);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-br) !important;
+            text-shadow: 0 0 8px rgba(241, 213, 146, 0.4);
+        }
+
+        /* KPI CARDS */
+        .kpi-card { 
+            background: var(--soft-black); 
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-left: 4px solid var(--gold); 
+            padding: 25px; 
+            border-radius: 15px; 
+            transition: 0.4s; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .kpi-card:hover { 
+            transform: translateY(-5px); 
+            border-left-color: var(--rose);
+            background: #181818;
+        }
+
+        /* TABLA ESTILO PROFESIONAL */
+        .table-container {
+            background: var(--soft-black);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .table-luxury { 
+            background: transparent !important; 
+            color: white !important; 
+            margin-bottom: 0;
+        }
+
+        .table-luxury thead { 
+            background: rgba(212, 175, 55, 0.1); 
+            color: var(--rose); 
+        }
+
+        .table-luxury thead th {
+            border-bottom: 1px solid var(--gold) !important;
+            padding: 15px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+        }
+
+        .table-luxury tbody td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            color: #ddd !important;
+        }
+
+        .text-gold { color: var(--gold) !important; }
+        .text-rose { color: var(--rose) !important; }
+
+        /* BOTONES */
+        .btn-outline-warning {
+            border-color: var(--gold);
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-outline-warning:hover {
+            background: var(--gold);
+            color: black;
+        }
+
+        @media print {
+            .navbar, .btn-outline-warning { display: none; }
+            body { background: white; color: black; }
+            .kpi-card { border: 1px solid #000; background: white; color: black; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container py-5">
-    <div class="row mb-5 animate__animated animate__fadeIn">
-        <div class="col-md-6">
-            <h1 class="luxury-font text-gold">BALANCE GENERAL</h1>
-            <p class="text-white-50 small">Análisis en tiempo real de reservaciones y ventas.</p>
+<nav class="navbar navbar-expand-lg sticky-top navbar-luxury">
+    <div class="container">
+        <a class="navbar-brand luxury-font fw-bold" href="PANEL_ADMIN.html" style="color: var(--gold-br);">
+            <i class="fas fa-crown me-2"></i>LK STUDIO
+        </a>
+        <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="fas fa-bars text-gold"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto text-uppercase">
+                <li class="nav-item"><a class="nav-link" href="PANEL_ADMIN.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="citas.html">Citas</a></li>
+                <li class="nav-item"><a class="nav-link" href="punto_venta.html">Caja</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Catálogos</a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="catalogo_servicios.html">Servicios</a></li>
+                        <li><a class="dropdown-item" href="catalogo_instruc.html">Staff</a></li>
+                        <li><a class="dropdown-item" href="catalogo_cursos.html">Academia</a></li>
+                        <li><a class="dropdown-item" href="catalogo_beneficios.html">Beneficios VIP</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link active fw-bold text-gold" href="reportes.html">Reportes</a></li>
+            </ul>
         </div>
-        <div class="col-md-6 text-md-end">
+    </div>
+</nav>
+
+<div class="container py-5">
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-7">
+            <h1 class="luxury-font text-gold fw-900 mb-0">BUSINESS INTELLIGENCE</h1>
+            <p class="text-rose fw-bold small mb-0">ANÁLISIS DE RENDIMIENTO FINANCIERO LK</p>
+        </div>
+        <div class="col-md-5 text-md-end mt-3 mt-md-0">
             <button class="btn btn-outline-warning rounded-pill px-4" onclick="window.print()">
-                <i class="fas fa-file-pdf me-2"></i>DESCARGAR REPORTE
+                <i class="fas fa-print me-2"></i>IMPRIMIR BALANCE
             </button>
         </div>
     </div>
@@ -36,43 +168,58 @@
     <div class="row g-4 mb-5">
         <div class="col-md-4">
             <div class="kpi-card">
-                <small class="text-uppercase text-white-50">Ingresos Proyectados</small>
-                <h2 class="text-gold fw-bold" id="totalIngresos">$0.00</h2>
+                <small class="text-uppercase text-rose fw-bold">Ingresos Totales</small>
+                <h2 class="text-gold fw-bold mb-0" id="totalIngresos">$0.00</h2>
+                <div class="progress mt-2" style="height: 4px; background: rgba(255,255,255,0.1);">
+                    <div class="progress-bar bg-warning" style="width: 100%"></div>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="kpi-card" style="border-left-color: var(--rose);">
-                <small class="text-uppercase text-white-50">Total Citas</small>
-                <h2 class="text-white fw-bold" id="totalCitas">0</h2>
+                <small class="text-uppercase text-rose fw-bold">Servicios Registrados</small>
+                <h2 class="text-white fw-bold mb-0" id="totalCitas">0</h2>
+                <div class="progress mt-2" style="height: 4px; background: rgba(255,255,255,0.1);">
+                    <div class="progress-bar" style="width: 100%; background-color: var(--rose);"></div>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="kpi-card" style="border-left-color: #00ff87;">
-                <small class="text-uppercase text-white-50">Servicio más Vendido</small>
-                <h2 class="text-white fw-bold" id="mejorServicio">-</h2>
+            <div class="kpi-card" style="border-left-color: #ffffff;">
+                <small class="text-uppercase text-rose fw-bold">Servicio Estrella</small>
+                <h2 class="text-white fw-bold mb-0" id="mejorServicio" style="font-size: 1.4rem;">-</h2>
+                <div class="progress mt-2" style="height: 4px; background: rgba(255,255,255,0.1);">
+                    <div class="progress-bar bg-white" style="width: 100%;"></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="table-responsive table-luxury shadow-lg p-2">
-        <table class="table align-middle m-0">
-            <thead>
-                <tr>
-                    <th>Fecha / Hora</th>
-                    <th>Clienta</th>
-                    <th>Servicio</th>
-                    <th class="text-end">Monto</th>
-                </tr>
-            </thead>
-            <tbody id="tablaReporte">
-                </tbody>
-        </table>
+    <div class="table-container">
+        <h5 class="luxury-font text-gold mb-4 p-2"><i class="fas fa-list-ul me-2"></i>Desglose de Operaciones</h5>
+        <div class="table-responsive">
+            <table class="table table-luxury align-middle">
+                <thead>
+                    <tr>
+                        <th>FECHA / HORA</th>
+                        <th>CLIENTA</th>
+                        <th>SERVICIO</th>
+                        <th>EXPERTA</th>
+                        <th class="text-end">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaReporte">
+                    </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     function cargarReportes() {
-        // Obtenemos los datos que guardas en la otra página
+        // Obtenemos los datos desde el localStorage (conectado con Gestión de Reservaciones)
         const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
         const tabla = document.getElementById("tablaReporte");
         const totalIngresosElem = document.getElementById("totalIngresos");
@@ -81,33 +228,53 @@
         let sumaTotal = 0;
         tabla.innerHTML = "";
 
+        if(reservaciones.length === 0) {
+            tabla.innerHTML = `<tr><td colspan="5" class="text-center py-5 text-white-50">No hay transacciones registradas todavía.</td></tr>`;
+            return;
+        }
+
         reservaciones.forEach(r => {
-            sumaTotal += parseFloat(r.costo);
+            const costo = parseFloat(r.costo) || 0;
+            sumaTotal += costo;
+            
             tabla.innerHTML += `
-                <tr>
-                    <td><div class="fw-bold">${r.fecha}</div><small class="text-muted">${r.hora} hrs</small></td>
-                    <td class="fw-bold text-uppercase">${r.cliente}</td>
-                    <td><span class="badge bg-dark text-gold">${r.servicio}</span></td>
-                    <td class="text-end fw-bold text-dark">$${parseFloat(r.costo).toLocaleString()}</td>
+                <tr class="animate__animated animate__fadeIn">
+                    <td>
+                        <div class="text-white fw-bold">${r.fecha}</div>
+                        <small class="text-rose">${r.hora} hrs</small>
+                    </td>
+                    <td class="fw-bold text-uppercase text-white">${r.cliente}</td>
+                    <td><span class="badge" style="background: rgba(212,175,55,0.1); color: var(--gold-br); border: 1px solid var(--gold);">${r.servicio}</span></td>
+                    <td><small class="text-white-50">${r.instructor || 'No asignada'}</small></td>
+                    <td class="text-end fw-bold text-gold" style="font-size: 1.1rem;">$${costo.toLocaleString()}</td>
                 </tr>
             `;
         });
 
-        // Actualizar KPIs
+        // Actualizar Indicadores Superiores
         totalIngresosElem.innerText = `$${sumaTotal.toLocaleString()}`;
         totalCitasElem.innerText = reservaciones.length;
         
-        // Lógica para servicio más popular
-        if(reservaciones.length > 0) {
-            const servicios = reservaciones.map(r => r.servicio);
-            const masFrecuente = servicios.sort((a,b) =>
-                servicios.filter(v => v===a).length - servicios.filter(v => v===b).length
-            ).pop();
-            document.getElementById("mejorServicio").innerText = masFrecuente;
+        // Lógica para determinar el servicio más solicitado
+        const conteoServicios = {};
+        reservaciones.forEach(r => {
+            conteoServicios[r.servicio] = (conteoServicios[r.servicio] || 0) + 1;
+        });
+
+        let masFrecuente = "-";
+        let maxRepeticiones = 0;
+        for (const servicio in conteoServicios) {
+            if (conteoServicios[servicio] > maxRepeticiones) {
+                maxRepeticiones = conteoServicios[servicio];
+                masFrecuente = servicio;
+            }
         }
+        document.getElementById("mejorServicio").innerText = masFrecuente.toUpperCase();
     }
 
+    // Cargar al iniciar la página
     window.onload = cargarReportes;
 </script>
+
 </body>
 </html>
