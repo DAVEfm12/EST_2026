@@ -2,279 +2,112 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportes Financieros | LK Studio</title>
-    
+    <title>LK Studio | Business Intelligence</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gold: #D4AF37;
-            --gold-bright: #FFD700;
-            --golden-rose: #FF9A8B; 
-            --deep-black: #050505;
-            --card-bg: rgba(255, 255, 255, 0.03);
-        }
-
-        body {
-            background: radial-gradient(circle at top, #1a1a1a 0%, var(--deep-black) 100%);
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-        }
-
-        .main-title {
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--gold-bright);
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-
-        /* KPI Cards con estilo Golden Rose */
-        .kpi-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-left: 4px solid var(--gold);
-            padding: 25px;
-            border-radius: 15px;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-5px);
-            border-left-color: var(--golden-rose);
-            box-shadow: 0 10px 20px rgba(255, 154, 139, 0.1);
-        }
-
-        .kpi-title {
-            color: var(--golden-rose);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-
-        .kpi-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-top: 10px;
-            background: linear-gradient(to right, #fff, var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Tabla Estilo Luxury */
-        .table-container-luxury {
-            background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 30px;
-        }
-
-        .table-luxury {
-            color: #e0e0e0;
-            margin-bottom: 0;
-        }
-
-        .table-luxury thead th {
-            border-bottom: 1px solid var(--gold);
-            color: var(--gold);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            padding: 15px;
-        }
-
-        .table-luxury tbody td {
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.9rem;
-        }
-
-        /* Estados y Badges */
-        .status-paid { 
-            color: #00ff87; 
-            background: rgba(0, 255, 135, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-        }
-
-        .status-pending { 
-            color: var(--golden-rose); 
-            background: rgba(255, 154, 139, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-        }
-
-        /* Botones e Inputs Personalizados */
-        .custom-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--gold);
-            color: white;
-            border-radius: 10px;
-        }
-
-        .custom-input:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--golden-rose);
-            box-shadow: 0 0 10px rgba(255, 154, 139, 0.3);
-            color: white;
-        }
-
-        .btn-gold {
-            background: linear-gradient(45deg, var(--gold), var(--golden-rose));
-            border: none;
-            color: var(--deep-black);
-            font-weight: 700;
-            padding: 10px 25px;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-
-        .btn-gold:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .icon-circle {
-            width: 35px;
-            height: 35px;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            color: var(--gold);
-        }
+        :root { --gold: #D4AF37; --gold-br: #F1D592; --rose: #E6B8A2; --deep: #050505; }
+        body { background: radial-gradient(circle at top, #1a1a1a, var(--deep)); color: white; font-family: 'Poppins', sans-serif; }
+        .luxury-font { font-family: 'Cinzel', serif; }
+        .kpi-card { background: rgba(255,255,255,0.03); border-left: 4px solid var(--gold); padding: 20px; border-radius: 15px; transition: 0.3s; }
+        .kpi-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); }
+        .table-luxury { background: white; border-radius: 15px; overflow: hidden; color: black !important; }
+        .table-luxury thead { background: var(--deep); color: var(--rose); text-transform: uppercase; font-size: 0.8rem; }
+        .text-gold { color: var(--gold); }
     </style>
 </head>
 <body>
 
 <div class="container py-5">
-    <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
-        <div class="col-lg-6">
-            <h2 class="main-title mb-0 text-uppercase">
-                <i class="fas fa-crown me-2"></i> Reportes Financieros
-            </h2>
-            <p style="color: var(--golden-rose); font-size: 0.85rem; letter-spacing: 3px;">ANÁLISIS DE RENDIMIENTO DE LUJO</p>
+    <div class="row mb-5 animate__animated animate__fadeIn">
+        <div class="col-md-6">
+            <h1 class="luxury-font text-gold">BALANCE GENERAL</h1>
+            <p class="text-white-50 small">Análisis en tiempo real de reservaciones y ventas.</p>
         </div>
-        <div class="col-lg-6">
-            <div class="d-flex gap-3 justify-content-lg-end mt-3 mt-lg-0">
-                <input type="date" class="form-control custom-input w-50">
-                <button class="btn btn-gold">
-                    <i class="fas fa-file-pdf me-2"></i> EXPORTAR
-                </button>
-            </div>
+        <div class="col-md-6 text-md-end">
+            <button class="btn btn-outline-warning rounded-pill px-4" onclick="window.print()">
+                <i class="fas fa-file-pdf me-2"></i>DESCARGAR REPORTE
+            </button>
         </div>
     </div>
 
     <div class="row g-4 mb-5">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="kpi-card">
-                <span class="kpi-title text-uppercase">Ingresos Totales</span>
-                <div class="kpi-value">$12,450.00</div>
-                <small class="text-success"><i class="fas fa-arrow-up"></i> +12% vs ayer</small>
+                <small class="text-uppercase text-white-50">Ingresos Proyectados</small>
+                <h2 class="text-gold fw-bold" id="totalIngresos">$0.00</h2>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="kpi-card" style="border-left-color: var(--golden-rose);">
-                <span class="kpi-title text-uppercase">Servicios Hoy</span>
-                <div class="kpi-value">18</div>
-                <small class="text-muted">4 servicios VIP</small>
+        <div class="col-md-4">
+            <div class="kpi-card" style="border-left-color: var(--rose);">
+                <small class="text-uppercase text-white-50">Total Citas</small>
+                <h2 class="text-white fw-bold" id="totalCitas">0</h2>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="kpi-card">
-                <span class="kpi-title text-uppercase">En Caja (Efectivo)</span>
-                <div class="kpi-value">$4,200.00</div>
-                <small style="color: var(--gold-bright)">Requiere corte</small>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="kpi-card" style="border-left-color: #fff;">
-                <span class="kpi-title text-uppercase">Ticket Promedio</span>
-                <div class="kpi-value">$690.00</div>
-                <small class="text-muted">Por cliente</small>
+        <div class="col-md-4">
+            <div class="kpi-card" style="border-left-color: #00ff87;">
+                <small class="text-uppercase text-white-50">Servicio más Vendido</small>
+                <h2 class="text-white fw-bold" id="mejorServicio">-</h2>
             </div>
         </div>
     </div>
 
-    <div class="row mb-4">
-        <div class="col-12">
-            <h4 class="mb-4" style="color: var(--gold); letter-spacing: 2px;">
-                <i class="fas fa-list-ul me-2"></i> ÚLTIMAS TRANSACCIONES
-            </h4>
-            <div class="table-responsive table-container-luxury">
-                <table class="table table-luxury align-middle">
-                    <thead>
-                        <tr>
-                            <th>Cliente</th>
-                            <th>Servicio Realizado</th>
-                            <th>Método de Pago</th>
-                            <th>Estado</th>
-                            <th class="text-end">Monto Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <img src="https://ui-avatars.com/api/?name=Ana+Lara&background=D4AF37&color=fff" class="rounded-circle me-3" width="35">
-                                Ana Lara
-                            </td>
-                            <td><span class="text-muted">Balayage Premium</span></td>
-                            <td>
-                                <span class="icon-circle"><i class="fas fa-credit-card"></i></span>
-                                Tarjeta de Crédito
-                            </td>
-                            <td><span class="status-paid">PAGADO</span></td>
-                            <td class="text-end fw-bold" style="color: var(--gold-bright)">$2,500.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="https://ui-avatars.com/api/?name=Carlos+M&background=FF9A8B&color=fff" class="rounded-circle me-3" width="35">
-                                Carlos Mendoza
-                            </td>
-                            <td><span class="text-muted">Corte & Barba Master</span></td>
-                            <td>
-                                <span class="icon-circle"><i class="fas fa-money-bill-wave"></i></span>
-                                Efectivo
-                            </td>
-                            <td><span class="status-paid">PAGADO</span></td>
-                            <td class="text-end fw-bold" style="color: var(--gold-bright)">$550.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="https://ui-avatars.com/api/?name=Lucia+F&background=60efff&color=fff" class="rounded-circle me-3" width="35">
-                                Lucía Fernández
-                            </td>
-                            <td><span class="text-muted">Tratamiento Hidratante</span></td>
-                            <td>
-                                <span class="icon-circle"><i class="fas fa-mobile-alt"></i></span>
-                                Transferencia
-                            </td>
-                            <td><span class="status-pending">PENDIENTE</span></td>
-                            <td class="text-end fw-bold" style="color: var(--gold-bright)">$850.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="text-center mt-5">
-        <p class="small text-muted text-uppercase" style="letter-spacing: 5px;">
-            Generado por <span style="color: var(--gold);">LK Studio System</span> • 2026
-        </p>
+    <div class="table-responsive table-luxury shadow-lg p-2">
+        <table class="table align-middle m-0">
+            <thead>
+                <tr>
+                    <th>Fecha / Hora</th>
+                    <th>Clienta</th>
+                    <th>Servicio</th>
+                    <th class="text-end">Monto</th>
+                </tr>
+            </thead>
+            <tbody id="tablaReporte">
+                </tbody>
+        </table>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function cargarReportes() {
+        // Obtenemos los datos que guardas en la otra página
+        const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
+        const tabla = document.getElementById("tablaReporte");
+        const totalIngresosElem = document.getElementById("totalIngresos");
+        const totalCitasElem = document.getElementById("totalCitas");
+        
+        let sumaTotal = 0;
+        tabla.innerHTML = "";
+
+        reservaciones.forEach(r => {
+            sumaTotal += parseFloat(r.costo);
+            tabla.innerHTML += `
+                <tr>
+                    <td><div class="fw-bold">${r.fecha}</div><small class="text-muted">${r.hora} hrs</small></td>
+                    <td class="fw-bold text-uppercase">${r.cliente}</td>
+                    <td><span class="badge bg-dark text-gold">${r.servicio}</span></td>
+                    <td class="text-end fw-bold text-dark">$${parseFloat(r.costo).toLocaleString()}</td>
+                </tr>
+            `;
+        });
+
+        // Actualizar KPIs
+        totalIngresosElem.innerText = `$${sumaTotal.toLocaleString()}`;
+        totalCitasElem.innerText = reservaciones.length;
+        
+        // Lógica para servicio más popular
+        if(reservaciones.length > 0) {
+            const servicios = reservaciones.map(r => r.servicio);
+            const masFrecuente = servicios.sort((a,b) =>
+                servicios.filter(v => v===a).length - servicios.filter(v => v===b).length
+            ).pop();
+            document.getElementById("mejorServicio").innerText = masFrecuente;
+        }
+    }
+
+    window.onload = cargarReportes;
+</script>
 </body>
 </html>
