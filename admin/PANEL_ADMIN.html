@@ -1,178 +1,405 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Sistema de Belleza | Panel Administrativo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>POS Elite | LK Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --gold-br: #F1D592; 
+            --rose: #E6B8A2; 
+            --deep: #050505; 
+            --soft-black: #121212;
+            --sidebar-width: 260px;
+        }
 
-  <style>
-    :root {
-      --gold: #D4AF37;
-      --gold-bright: #FFD700;
-      --golden-rose: #FF9A8B; 
-      --deep-black: #050505;
-    }
+        body { 
+            background: radial-gradient(circle at top right, #1a1a1a, var(--deep)); 
+            color: #ffffff; 
+            font-family: 'Poppins', sans-serif; 
+            min-height: 100vh;
+            display: flex;
+            margin: 0;
+        }
 
-    body {
-      background: radial-gradient(circle at center, #1a1a1a 0%, var(--deep-black) 100%);
-      color: #ffffff;
-      min-height: 100vh;
-      font-family: 'Poppins', sans-serif;
-    }
+        .luxury-font { font-family: 'Cinzel', serif; }
 
-    .main-title {
-      font-weight: 800;
-      letter-spacing: 3px;
-      color: var(--gold-bright);
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-    }
+        /* --- SIDEBAR --- */
+        #sidebarAdmin {
+            width: var(--sidebar-width);
+            background: var(--deep);
+            border-right: 1px solid var(--gold);
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
 
-    /* TARJETAS */
-    .dashboard-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 25px;
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      height: 100%;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 1;
-    }
+        .nav-link {
+            color: rgba(255,255,255,0.7) !important;
+            padding: 12px 25px;
+            transition: 0.3s;
+            font-size: 0.85rem;
+        }
 
-    .dashboard-card:hover {
-      transform: translateY(-10px);
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--gold-bright);
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-    }
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-br) !important;
+            background: rgba(212, 175, 55, 0.1);
+        }
 
-    /* ICONOS REPARADOS */
-    .dashboard-icon {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      color: var(--gold); /* Color sólido de respaldo */
-      display: block;
-      text-align: center;
-    }
+        .nav-link.active { border-left: 4px solid var(--gold); }
 
-    /* Colores específicos para que los iconos resalten */
-    .card-pos .dashboard-icon { color: #00ff87; text-shadow: 0 0 15px rgba(0, 255, 135, 0.5); }
-    .card-reserve .dashboard-icon { color: #ffcc00; text-shadow: 0 0 15px rgba(255, 204, 0, 0.5); }
-    .card-service .dashboard-icon { color: #e0aaff; text-shadow: 0 0 15px rgba(224, 170, 255, 0.5); }
-    .card-vip .dashboard-icon { color: #ff9a8b; text-shadow: 0 0 15px rgba(255, 154, 139, 0.5); }
-    .card-staff .dashboard-icon { color: #60efff; text-shadow: 0 0 15px rgba(96, 239, 255, 0.5); }
-    .card-academy .dashboard-icon { color: #ffffff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+        /* --- CONTENIDO POS --- */
+        .pos-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 30px;
+        }
 
-    h4 {
-      color: #fff;
-      text-transform: uppercase;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
+        .card-pos { 
+            background: var(--soft-black); 
+            border: 1px solid rgba(212, 175, 55, 0.3); 
+            border-radius: 1.5rem; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
 
-    .text-description {
-      color: #bbbbbb;
-      font-size: 0.85rem;
-      margin-top: 10px;
-    }
+        /* Tipografía y Colores */
+        label { color: var(--rose) !important; font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+        .gold { color: var(--gold) !important; }
+        .rose { color: var(--rose) !important; }
 
-    .hr-luxury {
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
-      border: none;
-      margin: 40px auto;
-    }
-  </style>
+        /* Form Elements */
+        .form-control, .form-select { 
+            background: #000 !important; border: 1px solid #333 !important; 
+            color: #fff !important; border-radius: 10px; padding: 10px;
+        }
+        .form-control:focus { border-color: var(--gold); box-shadow: 0 0 10px rgba(212,175,55,0.2); }
+
+        .btn-gold { 
+            background: linear-gradient(45deg, var(--gold), var(--gold-br)); 
+            color: #000 !important; font-weight: 800; border: none; border-radius: 12px;
+            transition: 0.3s;
+        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,175,55,0.4); }
+
+        /* Carrito y Tablas */
+        .table { color: #fff !important; }
+        .table thead th { border-bottom: 2px solid var(--gold); color: var(--rose); font-size: 0.75rem; }
+        
+        .badge-tipo { padding: 5px 10px; border-radius: 5px; font-size: 0.65rem; font-weight: 800; }
+        .bg-servicio { background: var(--gold); color: #000; }
+        .bg-extra { background: var(--rose); color: #000; }
+
+        .total-banner {
+            background: linear-gradient(90deg, #000, #1a1a1a);
+            border: 1px solid var(--gold);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .historial-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #222;
+            transition: 0.3s;
+            cursor: default;
+        }
+        .historial-item:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
+
+        @media (max-width: 992px) {
+            #sidebarAdmin { display: none; }
+            .pos-content { margin-left: 0; width: 100%; padding: 15px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container py-5">
+<nav id="sidebarAdmin">
+    <div class="p-4 mb-3">
+        <h4 class="luxury-font text-gold mb-0">LK STUDIO</h4>
+        <small class="text-white-50 small fw-bold">SISTEMA POS ELITE</small>
+    </div>
+    <div class="nav flex-column">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large me-3"></i> Dashboard</a>
+        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt me-3"></i> Agenda VIP</a>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-edit me-3"></i> Reservaciones</a>
+        <a href="punto_venta.html" class="nav-link active"><i class="fas fa-cash-register me-3"></i> Punto de Venta</a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut me-3"></i> Servicios</a>
+        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie me-3"></i> Staff</a>
+        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap me-3"></i> Academia</a>
+        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem me-3"></i> Beneficios</a>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line me-3"></i> Reportes</a>
+    </div>
+</nav>
 
-  <div class="text-center mb-5 animate__animated animate__fadeInDown">
-    <h1 class="main-title mb-2">
-      <i class="fas fa-crown"></i> SISTEMA DE BELLEZA
-    </h1>
-    <p class="text-uppercase small fw-bold" style="color: var(--gold); letter-spacing: 4px;">
-      Master Administration Panel
-    </p>
-    <hr class="hr-luxury w-50">
-  </div>
-
-  <div class="row g-4 justify-content-center">
-
-    <div class="col-md-6 col-lg-4 animate__animated animate__zoomIn" style="animation-delay: 0.1s;">
-      <div class="dashboard-card card-calendar text-center" onclick="window.location.href='citas.html'">
-        <i class="fas fa-calendar-check dashboard-icon"></i>
-        <h4>Calendario Maestro</h4>
-        <p class="text-description">Vista dinámica de ocupación, citas y disponibilidad en tiempo real.</p>
-      </div>
+<main class="pos-content">
+    <div class="d-flex justify-content-between align-items-end mb-4 animate__animated animate__fadeIn">
+        <div>
+            <h1 class="luxury-font gold fw-bold mb-0">TERMINAL DE COBRO</h1>
+            <p class="rose small fw-bold mb-0">GESTIÓN DE VENTAS EN TIEMPO REAL</p>
+        </div>
+        <div class="text-end">
+            <span id="fecha-actual" class="badge border border-warning gold p-2 px-3"></span>
+        </div>
     </div>
 
-    <div class="col-md-6 col-lg-4 animate__animated animate__zoomIn" style="animation-delay: 0.2s;">
-      <div class="dashboard-card card-pos text-center" onclick="window.location.href='punto_venta.html'">
-        <i class="fas fa-cash-register dashboard-icon"></i>
-        <h4>Punto de Venta</h4>
-        <p class="text-description">Terminal de cobro inteligente y registro rápido de ventas.</p>
-      </div>
+    <div class="row g-4">
+        <div class="col-xl-4 col-lg-5">
+            <div class="card card-pos p-4">
+                <h5 class="gold text-center mb-4 luxury-font"><i class="fas fa-shopping-cart me-2"></i> REGISTRO</h5>
+                
+                <div class="mb-3">
+                    <label>Cliente VIP</label>
+                    <div class="input-group">
+                        <input id="inputCliente" class="form-control" placeholder="Nombre de la clienta">
+                        <button class="btn btn-outline-warning" onclick="alert('Buscando en agenda...')"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label>Método</label>
+                        <select id="metodoPago" class="form-select" onchange="toggleTransferencia()">
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="Tarjeta">Tarjeta</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label>Folio / ID</label>
+                        <input id="inputCita" class="form-control" placeholder="LK-000">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label>Añadir Servicio</label>
+                    <div class="input-group">
+                        <select id="selectServicio" class="form-select"></select>
+                        <button class="btn btn-gold" onclick="agregarServicio()"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label>Añadir Extras (Material)</label>
+                    <div class="input-group">
+                        <select id="selectMaterial" class="form-select"></select>
+                        <button class="btn btn-gold" onclick="agregarMaterial()" style="filter: brightness(1.2) saturate(0.5);"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div id="infoTransferencia" class="alert alert-dark border-warning d-none animate__animated animate__fadeIn">
+                    <small class="gold fw-bold">DATOS BANCARIOS:</small><br>
+                    <span class="small text-white-50">CLABE: 127180012784596325</span>
+                </div>
+
+                <div class="p-3 mb-4 rounded" style="background: #000; border: 1px dashed var(--gold);">
+                    <label class="gold">CALCULADORA DE CAMBIO</label>
+                    <div class="input-group input-group-sm mt-1">
+                        <span class="input-group-text bg-dark border-secondary text-white">$</span>
+                        <input id="pagaCon" type="number" class="form-control" placeholder="Paga con..." oninput="calcularCambio()">
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <span class="small text-white-50">Cambio:</span>
+                        <span class="fw-bold text-success" id="cambioResult">$0.00</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-gold w-100 py-3 fw-bold shadow-lg" onclick="finalizarVenta()">
+                    <i class="fas fa-check-double me-2"></i> PROCESAR COBRO
+                </button>
+            </div>
+        </div>
+
+        <div class="col-xl-8 col-lg-7">
+            <div class="card card-pos p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="gold luxury-font m-0">DETALLE DE LA NOTA</h5>
+                    <button class="btn btn-sm btn-outline-danger px-3 rounded-pill" onclick="vaciarCarrito()">Limpiar</button>
+                </div>
+
+                <div class="table-responsive" style="min-height: 350px;">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th style="width: 50%;">CONCEPTO</th>
+                                <th>CATEGORÍA</th>
+                                <th>SUBTOTAL</th>
+                                <th class="text-end">ELIMINAR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaCarrito"></tbody>
+                    </table>
+                </div>
+
+                <div class="total-banner d-flex justify-content-between align-items-center mt-auto">
+                    <div>
+                        <h6 class="rose m-0 fw-bold">TOTAL NETO A PAGAR:</h6>
+                        <small class="text-white-50">Impuestos incluidos (IVA 16%)</small>
+                    </div>
+                    <div class="text-end">
+                        <h1 class="gold fw-bold m-0" style="font-size: 3rem;">$<span id="displayTotal">0.00</span></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-6 col-lg-4 animate__animated animate__zoomIn" style="animation-delay: 0.3s;">
-      <div class="dashboard-card card-reserve text-center" onclick="window.location.href='Gestión_Reservaciones.html'">
-        <i class="fas fa-address-book dashboard-icon"></i>
-        <h4>Gestión de Citas</h4>
-        <p class="text-description">Formulario para agendar, cancelar y editar datos de clientes.</p>
-      </div>
+    <div class="mt-4 animate__animated animate__fadeInUp">
+        <h6 class="rose fw-bold mb-3 small"><i class="fas fa-history me-2"></i>ÚLTIMOS COBROS REALIZADOS</h6>
+        <div id="historialRapido" class="row g-2"></div>
     </div>
+</main>
 
+<script>
+// Datos del Negocio
+const servicios = [
+    {name:"Uñas Acrílicas #2", precio:350},
+    {name:"Uñas XXL Cristales", precio:850},
+    {name:"Balayage Elite", precio:2500},
+    {name:"Corte Mariposa", precio:150},
+    {name:"Maquillaje Novia", precio:1200}
+];
 
-    <div class="col-md-6 col-lg-4 animate__animated animate__zoomIn" style="animation-delay: 0.4s;">
-      <div class="dashboard-card card-vip text-center" onclick="window.location.href='catalogo_beneficios.html'">
-        <i class="fas fa-gem dashboard-icon"></i>
-        <h4>Beneficios VIP</h4>
-        <p class="text-description">Programas de lealtad y recompensas exclusivas.</p>
-      </div>
-    </div>
+const materiales = [
+    {name:"Piedras Swarovski (x10)", precio:100},
+    {name:"Diseño 3D Manual", precio:150},
+    {name:"Retiro de Material", precio:100},
+    {name:"Efecto Espejo Gold", precio:50}
+];
 
-    <div class="col-md-6 col-lg-4 animate__animated animate__zoomIn" style="animation-delay: 0.5s;">
-      <div class="dashboard-card card-staff text-center" onclick="window.location.href='catalogo_instruc.html'">
-        <i class="fas fa-user dashboard-icon"></i>
-        <h4>Staff / Expertos</h4>
-        <p class="text-description">Gestión de especialistas y roles del equipo.</p>
-      </div>
-    </div>
+let carrito = [];
 
-    <div class="col-md-6 col-lg-4 animate__animated animate__zoomIn" style="animation-delay: 0.6s;">
-      <div class="dashboard-card card-academy text-center" onclick="window.location.href='catalogo_cursos.html'">
-        <i class="fas fa-graduation-cap dashboard-icon"></i>
-        <h4>Academia</h4>
-        <p class="text-description">Administración de cursos y formación profesional.</p>
-      </div>
-    </div>
-<div class="col-md-6 col-lg-4 animate__animated animate__zoomIn" style="animation-delay: 0.7s;">
-  <div class="dashboard-card text-center" onclick="window.location.href='reportes.html'">
-    <i class="fas fa-chart-pie dashboard-icon" style="color: #00d2ff; text-shadow: 0 0 15px rgba(0, 210, 255, 0.5);"></i>
-    <h4>Reportes & BI</h4>
-    <p class="text-description">Control de ingresos, métodos de pago y métricas de rendimiento.</p>
-  </div>
-</div>
-  </div>
+document.addEventListener('DOMContentLoaded', () => {
+    const selS = document.getElementById("selectServicio");
+    servicios.forEach((s, i) => selS.innerHTML += `<option value="${i}">${s.name} ($${s.precio})</option>`);
+    
+    const selM = document.getElementById("selectMaterial");
+    materiales.forEach((m, i) => selM.innerHTML += `<option value="${i}">${m.name} ($${m.precio})</option>`);
+    
+    document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString();
+    actualizarHistorial();
+});
 
-  <footer class="text-center">
-    <hr class="hr-luxury w-75">
-    <p class="mb-0 fw-bold" style="color: var(--gold); font-size: 0.8rem; letter-spacing: 2px;">
-      LK STUDIO · LUXURY MANAGEMENT SYSTEM · 2026
-    </p>
-  </footer>
+function agregarServicio() {
+    const item = servicios[document.getElementById("selectServicio").value];
+    carrito.push({ tipo: "Servicio", desc: item.name, precio: item.precio });
+    renderCarrito();
+}
 
-</div>
+function agregarMaterial() {
+    const item = materiales[document.getElementById("selectMaterial").value];
+    carrito.push({ tipo: "Extra", desc: item.name, precio: item.precio });
+    renderCarrito();
+}
 
+function eliminarItem(i) {
+    carrito.splice(i, 1);
+    renderCarrito();
+}
+
+function vaciarCarrito() {
+    if(confirm("¿Vaciar toda la nota?")) {
+        carrito = [];
+        renderCarrito();
+    }
+}
+
+function renderCarrito() {
+    const tbody = document.getElementById("tablaCarrito");
+    tbody.innerHTML = "";
+    let total = 0;
+    
+    carrito.forEach((item, i) => {
+        total += item.precio;
+        tbody.innerHTML += `
+            <tr class="animate__animated animate__fadeInLeft">
+                <td class="fw-bold text-white">${item.desc}</td>
+                <td><span class="badge-tipo ${item.tipo === 'Servicio' ? 'bg-servicio' : 'bg-extra'}">${item.tipo.toUpperCase()}</span></td>
+                <td class="gold fw-bold">$${item.precio.toFixed(2)}</td>
+                <td class="text-end">
+                    <button class="btn btn-link text-danger p-0" onclick="eliminarItem(${i})"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>`;
+    });
+    document.getElementById("displayTotal").innerText = total.toLocaleString('en-US', {minimumFractionDigits: 2});
+    calcularCambio();
+}
+
+function calcularCambio() {
+    const totalText = document.getElementById("displayTotal").innerText.replace(/,/g, '');
+    const total = parseFloat(totalText);
+    const paga = parseFloat(document.getElementById("pagaCon").value) || 0;
+    const cambio = paga - total;
+    const res = document.getElementById("cambioResult");
+    res.innerText = `$${(cambio > 0 ? cambio : 0).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+}
+
+function toggleTransferencia() {
+    const m = document.getElementById("metodoPago").value;
+    document.getElementById("infoTransferencia").classList.toggle("d-none", m !== "Transferencia");
+}
+
+function finalizarVenta() {
+    const cliente = document.getElementById("inputCliente").value;
+    if(!cliente || carrito.length === 0) return alert("Por favor ingresa el nombre de la clienta y añade servicios.");
+
+    const venta = {
+        cliente,
+        total: document.getElementById("displayTotal").innerText,
+        pago: document.getElementById("metodoPago").value,
+        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        fecha: new Date().toLocaleDateString()
+    };
+
+    // Guardar para Reportes
+    let reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
+    // Convertimos el formato para que coincida con tu reporte
+    reservaciones.push({
+        cliente: venta.cliente,
+        servicio: carrito.map(c => c.desc).join(", "),
+        costo: venta.total.replace(/,/g, ''),
+        fecha: venta.fecha,
+        hora: venta.hora
+    });
+    localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
+
+    // Guardar historial rápido
+    let ventasRapidas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
+    ventasRapidas.unshift(venta);
+    localStorage.setItem("ventas_dia", JSON.stringify(ventasRapidas));
+
+    alert("¡Venta registrada y conectada a Reportes!");
+    
+    // Resetear Todo
+    carrito = [];
+    document.getElementById("inputCliente").value = "";
+    document.getElementById("pagaCon").value = "";
+    renderCarrito();
+    actualizarHistorial();
+}
+
+function actualizarHistorial() {
+    const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
+    const div = document.getElementById("historialRapido");
+    div.innerHTML = "";
+    ventas.slice(0, 4).forEach(v => {
+        div.innerHTML += `
+            <div class="col-6 col-md-3">
+                <div class="p-2 historial-item rounded text-center small">
+                    <div class="gold fw-bold">$${v.total}</div>
+                    <div class="text-white text-truncate fw-bold">${v.cliente}</div>
+                    <div class="rose" style="font-size:10px">${v.hora} - ${v.pago}</div>
+                </div>
+            </div>`;
+    });
+}
+</script>
 </body>
 </html>
