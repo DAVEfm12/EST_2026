@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>LK Studio | Instructores VIP</title>
+  <title>LK Studio | Gestión de Instructores VIP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
       --golden-rose: #e6b8a2;
       --deep-black: #050505;
       --pure-white: #ffffff;
-      --sidebar-width: 250px;
+      --sidebar-width: 260px;
     }
 
     body {
@@ -25,42 +25,44 @@
       color: #ffffff;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
-      display: flex;
       margin: 0;
+      display: flex;
     }
 
-    /* --- SIDEBAR UNIFICADO --- */
+    /* --- SIDEBAR CORPORATIVO --- */
     #sidebar {
       width: var(--sidebar-width);
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.98);
       border-right: 1px solid var(--gold);
       height: 100vh;
       position: fixed;
       z-index: 1000;
+      transition: all 0.3s;
     }
 
     .sidebar-header {
-      padding: 30px 20px;
+      padding: 35px 20px;
       text-align: center;
       border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     }
 
     .nav-link {
-      color: #fff !important;
+      color: rgba(255,255,255,0.8) !important;
       padding: 15px 25px;
       display: flex;
       align-items: center;
       transition: 0.3s;
-      border-left: 3px solid transparent;
+      border-left: 4px solid transparent;
       font-size: 0.85rem;
       letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    .nav-link i { margin-right: 15px; width: 20px; text-align: center; color: var(--gold); }
+    .nav-link i { margin-right: 15px; width: 25px; text-align: center; color: var(--gold); font-size: 1.1rem; }
 
     .nav-link:hover, .nav-link.active {
-      background: rgba(212, 175, 55, 0.1);
-      border-left: 3px solid var(--gold);
+      background: rgba(212, 175, 55, 0.15);
+      border-left: 4px solid var(--gold);
       color: var(--gold-bright) !important;
     }
 
@@ -69,74 +71,80 @@
       width: calc(100% - var(--sidebar-width));
       margin-left: var(--sidebar-width);
       padding: 40px;
+      transition: all 0.3s;
     }
 
     .card-form {
       background: rgba(10, 10, 10, 0.95);
       border: 1px solid var(--gold);
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.9);
     }
 
-    /* TABLA BLANCA PROFESIONAL */
+    /* --- TABLA BLANCA DE ALTO CONTRASTE --- */
     .table-container-white {
       background: var(--pure-white);
       border-radius: 20px;
       padding: 25px;
-      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
-      border: 2px solid var(--gold);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      border: 4px solid var(--gold);
     }
 
-    .table { background: var(--pure-white) !important; margin-bottom: 0; }
+    .table { background: var(--pure-white) !important; color: #1a1a1a !important; }
     .table thead th {
-      color: var(--deep-black) !important;
-      border-bottom: 2px solid var(--gold);
+      color: #000 !important;
+      border-bottom: 3px solid var(--gold);
       font-weight: 800;
       font-size: 0.7rem;
+      letter-spacing: 1px;
     }
 
-    .instructor-name { color: var(--deep-black) !important; font-weight: 700; font-size: 1rem; }
-    .specialty-text { color: var(--gold-dark) !important; font-weight: 600; }
-    .table td { color: #333 !important; vertical-align: middle; border-bottom: 1px solid #eee; }
+    .instructor-name { color: var(--deep-black); font-weight: 800; font-size: 1.1rem; margin: 0; }
+    .specialty-badge { 
+        background: var(--gold); 
+        color: #000; 
+        padding: 4px 10px; 
+        border-radius: 6px; 
+        font-size: 0.7rem; 
+        font-weight: 700;
+    }
 
-    /* ESTILO FORMULARIO */
-    .form-label { color: var(--golden-rose) !important; font-weight: 700; font-size: 0.7rem; }
+    /* --- FORMULARIO ELEMENTOS --- */
+    .form-label { color: var(--golden-rose) !important; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
     .form-control, .form-select {
       background-color: #000 !important;
       border: 1px solid #333 !important;
       color: var(--gold) !important;
+      border-radius: 12px;
+      padding: 10px 15px;
     }
+    .form-control:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 
     .btn-gold {
-      background: linear-gradient(45deg, var(--gold), #f1d592);
+      background: linear-gradient(45deg, var(--gold-dark), var(--gold-bright));
       color: #000;
       font-weight: 800;
       border: none;
-      border-radius: 10px;
-      transition: 0.3s;
+      border-radius: 12px;
+      transition: 0.4s;
     }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
 
-    .doc-icon { font-size: 1.1rem; margin-right: 6px; }
-    .present { color: var(--gold); }
-    .absent { color: #dee2e6; }
+    .doc-icon { font-size: 1.1rem; margin-right: 6px; transition: 0.3s; }
+    .present { color: var(--gold-dark); }
+    .absent { color: #e0e0e0; }
 
-    .status-badge {
-      background: var(--deep-black);
-      color: var(--gold);
-      padding: 4px 12px;
-      border-radius: 50px;
-      font-size: 0.6rem;
-      font-weight: bold;
-    }
-
-    #searchBox {
-        background: rgba(255,255,255,0.1);
+    /* Buscador */
+    .search-box {
+        background: rgba(255,255,255,0.05);
         border: 1px solid var(--gold);
-        color: white;
+        border-radius: 50px;
+        padding: 5px 20px;
+        margin-bottom: 20px;
     }
 
-    @media (max-width: 992px) {
-      #sidebar { display: none; }
+    @media (max-width: 1100px) {
+      #sidebar { transform: translateX(-100%); }
       #content { width: 100%; margin-left: 0; }
     }
   </style>
@@ -146,147 +154,222 @@
 
   <nav id="sidebar">
     <div class="sidebar-header">
-      <h4 class="fw-bold m-0" style="color:var(--gold)">LK STUDIO</h4>
-      <small style="color:var(--golden-rose)">SISTEMA DE GESTIÓN</small>
+      <h3 style="color:var(--gold); font-weight: 900; letter-spacing: 2px; margin:0;">LK STUDIO</h3>
+      <small style="color:var(--golden-rose); font-weight: 700;">SISTEMA ACADÉMICO</small>
     </div>
     <div class="mt-4">
-      <a href="POS.html" class="nav-link"><i class="fas fa-cash-register"></i> VENTAS (POS)</a>
-      <a href="SERVICIOS.html" class="nav-link"><i class="fas fa-list"></i> CATÁLOGO</a>
-      <a href="#" class="nav-link active"><i class="fas fa-chalkboard-teacher"></i> INSTRUCTORES</a>
-      <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-arrow-left"></i> VOLVER AL PANEL</a>
+      <a href="POS.html" class="nav-link"><i class="fas fa-cash-register"></i> Ventas POS</a>
+      <a href="CATALOGO.html" class="nav-link"><i class="fas fa-th-list"></i> Servicios</a>
+      <a href="#" class="nav-link active"><i class="fas fa-chalkboard-teacher"></i> Instructores</a>
+      <a href="#" class="nav-link"><i class="fas fa-graduation-cap"></i> Cursos/Talleres</a>
+      <a href="#" class="nav-link"><i class="fas fa-users-cog"></i> Alumnas</a>
+      <a href="./PANEL_ADMIN.html" class="nav-link mt-5 border-top border-secondary pt-3"><i class="fas fa-sign-out-alt"></i> Panel Admin</a>
     </div>
   </nav>
 
   <div id="content">
-    <div class="container-fluid">
-      
-      <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
-        <div>
-            <h1 class="fw-bold m-0" style="color: var(--gold)">Expedientes Digitales</h1>
-            <p class="m-0" style="color: var(--golden-rose)">Control de Personal e Instructores de Élite</p>
-        </div>
-        <button class="btn btn-outline-warning" onclick="exportarCSV()">
-            <i class="fas fa-file-export me-2"></i> EXPORTAR LISTA
-        </button>
+    
+    <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
+      <div>
+        <h1 class="fw-bold m-0" style="color: var(--gold); letter-spacing: 2px;">GESTIÓN DE TALENTO</h1>
+        <p style="color: var(--golden-rose); font-weight: 600;">Expedientes y Nómina de Instructores VIP</p>
       </div>
+      <div class="text-end">
+        <h2 class="text-white fw-bold mb-0" id="clock">00:00</h2>
+        <span class="badge bg-outline-warning text-gold border border-warning" id="date"></span>
+      </div>
+    </div>
 
-      <div class="row g-4">
-        <div class="col-xl-4">
-          <div class="card-form p-4 animate__animated animate__fadeInLeft">
-            <h5 class="text-gold mb-4 fw-bold"><i class="fas fa-id-badge me-2"></i>NUEVO PERFIL</h5>
+    <div class="row g-4">
+      <div class="col-xl-4">
+        <div class="card-form p-4 sticky-top" style="top: 20px; z-index: 10;">
+          <h5 class="text-gold mb-4 fw-bold border-bottom border-secondary pb-3">
+            <i class="fas fa-id-card-alt me-2"></i> REGISTRO DE INSTRUCTOR
+          </h5>
+
+          <form id="formInstructor">
+            <input type="hidden" id="indexInstructor">
             
-            <form id="formInstructor">
-              <input type="hidden" id="indexInstructor">
-              
-              <div class="mb-3">
-                <label class="form-label">NOMBRE COMPLETO</label>
-                <input type="text" id="nombre" class="form-control" placeholder="Escriba el nombre" required>
-              </div>
+            <div class="mb-3">
+              <label class="form-label">Nombre Completo</label>
+              <input type="text" id="nombre" class="form-control" placeholder="Nombre y Apellidos" required>
+            </div>
 
-              <div class="row">
-                <div class="col-7 mb-3">
-                  <label class="form-label">ESPECIALIDAD</label>
-                  <input type="text" id="especialidad" class="form-control" placeholder="Ej. Master Nailer" required>
-                </div>
-                <div class="col-5 mb-3">
-                  <label class="form-label">AÑOS EXP.</label>
-                  <input type="number" id="experiencia" class="form-control" value="1">
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">ESTADO LABORAL</label>
-                <select id="estatus" class="form-select">
-                  <option value="Activo">ACTIVO</option>
-                  <option value="Inactivo">INACTIVO</option>
-                  <option value="En Revisión">EN REVISIÓN</option>
+            <div class="row">
+              <div class="col-6 mb-3">
+                <label class="form-label">Especialidad Principal</label>
+                <select id="especialidad" class="form-select">
+                  <option value="Uñas">Master Uñas</option>
+                  <option value="Cabello">Estilismo Pro</option>
+                  <option value="Maquillaje">Makeup Artist</option>
+                  <option value="Pestañas">Lashista</option>
+                  <option value="Micropigmentación">Microblading</option>
                 </select>
               </div>
+              <div class="col-6 mb-3">
+                <label class="form-label">Teléfono WhatsApp</label>
+                <input type="tel" id="telefono" class="form-control" placeholder="10 dígitos">
+              </div>
+            </div>
 
-              <div class="mb-4 p-3 border border-secondary rounded bg-black">
-                <label class="form-label d-block mb-2 text-center">DOCUMENTACIÓN CARGADA</label>
-                <div class="row g-2 text-center">
-                    <div class="col-4">
-                        <small class="d-block text-muted">ACTA</small>
-                        <input type="checkbox" id="check_acta">
-                    </div>
-                    <div class="col-4">
-                        <small class="d-block text-muted">CURP</small>
-                        <input type="checkbox" id="check_curp">
-                    </div>
-                    <div class="col-4">
-                        <small class="d-block text-muted">INE</small>
-                        <input type="checkbox" id="check_ine">
-                    </div>
+            <div class="row">
+              <div class="col-6 mb-3">
+                <label class="form-label">Sueldo Base / Día</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-dark border-secondary text-gold">$</span>
+                  <input type="number" id="sueldo" class="form-control" placeholder="0.00">
                 </div>
               </div>
+              <div class="col-6 mb-3">
+                <label class="form-label">Años Exp.</label>
+                <input type="number" id="experiencia" class="form-control" value="1">
+              </div>
+            </div>
 
-              <button type="submit" class="btn btn-gold w-100 py-3">
-                <i class="fas fa-save me-2"></i> REGISTRAR INSTRUCTOR
+            <div class="mb-3">
+                <label class="form-label">Redes Sociales (Instagram/FB)</label>
+                <input type="text" id="redes" class="form-control" placeholder="@usuario_pro">
+            </div>
+
+            <div class="row g-2 mb-4">
+                <div class="col-6">
+                    <label class="form-label">Estatus</label>
+                    <select id="estatus" class="form-select">
+                        <option value="Activo">ACTIVO</option>
+                        <option value="Vacaciones">EN PAUSA</option>
+                        <option value="Baja">BAJA</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Horario</label>
+                    <input type="text" id="horario" class="form-control" placeholder="9am - 6pm">
+                </div>
+            </div>
+
+            <div class="mb-4 p-3 border border-secondary rounded bg-black">
+              <label class="form-label d-block mb-3 border-bottom border-secondary pb-2"><i class="fas fa-folder-open me-2"></i>DOCUMENTACIÓN ENTREGADA</label>
+              <div class="row g-3 text-center">
+                  <div class="col-4">
+                      <i class="fas fa-file-contract d-block mb-1 gold"></i>
+                      <input type="checkbox" id="chk_acta"> <small class="d-block text-white" style="font-size:10px">ACTA</small>
+                  </div>
+                  <div class="col-4">
+                      <i class="fas fa-id-card d-block mb-1 gold"></i>
+                      <input type="checkbox" id="chk_ine"> <small class="d-block text-white" style="font-size:10px">INE</small>
+                  </div>
+                  <div class="col-4">
+                      <i class="fas fa-map-marker-alt d-block mb-1 gold"></i>
+                      <input type="checkbox" id="chk_dom"> <small class="d-block text-white" style="font-size:10px">DOM</small>
+                  </div>
+              </div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-gold py-3 shadow">
+                <i class="fas fa-save me-2"></i> REGISTRAR EN ACADEMIA
               </button>
-              <button type="button" class="btn btn-link w-100 text-decoration-none text-rose mt-2" onclick="resetForm()">Limpiar campos</button>
-            </form>
+              <button type="button" class="btn btn-sm text-rose mt-2" onclick="resetForm()">LIMPIAR CAMPOS</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-xl-8">
+        <div class="table-container-white animate__animated animate__fadeInRight">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="fw-bold m-0" style="color: var(--deep-black);">CATÁLOGO DE INSTRUCTORES</h4>
+              <div class="d-flex gap-2">
+                  <input type="text" id="buscador" class="form-control form-control-sm border-dark" placeholder="Buscar por nombre..." onkeyup="buscarInstructor()">
+                  <button class="btn btn-dark btn-sm" onclick="exportarExcel()"><i class="fas fa-file-export"></i></button>
+              </div>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>PROFESIONAL</th>
+                  <th>EXPERTISE</th>
+                  <th>FINANZAS/HORARIO</th>
+                  <th>EXPEDIENTE</th>
+                  <th class="text-center">GESTIÓN</th>
+                </tr>
+              </thead>
+              <tbody id="tablaInstructores">
+                  </tbody>
+            </table>
           </div>
         </div>
 
-        <div class="col-xl-8">
-          <div class="mb-3">
-              <input type="text" id="inputBusqueda" class="form-control" placeholder="🔍 Buscar por nombre o especialidad..." onkeyup="buscarInstructor()">
-          </div>
-          
-          <div class="table-container-white animate__animated animate__fadeInRight">
-            <div class="table-responsive">
-              <table class="table align-middle">
-                <thead>
-                  <tr>
-                    <th>INSTRUCTOR</th>
-                    <th>ESPECIALIDAD</th>
-                    <th>DOCS</th>
-                    <th>ESTADO</th>
-                    <th class="text-center">ACCIONES</th>
-                  </tr>
-                </thead>
-                <tbody id="tablaInstructores"></tbody>
-              </table>
+        <div class="mt-4 p-4 card-form border-0" style="background: rgba(212, 175, 55, 0.1);">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h6 class="text-gold">TOTAL INSTRUCTORES</h6>
+                    <h2 id="stat-total">0</h2>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-gold">NÓMINA DIARIA EST.</h6>
+                    <h2 id="stat-nomina">$0.00</h2>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-gold">EXPEDIENTES OK</h6>
+                    <h2 id="stat-docs">0</h2>
+                </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
 
 <script>
-let instructores = JSON.parse(localStorage.getItem("instructores")) || [];
+let instructores = JSON.parse(localStorage.getItem("lk_instructores")) || [];
 
 function renderTabla(datos = instructores) {
   const tabla = document.getElementById("tablaInstructores");
   tabla.innerHTML = "";
+  let nominaTotal = 0;
+  let docsCompletos = 0;
 
   datos.forEach((i, index) => {
-    const iconClass = (check) => check ? 'present fas fa-check-circle' : 'absent far fa-circle';
+    nominaTotal += parseFloat(i.sueldo || 0);
+    const hasAllDocs = i.docs.acta && i.docs.ine && i.docs.dom;
+    if(hasAllDocs) docsCompletos++;
 
     tabla.innerHTML += `
       <tr class="animate__animated animate__fadeIn">
         <td>
-          <div class="instructor-name">${i.nombre}</div>
-          <small class="text-muted">${i.experiencia} años de exp.</small>
+          <p class="instructor-name">${i.nombre}</p>
+          <small class="text-muted"><i class="fab fa-instagram me-1"></i>${i.redes || 'no_social'}</small><br>
+          <small class="text-primary fw-bold">${i.telefono || ''}</small>
         </td>
         <td>
-          <span class="specialty-text"><i class="fas fa-star me-1"></i>${i.especialidad}</span>
+          <span class="specialty-badge">${i.especialidad}</span><br>
+          <small class="fw-bold" style="color:#555">${i.experiencia} años exp.</small>
         </td>
         <td>
-          <i class="${iconClass(i.docs.acta)} doc-icon" title="Acta"></i>
-          <i class="${iconClass(i.docs.curp)} doc-icon" title="CURP"></i>
-          <i class="${iconClass(i.docs.ine)} doc-icon" title="INE"></i>
+          <div class="fw-bold text-success">$${parseFloat(i.sueldo).toFixed(2)} /día</div>
+          <small class="text-muted"><i class="far fa-clock me-1"></i>${i.horario || 'No def.'}</small>
         </td>
-        <td><span class="status-badge">${i.estatus.toUpperCase()}</span></td>
+        <td>
+          <div class="d-flex fs-5">
+            <i class="fas fa-file-invoice doc-icon ${i.docs.acta ? 'present' : 'absent'}" title="Acta"></i>
+            <i class="fas fa-id-card doc-icon ${i.docs.ine ? 'present' : 'absent'}" title="INE"></i>
+            <i class="fas fa-home doc-icon ${i.docs.dom ? 'present' : 'absent'}" title="Domicilio"></i>
+          </div>
+          <span class="badge ${i.estatus === 'Activo' ? 'bg-dark text-gold' : 'bg-secondary'}">${i.estatus}</span>
+        </td>
         <td class="text-center">
-          <button class="btn btn-sm btn-outline-dark me-1" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-sm btn-outline-dark border-0" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
         </td>
       </tr>
     `;
   });
+
+  // Update Stats
+  document.getElementById("stat-total").innerText = datos.length;
+  document.getElementById("stat-nomina").innerText = "$" + nominaTotal.toLocaleString();
+  document.getElementById("stat-docs").innerText = docsCompletos;
 }
 
 document.getElementById("formInstructor").addEventListener("submit", function(e){
@@ -296,11 +379,15 @@ document.getElementById("formInstructor").addEventListener("submit", function(e)
     nombre: document.getElementById("nombre").value,
     especialidad: document.getElementById("especialidad").value,
     experiencia: document.getElementById("experiencia").value,
+    telefono: document.getElementById("telefono").value,
+    sueldo: document.getElementById("sueldo").value,
+    redes: document.getElementById("redes").value,
+    horario: document.getElementById("horario").value,
     estatus: document.getElementById("estatus").value,
     docs: {
-        acta: document.getElementById("check_acta").checked,
-        curp: document.getElementById("check_curp").checked,
-        ine: document.getElementById("check_ine").checked
+        acta: document.getElementById("chk_acta").checked,
+        ine: document.getElementById("chk_ine").checked,
+        dom: document.getElementById("chk_dom").checked
     }
   };
 
@@ -308,57 +395,58 @@ document.getElementById("formInstructor").addEventListener("submit", function(e)
   if(index === "") instructores.push(instructor);
   else instructores[index] = instructor;
 
-  localStorage.setItem("instructores", JSON.stringify(instructores));
+  localStorage.setItem("lk_instructores", JSON.stringify(instructores));
   resetForm();
   renderTabla();
+  alert("¡Instructor guardado exitosamente!");
 });
-
-function buscarInstructor() {
-    const texto = document.getElementById("inputBusqueda").value.toLowerCase();
-    const filtrados = instructores.filter(i => 
-        i.nombre.toLowerCase().includes(texto) || 
-        i.especialidad.toLowerCase().includes(texto)
-    );
-    renderTabla(filtrados);
-}
 
 function editar(index){
   const i = instructores[index];
   document.getElementById("nombre").value = i.nombre;
   document.getElementById("especialidad").value = i.especialidad;
   document.getElementById("experiencia").value = i.experiencia;
+  document.getElementById("telefono").value = i.telefono || "";
+  document.getElementById("sueldo").value = i.sueldo || "";
+  document.getElementById("redes").value = i.redes || "";
+  document.getElementById("horario").value = i.horario || "";
   document.getElementById("estatus").value = i.estatus;
-  document.getElementById("check_acta").checked = i.docs.acta;
-  document.getElementById("check_curp").checked = i.docs.curp;
-  document.getElementById("check_ine").checked = i.docs.ine;
+  
+  document.getElementById("chk_acta").checked = i.docs.acta;
+  document.getElementById("chk_ine").checked = i.docs.ine;
+  document.getElementById("chk_dom").checked = i.docs.dom;
+
   document.getElementById("indexInstructor").value = index;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function buscarInstructor() {
+    const query = document.getElementById("buscador").value.toLowerCase();
+    const filtrados = instructores.filter(i => i.nombre.toLowerCase().includes(query));
+    renderTabla(filtrados);
 }
 
 function eliminar(index){
-  if(confirm("¿Seguro de eliminar este registro?")) {
+  if(confirm("¿Estás seguro de eliminar este registro? Esta acción no se puede deshacer.")) {
     instructores.splice(index,1);
-    localStorage.setItem("instructores", JSON.stringify(instructores));
+    localStorage.setItem("lk_instructores", JSON.stringify(instructores));
     renderTabla();
   }
-}
-
-function exportarCSV() {
-    let csv = "Nombre,Especialidad,Experiencia,Estado\n";
-    instructores.forEach(i => {
-        csv += `${i.nombre},${i.especialidad},${i.experiencia},${i.estatus}\n`;
-    });
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.setAttribute('href', url);
-    a.setAttribute('download', 'instructores_lkstudio.csv');
-    a.click();
 }
 
 function resetForm(){
   document.getElementById("formInstructor").reset();
   document.getElementById("indexInstructor").value = "";
 }
+
+// Reloj y Fecha
+function updateTime() {
+    const now = new Date();
+    document.getElementById("clock").innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    document.getElementById("date").innerText = now.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+}
+setInterval(updateTime, 1000);
+updateTime();
 
 renderTabla();
 </script>
