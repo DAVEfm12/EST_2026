@@ -42,10 +42,19 @@
             z-index: 1000; 
             display: flex; 
             flex-direction: column;
+            transition: all 0.3s;
         }
 
-        .sidebar-logo { padding: 30px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
-        .sidebar-logo img { max-width: 150px; filter: drop-shadow(0 0 5px var(--gold)); }
+        .sidebar-logo {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .sidebar-logo img {
+            max-width: 150px;
+            filter: drop-shadow(0 0 5px var(--gold));
+        }
 
         .nav-link {
             color: rgba(255,255,255,0.7) !important; 
@@ -60,50 +69,74 @@
         }
 
         .nav-link i { width: 25px; font-size: 1.1rem; }
-        .nav-link:hover { color: var(--gold-bright) !important; background: rgba(212, 175, 55, 0.15); transform: translateX(5px); }
-        .nav-link.active { color: var(--deep-black) !important; background: var(--gold) !important; font-weight: 800; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
 
-        /* --- CONTENIDO PRINCIPAL --- */
+        .nav-link:hover {
+            color: var(--gold-bright) !important; 
+            background: rgba(212, 175, 55, 0.15);
+        }
+
+        .nav-link.active {
+            color: var(--deep-black) !important;
+            background: var(--gold) !important;
+            font-weight: 800;
+        }
+
+        /* --- CONTENIDO --- */
         .main-content {
             margin-left: var(--sidebar-width); 
             width: calc(100% - var(--sidebar-width));
             padding: 40px;
+            min-height: 100vh;
         }
 
-        /* --- SLIDER LUXURY --- */
+        /* --- CAROUSEL CUSTOM --- */
         .carousel-luxury {
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid var(--gold);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
-            margin-bottom: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .carousel-item { height: 400px; }
+        .carousel-item {
+            height: 350px;
+        }
+
         .carousel-caption {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid var(--gold);
             padding: 25px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
             bottom: 15%;
         }
 
-        /* --- ESTILOS TABLA Y FORM --- */
-        .card-luxury { background: var(--soft-black); border: 1px solid var(--gold); border-radius: 1.5rem; }
-        .titulo-dorado-bold { color: var(--gold) !important; font-weight: 900; font-family: 'Cinzel', serif; letter-spacing: 2px; }
-        
-        .table-container { background: var(--gold); border-radius: 1.5rem; padding: 5px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .table { margin-bottom: 0; background-color: white !important; }
-        .table thead th { background-color: var(--deep-black) !important; color: var(--gold-bright) !important; padding: 15px; border: none; font-size: 0.75rem; }
-        .table tbody td { color: #000; font-weight: 700; background-color: #fff !important; padding: 15px; border-bottom: 1px solid #eee; }
+        /* --- TARJETAS Y TABLAS --- */
+        .card-luxury {
+            background: var(--soft-black);
+            border: 1px solid var(--gold);
+            border-radius: 1.5rem;
+        }
 
-        .st-badge { padding: 5px 12px; border-radius: 50px; font-size: 0.65rem; text-transform: uppercase; font-weight: 800; }
+        .table-container {
+            background: var(--gold);
+            border-radius: 1.5rem;
+            padding: 5px;
+            overflow: hidden;
+        }
+
+        .table { margin-bottom: 0; background-color: white !important; }
+        
+        .btn-pro {
+            background: linear-gradient(45deg, var(--gold), var(--gold-bright));
+            color: #000; font-weight: 800; border-radius: 50px; border: none;
+        }
+
+        .st-badge {
+            padding: 5px 12px; border-radius: 50px; font-size: 0.65rem; font-weight: 800;
+        }
         .st-pagado { background: #d1e7dd; color: #0f5132; }
         .st-pendiente { background: #fff3cd; color: #664d03; }
-
-        .btn-pro { background: linear-gradient(45deg, var(--gold), var(--gold-bright)); color: #000; font-weight: 800; border-radius: 50px; border: none; }
-        .search-box { background: #000; border: 1px solid var(--gold); border-radius: 50px; padding: 10px 25px; color: var(--gold-bright); width: 100%; max-width: 350px; }
 
         @media (max-width: 1200px) {
             #sidebarAdmin { transform: translateX(-100%); }
@@ -118,17 +151,14 @@
     <div class="sidebar-logo">
         <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
     </div>
-    <div class="nav-flex-column">
+    <div class="nav-flex-column mt-3">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
         <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Agenda VIP</a>
         <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-edit"></i> Reservaciones</a>
         <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Punto de Venta</a>
         <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut"></i> Servicios</a>
-        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-crown"></i> Beneficios</a>
+        <a href="beneficios.html" class="nav-link"><i class="fas fa-crown"></i> Beneficios</a>
         <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> Reportes</a>
-    </div>
-    <div class="p-3 border-top border-secondary">
-        <a href="index.html" class="nav-link text-danger"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
     </div>
 </nav>
 
@@ -136,29 +166,19 @@
     
     <div id="reservaSlider" class="carousel slide carousel-fade carousel-luxury animate__animated animate__fadeIn" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=1500') center/cover;">
-                    <div class="carousel-caption">
-                        <h1 class="luxury-font text-gold">RESERVACIONES ELITE</h1>
-                        <p style="color: var(--rose-gold);">Organiza el flujo de clientes con precisión Master.</p>
-                    </div>
+            <div class="carousel-item active" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1600&auto=format&fit=crop') center/cover;">
+                <div class="carousel-caption">
+                    <h2 class="luxury-font" style="color: var(--gold-bright);">CONTROL DE RESERVAS</h2>
+                    <p style="color: var(--rose-gold);">Administra las citas de alta gama y el flujo de clientas VIP.</p>
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=1500') center/cover;">
-                    <div class="carousel-caption">
-                        <h1 class="luxury-font text-gold">LK STUDIO SYSTEM</h1>
-                        <p style="color: var(--rose-gold);">Control de Pagos, Servicios y Especialistas.</p>
-                    </div>
+            <div class="carousel-item" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=1600&auto=format&fit=crop') center/cover;">
+                <div class="carousel-caption">
+                    <h2 class="luxury-font" style="color: var(--gold-bright);">ESTADO DE PAGOS</h2>
+                    <p>Monitorea abonos y liquidaciones en tiempo real para servicios élite.</p>
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#reservaSlider" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#reservaSlider" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
@@ -166,27 +186,31 @@
             <h1 class="luxury-font fw-bold mb-0" style="color: var(--gold); font-size: 2.2rem;">RESERVACIONES VIP</h1>
             <p style="color: var(--rose-gold);" class="fw-bold mb-0 small text-uppercase">Gestión de flujo LK Studio Master</p>
         </div>
-        <div class="position-relative">
-            <i class="fas fa-search position-absolute text-gold" style="top:14px; left:20px;"></i>
-            <input type="text" id="busqueda" class="search-box ps-5" placeholder="Buscar clienta..." onkeyup="renderReservas()">
+        <div class="d-flex gap-3">
+            <div class="position-relative">
+                <i class="fas fa-search position-absolute text-gold" style="top:14px; left:20px;"></i>
+                <input type="text" id="busqueda" class="form-control ps-5" style="width: 350px; border-radius: 50px; border: 1px solid var(--gold); background: #000;" placeholder="Buscar clienta..." onkeyup="renderReservas()">
+            </div>
         </div>
     </div>
 
     <div class="row g-4">
         <div class="col-xl-4">
             <div class="card card-luxury p-4 shadow animate__animated animate__fadeInLeft">
-                <h5 class="titulo-dorado-bold mb-4 text-center">NUEVA RESERVA</h5>
+                <h5 class="luxury-font text-center mb-4" style="color: var(--gold);">NUEVA RESERVA</h5>
                 <form id="formReserva">
                     <input type="hidden" id="indexReserva">
+                    
                     <div class="mb-3">
                         <label class="form-label">Nombre de Clienta</label>
-                        <input type="text" id="cliente" class="form-control" placeholder="..." required>
+                        <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
                     </div>
+
                     <div class="row g-2 mb-3">
                         <div class="col-7">
                             <label class="form-label">Servicio</label>
                             <select id="servicio" class="form-select" required>
-                                <option value="" selected disabled>Elegir...</option>
+                                <option value="" selected disabled>Seleccionar...</option>
                                 <option value="Uñas Acrílicas #2">Uñas Acrílicas #2</option>
                                 <option value="Balayage Elite">Balayage Elite</option>
                                 <option value="Diseño Mariposa">Diseño Mariposa</option>
@@ -201,10 +225,12 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Especialista</label>
-                        <input type="text" id="instructor" class="form-control" placeholder="Nombre" required>
+                        <input type="text" id="instructor" class="form-control" placeholder="Nombre de la experta" required>
                     </div>
+
                     <div class="row g-2 mb-3">
                         <div class="col-6">
                             <label class="form-label">Fecha</label>
@@ -215,11 +241,15 @@
                             <input type="time" id="hora" class="form-control" required>
                         </div>
                     </div>
+
                     <div class="mb-4">
                         <label class="form-label">Costo Total ($)</label>
-                        <input type="number" id="costo" class="form-control fw-bold" required>
+                        <input type="number" id="costo" class="form-control fw-bold" placeholder="0.00" required>
                     </div>
-                    <button type="submit" id="btnSubmit" class="btn btn-pro w-100 py-3">CONFIRMAR RESERVA</button>
+
+                    <button type="submit" id="btnSubmit" class="btn btn-pro w-100 py-3">
+                        <i class="fas fa-calendar-check me-2"></i>CONFIRMAR RESERVA
+                    </button>
                     <button type="button" id="btnCancelarEdit" class="btn btn-outline-secondary w-100 mt-2 d-none" onclick="cancelarEdicion()">CANCELAR</button>
                 </form>
             </div>
@@ -227,7 +257,7 @@
 
         <div class="col-xl-8">
             <div class="table-container animate__animated animate__fadeInRight">
-                <div class="table-responsive">
+                <div class="table-responsive" style="max-height: 600px;">
                     <table class="table align-middle">
                         <thead>
                             <tr>
@@ -243,8 +273,9 @@
                     </table>
                 </div>
             </div>
+            
             <div class="mt-4 d-flex justify-content-between text-white-50 small fw-bold">
-                <span>TOTAL AGENDA: <span id="countTotal" class="text-gold">0</span></span>
+                <span>TOTAL EN AGENDA: <span id="countTotal" class="text-gold">0</span></span>
                 <span>MONTO PROYECTADO: <span id="montoTotal" class="text-gold">$0.00</span></span>
             </div>
         </div>
@@ -271,14 +302,14 @@ function renderReservas() {
             tabla.innerHTML += `
                 <tr class="animate__animated animate__fadeIn">
                     <td>
-                        <div class="text-uppercase fw-bold text-dark" style="font-size:0.9rem">${r.cliente}</div>
+                        <div class="text-uppercase fw-bold text-dark" style="font-size:0.85rem">${r.cliente}</div>
                         <div class="text-muted small">${r.servicio}</div>
                     </td>
                     <td>
-                        <div class="fw-bold" style="font-size: 0.8rem;">${r.fecha}</div>
+                        <div class="fw-bold text-dark" style="font-size: 0.8rem;">${r.fecha}</div>
                         <div class="small text-muted">${r.hora} hrs</div>
                     </td>
-                    <td><span class="text-uppercase small">${r.instructor}</span></td>
+                    <td><span class="text-uppercase small text-dark">${r.instructor}</span></td>
                     <td><span class="st-badge ${badgeClass}">${r.pago}</span></td>
                     <td class="fw-bold text-dark">$${parseFloat(r.costo).toFixed(2)}</td>
                     <td class="text-center">
@@ -333,15 +364,14 @@ function editar(i) {
     document.getElementById("fecha").value = r.fecha;
     document.getElementById("hora").value = r.hora;
     document.getElementById("costo").value = r.costo;
-    document.getElementById("btnSubmit").innerHTML = 'ACTUALIZAR RESERVA';
+    document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-sync me-2"></i>ACTUALIZAR';
     document.getElementById("btnCancelarEdit").classList.remove("d-none");
-    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function cancelarEdicion() {
     document.getElementById("formReserva").reset();
     document.getElementById("indexReserva").value = "";
-    document.getElementById("btnSubmit").innerHTML = 'CONFIRMAR RESERVA';
+    document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-calendar-check me-2"></i>CONFIRMAR RESERVA';
     document.getElementById("btnCancelarEdit").classList.add("d-none");
 }
 
