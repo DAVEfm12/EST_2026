@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>LK Studio | Gestión de Instructores VIP</title>
+  <title>LK Studio | Instructores VIP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,9 +13,11 @@
     :root {
       --gold: #D4AF37;
       --gold-dark: #b38f1d;
+      --gold-bright: #FFD700;
       --golden-rose: #e6b8a2;
       --deep-black: #050505;
       --pure-white: #ffffff;
+      --sidebar-width: 250px;
     }
 
     body {
@@ -23,247 +25,264 @@
       color: #ffffff;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
+      display: flex;
+      margin: 0;
     }
 
-    /* Tarjeta del Formulario (Negra) */
+    /* --- SIDEBAR UNIFICADO --- */
+    #sidebar {
+      width: var(--sidebar-width);
+      background: rgba(0, 0, 0, 0.95);
+      border-right: 1px solid var(--gold);
+      height: 100vh;
+      position: fixed;
+      z-index: 1000;
+    }
+
+    .sidebar-header {
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .nav-link {
+      color: #fff !important;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      transition: 0.3s;
+      border-left: 3px solid transparent;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-link i { margin-right: 15px; width: 20px; text-align: center; color: var(--gold); }
+
+    .nav-link:hover, .nav-link.active {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--gold);
+      color: var(--gold-bright) !important;
+    }
+
+    /* --- CONTENIDO PRINCIPAL --- */
+    #content {
+      width: calc(100% - var(--sidebar-width));
+      margin-left: var(--sidebar-width);
+      padding: 40px;
+    }
+
     .card-form {
       background: rgba(10, 10, 10, 0.95);
-      border: 2px solid var(--gold);
+      border: 1px solid var(--gold);
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    /* TABLA BLANCA (Contraste solicitado) */
+    /* TABLA BLANCA PROFESIONAL */
     .table-container-white {
       background: var(--pure-white);
       border-radius: 20px;
-      padding: 15px;
+      padding: 25px;
       box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
-      border: 3px solid var(--gold);
+      border: 2px solid var(--gold);
     }
 
-    .table {
-      background: var(--pure-white) !important;
-      margin-bottom: 0;
-    }
-
-    /* Letras Negras y Doradas en la tabla */
+    .table { background: var(--pure-white) !important; margin-bottom: 0; }
     .table thead th {
-      background: var(--pure-white);
       color: var(--deep-black) !important;
-      border-bottom: 3px solid var(--gold);
-      text-transform: uppercase;
+      border-bottom: 2px solid var(--gold);
       font-weight: 800;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
     }
 
-    .instructor-name {
-      color: var(--deep-black) !important;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
+    .instructor-name { color: var(--deep-black) !important; font-weight: 700; font-size: 1rem; }
+    .specialty-text { color: var(--gold-dark) !important; font-weight: 600; }
+    .table td { color: #333 !important; vertical-align: middle; border-bottom: 1px solid #eee; }
 
-    .specialty-text {
-      color: var(--gold-dark) !important;
-      font-weight: 600;
-    }
-
-    .table td {
-      color: #333 !important; /* Letras oscuras sobre fondo blanco */
-      padding: 15px 10px;
-      vertical-align: middle;
-    }
-
-    /* Formulario Estilo Golden Rose */
-    .form-label {
-      color: var(--golden-rose) !important;
-      font-weight: 700;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-    }
-
+    /* ESTILO FORMULARIO */
+    .form-label { color: var(--golden-rose) !important; font-weight: 700; font-size: 0.7rem; }
     .form-control, .form-select {
       background-color: #000 !important;
-      border: 1px solid #444 !important;
+      border: 1px solid #333 !important;
       color: var(--gold) !important;
-      border-radius: 10px;
     }
 
-    .form-control:focus {
-      border-color: var(--golden-rose);
-      box-shadow: 0 0 10px rgba(230, 184, 162, 0.3);
-    }
-
-    /* Botones */
     .btn-gold {
       background: linear-gradient(45deg, var(--gold), #f1d592);
       color: #000;
       font-weight: 800;
       border: none;
-      border-radius: 50px;
-      padding: 12px;
+      border-radius: 10px;
       transition: 0.3s;
     }
 
-    .btn-gold:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-    }
+    .doc-icon { font-size: 1.1rem; margin-right: 6px; }
+    .present { color: var(--gold); }
+    .absent { color: #dee2e6; }
 
-    /* Iconos de documentos */
-    .doc-icon {
-      font-size: 1.2rem;
-      margin-right: 5px;
-    }
-    .present { color: var(--gold-dark); }
-    .absent { color: #e0e0e0; }
-
-    /* Badge de Estatus */
     .status-badge {
       background: var(--deep-black);
       color: var(--gold);
-      border: 1px solid var(--gold);
-      padding: 5px 10px;
+      padding: 4px 12px;
       border-radius: 50px;
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: bold;
     }
 
-    @media (max-width: 768px) {
-      .display-mobile-none { display: none; }
+    #searchBox {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid var(--gold);
+        color: white;
+    }
+
+    @media (max-width: 992px) {
+      #sidebar { display: none; }
+      #content { width: 100%; margin-left: 0; }
     }
   </style>
 </head>
 
 <body>
 
-<div class="container-fluid py-5 px-lg-5">
-
-  <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
-    <a href="./PANEL_ADMIN.html" class="btn btn-outline-light btn-sm rounded-pill px-4" style="color: var(--golden-rose); border-color: var(--golden-rose);">
-      <i class="fas fa-chevron-left me-2"></i> VOLVER AL PANEL
-    </a>
-    <h4 class="text-gold m-0 luxury-font fw-bold display-mobile-none">SISTEMA ACADÉMICO</h4>
-  </div>
-
-  <div class="text-center mb-5 animate__animated animate__zoomIn">
-    <h1 class="fw-bold" style="color: var(--gold); letter-spacing: 2px;">INSTRUCTORES & EXPEDIENTES</h1>
-    <p class="text-rose fw-bold" style="color: var(--golden-rose) !important;">CONTROL DE PERSONAL VIP LK STUDIO</p>
-  </div>
-
-  <div class="row g-4">
-    <div class="col-xl-4 col-lg-5">
-      <div class="card-form p-4">
-        <h5 class="text-gold mb-4 fw-bold border-bottom border-secondary pb-3">
-          <i class="fas fa-user-plus me-2"></i> REGISTRO PROFESIONAL
-        </h5>
-
-        <form id="formInstructor">
-          <input type="hidden" id="indexInstructor">
-          
-          <div class="mb-3">
-            <label class="form-label">Nombre del Instructor</label>
-            <input type="text" id="nombre" class="form-control" placeholder="Nombre y Apellidos" required>
-          </div>
-
-          <div class="row">
-            <div class="col-7 mb-3">
-              <label class="form-label">Especialidad</label>
-              <input type="text" id="especialidad" class="form-control" placeholder="Ej. Uñas / Cabello" required>
-            </div>
-            <div class="col-5 mb-3">
-              <label class="form-label">Años Exp.</label>
-              <input type="number" id="experiencia" class="form-control" value="1" required>
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <label class="form-label">Estatus de Contrato</label>
-            <select id="estatus" class="form-select">
-              <option value="Activo">ACTIVO</option>
-              <option value="Inactivo">INACTIVO</option>
-            </select>
-          </div>
-
-          <div class="mb-4 p-3 border border-secondary rounded">
-            <label class="form-label d-block mb-3 border-bottom border-secondary pb-2">EXPEDIENTE DIGITAL (Subir archivos)</label>
-            <div class="row g-2">
-                <div class="col-6"><input type="file" id="f_acta" class="form-control form-control-sm" title="Acta"></div>
-                <div class="col-6"><input type="file" id="f_curp" class="form-control form-control-sm" title="CURP"></div>
-                <div class="col-6"><input type="file" id="f_ine" class="form-control form-control-sm" title="INE"></div>
-                <div class="col-6"><input type="file" id="f_dom" class="form-control form-control-sm" title="Domicilio"></div>
-                <div class="col-12"><input type="file" id="f_cv" class="form-control form-control-sm" title="CV"></div>
-            </div>
-          </div>
-
-          <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-gold py-3 shadow">
-              <i class="fas fa-save me-2"></i> GUARDAR INSTRUCTOR
-            </button>
-            <button type="button" class="btn btn-sm text-rose mt-2" onclick="resetForm()">DESCARTAR</button>
-          </div>
-        </form>
-      </div>
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <h4 class="fw-bold m-0" style="color:var(--gold)">LK STUDIO</h4>
+      <small style="color:var(--golden-rose)">SISTEMA DE GESTIÓN</small>
     </div>
+    <div class="mt-4">
+      <a href="POS.html" class="nav-link"><i class="fas fa-cash-register"></i> VENTAS (POS)</a>
+      <a href="SERVICIOS.html" class="nav-link"><i class="fas fa-list"></i> CATÁLOGO</a>
+      <a href="#" class="nav-link active"><i class="fas fa-chalkboard-teacher"></i> INSTRUCTORES</a>
+      <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-arrow-left"></i> VOLVER AL PANEL</a>
+    </div>
+  </nav>
 
-    <div class="col-xl-8 col-lg-7">
-      <div class="table-container-white animate__animated animate__fadeInRight">
-        <h5 class="fw-bold mb-4" style="color: var(--deep-black);">CATÁLOGO DE INSTRUCTORES</h5>
-        
-        <div class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead>
-              <tr>
-                <th>IDENTIDAD</th>
-                <th>ESPECIALIDAD</th>
-                <th class="display-mobile-none">DOCUMENTOS</th>
-                <th>ESTADO</th>
-                <th class="text-center">OPCIONES</th>
-              </tr>
-            </thead>
-            <tbody id="tablaInstructores">
-                </tbody>
-          </table>
+  <div id="content">
+    <div class="container-fluid">
+      
+      <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
+        <div>
+            <h1 class="fw-bold m-0" style="color: var(--gold)">Expedientes Digitales</h1>
+            <p class="m-0" style="color: var(--golden-rose)">Control de Personal e Instructores de Élite</p>
+        </div>
+        <button class="btn btn-outline-warning" onclick="exportarCSV()">
+            <i class="fas fa-file-export me-2"></i> EXPORTAR LISTA
+        </button>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-xl-4">
+          <div class="card-form p-4 animate__animated animate__fadeInLeft">
+            <h5 class="text-gold mb-4 fw-bold"><i class="fas fa-id-badge me-2"></i>NUEVO PERFIL</h5>
+            
+            <form id="formInstructor">
+              <input type="hidden" id="indexInstructor">
+              
+              <div class="mb-3">
+                <label class="form-label">NOMBRE COMPLETO</label>
+                <input type="text" id="nombre" class="form-control" placeholder="Escriba el nombre" required>
+              </div>
+
+              <div class="row">
+                <div class="col-7 mb-3">
+                  <label class="form-label">ESPECIALIDAD</label>
+                  <input type="text" id="especialidad" class="form-control" placeholder="Ej. Master Nailer" required>
+                </div>
+                <div class="col-5 mb-3">
+                  <label class="form-label">AÑOS EXP.</label>
+                  <input type="number" id="experiencia" class="form-control" value="1">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">ESTADO LABORAL</label>
+                <select id="estatus" class="form-select">
+                  <option value="Activo">ACTIVO</option>
+                  <option value="Inactivo">INACTIVO</option>
+                  <option value="En Revisión">EN REVISIÓN</option>
+                </select>
+              </div>
+
+              <div class="mb-4 p-3 border border-secondary rounded bg-black">
+                <label class="form-label d-block mb-2 text-center">DOCUMENTACIÓN CARGADA</label>
+                <div class="row g-2 text-center">
+                    <div class="col-4">
+                        <small class="d-block text-muted">ACTA</small>
+                        <input type="checkbox" id="check_acta">
+                    </div>
+                    <div class="col-4">
+                        <small class="d-block text-muted">CURP</small>
+                        <input type="checkbox" id="check_curp">
+                    </div>
+                    <div class="col-4">
+                        <small class="d-block text-muted">INE</small>
+                        <input type="checkbox" id="check_ine">
+                    </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-gold w-100 py-3">
+                <i class="fas fa-save me-2"></i> REGISTRAR INSTRUCTOR
+              </button>
+              <button type="button" class="btn btn-link w-100 text-decoration-none text-rose mt-2" onclick="resetForm()">Limpiar campos</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-xl-8">
+          <div class="mb-3">
+              <input type="text" id="inputBusqueda" class="form-control" placeholder="🔍 Buscar por nombre o especialidad..." onkeyup="buscarInstructor()">
+          </div>
+          
+          <div class="table-container-white animate__animated animate__fadeInRight">
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th>INSTRUCTOR</th>
+                    <th>ESPECIALIDAD</th>
+                    <th>DOCS</th>
+                    <th>ESTADO</th>
+                    <th class="text-center">ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaInstructores"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 <script>
 let instructores = JSON.parse(localStorage.getItem("instructores")) || [];
 
-function renderTabla() {
+function renderTabla(datos = instructores) {
   const tabla = document.getElementById("tablaInstructores");
   tabla.innerHTML = "";
 
-  instructores.forEach((i, index) => {
-    const checkDoc = (doc) => i.docs && i.docs[doc] ? 'present' : 'absent';
+  datos.forEach((i, index) => {
+    const iconClass = (check) => check ? 'present fas fa-check-circle' : 'absent far fa-circle';
 
     tabla.innerHTML += `
-      <tr>
+      <tr class="animate__animated animate__fadeIn">
         <td>
           <div class="instructor-name">${i.nombre}</div>
-          <small class="text-muted fw-bold">${i.experiencia} años de trayectoria</small>
+          <small class="text-muted">${i.experiencia} años de exp.</small>
         </td>
         <td>
-          <span class="specialty-text"><i class="fas fa-certificate me-1"></i>${i.especialidad}</span>
-        </td>
-        <td class="display-mobile-none">
-          <div class="d-flex">
-            <i class="fas fa-file-invoice doc-icon ${checkDoc('acta')}" title="Acta"></i>
-            <i class="fas fa-fingerprint doc-icon ${checkDoc('curp')}" title="CURP"></i>
-            <i class="fas fa-id-card doc-icon ${checkDoc('ine')}" title="INE"></i>
-            <i class="fas fa-home doc-icon ${checkDoc('domicilio')}" title="Domicilio"></i>
-            <i class="fas fa-file-pdf doc-icon ${checkDoc('cv')}" title="CV"></i>
-          </div>
+          <span class="specialty-text"><i class="fas fa-star me-1"></i>${i.especialidad}</span>
         </td>
         <td>
-          <span class="status-badge">${i.estatus.toUpperCase()}</span>
+          <i class="${iconClass(i.docs.acta)} doc-icon" title="Acta"></i>
+          <i class="${iconClass(i.docs.curp)} doc-icon" title="CURP"></i>
+          <i class="${iconClass(i.docs.ine)} doc-icon" title="INE"></i>
         </td>
+        <td><span class="status-badge">${i.estatus.toUpperCase()}</span></td>
         <td class="text-center">
-          <button class="btn btn-sm text-dark me-1" onclick="editar(${index})"><i class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
+          <button class="btn btn-sm btn-outline-dark me-1" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
         </td>
       </tr>
     `;
@@ -279,11 +298,9 @@ document.getElementById("formInstructor").addEventListener("submit", function(e)
     experiencia: document.getElementById("experiencia").value,
     estatus: document.getElementById("estatus").value,
     docs: {
-        acta: document.getElementById("f_acta").files.length > 0,
-        curp: document.getElementById("f_curp").files.length > 0,
-        ine: document.getElementById("f_ine").files.length > 0,
-        domicilio: document.getElementById("f_dom").files.length > 0,
-        cv: document.getElementById("f_cv").files.length > 0
+        acta: document.getElementById("check_acta").checked,
+        curp: document.getElementById("check_curp").checked,
+        ine: document.getElementById("check_ine").checked
     }
   };
 
@@ -296,22 +313,46 @@ document.getElementById("formInstructor").addEventListener("submit", function(e)
   renderTabla();
 });
 
+function buscarInstructor() {
+    const texto = document.getElementById("inputBusqueda").value.toLowerCase();
+    const filtrados = instructores.filter(i => 
+        i.nombre.toLowerCase().includes(texto) || 
+        i.especialidad.toLowerCase().includes(texto)
+    );
+    renderTabla(filtrados);
+}
+
 function editar(index){
   const i = instructores[index];
   document.getElementById("nombre").value = i.nombre;
   document.getElementById("especialidad").value = i.especialidad;
   document.getElementById("experiencia").value = i.experiencia;
   document.getElementById("estatus").value = i.estatus;
+  document.getElementById("check_acta").checked = i.docs.acta;
+  document.getElementById("check_curp").checked = i.docs.curp;
+  document.getElementById("check_ine").checked = i.docs.ine;
   document.getElementById("indexInstructor").value = index;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function eliminar(index){
-  if(confirm("¿Eliminar este instructor de la base de datos?")) {
+  if(confirm("¿Seguro de eliminar este registro?")) {
     instructores.splice(index,1);
     localStorage.setItem("instructores", JSON.stringify(instructores));
     renderTabla();
   }
+}
+
+function exportarCSV() {
+    let csv = "Nombre,Especialidad,Experiencia,Estado\n";
+    instructores.forEach(i => {
+        csv += `${i.nombre},${i.especialidad},${i.experiencia},${i.estatus}\n`;
+    });
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'instructores_lkstudio.csv');
+    a.click();
 }
 
 function resetForm(){
