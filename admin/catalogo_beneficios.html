@@ -1,266 +1,687 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
-  <title>Elite Management | LK Studio</title>
+
+  <title>Elite Privileges | LK Studio</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
+
   <style>
+
     :root {
+
       --gold: #D4AF37;
+
       --gold-dark: #b38f1d;
+
       --gold-light: #f1d592;
+
       --golden-rose: #e6b8a2;
+
       --deep-black: #050505;
+
       --soft-black: #0d0d0d;
-      --glass-black: rgba(10, 10, 10, 0.95);
+
       --sidebar-width: 280px;
+
     }
 
+
     body {
+
       background: radial-gradient(circle at top, #1a1a1a 0%, var(--deep-black) 100%);
+
       color: #ffffff;
+
       font-family: 'Poppins', sans-serif;
+
       margin: 0;
+
       display: flex;
+
       min-height: 100vh;
+
       overflow-x: hidden;
+
     }
+
 
     .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-    /* --- SIDEBAR MAJESTIC --- */
+
+    /* --- SIDEBAR IZQUIERDO --- */
+
     #sidebar {
+
       width: var(--sidebar-width);
-      background: var(--glass-black);
-      border-right: 1px solid rgba(212, 175, 55, 0.3);
+
+      background: rgba(0, 0, 0, 0.98);
+
+      border-right: 1px solid var(--gold);
+
       height: 100vh;
+
       position: fixed;
+
       z-index: 1000;
+
       display: flex;
+
       flex-direction: column;
-      backdrop-filter: blur(15px);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
     }
 
-    .sidebar-header {
+
+    .sidebar-logo {
+
       padding: 40px 20px;
+
       text-align: center;
-      background: linear-gradient(to bottom, rgba(212, 175, 55, 0.05), transparent);
+
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+
     }
 
-    .sidebar-header img {
-      max-width: 160px;
-      filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
-      margin-bottom: 15px;
+
+    .sidebar-logo img {
+
+      max-width: 180px;
+
+      height: auto;
+
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+
     }
 
-    .system-label {
-      color: var(--golden-rose);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      display: block;
-    }
 
-    /* Scroll Personalizado para el Menú */
-    .nav-container {
+    .nav-menu {
+
       flex-grow: 1;
-      overflow-y: auto;
-      padding: 10px 0;
+
+      padding: 20px 0;
+
     }
 
-    .nav-container::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .nav-container::-webkit-scrollbar-thumb {
-      background: var(--gold-dark);
-      border-radius: 10px;
-    }
-
-    /* Categorías de Menú */
-    .menu-category {
-      color: rgba(230, 184, 162, 0.5); /* Golden Rose con opacidad */
-      font-size: 0.6rem;
-      font-weight: 800;
-      padding: 20px 30px 10px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
 
     .nav-link {
-      color: rgba(255, 255, 255, 0.8) !important;
-      padding: 12px 30px;
+
+      color: rgba(255,255,255,0.7) !important;
+
+      padding: 15px 30px;
+
       display: flex;
+
       align-items: center;
-      font-size: 0.85rem;
-      transition: 0.3s all ease;
-      position: relative;
+
+      font-size: 0.8rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      transition: 0.3s;
+
+      border-left: 4px solid transparent;
+
       text-decoration: none;
-      border-left: 3px solid transparent;
+
     }
+
 
     .nav-link i {
-      width: 30px;
+
+      width: 25px;
+
       font-size: 1.1rem;
-      transition: 0.3s;
-      color: var(--gold-light);
+
     }
 
-    .nav-link:hover {
-      color: var(--gold) !important;
+
+    .nav-link:hover, .nav-link.active {
+
       background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
-      border-left: 3px solid var(--gold);
-      padding-left: 35px;
-    }
 
-    .nav-link.active {
-      background: rgba(212, 175, 55, 0.15);
-      border-left: 3px solid var(--gold);
+      border-left: 4px solid var(--gold);
+
       color: var(--gold) !important;
-      font-weight: 600;
+
     }
 
-    .nav-link.active i {
-      color: var(--gold);
-      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+
+    .nav-exit {
+
+      padding: 20px 0;
+
+      border-top: 1px solid rgba(255,255,255,0.05);
+
     }
 
-    /* Footer del Sidebar */
-    .sidebar-footer {
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      border-top: 1px solid rgba(212, 175, 55, 0.1);
-    }
 
-    .btn-exit {
-      width: 100%;
-      background: transparent;
-      border: 1px solid rgba(255, 0, 0, 0.3);
-      color: #ff4d4d !important;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-    }
+    /* --- CONTENIDO PRINCIPAL --- */
 
-    .btn-exit:hover {
-      background: rgba(255, 0, 0, 0.1);
-      border-color: #ff4d4d;
-    }
-
-    /* --- CONTENIDO --- */
     #content {
+
       width: calc(100% - var(--sidebar-width));
+
       margin-left: var(--sidebar-width);
+
       padding: 40px;
-      transition: all 0.4s;
+
     }
 
-    /* Badge Golden Rose */
-    .badge-elite {
-      background: var(--golden-rose);
-      color: var(--deep-black);
-      font-weight: 900;
-      font-size: 0.6rem;
-      padding: 4px 10px;
-      border-radius: 4px;
-      text-transform: uppercase;
+
+    /* CARDS */
+
+    .card-luxury {
+
+      background: var(--soft-black);
+
+      border: 1px solid rgba(212, 175, 55, 0.2);
+
+      border-radius: 15px;
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
     }
+
+
+    /* TABLA LUXURY */
+
+    .table-container {
+
+      background: #ffffff; /* Fondo blanco para legibilidad */
+
+      border-radius: 15px;
+
+      padding: 20px;
+
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+
+    }
+
+
+    .table-luxury { color: #333 !important; }
+
+    .table-luxury thead th {
+
+      color: #999;
+
+      font-size: 0.75rem;
+
+      text-transform: uppercase;
+
+      border-bottom: 2px solid var(--gold);
+
+      padding: 15px;
+
+    }
+
+
+    /* ELEMENTOS DE DISEÑO */
+
+    .stat-card {
+
+      background: rgba(255,255,255,0.03);
+
+      border: 1px solid #222;
+
+      border-radius: 12px;
+
+      padding: 20px;
+
+      text-align: center;
+
+    }
+
+
+    .icon-box {
+
+      width: 40px; height: 40px;
+
+      background: #000;
+
+      border: 1px solid var(--gold);
+
+      border-radius: 8px;
+
+      display: flex; align-items: center; justify-content: center;
+
+      color: var(--gold);
+
+    }
+
+
+    .btn-gold {
+
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+
+      color: #000 !important;
+
+      font-weight: 700; border: none; border-radius: 50px;
+
+      padding: 10px 25px; transition: 0.3s;
+
+    }
+
+
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+
+
+    /* RESPONSIVO */
 
     @media (max-width: 992px) {
-      #sidebar { width: 85px; }
-      #sidebar .system-label, #sidebar span, #sidebar .menu-category { display: none; }
-      #sidebar .sidebar-header { padding: 20px 10px; }
-      #sidebar .nav-link { justify-content: center; padding: 15px; }
-      #sidebar .nav-link i { margin: 0 !important; width: auto; }
-      #content { width: calc(100% - 85px); margin-left: 85px; }
+
+      #sidebar { width: 80px; }
+
+      #sidebar .sidebar-logo img { width: 40px; }
+
+      #sidebar span, #sidebar small { display: none; }
+
+      #content { width: calc(100% - 80px); margin-left: 80px; }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <nav id="sidebar">
-    <div class="sidebar-header">
+
+    <div class="sidebar-logo">
+
         <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
-        <span class="system-label">Elite System v4.0</span>
+
+        <div class="mt-2">
+
+          <small style="color:var(--golden-rose); font-size: 0.6rem; letter-spacing: 2px;">ELITE SYSTEM</small>
+
+        </div>
+
     </div>
 
-    <div class="nav-container">
-        <div class="menu-category">Operaciones</div>
-        <a href="PANEL_ADMIN.html" class="nav-link active">
-            <i class="fas fa-chart-line me-3"></i> <span>Dashboard Principal</span>
-        </a>
-        <a href="punto_venta.html" class="nav-link">
-            <i class="fas fa-cash-register me-3"></i> <span>Punto de Venta</span>
-        </a>
-        <a href="Gestión_Reservaciones.html" class="nav-link">
-            <i class="fas fa-calendar-check me-3"></i> <span>Reservaciones</span>
-        </a>
-        <a href="citas.html" class="nav-link">
-            <i class="fas fa-clock me-3"></i> <span>Control de Citas</span>
+
+    <div class="nav-menu">
+
+        <a href="beneficios.html" class="nav-link active">
+
+          <i class="fas fa-gem me-3"></i> <span>Beneficios VIP</span>
+
         </a>
 
-        <div class="menu-category">Catálogos & Elite</div>
-        <a href="catalogo_servicios.html" class="nav-link">
-            <i class="fas fa-cut me-3"></i> <span>Servicios</span>
-        </a>
-        <a href="catalogo_beneficios.html" class="nav-link">
-            <i class="fas fa-gem me-3"></i> <span>Beneficios VIP</span>
-        </a>
         <a href="catalogo_cursos.html" class="nav-link">
-            <i class="fas fa-graduation-cap me-3"></i> <span>Cursos Online</span>
-        </a>
-        <a href="catalogo_instruc.html" class="nav-link">
-            <i class="fas fa-user-tie me-3"></i> <span>Instructores</span>
+
+          <i class="fas fa-graduation-cap me-3"></i> <span>Cursos Elite</span>
+
         </a>
 
-        <div class="menu-category">Reportes</div>
-        <a href="reportes.html" class="nav-link">
-            <i class="fas fa-file-invoice-dollar me-3"></i> <span>Finanzas & Ventas</span>
+        <a href="clientes.html" class="nav-link">
+
+          <i class="fas fa-users me-3"></i> <span>Membresías</span>
+
         </a>
+
+        <a href="historial.html" class="nav-link">
+
+          <i class="fas fa-history me-3"></i> <span>Historial</span>
+
+        </a>
+
     </div>
 
-    <div class="sidebar-footer">
-        <a href="login.html" class="btn-exit">
-            <i class="fas fa-power-off me-2"></i> Cerrar Sesión
+
+    <div class="nav-exit">
+
+        <a href="./PANEL_ADMIN.html" class="nav-link text-danger">
+
+          <i class="fas fa-sign-out-alt me-3"></i> <span>Salir</span>
+
         </a>
+
     </div>
+
 </nav>
 
+
 <div id="content">
-    <div class="container-fluid animate__animated animate__fadeIn">
-        <div class="row">
-            <div class="col-12">
-                <span class="badge-elite mb-2 d-inline-block">Acceso Autorizado</span>
-                <h1 class="luxury-font text-gold">Bienvenido al Panel Elite</h1>
-                <hr style="border-color: rgba(212,175,55,0.2)">
-            </div>
+
+  <div class="container-fluid">
+
+    
+
+    <div class="row mb-5 animate__animated animate__fadeInDown">
+
+        <div class="col-md-7">
+
+            <h1 class="luxury-font text-gold mb-1">GESTIÓN DE BENEFICIOS</h1>
+
+            <p class="text-white-50 small">Administra el catálogo de experiencias de lujo para tus clientas.</p>
+
         </div>
-        
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <div class="p-5 text-center" style="background: rgba(255,255,255,0.02); border: 1px dashed rgba(212,175,55,0.3); border-radius: 20px;">
-                    <i class="fas fa-shield-alt fa-3x text-gold mb-3"></i>
-                    <p class="text-white-50">Seleccione una opción del menú lateral para comenzar la gestión de su estudio.</p>
-                </div>
+
+        <div class="col-md-5 d-flex gap-3 justify-content-end align-items-center">
+
+            <div class="stat-card">
+
+                <small class="text-white-50 d-block">TOTAL</small>
+
+                <span class="text-gold fw-bold h4 m-0" id="countTotal">0</span>
+
             </div>
+
+            <div class="stat-card">
+
+                <small class="text-white-50 d-block">ESTADO</small>
+
+                <span class="text-success fw-bold h6 m-0">Sincronizado</span>
+
+            </div>
+
         </div>
+
     </div>
+
+
+    <div class="row g-4">
+
+      <div class="col-xl-4 col-lg-5">
+
+        <div class="card card-luxury animate__animated animate__fadeInLeft">
+
+          <div class="card-body p-4">
+
+            <h6 class="text-gold luxury-font mb-4">
+
+              <i class="fas fa-edit me-2"></i>Editor de Ítem
+
+            </h6>
+
+
+            <form id="formBeneficio">
+
+              <input type="hidden" id="indexBeneficio">
+
+              
+
+              <div class="mb-3">
+
+                <label class="form-label">Nombre del Beneficio</label>
+
+                <input type="text" id="titulo" class="form-control" placeholder="..." required>
+
+              </div>
+
+
+              <div class="mb-3">
+
+                <label class="form-label">Categoría / Icono</label>
+
+                <select id="icono" class="form-select">
+
+                  <option value="fa-glass-cheers">🍷 Bebidas</option>
+
+                  <option value="fa-spa">🧖‍♀️ Spa & Relax</option>
+
+                  <option value="fa-star">✨ Servicio Premium</option>
+
+                  <option value="fa-wifi">📶 Conexión</option>
+
+                </select>
+
+              </div>
+
+
+              <div class="mb-4">
+
+                <label class="form-label">Descripción Breve</label>
+
+                <textarea id="descripcion" class="form-control" rows="3" required></textarea>
+
+              </div>
+
+
+              <div class="d-grid gap-2">
+
+                <button type="submit" id="btnGuardar" class="btn btn-gold">GUARDAR CAMBIOS</button>
+
+                <button type="button" id="btnCancel" class="btn btn-sm text-white-50 d-none" onclick="resetForm()">Cancelar</button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-xl-8 col-lg-7">
+
+        <div class="table-container animate__animated animate__fadeInRight">
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+
+              <h6 class="fw-bold m-0 text-dark">CATÁLOGO VIGENTE</h6>
+
+              <div class="input-group" style="width: 200px;">
+
+                  <span class="input-group-text bg-light border-0"><i class="fas fa-search"></i></span>
+
+                  <input type="text" id="search" class="form-control bg-light border-0 small" placeholder="Filtrar..." onkeyup="filtrar()">
+
+              </div>
+
+          </div>
+
+
+          <div class="table-responsive">
+
+            <table class="table table-luxury align-middle">
+
+              <thead>
+
+                <tr>
+
+                  <th>BENEFICIO</th>
+
+                  <th class="text-center">ESTADO</th>
+
+                  <th class="text-end">ACCIONES</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="tablaBeneficios">
+
+                </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
+
+<script>
+
+let beneficios = JSON.parse(localStorage.getItem("lk_vip_items")) || [
+
+  { titulo: "Barra Gourmet", descripcion: "Mimosas y snacks premium ilimitados.", icono: "fa-glass-cheers" },
+
+  { titulo: "Estación de Carga", descripcion: "Carga rápida para dispositivos en cada cubículo.", icono: "fa-wifi" }
+
+];
+
+
+function renderTabla(datos = beneficios) {
+
+  const tabla = document.getElementById("tablaBeneficios");
+
+  document.getElementById("countTotal").innerText = datos.length;
+
+  tabla.innerHTML = "";
+
+ 
+
+  datos.forEach((b, index) => {
+
+    tabla.innerHTML += `
+
+      <tr>
+
+        <td>
+
+          <div class="d-flex align-items-center">
+
+            <div class="icon-box me-3"><i class="fas ${b.icono}"></i></div>
+
+            <div>
+
+              <div class="fw-bold text-dark text-uppercase small">${b.titulo}</div>
+
+              <div class="text-muted" style="font-size: 0.7rem;">${b.descripcion}</div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+        <td class="text-center"><span class="badge rounded-pill bg-dark" style="font-size: 0.6rem; color: var(--gold);">VIP ELITE</span></td>
+
+        <td class="text-end">
+
+          <button class="btn btn-link text-primary p-1" onclick="editar(${index})"><i class="fas fa-pencil-alt"></i></button>
+
+          <button class="btn btn-link text-danger p-1" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
+
+        </td>
+
+      </tr>`;
+
+  });
+
+}
+
+
+document.getElementById("formBeneficio").addEventListener("submit", function(e){
+
+  e.preventDefault();
+
+  const index = document.getElementById("indexBeneficio").value;
+
+  const nuevo = {
+
+    titulo: document.getElementById("titulo").value,
+
+    descripcion: document.getElementById("descripcion").value,
+
+    icono: document.getElementById("icono").value
+
+  };
+
+  if (index === "") beneficios.push(nuevo);
+
+  else beneficios[index] = nuevo;
+
+  localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
+
+  resetForm();
+
+  renderTabla();
+
+});
+
+
+function filtrar() {
+
+    const text = document.getElementById("search").value.toLowerCase();
+
+    renderTabla(beneficios.filter(b => b.titulo.toLowerCase().includes(text)));
+
+}
+
+
+function editar(index) {
+
+  const b = beneficios[index];
+
+  document.getElementById("titulo").value = b.titulo;
+
+  document.getElementById("descripcion").value = b.descripcion;
+
+  document.getElementById("icono").value = b.icono;
+
+  document.getElementById("indexBeneficio").value = index;
+
+  document.getElementById("btnGuardar").innerText = "ACTUALIZAR ÍTEM";
+
+  document.getElementById("btnCancel").classList.remove('d-none');
+
+}
+
+
+function eliminar(index) {
+
+  if (confirm("¿Segura que deseas eliminar este privilegio?")) {
+
+    beneficios.splice(index, 1);
+
+    localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
+
+    renderTabla();
+
+  }
+
+}
+
+
+function resetForm() {
+
+  document.getElementById("formBeneficio").reset();
+
+  document.getElementById("indexBeneficio").value = "";
+
+  document.getElementById("btnGuardar").innerText = "GUARDAR CAMBIOS";
+
+  document.getElementById("btnCancel").classList.add('d-none');
+
+}
+
+
+renderTabla();
+
+</script>
+
+
 </body>
-</html>
+
+</html> 
