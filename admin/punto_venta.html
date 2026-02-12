@@ -13,13 +13,60 @@
             --gold-bright: #FFD700; 
             --rose-gold: #E6B8A2; 
             --deep-black: #050505;
+            --sidebar-width: 250px;
         }
 
         body { 
             background: radial-gradient(circle at top, #1a1a1a, var(--deep-black)); 
             color: #ffffff; 
             font-family: 'Poppins', sans-serif; 
-            min-height: 100vh; 
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+        }
+
+        /* --- MENÚ LATERAL (SIDEBAR) --- */
+        #sidebar {
+            width: var(--sidebar-width);
+            background: rgba(0, 0, 0, 0.95);
+            border-right: 1px solid var(--gold);
+            height: 100vh;
+            position: fixed;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-link {
+            color: #fff !important;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-link i { margin-right: 15px; width: 20px; text-align: center; color: var(--gold); }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--gold);
+            color: var(--gold-bright) !important;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        #content {
+            width: calc(100% - var(--sidebar-width));
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: all 0.3s;
         }
 
         .card { 
@@ -31,7 +78,6 @@
 
         .gold { color: var(--gold) !important; }
         .golden-rose { color: var(--rose-gold) !important; }
-        .text-resaltado { color: #ffffff !important; font-weight: 600; }
         label { color: var(--rose-gold) !important; letter-spacing: 1px; margin-bottom: 5px; font-size: 0.8rem; font-weight: bold; }
 
         .btn-gold { 
@@ -41,22 +87,13 @@
             border: none; 
             border-radius: 10px; 
             text-transform: uppercase;
-            transition: 0.3s;
         }
-        .btn-gold:hover { transform: scale(1.02); box-shadow: 0 0 15px var(--gold); }
 
         .form-control, .form-select { 
             background: #000 !important; 
             border: 1px solid #444 !important; 
             color: #ffffff !important; 
         }
-        .form-control:focus { border-color: var(--gold) !important; box-shadow: none; }
-
-        .badge-servicio { background: var(--gold) !important; color: #000 !important; font-weight: bold; }
-        .badge-extra { background: var(--rose-gold) !important; color: #000 !important; font-weight: bold; }
-
-        .table { color: #ffffff !important; }
-        .table thead th { color: var(--gold) !important; border-bottom: 2px solid var(--gold); font-size: 0.8rem; }
 
         .bg-calculadora {
             background: #000;
@@ -73,132 +110,139 @@
         }
         .historial-item:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
 
-        /* Estilo para el ticket */
-        #ticket-print { display: none; }
-        @media print {
-            body * { display: none; }
-            #ticket-print { display: block; color: #000; font-family: monospace; }
+        @media (max-width: 992px) {
+            #sidebar { margin-left: calc(var(--sidebar-width) * -1); }
+            #content { width: 100%; margin-left: 0; }
+            #sidebar.active { margin-left: 0; }
         }
     </style>
 </head>
 <body>
 
-<div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4 animate__animated animate__fadeIn">
-        <div>
-            <h2 class="gold fw-bold m-0"><i class="fas fa-crown"></i> LK STUDIO POS</h2>
-            <small class="golden-rose text-uppercase fw-bold">Gestión de Ventas Elite</small>
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h4 class="gold fw-bold mb-0">LK STUDIO</h4>
+            <small class="golden-rose">SISTEMA ELITE</small>
         </div>
-        <div class="text-end">
-            <button class="btn btn-sm btn-outline-warning rounded-pill px-3 me-2" onclick="verCorteCaja()">Corte de Caja</button>
-            <span id="fecha-actual" class="badge border border-warning gold p-2"></span>
+        <div class="mt-4">
+            <a href="#" class="nav-link active"><i class="fas fa-cash-register"></i> VENTAS (POS)</a>
+            <a href="#" class="nav-link"><i class="fas fa-calendar-alt"></i> AGENDA</a>
+            <a href="#" class="nav-link"><i class="fas fa-users"></i> CLIENTAS</a>
+            <a href="#" class="nav-link"><i class="fas fa-box"></i> INVENTARIO</a>
+            <a href="#" class="nav-link" onclick="verCorteCaja()"><i class="fas fa-chart-line"></i> CORTE DE CAJA</a>
+            <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-user-shield"></i> PANEL ADMIN</a>
+            <hr class="mx-3 border-secondary">
+            <a href="#" class="nav-link" onclick="location.reload()"><i class="fas fa-sync"></i> NUEVA VENTA</a>
+        </div>
+    </nav>
+
+    <div id="content">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="gold fw-bold m-0 animate__animated animate__fadeInDown">TERMINAL DE COBRO</h2>
+                    <span id="fecha-actual" class="badge border border-warning gold p-2 mt-2"></span>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-xl-4">
+                    <div class="card p-4 animate__animated animate__fadeInLeft">
+                        <h5 class="gold mb-4 text-center fw-bold"><i class="fas fa-star me-2"></i>DATOS DE VENTA</h5>
+                        
+                        <div class="mb-3">
+                            <label>CLIENTE</label>
+                            <input id="inputCliente" class="form-control" placeholder="Nombre completo">
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label>FOLIO</label>
+                                <input id="inputFolio" class="form-control" readonly>
+                                <input type="hidden" id="inputCita"> </div>
+                            <div class="col-6">
+                                <label>MÉTODO</label>
+                                <select id="metodoPago" class="form-select" onchange="toggleTransferencia()">
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                    <option value="Tarjeta">Tarjeta</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>AGREGAR SERVICIO</label>
+                            <div class="input-group">
+                                <select id="selectServicio" class="form-select"></select>
+                                <button class="btn btn-gold" onclick="agregarAlCarrito('servicio')"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>AGREGAR EXTRA</label>
+                            <div class="input-group">
+                                <select id="selectMaterial" class="form-select"></select>
+                                <button class="btn btn-gold" style="filter: hue-rotate(150deg);" onclick="agregarAlCarrito('material')"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="infoTransferencia" class="alert alert-dark border-warning d-none small text-center">
+                            <strong class="gold">PAGO TRANSFERENCIA</strong><br>
+                            Banco Azteca | 1271 8001 2784 5963 25
+                        </div>
+
+                        <div class="bg-calculadora mb-4">
+                            <label class="small golden-rose fw-bold">CALCULAR CAMBIO</label>
+                            <input id="pagaCon" type="number" class="form-control mb-2" placeholder="Paga con..." oninput="calcularCambio()">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>Cambio:</span>
+                                <h4 class="m-0 text-success fw-bold" id="cambioResult">$0.00</h4>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-gold w-100 py-3 shadow" onclick="finalizarVenta()">
+                            <i class="fas fa-check-circle me-2"></i> REGISTRAR VENTA
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-xl-8">
+                    <div class="card p-4 mb-4 animate__animated animate__fadeInRight" style="min-height: 450px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="gold fw-bold m-0"><i class="fas fa-receipt me-2"></i>RESUMEN</h5>
+                            <button class="btn btn-sm btn-outline-danger" onclick="vaciarCarrito()">VACIAR</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>CONCEPTO</th>
+                                        <th>TIPO</th>
+                                        <th>PRECIO</th>
+                                        <th class="text-end">BORRAR</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaCarrito"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto bg-dark p-3 rounded border border-warning">
+                            <h2 class="golden-rose fw-bold m-0">TOTAL:</h2>
+                            <h2 class="gold fw-bold m-0">$<span id="displayTotal">0.00</span></h2>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 border-secondary">
+                        <h6 class="gold fw-bold mb-3 small"><i class="fas fa-history me-2"></i>ÚLTIMAS VENTAS</h6>
+                        <div id="historialRapido" class="row g-2"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="row g-4">
-        <div class="col-lg-4">
-            <div class="card p-4 shadow-lg animate__animated animate__fadeInLeft">
-                <h5 class="gold mb-4 text-center fw-bold"><i class="fas fa-cash-register me-2"></i>NUEVO COBRO</h5>
-                
-                <div class="mb-3">
-                    <label>CLIENTE</label>
-                    <div class="input-group">
-                        <input id="inputCliente" class="form-control" placeholder="Nombre de la clienta">
-                        <span class="input-group-text bg-dark border-secondary"><i class="fas fa-user gold"></i></span>
-                    </div>
-                </div>
-
-                <div class="row g-2 mb-3">
-                    <div class="col-6">
-                        <label>FOLIO</label>
-                        <input id="inputFolio" class="form-control" readonly>
-                    </div>
-                    <div class="col-6">
-                        <label>PAGO</label>
-                        <select id="metodoPago" class="form-select" onchange="toggleTransferencia()">
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Transferencia">Transferencia</option>
-                            <option value="Tarjeta">Tarjeta</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label>SERVICIOS</label>
-                    <div class="input-group">
-                        <select id="selectServicio" class="form-select"></select>
-                        <button class="btn btn-gold" onclick="agregarAlCarrito('servicio')"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label>EXTRAS / DISEÑO</label>
-                    <div class="input-group">
-                        <select id="selectMaterial" class="form-select"></select>
-                        <button class="btn btn-gold" style="filter: hue-rotate(150deg);" onclick="agregarAlCarrito('material')"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-
-                <div id="infoTransferencia" class="alert alert-dark border-warning d-none small text-center animate__animated animate__pulse">
-                    <strong class="gold">DATOS BANCO AZTECA</strong><br>
-                    CLABE: <span class="text-white">127180012784596325</span>
-                </div>
-
-                <div class="bg-calculadora mb-4">
-                    <label class="small golden-rose fw-bold">CALCULADORA DE CAMBIO</label>
-                    <div class="input-group input-group-sm mb-2">
-                        <span class="input-group-text">$</span>
-                        <input id="pagaCon" type="number" class="form-control" placeholder="¿Con cuánto paga?" oninput="calcularCambio()">
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="small">Cambio:</span>
-                        <h4 class="m-0 text-success fw-bold" id="cambioResult">$0.00</h4>
-                    </div>
-                </div>
-
-                <button class="btn btn-gold w-100 py-3 shadow" onclick="finalizarVenta()">
-                    <i class="fas fa-check-circle me-2"></i> REGISTRAR Y TICKET
-                </button>
-            </div>
-        </div>
-
-        <div class="col-lg-8">
-            <div class="card p-4 mb-4 animate__animated animate__fadeInRight">
-                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
-                    <h5 class="gold fw-bold m-0"><i class="fas fa-receipt me-2"></i>DETALLE DE CUENTA</h5>
-                    <button class="btn btn-sm btn-outline-danger" onclick="vaciarCarrito()">Limpiar todo</button>
-                </div>
-
-                <div class="table-responsive" style="min-height: 300px;">
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th>CONCEPTO</th>
-                                <th>TIPO</th>
-                                <th>PRECIO</th>
-                                <th class="text-end">ACCIONES</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaCarrito"></tbody>
-                    </table>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center mt-4 bg-dark p-3 rounded border border-warning">
-                    <h2 class="golden-rose fw-bold m-0">TOTAL:</h2>
-                    <h2 class="gold fw-bold m-0">$<span id="displayTotal">0.00</span></h2>
-                </div>
-            </div>
-
-            <div class="card p-3 border-secondary">
-                <h6 class="gold fw-bold mb-3 small"><i class="fas fa-history me-2"></i>ÚLTIMAS 4 VENTAS</h6>
-                <div id="historialRapido" class="row g-2"></div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
-// Base de datos de servicios
 const servicios = [
     {name:"Corte Mariposa", precio:150},
     {name:"Uñas Acrílicas #2", precio:350},
@@ -218,14 +262,10 @@ const materiales = [
 let carrito = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargar selects
     const selS = document.getElementById("selectServicio");
     servicios.forEach((s, i) => selS.innerHTML += `<option value="${i}">${s.name} ($${s.precio})</option>`);
-    
     const selM = document.getElementById("selectMaterial");
     materiales.forEach((m, i) => selM.innerHTML += `<option value="${i}">${m.name} ($${m.precio})</option>`);
-    
-    // Fecha y Folio inicial
     document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString();
     generarFolio();
     actualizarHistorial();
@@ -234,20 +274,14 @@ document.addEventListener('DOMContentLoaded', () => {
 function generarFolio() {
     const ultimoFolio = localStorage.getItem("ultimo_folio") || 0;
     const nuevoFolio = parseInt(ultimoFolio) + 1;
-    document.getElementById("inputCita").value = nuevoFolio.toString().padStart(3, '0');
-    // Para el ID visual
+    document.getElementById("inputCita").value = nuevoFolio;
     document.getElementById("inputFolio").value = "LK-" + nuevoFolio.toString().padStart(3, '0');
 }
 
 function agregarAlCarrito(tipo) {
     const id = (tipo === 'servicio') ? document.getElementById("selectServicio").value : document.getElementById("selectMaterial").value;
     const item = (tipo === 'servicio') ? servicios[id] : materiales[id];
-    
-    carrito.push({ 
-        tipo: tipo === 'servicio' ? 'Servicio' : 'Extra', 
-        desc: item.name, 
-        precio: item.precio 
-    });
+    carrito.push({ tipo: tipo === 'servicio' ? 'Servicio' : 'Extra', desc: item.name, precio: item.precio });
     renderCarrito();
 }
 
@@ -257,26 +291,23 @@ function eliminarItem(index) {
 }
 
 function vaciarCarrito() {
-    if(confirm("¿Estás seguro de limpiar la cuenta?")) {
-        carrito = [];
-        renderCarrito();
-    }
+    carrito = [];
+    renderCarrito();
 }
 
 function renderCarrito() {
     const tbody = document.getElementById("tablaCarrito");
     tbody.innerHTML = "";
     let total = 0;
-    
     carrito.forEach((item, i) => {
         total += item.precio;
         tbody.innerHTML += `
             <tr class="animate__animated animate__fadeIn">
-                <td class="text-resaltado">${item.desc}</td>
+                <td>${item.desc}</td>
                 <td><span class="badge ${item.tipo === 'Servicio' ? 'badge-servicio' : 'badge-extra'}">${item.tipo}</span></td>
                 <td class="gold fw-bold">$${item.precio.toFixed(2)}</td>
                 <td class="text-end">
-                    <button class="btn btn-sm btn-link text-danger" onclick="eliminarItem(${i})"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-sm text-danger" onclick="eliminarItem(${i})"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>`;
     });
@@ -300,53 +331,35 @@ function toggleTransferencia() {
 
 function finalizarVenta() {
     const cliente = document.getElementById("inputCliente").value;
-    if(!cliente) return alert("Por favor, ingresa el nombre de la clienta");
-    if(carrito.length === 0) return alert("El carrito está vacío");
+    if(!cliente || carrito.length === 0) return alert("Completa los datos de la clienta");
 
-    const total = document.getElementById("displayTotal").innerText;
-    const folio = document.getElementById("inputFolio").value;
-    
     const venta = {
-        folio: folio,
-        cliente: cliente,
-        total: total,
+        folio: document.getElementById("inputFolio").value,
+        cliente,
+        total: document.getElementById("displayTotal").innerText,
         metodo: document.getElementById("metodoPago").value,
-        fecha: new Date().toLocaleDateString(),
-        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        items: [...carrito]
+        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    // Guardar en LocalStorage (Base de datos real del navegador)
     let ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
     ventas.unshift(venta);
     localStorage.setItem("ventas_dia", JSON.stringify(ventas));
-    
-    // Actualizar contador de folio
-    const numFolio = parseInt(localStorage.getItem("ultimo_folio") || 0) + 1;
-    localStorage.setItem("ultimo_folio", numFolio);
+    localStorage.setItem("ultimo_folio", document.getElementById("inputCita").value);
 
-    alert(`✅ Venta Registrada con éxito\nFolio: ${folio}\nTotal: $${total}`);
-    
-    // Limpiar para nueva venta
-    carrito = [];
-    document.getElementById("inputCliente").value = "";
-    document.getElementById("pagaCon").value = "";
-    renderCarrito();
-    generarFolio();
-    actualizarHistorial();
+    alert("Venta registrada correctamente");
+    location.reload();
 }
 
 function actualizarHistorial() {
     const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
     const div = document.getElementById("historialRapido");
     div.innerHTML = "";
-    
     ventas.slice(0, 4).forEach(v => {
         div.innerHTML += `
             <div class="col-6 col-md-3">
                 <div class="p-2 historial-item rounded text-center small animate__animated animate__fadeIn">
                     <div class="gold fw-bold">$${v.total}</div>
-                    <div class="text-white text-truncate" title="${v.cliente}">${v.cliente}</div>
+                    <div class="text-white text-truncate">${v.cliente}</div>
                     <div class="golden-rose" style="font-size:10px">${v.hora} | ${v.metodo}</div>
                 </div>
             </div>`;
@@ -355,16 +368,10 @@ function actualizarHistorial() {
 
 function verCorteCaja() {
     const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
-    let totalEfectivo = 0;
-    let totalTrans = 0;
-    
-    ventas.forEach(v => {
-        if(v.metodo === "Efectivo") totalEfectivo += parseFloat(v.total);
-        else totalTrans += parseFloat(v.total);
-    });
-
-    alert(`--- CORTE DE CAJA ACTUAL ---\n\nEfectivo: $${totalEfectivo.toFixed(2)}\nTransferencia/Tarjeta: $${totalTrans.toFixed(2)}\n\nTOTAL DEL DÍA: $${(totalEfectivo + totalTrans).toFixed(2)}`);
+    let total = ventas.reduce((acc, v) => acc + parseFloat(v.total), 0);
+    alert(`LK STUDIO - CORTE DE CAJA\nTotal Acumulado: $${total.toFixed(2)}\nNúmero de ventas: ${ventas.length}`);
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
