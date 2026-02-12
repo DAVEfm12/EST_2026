@@ -31,7 +31,8 @@
 
         .gold { color: var(--gold) !important; }
         .golden-rose { color: var(--rose-gold) !important; }
-        label { color: var(--rose-gold) !important; letter-spacing: 1px; margin-bottom: 5px; font-size: 0.75rem; font-weight: bold; }
+        .text-resaltado { color: #ffffff !important; font-weight: 600; }
+        label { color: var(--rose-gold) !important; letter-spacing: 1px; margin-bottom: 5px; font-size: 0.8rem; font-weight: bold; }
 
         .btn-gold { 
             background: linear-gradient(45deg, var(--gold), #f3cf58); 
@@ -40,264 +41,329 @@
             border: none; 
             border-radius: 10px; 
             text-transform: uppercase;
+            transition: 0.3s;
         }
+        .btn-gold:hover { transform: scale(1.02); box-shadow: 0 0 15px var(--gold); }
 
         .form-control, .form-select { 
             background: #000 !important; 
             border: 1px solid #444 !important; 
             color: #ffffff !important; 
         }
+        .form-control:focus { border-color: var(--gold) !important; box-shadow: none; }
 
-        /* Estilo Ticket Modal */
-        #ticketPreview {
-            background: #fff;
-            color: #000;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 20px;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            line-height: 1.2;
+        .badge-servicio { background: var(--gold) !important; color: #000 !important; font-weight: bold; }
+        .badge-extra { background: var(--rose-gold) !important; color: #000 !important; font-weight: bold; }
+
+        .table { color: #ffffff !important; }
+        .table thead th { color: var(--gold) !important; border-bottom: 2px solid var(--gold); font-size: 0.8rem; }
+
+        .bg-calculadora {
+            background: #000;
+            border: 1px dashed var(--rose-gold);
+            padding: 15px;
+            border-radius: 15px;
         }
 
-        .logo-ticket {
-            max-width: 120px;
-            display: block;
-            margin: 0 auto 10px;
-            filter: grayscale(100%) contrast(150%);
+        .historial-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            transition: 0.3s;
+            cursor: pointer;
         }
+        .historial-item:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
 
-        .btn-whatsapp {
-            background-color: #25D366;
-            color: white !important;
-            font-weight: 800;
-            border: none;
-            border-radius: 10px;
-        }
-
-        .stat-box {
-            background: rgba(212, 175, 55, 0.05);
-            border-left: 3px solid var(--gold);
-            padding: 10px;
+        /* Estilo para el ticket */
+        #ticket-print { display: none; }
+        @media print {
+            body * { display: none; }
+            #ticket-print { display: block; color: #000; font-family: monospace; }
         }
     </style>
 </head>
 <body>
 
 <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 animate__animated animate__fadeIn">
         <div>
             <h2 class="gold fw-bold m-0"><i class="fas fa-crown"></i> LK STUDIO POS</h2>
-            <small class="golden-rose fw-bold">ENVÍO DE TICKET DIGITAL</small>
+            <small class="golden-rose text-uppercase fw-bold">Gestión de Ventas Elite</small>
         </div>
-        <span id="fecha-actual" class="badge border border-warning gold p-2"></span>
+        <div class="text-end">
+            <button class="btn btn-sm btn-outline-warning rounded-pill px-3 me-2" onclick="verCorteCaja()">Corte de Caja</button>
+            <span id="fecha-actual" class="badge border border-warning gold p-2"></span>
+        </div>
     </div>
 
     <div class="row g-4">
         <div class="col-lg-4">
-            <div class="card p-4">
-                <h5 class="gold mb-4 text-center fw-bold">DATOS DE VENTA</h5>
+            <div class="card p-4 shadow-lg animate__animated animate__fadeInLeft">
+                <h5 class="gold mb-4 text-center fw-bold"><i class="fas fa-cash-register me-2"></i>NUEVO COBRO</h5>
                 
                 <div class="mb-3">
-                    <label>NOMBRE DE CLIENTA</label>
-                    <input id="inputCliente" class="form-control" placeholder="Ej. Maria Lopez">
-                </div>
-
-                <div class="mb-3">
-                    <label>WHATSAPP (10 DÍGITOS)</label>
-                    <input id="inputTel" type="tel" class="form-control" placeholder="5512345678">
+                    <label>CLIENTE</label>
+                    <div class="input-group">
+                        <input id="inputCliente" class="form-control" placeholder="Nombre de la clienta">
+                        <span class="input-group-text bg-dark border-secondary"><i class="fas fa-user gold"></i></span>
+                    </div>
                 </div>
 
                 <div class="row g-2 mb-3">
                     <div class="col-6">
-                        <label>MÉTODO</label>
-                        <select id="metodoPago" class="form-select">
+                        <label>FOLIO</label>
+                        <input id="inputFolio" class="form-control" readonly>
+                    </div>
+                    <div class="col-6">
+                        <label>PAGO</label>
+                        <select id="metodoPago" class="form-select" onchange="toggleTransferencia()">
                             <option value="Efectivo">Efectivo</option>
                             <option value="Transferencia">Transferencia</option>
                             <option value="Tarjeta">Tarjeta</option>
                         </select>
                     </div>
-                    <div class="col-6">
-                        <label>PROPINA</label>
-                        <input id="inputPropina" type="number" class="form-control" value="0" oninput="renderCarrito()">
+                </div>
+
+                <div class="mb-3">
+                    <label>SERVICIOS</label>
+                    <div class="input-group">
+                        <select id="selectServicio" class="form-select"></select>
+                        <button class="btn btn-gold" onclick="agregarAlCarrito('servicio')"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label>AGREGAR SERVICIO</label>
+                    <label>EXTRAS / DISEÑO</label>
                     <div class="input-group">
-                        <select id="selectServicio" class="form-select"></select>
-                        <button class="btn btn-gold" onclick="agregarServicio()"><i class="fas fa-plus"></i></button>
+                        <select id="selectMaterial" class="form-select"></select>
+                        <button class="btn btn-gold" style="filter: hue-rotate(150deg);" onclick="agregarAlCarrito('material')"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
 
-                <div class="bg-calculadora p-3 border border-secondary rounded mb-4">
-                    <div class="d-flex justify-content-between">
-                        <span class="golden-rose fw-bold">TOTAL:</span>
-                        <h3 class="gold fw-bold m-0">$<span id="displayTotal">0.00</span></h3>
+                <div id="infoTransferencia" class="alert alert-dark border-warning d-none small text-center animate__animated animate__pulse">
+                    <strong class="gold">DATOS BANCO AZTECA</strong><br>
+                    CLABE: <span class="text-white">127180012784596325</span>
+                </div>
+
+                <div class="bg-calculadora mb-4">
+                    <label class="small golden-rose fw-bold">CALCULADORA DE CAMBIO</label>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text">$</span>
+                        <input id="pagaCon" type="number" class="form-control" placeholder="¿Con cuánto paga?" oninput="calcularCambio()">
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="small">Cambio:</span>
+                        <h4 class="m-0 text-success fw-bold" id="cambioResult">$0.00</h4>
                     </div>
                 </div>
 
                 <button class="btn btn-gold w-100 py-3 shadow" onclick="finalizarVenta()">
-                    <i class="fas fa-check-circle me-2"></i> FINALIZAR Y ENVIAR
+                    <i class="fas fa-check-circle me-2"></i> REGISTRAR Y TICKET
                 </button>
             </div>
         </div>
 
         <div class="col-lg-8">
-            <div class="card p-4" style="min-height: 500px;">
-                <h5 class="gold fw-bold mb-3">DETALLE DE LA NOTA</h5>
-                <div class="table-responsive">
+            <div class="card p-4 mb-4 animate__animated animate__fadeInRight">
+                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
+                    <h5 class="gold fw-bold m-0"><i class="fas fa-receipt me-2"></i>DETALLE DE CUENTA</h5>
+                    <button class="btn btn-sm btn-outline-danger" onclick="vaciarCarrito()">Limpiar todo</button>
+                </div>
+
+                <div class="table-responsive" style="min-height: 300px;">
                     <table class="table align-middle">
                         <thead>
                             <tr>
-                                <th>DESCRIPCIÓN</th>
+                                <th>CONCEPTO</th>
+                                <th>TIPO</th>
                                 <th>PRECIO</th>
-                                <th class="text-end">ACCIÓN</th>
+                                <th class="text-end">ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody id="tablaCarrito"></tbody>
                     </table>
                 </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4 bg-dark p-3 rounded border border-warning">
+                    <h2 class="golden-rose fw-bold m-0">TOTAL:</h2>
+                    <h2 class="gold fw-bold m-0">$<span id="displayTotal">0.00</span></h2>
+                </div>
+            </div>
+
+            <div class="card p-3 border-secondary">
+                <h6 class="gold fw-bold mb-3 small"><i class="fas fa-history me-2"></i>ÚLTIMAS 4 VENTAS</h6>
+                <div id="historialRapido" class="row g-2"></div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalTicket" tabindex="-1" data-bs-backdrop="static">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content" style="background: #111; border: 1px solid var(--gold);">
-            <div class="modal-body">
-                <div id="ticketPreview" class="animate__animated animate__fadeIn">
-                    </div>
-                
-                <button class="btn btn-whatsapp w-100 mt-3 py-2" onclick="enviarWhatsApp()">
-                    <i class="fab fa-whatsapp me-2"></i> ENVIAR A WHATSAPP
-                </button>
-                <button class="btn btn-outline-light btn-sm w-100 mt-2" onclick="cerrarModal()">NUEVA VENTA</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// --- CONFIGURACIÓN ---
-const LOGO_URL = "https://tu-sitio.com/logo-lk-studio.png"; // REEMPLAZA CON EL LINK DE TU LOGO
+// Base de datos de servicios
 const servicios = [
+    {name:"Corte Mariposa", precio:150},
     {name:"Uñas Acrílicas #2", precio:350},
+    {name:"Uñas XXL Cristales", precio:850},
     {name:"Balayage Elite", precio:2500},
-    {name:"Corte Mariposa", precio:180},
-    {name:"Pestañas Mink", precio:450}
+    {name:"Maquillaje Novia", precio:1200},
+    {name:"Retoque Semipermanente", precio:200}
+];
+
+const materiales = [
+    {name:"Piedras Swarovski", precio:100},
+    {name:"Efecto Espejo", precio:50},
+    {name:"Diseño 3D", precio:150},
+    {name:"Retiro de Material", precio:100}
 ];
 
 let carrito = [];
-let ultimaVenta = {};
 
-// Inicializar
 document.addEventListener('DOMContentLoaded', () => {
+    // Cargar selects
     const selS = document.getElementById("selectServicio");
     servicios.forEach((s, i) => selS.innerHTML += `<option value="${i}">${s.name} ($${s.precio})</option>`);
+    
+    const selM = document.getElementById("selectMaterial");
+    materiales.forEach((m, i) => selM.innerHTML += `<option value="${i}">${m.name} ($${m.precio})</option>`);
+    
+    // Fecha y Folio inicial
     document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString();
+    generarFolio();
+    actualizarHistorial();
 });
 
-function agregarServicio() {
-    const item = servicios[document.getElementById("selectServicio").value];
-    carrito.push({ ...item });
+function generarFolio() {
+    const ultimoFolio = localStorage.getItem("ultimo_folio") || 0;
+    const nuevoFolio = parseInt(ultimoFolio) + 1;
+    document.getElementById("inputCita").value = nuevoFolio.toString().padStart(3, '0');
+    // Para el ID visual
+    document.getElementById("inputFolio").value = "LK-" + nuevoFolio.toString().padStart(3, '0');
+}
+
+function agregarAlCarrito(tipo) {
+    const id = (tipo === 'servicio') ? document.getElementById("selectServicio").value : document.getElementById("selectMaterial").value;
+    const item = (tipo === 'servicio') ? servicios[id] : materiales[id];
+    
+    carrito.push({ 
+        tipo: tipo === 'servicio' ? 'Servicio' : 'Extra', 
+        desc: item.name, 
+        precio: item.precio 
+    });
     renderCarrito();
 }
 
-function eliminarItem(i) {
-    carrito.splice(i, 1);
+function eliminarItem(index) {
+    carrito.splice(index, 1);
     renderCarrito();
+}
+
+function vaciarCarrito() {
+    if(confirm("¿Estás seguro de limpiar la cuenta?")) {
+        carrito = [];
+        renderCarrito();
+    }
 }
 
 function renderCarrito() {
     const tbody = document.getElementById("tablaCarrito");
     tbody.innerHTML = "";
-    let subtotal = 0;
+    let total = 0;
     
     carrito.forEach((item, i) => {
-        subtotal += item.precio;
+        total += item.precio;
         tbody.innerHTML += `
-            <tr>
-                <td class="text-white">${item.name}</td>
+            <tr class="animate__animated animate__fadeIn">
+                <td class="text-resaltado">${item.desc}</td>
+                <td><span class="badge ${item.tipo === 'Servicio' ? 'badge-servicio' : 'badge-extra'}">${item.tipo}</span></td>
                 <td class="gold fw-bold">$${item.precio.toFixed(2)}</td>
-                <td class="text-end"><i class="fas fa-trash text-danger" onclick="eliminarItem(${i})"></i></td>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-link text-danger" onclick="eliminarItem(${i})"><i class="fas fa-trash"></i></button>
+                </td>
             </tr>`;
     });
+    document.getElementById("displayTotal").innerText = total.toFixed(2);
+    calcularCambio();
+}
 
-    const propina = parseFloat(document.getElementById("inputPropina").value) || 0;
-    document.getElementById("displayTotal").innerText = (subtotal + propina).toFixed(2);
+function calcularCambio() {
+    const total = parseFloat(document.getElementById("displayTotal").innerText);
+    const paga = parseFloat(document.getElementById("pagaCon").value) || 0;
+    const cambio = paga - total;
+    const res = document.getElementById("cambioResult");
+    res.innerText = `$${(cambio > 0 ? cambio : 0).toFixed(2)}`;
+    res.className = cambio >= 0 ? "m-0 text-success fw-bold" : "m-0 text-danger fw-bold";
+}
+
+function toggleTransferencia() {
+    const m = document.getElementById("metodoPago").value;
+    document.getElementById("infoTransferencia").classList.toggle("d-none", m !== "Transferencia");
 }
 
 function finalizarVenta() {
     const cliente = document.getElementById("inputCliente").value;
-    const telefono = document.getElementById("inputTel").value;
-    
-    if(!cliente || carrito.length === 0) return alert("Ingresa nombre de clienta y servicios.");
+    if(!cliente) return alert("Por favor, ingresa el nombre de la clienta");
+    if(carrito.length === 0) return alert("El carrito está vacío");
 
     const total = document.getElementById("displayTotal").innerText;
-    const propina = document.getElementById("inputPropina").value;
-    const metodo = document.getElementById("metodoPago").value;
-    const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    ultimaVenta = { cliente, telefono, total, propina, metodo, hora, items: [...carrito] };
-
-    // Generar Ticket Visual
-    let itemsHTML = carrito.map(i => `<div style="display:flex; justify-content:space-between;"><span>${i.name}</span> <span>$${i.precio.toFixed(2)}</span></div>`).join('');
+    const folio = document.getElementById("inputFolio").value;
     
-    document.getElementById("ticketPreview").innerHTML = `
-        <div class="text-center">
-            <img src="${LKSTUDIO.png}" class="logo-ticket" onerror="this.style.display='none'">
-            <h6 class="fw-bold mb-0">LK STUDIO VIP</h6>
-            <small>Citas: +52 744381188 </small>
-        </div>
-        <hr style="border-top: 1px dashed #000">
-        <div>FECHA: ${new Date().toLocaleDateString()}</div>
-        <div>CLIENTA: ${cliente.toUpperCase()}</div>
-        <hr style="border-top: 1px dashed #000">
-        ${itemsHTML}
-        <div style="display:flex; justify-content:space-between; margin-top:5px;"><span>Propina:</span> <span>$${parseFloat(propina).toFixed(2)}</span></div>
-        <hr style="border-top: 1px dashed #000">
-        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size: 1.1rem;">
-            <span>TOTAL:</span> <span>$${total}</span>
-        </div>
-        <div class="text-center mt-3 small">MÉTODO: ${metodo.toUpperCase()}</div>
-        <div class="text-center mt-2" style="font-size:0.7rem">¡Gracias por brillar con nosotros!</div>
-    `;
+    const venta = {
+        folio: folio,
+        cliente: cliente,
+        total: total,
+        metodo: document.getElementById("metodoPago").value,
+        fecha: new Date().toLocaleDateString(),
+        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        items: [...carrito]
+    };
 
-    const modal = new bootstrap.Modal(document.getElementById('modalTicket'));
-    modal.show();
+    // Guardar en LocalStorage (Base de datos real del navegador)
+    let ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
+    ventas.unshift(venta);
+    localStorage.setItem("ventas_dia", JSON.stringify(ventas));
+    
+    // Actualizar contador de folio
+    const numFolio = parseInt(localStorage.getItem("ultimo_folio") || 0) + 1;
+    localStorage.setItem("ultimo_folio", numFolio);
+
+    alert(`✅ Venta Registrada con éxito\nFolio: ${folio}\nTotal: $${total}`);
+    
+    // Limpiar para nueva venta
+    carrito = [];
+    document.getElementById("inputCliente").value = "";
+    document.getElementById("pagaCon").value = "";
+    renderCarrito();
+    generarFolio();
+    actualizarHistorial();
 }
 
-function enviarWhatsApp() {
-    const v = ultimaVenta;
-    if(!v.telefono) return alert("Ingresa un número de teléfono válido");
-
-    // Construir mensaje para WhatsApp con emojis
-    let mensaje = `*✨ LK STUDIO - TICKET VIP ✨*%0A`;
-    mensaje += `-----------------------------------%0A`;
-    mensaje += `*Clienta:* ${v.cliente.toUpperCase()}%0A`;
-    mensaje += `*Fecha:* ${new Date().toLocaleDateString()} | ${v.hora}%0A`;
-    mensaje += `-----------------------------------%0A`;
+function actualizarHistorial() {
+    const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
+    const div = document.getElementById("historialRapido");
+    div.innerHTML = "";
     
-    v.items.forEach(item => {
-        mensaje += `• ${item.name}: $${item.precio.toFixed(2)}%0A`;
+    ventas.slice(0, 4).forEach(v => {
+        div.innerHTML += `
+            <div class="col-6 col-md-3">
+                <div class="p-2 historial-item rounded text-center small animate__animated animate__fadeIn">
+                    <div class="gold fw-bold">$${v.total}</div>
+                    <div class="text-white text-truncate" title="${v.cliente}">${v.cliente}</div>
+                    <div class="golden-rose" style="font-size:10px">${v.hora} | ${v.metodo}</div>
+                </div>
+            </div>`;
+    });
+}
+
+function verCorteCaja() {
+    const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
+    let totalEfectivo = 0;
+    let totalTrans = 0;
+    
+    ventas.forEach(v => {
+        if(v.metodo === "Efectivo") totalEfectivo += parseFloat(v.total);
+        else totalTrans += parseFloat(v.total);
     });
 
-    if(parseFloat(v.propina) > 0) mensaje += `• Propina: $${v.propina}%0A`;
-    
-    mensaje += `-----------------------------------%0A`;
-    mensaje += `*TOTAL A PAGAR: $${v.total}*%0A`;
-    mensaje += `*Método:* ${v.metodo}%0A%0A`;
-    mensaje += `¡Gracias por tu preferencia! Te esperamos pronto en LK Studio. 👑`;
-
-    const url = `https://api.whatsapp.com/send?phone=52${v.telefono}&text=${mensaje}`;
-    window.open(url, '_blank');
-}
-
-function cerrarModal() {
-    location.reload(); // Reinicia para nueva venta
+    alert(`--- CORTE DE CAJA ACTUAL ---\n\nEfectivo: $${totalEfectivo.toFixed(2)}\nTransferencia/Tarjeta: $${totalTrans.toFixed(2)}\n\nTOTAL DEL DÍA: $${(totalEfectivo + totalTrans).toFixed(2)}`);
 }
 </script>
 </body>
