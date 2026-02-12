@@ -7,222 +7,346 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
   <style>
     :root {
       --gold: #D4AF37;
+      --gold-bright: #FFD700;
       --golden-rose: #e6b8a2;
-      --deep-black: #000000;
+      --deep-black: #050505;
+      --sidebar-width: 250px;
     }
 
     body {
-      background: linear-gradient(135deg, var(--deep-black), #121212);
+      background: radial-gradient(circle at top, #1a1a1a, var(--deep-black));
       color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
     }
 
-    /* Estilo de Tarjetas de Servicio */
-    .service-card {
-      background-color: var(--deep-black);
-      border: 2px solid var(--gold);
-      border-radius: 1.5rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* --- SIDEBAR IGUAL AL POS --- */
+    #sidebar {
+      width: var(--sidebar-width);
+      background: rgba(0, 0, 0, 0.95);
+      border-right: 1px solid var(--gold);
+      height: 100vh;
+      position: fixed;
+      z-index: 1000;
     }
 
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+    .sidebar-header {
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     }
 
-    /* Formulario en Modal */
-    .modal-content {
-      background-color: var(--deep-black);
-      border: 2px solid var(--gold);
-      border-radius: 1.5rem;
-    }
-
-    .form-label {
-      color: var(--golden-rose); /* Rosa Dorado */
-      font-weight: 500;
+    .nav-link {
+      color: #fff !important;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      transition: 0.3s;
+      border-left: 3px solid transparent;
       font-size: 0.9rem;
     }
 
-    .form-control {
-      background-color: var(--deep-black) !important;
-      border: 1px solid #333;
-      color: var(--gold) !important; /* Texto en Oro */
-      border-radius: 0.75rem;
+    .nav-link i { margin-right: 15px; width: 20px; text-align: center; color: var(--gold); }
+
+    .nav-link:hover, .nav-link.active {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--gold);
+      color: var(--gold-bright) !important;
     }
 
-    .form-control:focus {
-      border-color: var(--golden-rose);
-      box-shadow: 0 0 8px rgba(230, 184, 162, 0.3);
+    /* --- CONTENIDO --- */
+    #content {
+      width: calc(100% - var(--sidebar-width));
+      margin-left: var(--sidebar-width);
+      padding: 40px;
     }
 
-    /* Botones */
-    .btn-gold {
-      background-color: var(--gold);
-      color: var(--deep-black);
+    .service-card {
+      background: rgba(10, 10, 10, 0.9);
+      border: 1px solid var(--gold);
+      border-radius: 1.5rem;
+      transition: 0.3s;
+      height: 100%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+    }
+
+    .badge-category {
+      background: var(--golden-rose);
+      color: #000;
+      font-size: 0.7rem;
       font-weight: bold;
-      border-radius: 0.75rem;
+      text-transform: uppercase;
     }
 
-    .btn-gold:hover {
-      background-color: var(--golden-rose);
-      color: var(--deep-black);
+    /* Modales y Formularios */
+    .modal-content {
+      background: var(--deep-black);
+      border: 2px solid var(--gold);
+      border-radius: 1.5rem;
     }
 
-    .text-rose { color: var(--golden-rose); }
-    .text-gold { color: var(--gold); }
+    .form-control, .form-select {
+      background: #000 !important;
+      border: 1px solid #444 !important;
+      color: var(--gold) !important;
+    }
+
+    .btn-gold {
+      background: linear-gradient(45deg, var(--gold), #f3cf58);
+      color: #000 !important;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .stats-box {
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    @media (max-width: 992px) {
+      #sidebar { display: none; }
+      #content { width: 100%; margin-left: 0; }
+    }
   </style>
 </head>
 
 <body>
 
-<div class="container py-5">
-
-  <div class="mb-4">
-    <a href="./PANEL_ADMIN.html" class="btn btn-outline-light border-0">
-      <i class="fas fa-arrow-left"></i> Volver al Panel
-    </a>
-  </div>
-
-  <div class="text-center mb-5">
-    <h1 class="text-gold fw-bold display-5">Catálogo de Servicios</h1>
-    <p class="text-rose">Administración de tratamientos y estética premium</p>
-  </div>
-
-  <div class="text-center mb-5">
-    <button class="btn btn-gold px-5 py-2 shadow" data-bs-toggle="modal" data-bs-target="#modalServicio" onclick="limpiarFormulario()">
-      <i class="fas fa-plus-circle me-2"></i> Nuevo Servicio
-    </button>
-  </div>
-
-  <div class="row g-4" id="listaServicios">
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <h4 class="gold fw-bold mb-0" style="color:var(--gold)">LK STUDIO</h4>
+      <small style="color:var(--golden-rose)">ADMINISTRACIÓN</small>
     </div>
+    <div class="mt-4">
+      <a href="POS.html" class="nav-link"><i class="fas fa-cash-register"></i> VENTAS (POS)</a>
+      <a href="#" class="nav-link active"><i class="fas fa-list"></i> SERVICIOS</a>
+      <a href="#" class="nav-link"><i class="fas fa-calendar-check"></i> CITAS</a>
+      <a href="./PANEL_ADMIN.html" class="nav-link"><i class="fas fa-arrow-left"></i> VOLVER AL PANEL</a>
+    </div>
+  </nav>
 
-</div>
-
-<div class="modal fade" id="modalServicio" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-3">
-
-      <div class="modal-header border-0">
-        <h5 class="modal-title text-gold fw-bold" id="modalTitulo">Nuevo Servicio</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+  <div id="content">
+    <div class="container-fluid">
+      
+      <div class="row mb-5 align-items-center">
+        <div class="col-md-6">
+          <h1 class="fw-bold animate__animated animate__fadeInDown" style="color:var(--gold)">Catálogo Elite</h1>
+          <p style="color:var(--golden-rose)">Gestión de servicios y precios premium</p>
+        </div>
+        <div class="col-md-3">
+          <div class="stats-box">
+            <small class="text-white opacity-50">TOTAL SERVICIOS</small>
+            <h3 id="countServicios" class="m-0 text-gold">0</h3>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stats-box border-warning">
+            <small class="text-white opacity-50">VALOR PROMEDIO</small>
+            <h3 id="avgPrecio" class="m-0 text-gold">$0</h3>
+          </div>
+        </div>
       </div>
 
-      <div class="modal-body">
-        <input type="hidden" id="servicioId">
-
-        <div class="mb-3">
-          <label class="form-label">Nombre del Servicio</label>
-          <input class="form-control" id="nombre" placeholder="Ej. Balayage Pro">
+      <div class="row mb-4 g-3">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text bg-dark border-secondary"><i class="fas fa-search text-warning"></i></span>
+            <input type="text" id="buscador" class="form-control" placeholder="Buscar servicio..." onkeyup="filtrarServicios()">
+          </div>
         </div>
-
-        <div class="mb-3">
-          <label class="form-label">Descripción</label>
-          <textarea class="form-control" id="descripcion" rows="3" placeholder="Detalles del servicio..."></textarea>
+        <div class="col-md-3">
+          <select id="filtroCategoria" class="form-select" onchange="filtrarServicios()">
+            <option value="Todos">Todas las categorías</option>
+            <option value="Uñas">Uñas</option>
+            <option value="Cabello">Cabello</option>
+            <option value="Maquillaje">Maquillaje</option>
+            <option value="Pestañas">Pestañas</option>
+          </select>
         </div>
-
-        <div class="mb-3">
-          <label class="form-label">Precio ($)</label>
-          <input type="number" class="form-control" id="precio" placeholder="0.00">
+        <div class="col-md-5 text-end">
+          <button class="btn btn-outline-warning me-2" onclick="exportarServicios()">
+            <i class="fas fa-download"></i> Respaldar
+          </button>
+          <button class="btn btn-gold px-4" data-bs-toggle="modal" data-bs-target="#modalServicio" onclick="limpiarFormulario()">
+            <i class="fas fa-plus-circle me-2"></i> NUEVO SERVICIO
+          </button>
         </div>
       </div>
 
-      <div class="modal-footer border-0">
-        <button class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Cancelar</button>
-        <button class="btn btn-gold" onclick="guardarServicio()">Confirmar Cambios</button>
-      </div>
-
+      <div class="row g-4" id="listaServicios">
+        </div>
     </div>
   </div>
-</div>
+
+  <div class="modal fade" id="modalServicio" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" style="color:var(--gold)" id="modalTitulo">Nuevo Servicio</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="servicioId">
+          <div class="mb-3">
+            <label class="form-label" style="color:var(--golden-rose)">Nombre del Servicio</label>
+            <input class="form-control" id="nombre" placeholder="Ej. Retoque Acrílico">
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label" style="color:var(--golden-rose)">Categoría</label>
+              <select id="categoria" class="form-select">
+                <option value="Uñas">Uñas</option>
+                <option value="Cabello">Cabello</option>
+                <option value="Maquillaje">Maquillaje</option>
+                <option value="Pestañas">Pestañas</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" style="color:var(--golden-rose)">Precio ($)</label>
+              <input type="number" class="form-control" id="precio" placeholder="0.00">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style="color:var(--golden-rose)">Descripción Corta</label>
+            <textarea class="form-control" id="descripcion" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button class="btn btn-gold w-100 py-2" onclick="guardarServicio()">GUARDAR EN CATÁLOGO</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 let servicios = JSON.parse(localStorage.getItem("servicios")) || [
-  { id: 1, nombre: "Uñas Acrílicas", descripcion: "Aplicación profesional con diseño", precio: 500 },
-  { id: 2, nombre: "Maquillaje Profesional", descripcion: "Eventos y sesiones especiales", precio: 800 }
+  { id: 1, nombre: "Uñas Acrílicas #2", categoria: "Uñas", descripcion: "Largo medio con acabado brillante", precio: 450 },
+  { id: 2, nombre: "Balayage Premium", categoria: "Cabello", descripcion: "Incluye matizado y tratamiento", precio: 1800 }
 ];
 
 let editando = false;
 
-function renderServicios() {
+function renderServicios(datos = servicios) {
   const contenedor = document.getElementById("listaServicios");
   contenedor.innerHTML = "";
+  
+  let totalPrecios = 0;
 
-  servicios.forEach(s => {
+  datos.forEach(s => {
+    totalPrecios += parseFloat(s.precio);
     contenedor.innerHTML += `
-      <div class="col-md-4">
-        <div class="service-card p-4 h-100">
-          <h5 class="fw-bold text-gold">${s.nombre}</h5>
-          <p class="small text-rose opacity-75">${s.descripcion}</p>
-          <h4 class="text-white fw-bold mb-4">$${s.precio}</h4>
-
-          <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-outline-warning border-0" onclick="editarServicio(${s.id})">
-              <i class="fas fa-edit"></i> Editar
-            </button>
-            <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminarServicio(${s.id})">
-              <i class="fas fa-trash"></i> Eliminar
-            </button>
+      <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp">
+        <div class="service-card p-4">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="badge badge-category">${s.categoria}</span>
+            <span class="text-gold fw-bold">ID: #${s.id.toString().slice(-4)}</span>
+          </div>
+          <h4 class="fw-bold text-white mb-1">${s.nombre}</h4>
+          <p class="small text-white opacity-50 mb-4">${s.descripcion}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="text-gold fw-bold m-0">$${s.precio}</h3>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-outline-warning" onclick="editarServicio(${s.id})"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-sm btn-outline-danger" onclick="eliminarServicio(${s.id})"><i class="fas fa-trash"></i></button>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   });
+
+  // Actualizar Stats
+  document.getElementById("countServicios").innerText = datos.length;
+  const avg = datos.length ? (totalPrecios / datos.length).toFixed(0) : 0;
+  document.getElementById("avgPrecio").innerText = `$${avg}`;
+}
+
+function filtrarServicios() {
+  const busqueda = document.getElementById("buscador").value.toLowerCase();
+  const cat = document.getElementById("filtroCategoria").value;
+
+  const filtrados = servicios.filter(s => {
+    const coincideNombre = s.nombre.toLowerCase().includes(busqueda);
+    const coincideCat = (cat === "Todos" || s.categoria === cat);
+    return coincideNombre && coincideCat;
+  });
+
+  renderServicios(filtrados);
 }
 
 function guardarServicio() {
   const nombre = document.getElementById("nombre").value;
-  const descripcion = document.getElementById("descripcion").value;
+  const categoria = document.getElementById("categoria").value;
   const precio = document.getElementById("precio").value;
+  const descripcion = document.getElementById("descripcion").value;
   const id = document.getElementById("servicioId").value;
 
-  if (!nombre || !precio) return alert("Por favor llena los campos básicos.");
+  if (!nombre || !precio) return alert("Completa nombre y precio.");
 
   if (editando) {
     const index = servicios.findIndex(s => s.id == id);
-    servicios[index] = { id: Number(id), nombre, descripcion, precio };
+    servicios[index] = { id: Number(id), nombre, categoria, descripcion, precio };
   } else {
-    servicios.push({ id: Date.now(), nombre, descripcion, precio });
+    servicios.push({ id: Date.now(), nombre, categoria, descripcion, precio });
   }
 
   localStorage.setItem("servicios", JSON.stringify(servicios));
-  limpiarFormulario();
-  renderServicios();
   bootstrap.Modal.getInstance(document.getElementById("modalServicio")).hide();
+  renderServicios();
 }
 
 function editarServicio(id) {
   const s = servicios.find(s => s.id === id);
-  document.getElementById("modalTitulo").innerText = "Editar Servicio";
-  document.getElementById("nombre").value = s.nombre;
-  document.getElementById("descripcion").value = s.descripcion;
-  document.getElementById("precio").value = s.precio;
-  document.getElementById("servicioId").value = s.id;
   editando = true;
+  document.getElementById("modalTitulo").innerText = "Editar Servicio";
+  document.getElementById("servicioId").value = s.id;
+  document.getElementById("nombre").value = s.nombre;
+  document.getElementById("categoria").value = s.categoria;
+  document.getElementById("precio").value = s.precio;
+  document.getElementById("descripcion").value = s.descripcion;
   new bootstrap.Modal(document.getElementById("modalServicio")).show();
 }
 
 function eliminarServicio(id) {
-  if (confirm("¿Deseas eliminar este servicio de la lista?")) {
+  if (confirm("¿Eliminar este servicio del catálogo?")) {
     servicios = servicios.filter(s => s.id !== id);
     localStorage.setItem("servicios", JSON.stringify(servicios));
     renderServicios();
   }
 }
 
+function exportarServicios() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(servicios));
+  const downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href", dataStr);
+  downloadAnchorNode.setAttribute("download", "servicios_lkstudio.json");
+  document.body.appendChild(downloadAnchorNode);
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
+
 function limpiarFormulario() {
   editando = false;
   document.getElementById("modalTitulo").innerText = "Nuevo Servicio";
   document.getElementById("nombre").value = "";
-  document.getElementById("descripcion").value = "";
   document.getElementById("precio").value = "";
-  document.getElementById("servicioId").value = "";
+  document.getElementById("descripcion").value = "";
 }
 
 renderServicios();
