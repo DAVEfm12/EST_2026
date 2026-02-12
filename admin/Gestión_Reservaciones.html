@@ -32,7 +32,7 @@
 
         .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-        /* --- SIDEBAR UNIFICADO --- */
+        /* --- SIDEBAR --- */
         #sidebarAdmin {
             width: var(--sidebar-width); 
             background: var(--deep-black);
@@ -42,24 +42,10 @@
             z-index: 1000; 
             display: flex; 
             flex-direction: column;
-            transition: all 0.3s;
         }
 
-        .sidebar-logo {
-            padding: 30px;
-            text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .sidebar-logo img {
-            max-width: 150px; /* Ajusta según tu logo */
-            filter: drop-shadow(0 0 5px var(--gold));
-        }
-
-        .nav-flex-column {
-            padding-top: 20px;
-            flex-grow: 1;
-        }
+        .sidebar-logo { padding: 30px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .sidebar-logo img { max-width: 150px; filter: drop-shadow(0 0 5px var(--gold)); }
 
         .nav-link {
             color: rgba(255,255,255,0.7) !important; 
@@ -70,91 +56,54 @@
             border-radius: 12px;
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
 
         .nav-link i { width: 25px; font-size: 1.1rem; }
-
-        .nav-link:hover {
-            color: var(--gold-bright) !important; 
-            background: rgba(212, 175, 55, 0.15);
-            transform: translateX(5px);
-        }
-
-        .nav-link.active {
-            color: var(--deep-black) !important;
-            background: var(--gold) !important;
-            font-weight: 800;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
+        .nav-link:hover { color: var(--gold-bright) !important; background: rgba(212, 175, 55, 0.15); transform: translateX(5px); }
+        .nav-link.active { color: var(--deep-black) !important; background: var(--gold) !important; font-weight: 800; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
 
         /* --- CONTENIDO PRINCIPAL --- */
         .main-content {
             margin-left: var(--sidebar-width); 
             width: calc(100% - var(--sidebar-width));
             padding: 40px;
-            min-height: 100vh;
         }
 
-        /* Estilos de Tarjetas y Formulario */
-        .card-luxury {
-            background: var(--soft-black);
-            border: 1px solid var(--gold);
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .titulo-dorado-bold {
-            color: var(--gold) !important; 
-            font-weight: 900 !important;
-            font-family: 'Cinzel', serif; 
-            text-transform: uppercase; 
-            letter-spacing: 2px;
-        }
-
-        .form-label { color: var(--rose-gold); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
-        .form-control, .form-select {
-            background-color: #000 !important; border: 1px solid #333 !important;
-            color: var(--gold-bright) !important; border-radius: 10px; padding: 12px;
-        }
-
-        /* TABLA DORADA VIP */
-        .table-container {
-            background: var(--gold);
-            border-radius: 1.5rem;
-            padding: 5px;
+        /* --- SLIDER LUXURY --- */
+        .carousel-luxury {
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid var(--gold);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            margin-bottom: 50px;
         }
 
+        .carousel-item { height: 400px; }
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            bottom: 15%;
+        }
+
+        /* --- ESTILOS TABLA Y FORM --- */
+        .card-luxury { background: var(--soft-black); border: 1px solid var(--gold); border-radius: 1.5rem; }
+        .titulo-dorado-bold { color: var(--gold) !important; font-weight: 900; font-family: 'Cinzel', serif; letter-spacing: 2px; }
+        
+        .table-container { background: var(--gold); border-radius: 1.5rem; padding: 5px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .table { margin-bottom: 0; background-color: white !important; }
-        .table thead th { 
-            background-color: var(--deep-black) !important;
-            color: var(--gold-bright) !important; 
-            font-weight: 800; text-transform: uppercase;
-            font-size: 0.75rem; border: none; padding: 15px;
-        }
+        .table thead th { background-color: var(--deep-black) !important; color: var(--gold-bright) !important; padding: 15px; border: none; font-size: 0.75rem; }
+        .table tbody td { color: #000; font-weight: 700; background-color: #fff !important; padding: 15px; border-bottom: 1px solid #eee; }
 
-        .table tbody td {
-            color: #000000 !important; font-weight: 700 !important;
-            background-color: #ffffff !important; border-bottom: 1px solid #eee;
-            padding: 15px;
-        }
-
-        .st-badge {
-            padding: 5px 12px; border-radius: 50px; font-size: 0.65rem; text-transform: uppercase; font-weight: 800;
-        }
+        .st-badge { padding: 5px 12px; border-radius: 50px; font-size: 0.65rem; text-transform: uppercase; font-weight: 800; }
         .st-pagado { background: #d1e7dd; color: #0f5132; }
         .st-pendiente { background: #fff3cd; color: #664d03; }
 
-        .btn-pro {
-            background: linear-gradient(45deg, var(--gold), var(--gold-bright));
-            color: #000; font-weight: 800; border-radius: 50px; border: none; transition: 0.3s;
-        }
-
-        .search-box {
-            background: #000; border: 1px solid var(--gold); border-radius: 50px;
-            padding: 10px 25px; color: var(--gold-bright); width: 350px;
-        }
+        .btn-pro { background: linear-gradient(45deg, var(--gold), var(--gold-bright)); color: #000; font-weight: 800; border-radius: 50px; border: none; }
+        .search-box { background: #000; border: 1px solid var(--gold); border-radius: 50px; padding: 10px 25px; color: var(--gold-bright); width: 100%; max-width: 350px; }
 
         @media (max-width: 1200px) {
             #sidebarAdmin { transform: translateX(-100%); }
@@ -167,7 +116,7 @@
 
 <nav id="sidebarAdmin">
     <div class="sidebar-logo">
-        <img src="IMG/LKSTUDIO.png" alt="LK Studio Logo">
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
     </div>
     <div class="nav-flex-column">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
@@ -185,16 +134,41 @@
 
 <main class="main-content">
     
+    <div id="reservaSlider" class="carousel slide carousel-fade carousel-luxury animate__animated animate__fadeIn" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=1500') center/cover;">
+                    <div class="carousel-caption">
+                        <h1 class="luxury-font text-gold">RESERVACIONES ELITE</h1>
+                        <p style="color: var(--rose-gold);">Organiza el flujo de clientes con precisión Master.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=1500') center/cover;">
+                    <div class="carousel-caption">
+                        <h1 class="luxury-font text-gold">LK STUDIO SYSTEM</h1>
+                        <p style="color: var(--rose-gold);">Control de Pagos, Servicios y Especialistas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#reservaSlider" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#reservaSlider" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
     <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
         <div>
             <h1 class="luxury-font fw-bold mb-0" style="color: var(--gold); font-size: 2.2rem;">RESERVACIONES VIP</h1>
             <p style="color: var(--rose-gold);" class="fw-bold mb-0 small text-uppercase">Gestión de flujo LK Studio Master</p>
         </div>
-        <div class="d-flex gap-3">
-            <div class="position-relative">
-                <i class="fas fa-search position-absolute text-gold" style="top:14px; left:20px;"></i>
-                <input type="text" id="busqueda" class="search-box ps-5" placeholder="Buscar clienta o experta..." onkeyup="renderReservas()">
-            </div>
+        <div class="position-relative">
+            <i class="fas fa-search position-absolute text-gold" style="top:14px; left:20px;"></i>
+            <input type="text" id="busqueda" class="search-box ps-5" placeholder="Buscar clienta..." onkeyup="renderReservas()">
         </div>
     </div>
 
@@ -204,17 +178,15 @@
                 <h5 class="titulo-dorado-bold mb-4 text-center">NUEVA RESERVA</h5>
                 <form id="formReserva">
                     <input type="hidden" id="indexReserva">
-                    
                     <div class="mb-3">
                         <label class="form-label">Nombre de Clienta</label>
-                        <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
+                        <input type="text" id="cliente" class="form-control" placeholder="..." required>
                     </div>
-
                     <div class="row g-2 mb-3">
                         <div class="col-7">
                             <label class="form-label">Servicio</label>
                             <select id="servicio" class="form-select" required>
-                                <option value="" selected disabled>Seleccionar...</option>
+                                <option value="" selected disabled>Elegir...</option>
                                 <option value="Uñas Acrílicas #2">Uñas Acrílicas #2</option>
                                 <option value="Balayage Elite">Balayage Elite</option>
                                 <option value="Diseño Mariposa">Diseño Mariposa</option>
@@ -229,12 +201,10 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label">Especialista</label>
-                        <input type="text" id="instructor" class="form-control" placeholder="Nombre de la experta" required>
+                        <input type="text" id="instructor" class="form-control" placeholder="Nombre" required>
                     </div>
-
                     <div class="row g-2 mb-3">
                         <div class="col-6">
                             <label class="form-label">Fecha</label>
@@ -245,23 +215,19 @@
                             <input type="time" id="hora" class="form-control" required>
                         </div>
                     </div>
-
                     <div class="mb-4">
                         <label class="form-label">Costo Total ($)</label>
-                        <input type="number" id="costo" class="form-control fw-bold" placeholder="0.00" required>
+                        <input type="number" id="costo" class="form-control fw-bold" required>
                     </div>
-
-                    <button type="submit" id="btnSubmit" class="btn btn-pro w-100 py-3">
-                        <i class="fas fa-calendar-check me-2"></i>CONFIRMAR RESERVA
-                    </button>
-                    <button type="button" id="btnCancelarEdit" class="btn btn-outline-secondary w-100 mt-2 d-none" onclick="cancelarEdicion()">CANCELAR EDICIÓN</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-pro w-100 py-3">CONFIRMAR RESERVA</button>
+                    <button type="button" id="btnCancelarEdit" class="btn btn-outline-secondary w-100 mt-2 d-none" onclick="cancelarEdicion()">CANCELAR</button>
                 </form>
             </div>
         </div>
 
         <div class="col-xl-8">
             <div class="table-container animate__animated animate__fadeInRight">
-                <div class="table-responsive" style="max-height: 650px;">
+                <div class="table-responsive">
                     <table class="table align-middle">
                         <thead>
                             <tr>
@@ -277,17 +243,17 @@
                     </table>
                 </div>
             </div>
-            
             <div class="mt-4 d-flex justify-content-between text-white-50 small fw-bold">
-                <span>TOTAL EN AGENDA: <span id="countTotal" class="text-gold">0</span></span>
+                <span>TOTAL AGENDA: <span id="countTotal" class="text-gold">0</span></span>
                 <span>MONTO PROYECTADO: <span id="montoTotal" class="text-gold">$0.00</span></span>
             </div>
         </div>
     </div>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-// (Aquí se mantiene el mismo script funcional que tenías anteriormente para manejar el LocalStorage)
 let reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
 
 function renderReservas() {
@@ -367,7 +333,7 @@ function editar(i) {
     document.getElementById("fecha").value = r.fecha;
     document.getElementById("hora").value = r.hora;
     document.getElementById("costo").value = r.costo;
-    document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-sync me-2"></i>ACTUALIZAR RESERVA';
+    document.getElementById("btnSubmit").innerHTML = 'ACTUALIZAR RESERVA';
     document.getElementById("btnCancelarEdit").classList.remove("d-none");
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
@@ -375,7 +341,7 @@ function editar(i) {
 function cancelarEdicion() {
     document.getElementById("formReserva").reset();
     document.getElementById("indexReserva").value = "";
-    document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-calendar-check me-2"></i>CONFIRMAR RESERVA';
+    document.getElementById("btnSubmit").innerHTML = 'CONFIRMAR RESERVA';
     document.getElementById("btnCancelarEdit").classList.add("d-none");
 }
 
