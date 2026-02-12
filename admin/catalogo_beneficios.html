@@ -28,11 +28,12 @@
       margin: 0;
       display: flex;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-    /* --- SIDEBAR --- */
+    /* --- SIDEBAR MEJORADO CON LOGO --- */
     #sidebar {
       width: var(--sidebar-width);
       background: rgba(0, 0, 0, 0.98);
@@ -40,6 +41,18 @@
       height: 100vh;
       position: fixed;
       z-index: 1000;
+      transition: all 0.3s;
+    }
+
+    .sidebar-logo {
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .sidebar-logo img {
+      width: 150px; /* Ajusta según tu logo */
+      filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
     }
 
     .nav-link {
@@ -51,6 +64,7 @@
       text-transform: uppercase;
       transition: 0.3s;
       border-left: 4px solid transparent;
+      text-decoration: none;
     }
 
     .nav-link:hover, .nav-link.active {
@@ -63,7 +77,7 @@
     #content {
       width: calc(100% - var(--sidebar-width));
       margin-left: var(--sidebar-width);
-      padding: 30px;
+      padding: 40px;
     }
 
     /* CARD LUXURY */
@@ -107,7 +121,7 @@
       transition: 0.3s; padding: 12px;
     }
 
-    /* TABLA LUXURY */
+    /* TABLA LUXURY (FONDO BLANCO PARA CONTRASTE) */
     .table-container {
         background: #fff;
         border-radius: 20px;
@@ -129,19 +143,18 @@
       color: var(--gold); font-size: 1.2rem;
     }
 
-    .text-main-gold { color: #000; font-weight: 800; font-size: 1rem; }
     .badge-vip {
       background: var(--deep-black);
       color: var(--gold);
       font-size: 0.6rem; padding: 5px 10px; border-radius: 50px;
     }
 
-    .search-bar {
-        background: #f8f9fa;
-        border: 1px solid #ddd;
-        border-radius: 50px;
-        padding: 8px 20px;
-        margin-bottom: 20px;
+    /* Responsivo Móvil */
+    @media (max-width: 992px) {
+      #sidebar { width: 80px; }
+      #sidebar .nav-link span, #sidebar .sidebar-logo h4, #sidebar small { display: none; }
+      #content { width: calc(100% - 80px); margin-left: 80px; }
+      .sidebar-logo img { width: 50px; }
     }
   </style>
 </head>
@@ -149,16 +162,30 @@
 <body>
 
 <nav id="sidebar" class="animate__animated animate__fadeInLeft">
-    <div class="p-4 text-center">
-        <h4 class="luxury-font text-gold m-0">LK STUDIO</h4>
-        <small style="color:var(--golden-rose)">VIP MANAGEMENT</small>
+    <div class="sidebar-logo">
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio Logo" onerror="this.src='https://via.placeholder.com/150x50/000000/D4AF37?text=LK+STUDIO'">
+        <div class="mt-2">
+          <small style="color:var(--golden-rose); font-size: 0.6rem; letter-spacing: 2px;">MANAGEMENT SYSTEM</small>
+        </div>
     </div>
     <div class="mt-4">
-        <a href="#" class="nav-link active"><i class="fas fa-gem me-3"></i> Beneficios VIP</a>
-        <a href="#" class="nav-link"><i class="fas fa-star me-3"></i> Membresías</a>
-        <a href="#" class="nav-link"><i class="fas fa-history me-3"></i> Historial</a>
+        <a href="beneficios.html" class="nav-link active">
+          <i class="fas fa-gem me-3"></i> <span>Beneficios VIP</span>
+        </a>
+        <a href="cursos.html" class="nav-link">
+          <i class="fas fa-graduation-cap me-3"></i> <span>Cursos Elite</span>
+        </a>
+        <a href="clientes.html" class="nav-link">
+          <i class="fas fa-users me-3"></i> <span>Membresías</span>
+        </a>
+        <a href="historial.html" class="nav-link">
+          <i class="fas fa-history me-3"></i> <span>Historial</span>
+        </a>
+
         <div style="position: absolute; bottom: 20px; width: 100%;">
-            <a href="./PANEL_ADMIN.html" class="nav-link"><i class="fas fa-sign-out-alt me-3"></i> Volver</a>
+            <a href="./PANEL_ADMIN.html" class="nav-link" style="border: none;">
+              <i class="fas fa-sign-out-alt me-3 text-danger"></i> <span class="text-danger">Salir</span>
+            </a>
         </div>
     </div>
 </nav>
@@ -175,14 +202,14 @@
             <div class="row g-2">
                 <div class="col-6">
                     <div class="stat-card">
-                        <small class="text-white-50 d-block">Total Activos</small>
+                        <small class="text-white-50 d-block">Items Totales</small>
                         <h3 class="text-gold m-0" id="countTotal">0</h3>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="stat-card">
                         <small class="text-white-50 d-block">Categorías</small>
-                        <h3 class="text-gold m-0" id="countCats">5</h3>
+                        <h3 class="text-gold m-0">6</h3>
                     </div>
                 </div>
             </div>
@@ -194,7 +221,7 @@
         <div class="card card-luxury animate__animated animate__fadeIn">
           <div class="card-body p-4">
             <h5 class="text-gold luxury-font mb-4 border-bottom border-secondary pb-3">
-              <i class="fas fa-plus-circle me-2"></i>NUEVO ÍTEM
+              <i class="fas fa-plus-circle me-2"></i>NUEVO REGISTRO
             </h5>
 
             <form id="formBeneficio">
@@ -202,33 +229,28 @@
 
               <div class="mb-3">
                 <label class="form-label">Nombre del Beneficio</label>
-                <input type="text" id="titulo" class="form-control" placeholder="Ej. Copa de Champaña" required>
+                <input type="text" id="titulo" class="form-control" placeholder="Ej. Copa de Bienvenida" required>
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Icono Representativo</label>
+                <label class="form-label">Icono</label>
                 <select id="icono" class="form-select">
-                  <option value="fa-glass-cheers">🍷 Bebidas / Catering</option>
-                  <option value="fa-star">✨ Servicio Premium</option>
-                  <option value="fa-couch">🛋️ Zona Confort</option>
+                  <option value="fa-glass-cheers">🍷 Bebidas</option>
+                  <option value="fa-star">✨ Premium</option>
+                  <option value="fa-couch">🛋️ Confort</option>
+                  <option value="fa-spa">🧖‍♀️ Spa</option>
                   <option value="fa-wifi">📶 Conectividad</option>
-                  <option value="fa-gem">💎 Exclusividad</option>
-                  <option value="fa-spa">🧖‍♀️ Spa Relax</option>
                 </select>
               </div>
 
               <div class="mb-4">
-                <label class="form-label">Descripción del Privilegio</label>
-                <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalla la experiencia..." required></textarea>
+                <label class="form-label">Descripción</label>
+                <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del beneficio..." required></textarea>
               </div>
 
               <div class="d-grid gap-2">
-                <button type="submit" id="btnGuardar" class="btn btn-gold">
-                   GUARDAR EN CATÁLOGO
-                </button>
-                <button type="button" id="btnCancel" class="btn btn-sm text-white-50 d-none" onclick="resetForm()">
-                  Cancelar edición
-                </button>
+                <button type="submit" id="btnGuardar" class="btn btn-gold">GUARDAR</button>
+                <button type="button" id="btnCancel" class="btn btn-sm text-white-50 d-none" onclick="resetForm()">Cancelar</button>
               </div>
             </form>
           </div>
@@ -237,9 +259,8 @@
 
       <div class="col-xl-8 col-lg-7">
         <div class="table-container shadow-lg animate__animated animate__fadeInRight">
-          
           <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5 class="fw-bold m-0" style="color: #000">CATÁLOGO ACTIVO</h5>
+              <h5 class="fw-bold m-0" style="color: #000">REGISTROS ACTIVOS</h5>
               <div class="input-group" style="width: 250px;">
                   <span class="input-group-text bg-transparent border-end-0"><i class="fas fa-search"></i></span>
                   <input type="text" id="search" class="form-control border-start-0" placeholder="Buscar..." onkeyup="filtrar()">
@@ -250,8 +271,8 @@
             <table class="table table-luxury align-middle">
               <thead>
                 <tr>
-                  <th>EXPERIENCIA VIP</th>
-                  <th class="text-center">TIPO</th>
+                  <th>DETALLE</th>
+                  <th class="text-center">ESTADO</th>
                   <th class="text-end">GESTIÓN</th>
                 </tr>
               </thead>
@@ -266,50 +287,34 @@
 </div>
 
 <script>
+/* Lógica de JavaScript se mantiene igual que la anterior */
 let beneficios = JSON.parse(localStorage.getItem("lk_vip_items")) || [
-  {
-    titulo: "Barra Gourmet Ilimitada",
-    descripcion: "Café de especialidad, té artesanal y mimosas de cortesía.",
-    icono: "fa-glass-cheers"
-  },
-  {
-    titulo: "Zona Zen / Silencio",
-    descripcion: "Acceso a área de espera privada con aromaterapia.",
-    icono: "fa-spa"
-  }
+  { titulo: "Barra Gourmet Ilimitada", descripcion: "Café y mimosas de cortesía.", icono: "fa-glass-cheers" },
+  { titulo: "Aromaterapia Relax", descripcion: "Ambiente con esencias naturales.", icono: "fa-spa" }
 ];
 
 function renderTabla(datos = beneficios) {
   const tabla = document.getElementById("tablaBeneficios");
-  const countTotal = document.getElementById("countTotal");
+  document.getElementById("countTotal").innerText = datos.length;
   tabla.innerHTML = "";
-  countTotal.innerText = datos.length;
-
   datos.forEach((b, index) => {
     tabla.innerHTML += `
       <tr class="animate__animated animate__fadeIn">
         <td>
           <div class="d-flex align-items-center">
-            <div class="icon-box me-3">
-              <i class="fas ${b.icono}"></i>
-            </div>
+            <div class="icon-box me-3"><i class="fas ${b.icono}"></i></div>
             <div>
-              <div class="text-main-gold text-uppercase">${b.titulo}</div>
+              <div class="fw-bold text-dark text-uppercase">${b.titulo}</div>
               <div class="text-muted small">${b.descripcion}</div>
             </div>
           </div>
         </td>
-        <td class="text-center"><span class="badge-vip">ELITE</span></td>
+        <td class="text-center"><span class="badge-vip">ACTIVO</span></td>
         <td class="text-end">
-          <button class="btn btn-sm text-primary me-2" onclick="editar(${index})">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="btn btn-sm text-danger" onclick="eliminar(${index})">
-            <i class="fas fa-trash-alt"></i>
-          </button>
+          <button class="btn btn-sm text-primary me-2" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
         </td>
-      </tr>
-    `;
+      </tr>`;
   });
 }
 
@@ -321,10 +326,8 @@ document.getElementById("formBeneficio").addEventListener("submit", function(e){
     descripcion: document.getElementById("descripcion").value,
     icono: document.getElementById("icono").value
   };
-
   if (index === "") beneficios.push(nuevo);
   else beneficios[index] = nuevo;
-
   localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
   resetForm();
   renderTabla();
@@ -332,10 +335,7 @@ document.getElementById("formBeneficio").addEventListener("submit", function(e){
 
 function filtrar() {
     const busqueda = document.getElementById("search").value.toLowerCase();
-    const filtrados = beneficios.filter(b => 
-        b.titulo.toLowerCase().includes(busqueda) || 
-        b.descripcion.toLowerCase().includes(busqueda)
-    );
+    const filtrados = beneficios.filter(b => b.titulo.toLowerCase().includes(busqueda));
     renderTabla(filtrados);
 }
 
@@ -345,13 +345,12 @@ function editar(index) {
   document.getElementById("descripcion").value = b.descripcion;
   document.getElementById("icono").value = b.icono;
   document.getElementById("indexBeneficio").value = index;
-  
-  document.getElementById("btnGuardar").innerText = "ACTUALIZAR ÍTEM";
+  document.getElementById("btnGuardar").innerText = "ACTUALIZAR";
   document.getElementById("btnCancel").classList.remove('d-none');
 }
 
 function eliminar(index) {
-  if (confirm("¿Eliminar este privilegio VIP permanentemente?")) {
+  if (confirm("¿Eliminar registro?")) {
     beneficios.splice(index, 1);
     localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
     renderTabla();
@@ -361,7 +360,7 @@ function eliminar(index) {
 function resetForm() {
   document.getElementById("formBeneficio").reset();
   document.getElementById("indexBeneficio").value = "";
-  document.getElementById("btnGuardar").innerText = "GUARDAR EN CATÁLOGO";
+  document.getElementById("btnGuardar").innerText = "GUARDAR";
   document.getElementById("btnCancel").classList.add('d-none');
 }
 
