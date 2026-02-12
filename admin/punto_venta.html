@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>POS Elite | LK Studio</title>
+    <title>POS Elite Pro | LK Studio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root { 
             --gold: #D4AF37; 
             --gold-bright: #FFD700; 
-            --rose-gold: #E6B8A2; /* Color Golden Rose */
+            --rose-gold: #E6B8A2; 
             --deep-black: #050505;
         }
 
@@ -21,7 +22,6 @@
             min-height: 100vh; 
         }
 
-        /* Ajuste de Cards */
         .card { 
             background: rgba(10, 10, 10, 0.9); 
             border: 1px solid var(--gold); 
@@ -29,13 +29,10 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        /* Colores de texto resaltados para que SE VEAN */
         .gold { color: var(--gold) !important; }
         .golden-rose { color: var(--rose-gold) !important; }
-        .text-resaltado { color: #ffffff !important; font-weight: 600; }
-        label { color: var(--rose-gold) !important; letter-spacing: 1px; margin-bottom: 5px; }
+        label { color: var(--rose-gold) !important; letter-spacing: 1px; margin-bottom: 5px; font-size: 0.75rem; font-weight: bold; }
 
-        /* Botón Dorado */
         .btn-gold { 
             background: linear-gradient(45deg, var(--gold), #f3cf58); 
             color: #000 !important; 
@@ -45,270 +42,262 @@
             text-transform: uppercase;
         }
 
-        /* Inputs - Corregido para que el texto escrito se vea blanco */
         .form-control, .form-select { 
             background: #000 !important; 
             border: 1px solid #444 !important; 
             color: #ffffff !important; 
-            font-weight: 400;
-        }
-        .form-control::placeholder { color: #666 !important; }
-
-        .badge-servicio { background: var(--gold) !important; color: #000 !important; font-weight: bold; }
-        .badge-extra { background: var(--rose-gold) !important; color: #000 !important; font-weight: bold; }
-
-        .table { color: #ffffff !important; }
-        .table thead th { color: var(--gold) !important; border-bottom: 2px solid var(--gold); }
-
-        .input-group-text { background: #222; border: 1px solid #444; color: var(--gold); }
-        
-        .bg-calculadora {
-            background: #000;
-            border: 1px dashed var(--rose-gold);
-            padding: 15px;
-            border-radius: 15px;
         }
 
-        .historial-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            transition: 0.3s;
+        /* Estilo Ticket Modal */
+        #ticketPreview {
+            background: #fff;
+            color: #000;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            line-height: 1.2;
         }
-        .historial-item:hover { border-color: var(--gold); }
+
+        .logo-ticket {
+            max-width: 120px;
+            display: block;
+            margin: 0 auto 10px;
+            filter: grayscale(100%) contrast(150%);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white !important;
+            font-weight: 800;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .stat-box {
+            background: rgba(212, 175, 55, 0.05);
+            border-left: 3px solid var(--gold);
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4 animate__animated animate__fadeIn">
+    <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="gold fw-bold m-0"><i class="fas fa-crown"></i> LK STUDIO POS</h2>
-            <small class="golden-rose text-uppercase fw-bold">Sistema de Ventas & Cobro</small>
+            <small class="golden-rose fw-bold">ENVÍO DE TICKET DIGITAL</small>
         </div>
-        <div class="text-end">
-            <a href="PANEL_ADMIN.html" class="btn btn-sm btn-outline-warning rounded-pill px-3 me-2">Panel Admin</a>
-            <span id="fecha-actual" class="badge border border-warning gold p-2"></span>
-        </div>
+        <span id="fecha-actual" class="badge border border-warning gold p-2"></span>
     </div>
 
     <div class="row g-4">
         <div class="col-lg-4">
             <div class="card p-4">
-                <h5 class="gold mb-4 text-center fw-bold"><i class="fas fa-cash-register me-2"></i>NUEVO COBRO</h5>
+                <h5 class="gold mb-4 text-center fw-bold">DATOS DE VENTA</h5>
                 
                 <div class="mb-3">
-                    <label class="small fw-bold">CLIENTE</label>
-                    <div class="input-group">
-                        <input id="inputCliente" class="form-control" placeholder="Nombre completo">
-                        <button class="btn btn-outline-warning" onclick="buscarCitaHoy()">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <label>NOMBRE DE CLIENTA</label>
+                    <input id="inputCliente" class="form-control" placeholder="Ej. Maria Lopez">
+                </div>
+
+                <div class="mb-3">
+                    <label>WHATSAPP (10 DÍGITOS)</label>
+                    <input id="inputTel" type="tel" class="form-control" placeholder="5512345678">
                 </div>
 
                 <div class="row g-2 mb-3">
                     <div class="col-6">
-                        <label class="small fw-bold">FOLIO</label>
-                        <input id="inputCita" class="form-control" placeholder="001">
-                    </div>
-                    <div class="col-6">
-                        <label class="small fw-bold">PAGO</label>
-                        <select id="metodoPago" class="form-select" onchange="toggleTransferencia()">
+                        <label>MÉTODO</label>
+                        <select id="metodoPago" class="form-select">
                             <option value="Efectivo">Efectivo</option>
                             <option value="Transferencia">Transferencia</option>
                             <option value="Tarjeta">Tarjeta</option>
                         </select>
                     </div>
+                    <div class="col-6">
+                        <label>PROPINA</label>
+                        <input id="inputPropina" type="number" class="form-control" value="0" oninput="renderCarrito()">
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="small fw-bold">SERVICIOS</label>
+                    <label>AGREGAR SERVICIO</label>
                     <div class="input-group">
                         <select id="selectServicio" class="form-select"></select>
                         <button class="btn btn-gold" onclick="agregarServicio()"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label class="small fw-bold">EXTRAS / MATERIAL</label>
-                    <div class="input-group">
-                        <select id="selectMaterial" class="form-select"></select>
-                        <button class="btn btn-gold" style="filter: hue-rotate(150deg);" onclick="agregarMaterial()"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-
-                <div id="infoTransferencia" class="alert alert-dark border-warning d-none small text-center">
-                    <strong class="gold">DATOS DE PAGO</strong><br>
-                    Banco Azteca | CLABE:<br>
-                    <span class="text-white">127180012784596325</span>
-                </div>
-
-                <div class="bg-calculadora mb-4">
-                    <label class="small golden-rose fw-bold">CALCULAR CAMBIO</label>
-                    <div class="input-group input-group-sm mb-2">
-                        <span class="input-group-text">$</span>
-                        <input id="pagaCon" type="number" class="form-control" placeholder="¿Con cuánto paga?" oninput="calcularCambio()">
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="small">Cambio a entregar:</span>
-                        <h4 class="m-0 text-success fw-bold" id="cambioResult">$0.00</h4>
+                <div class="bg-calculadora p-3 border border-secondary rounded mb-4">
+                    <div class="d-flex justify-content-between">
+                        <span class="golden-rose fw-bold">TOTAL:</span>
+                        <h3 class="gold fw-bold m-0">$<span id="displayTotal">0.00</span></h3>
                     </div>
                 </div>
 
                 <button class="btn btn-gold w-100 py-3 shadow" onclick="finalizarVenta()">
-                    <i class="fas fa-check-circle me-2"></i> REGISTRAR COBRO
+                    <i class="fas fa-check-circle me-2"></i> FINALIZAR Y ENVIAR
                 </button>
             </div>
         </div>
 
         <div class="col-lg-8">
-            <div class="card p-4 mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
-                    <h5 class="gold fw-bold m-0"><i class="fas fa-receipt me-2"></i>DETALLE DE CUENTA</h5>
-                    <button class="btn btn-sm btn-outline-danger" onclick="vaciarCarrito()">Limpiar todo</button>
-                </div>
-
-                <div class="table-responsive" style="min-height: 300px;">
+            <div class="card p-4" style="min-height: 500px;">
+                <h5 class="gold fw-bold mb-3">DETALLE DE LA NOTA</h5>
+                <div class="table-responsive">
                     <table class="table align-middle">
                         <thead>
                             <tr>
-                                <th>CONCEPTO</th>
-                                <th>TIPO</th>
+                                <th>DESCRIPCIÓN</th>
                                 <th>PRECIO</th>
-                                <th class="text-end">ACCIONES</th>
+                                <th class="text-end">ACCIÓN</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaCarrito">
-                            </tbody>
+                        <tbody id="tablaCarrito"></tbody>
                     </table>
                 </div>
-
-                <div class="d-flex justify-content-between align-items-center mt-4 bg-dark p-3 rounded">
-                    <h2 class="golden-rose fw-bold m-0">TOTAL A COBRAR:</h2>
-                    <h2 class="gold fw-bold m-0">$<span id="displayTotal">0.00</span></h2>
-                </div>
-            </div>
-
-            <div class="card p-3 border-secondary">
-                <h6 class="golden-rose fw-bold mb-3 small">ÚLTIMOS MOVIMIENTOS</h6>
-                <div id="historialRapido" class="row g-2"></div>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-const servicios = [
-    {name:"Corte Mariposa", precio:150},
-    {name:"Uñas Acrílicas #2", precio:350},
-    {name:"Uñas XXL Cristales", precio:850},
-    {name:"Balayage Elite", precio:2500},
-    {name:"Maquillaje Novia", precio:1200},
-    {name:"Peinado XV Años", precio:600}
-];
+<div class="modal fade" id="modalTicket" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content" style="background: #111; border: 1px solid var(--gold);">
+            <div class="modal-body">
+                <div id="ticketPreview" class="animate__animated animate__fadeIn">
+                    </div>
+                
+                <button class="btn btn-whatsapp w-100 mt-3 py-2" onclick="enviarWhatsApp()">
+                    <i class="fab fa-whatsapp me-2"></i> ENVIAR A WHATSAPP
+                </button>
+                <button class="btn btn-outline-light btn-sm w-100 mt-2" onclick="cerrarModal()">NUEVA VENTA</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-const materiales = [
-    {name:"Piedras Swarovski (x10)", precio:100},
-    {name:"Efecto Espejo", precio:50},
-    {name:"Diseño 3D", precio:150},
-    {name:"Retiro de Material", precio:100}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// --- CONFIGURACIÓN ---
+const LOGO_URL = "https://tu-sitio.com/logo-lk-studio.png"; // REEMPLAZA CON EL LINK DE TU LOGO
+const servicios = [
+    {name:"Uñas Acrílicas #2", precio:350},
+    {name:"Balayage Elite", precio:2500},
+    {name:"Corte Mariposa", precio:180},
+    {name:"Pestañas Mink", precio:450}
 ];
 
 let carrito = [];
+let ultimaVenta = {};
 
+// Inicializar
 document.addEventListener('DOMContentLoaded', () => {
     const selS = document.getElementById("selectServicio");
     servicios.forEach((s, i) => selS.innerHTML += `<option value="${i}">${s.name} ($${s.precio})</option>`);
-    
-    const selM = document.getElementById("selectMaterial");
-    materiales.forEach((m, i) => selM.innerHTML += `<option value="${i}">${m.name} ($${m.precio})</option>`);
-    
     document.getElementById("fecha-actual").innerText = new Date().toLocaleDateString();
-    actualizarHistorial();
 });
 
 function agregarServicio() {
     const item = servicios[document.getElementById("selectServicio").value];
-    carrito.push({ tipo: "Servicio", desc: item.name, precio: item.precio });
+    carrito.push({ ...item });
     renderCarrito();
 }
 
-function agregarMaterial() {
-    const item = materiales[document.getElementById("selectMaterial").value];
-    carrito.push({ tipo: "Extra", desc: item.name, precio: item.precio });
+function eliminarItem(i) {
+    carrito.splice(i, 1);
     renderCarrito();
 }
 
 function renderCarrito() {
     const tbody = document.getElementById("tablaCarrito");
     tbody.innerHTML = "";
-    let total = 0;
+    let subtotal = 0;
     
     carrito.forEach((item, i) => {
-        total += item.precio;
+        subtotal += item.precio;
         tbody.innerHTML += `
             <tr>
-                <td class="text-resaltado">${item.desc}</td>
-                <td><span class="badge ${item.tipo === 'Servicio' ? 'badge-servicio' : 'badge-extra'}">${item.tipo}</span></td>
+                <td class="text-white">${item.name}</td>
                 <td class="gold fw-bold">$${item.precio.toFixed(2)}</td>
-                <td class="text-end">
-                    <button class="btn btn-sm btn-outline-danger" onclick="eliminarItem(${i})"><i class="fas fa-times"></i></button>
-                </td>
+                <td class="text-end"><i class="fas fa-trash text-danger" onclick="eliminarItem(${i})"></i></td>
             </tr>`;
     });
-    document.getElementById("displayTotal").innerText = total.toFixed(2);
-    calcularCambio();
-}
 
-function calcularCambio() {
-    const total = parseFloat(document.getElementById("displayTotal").innerText);
-    const paga = parseFloat(document.getElementById("pagaCon").value) || 0;
-    const cambio = paga - total;
-    const res = document.getElementById("cambioResult");
-    res.innerText = `$${(cambio > 0 ? cambio : 0).toFixed(2)}`;
-}
-
-function toggleTransferencia() {
-    const m = document.getElementById("metodoPago").value;
-    document.getElementById("infoTransferencia").classList.toggle("d-none", m !== "Transferencia");
+    const propina = parseFloat(document.getElementById("inputPropina").value) || 0;
+    document.getElementById("displayTotal").innerText = (subtotal + propina).toFixed(2);
 }
 
 function finalizarVenta() {
     const cliente = document.getElementById("inputCliente").value;
-    if(!cliente || carrito.length === 0) return alert("Completa los datos");
+    const telefono = document.getElementById("inputTel").value;
+    
+    if(!cliente || carrito.length === 0) return alert("Ingresa nombre de clienta y servicios.");
 
-    const venta = {
-        cliente,
-        total: document.getElementById("displayTotal").innerText,
-        pago: document.getElementById("metodoPago").value,
-        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
+    const total = document.getElementById("displayTotal").innerText;
+    const propina = document.getElementById("inputPropina").value;
+    const metodo = document.getElementById("metodoPago").value;
+    const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    let ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
-    ventas.unshift(venta);
-    localStorage.setItem("ventas_dia", JSON.stringify(ventas));
+    ultimaVenta = { cliente, telefono, total, propina, metodo, hora, items: [...carrito] };
 
-    alert("¡Venta Exitosa!");
-    carrito = [];
-    document.getElementById("inputCliente").value = "";
-    renderCarrito();
-    actualizarHistorial();
+    // Generar Ticket Visual
+    let itemsHTML = carrito.map(i => `<div style="display:flex; justify-content:space-between;"><span>${i.name}</span> <span>$${i.precio.toFixed(2)}</span></div>`).join('');
+    
+    document.getElementById("ticketPreview").innerHTML = `
+        <div class="text-center">
+            <img src="${LKSTUDIO.png}" class="logo-ticket" onerror="this.style.display='none'">
+            <h6 class="fw-bold mb-0">LK STUDIO VIP</h6>
+            <small>Citas: +52 744381188 </small>
+        </div>
+        <hr style="border-top: 1px dashed #000">
+        <div>FECHA: ${new Date().toLocaleDateString()}</div>
+        <div>CLIENTA: ${cliente.toUpperCase()}</div>
+        <hr style="border-top: 1px dashed #000">
+        ${itemsHTML}
+        <div style="display:flex; justify-content:space-between; margin-top:5px;"><span>Propina:</span> <span>$${parseFloat(propina).toFixed(2)}</span></div>
+        <hr style="border-top: 1px dashed #000">
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size: 1.1rem;">
+            <span>TOTAL:</span> <span>$${total}</span>
+        </div>
+        <div class="text-center mt-3 small">MÉTODO: ${metodo.toUpperCase()}</div>
+        <div class="text-center mt-2" style="font-size:0.7rem">¡Gracias por brillar con nosotros!</div>
+    `;
+
+    const modal = new bootstrap.Modal(document.getElementById('modalTicket'));
+    modal.show();
 }
 
-function actualizarHistorial() {
-    const ventas = JSON.parse(localStorage.getItem("ventas_dia")) || [];
-    const div = document.getElementById("historialRapido");
-    div.innerHTML = "";
-    ventas.slice(0, 4).forEach(v => {
-        div.innerHTML += `
-            <div class="col-6 col-md-3">
-                <div class="p-2 historial-item rounded text-center small">
-                    <div class="gold fw-bold">$${v.total}</div>
-                    <div class="text-white text-truncate">${v.cliente}</div>
-                    <div class="golden-rose" style="font-size:10px">${v.hora} - ${v.pago}</div>
-                </div>
-            </div>`;
+function enviarWhatsApp() {
+    const v = ultimaVenta;
+    if(!v.telefono) return alert("Ingresa un número de teléfono válido");
+
+    // Construir mensaje para WhatsApp con emojis
+    let mensaje = `*✨ LK STUDIO - TICKET VIP ✨*%0A`;
+    mensaje += `-----------------------------------%0A`;
+    mensaje += `*Clienta:* ${v.cliente.toUpperCase()}%0A`;
+    mensaje += `*Fecha:* ${new Date().toLocaleDateString()} | ${v.hora}%0A`;
+    mensaje += `-----------------------------------%0A`;
+    
+    v.items.forEach(item => {
+        mensaje += `• ${item.name}: $${item.precio.toFixed(2)}%0A`;
     });
+
+    if(parseFloat(v.propina) > 0) mensaje += `• Propina: $${v.propina}%0A`;
+    
+    mensaje += `-----------------------------------%0A`;
+    mensaje += `*TOTAL A PAGAR: $${v.total}*%0A`;
+    mensaje += `*Método:* ${v.metodo}%0A%0A`;
+    mensaje += `¡Gracias por tu preferencia! Te esperamos pronto en LK Studio. 👑`;
+
+    const url = `https://api.whatsapp.com/send?phone=52${v.telefono}&text=${mensaje}`;
+    window.open(url, '_blank');
+}
+
+function cerrarModal() {
+    location.reload(); // Reinicia para nueva venta
 }
 </script>
 </body>
