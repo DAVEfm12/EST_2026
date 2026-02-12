@@ -18,7 +18,7 @@
       --golden-rose: #e6b8a2;
       --deep-black: #050505;
       --soft-black: #0d0d0d;
-      --sidebar-width: 260px;
+      --sidebar-width: 280px;
     }
 
     body {
@@ -33,7 +33,7 @@
 
     .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-    /* --- SIDEBAR MEJORADO CON LOGO --- */
+    /* --- SIDEBAR IZQUIERDO --- */
     #sidebar {
       width: var(--sidebar-width);
       background: rgba(0, 0, 0, 0.98);
@@ -41,134 +41,136 @@
       height: 100vh;
       position: fixed;
       z-index: 1000;
-      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
     }
 
     .sidebar-logo {
-      padding: 30px 20px;
+      padding: 40px 20px;
       text-align: center;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
     }
 
     .sidebar-logo img {
-      width: 150px; /* Ajusta según tu logo */
-      filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
+      max-width: 180px;
+      height: auto;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+    }
+
+    .nav-menu {
+      flex-grow: 1;
+      padding: 20px 0;
     }
 
     .nav-link {
-      color: #fff !important;
-      padding: 15px 25px;
+      color: rgba(255,255,255,0.7) !important;
+      padding: 15px 30px;
       display: flex;
       align-items: center;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
+      letter-spacing: 1px;
       transition: 0.3s;
       border-left: 4px solid transparent;
       text-decoration: none;
     }
 
+    .nav-link i {
+      width: 25px;
+      font-size: 1.1rem;
+    }
+
     .nav-link:hover, .nav-link.active {
-      background: rgba(212, 175, 55, 0.1);
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
       border-left: 4px solid var(--gold);
       color: var(--gold) !important;
     }
 
-    /* --- CONTENIDO --- */
+    .nav-exit {
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* --- CONTENIDO PRINCIPAL --- */
     #content {
       width: calc(100% - var(--sidebar-width));
       margin-left: var(--sidebar-width);
       padding: 40px;
     }
 
-    /* CARD LUXURY */
+    /* CARDS */
     .card-luxury {
       background: var(--soft-black);
       border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    /* ESTADISTICAS */
+    /* TABLA LUXURY */
+    .table-container {
+      background: #ffffff; /* Fondo blanco para legibilidad */
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+
+    .table-luxury { color: #333 !important; }
+    .table-luxury thead th {
+      color: #999;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--gold);
+      padding: 15px;
+    }
+
+    /* ELEMENTOS DE DISEÑO */
     .stat-card {
-        background: linear-gradient(145deg, #111, #000);
-        border: 1px solid #333;
-        border-radius: 15px;
-        padding: 20px;
-        text-align: center;
-        transition: 0.3s;
-    }
-    .stat-card:hover { border-color: var(--gold); transform: translateY(-5px); }
-
-    /* FORMULARIO */
-    .form-label {
-      color: var(--golden-rose) !important; 
-      font-weight: 600; font-size: 0.7rem; text-transform: uppercase;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
     }
 
-    .form-control, .form-select {
-      background-color: #000 !important;
-      border: 1px solid #333 !important;
-      color: var(--gold-light) !important;
-      border-radius: 10px;
-      padding: 10px;
+    .icon-box {
+      width: 40px; height: 40px;
+      background: #000;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
     }
 
     .btn-gold {
       background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
       color: #000 !important;
-      font-weight: 800; border: none; border-radius: 50px;
-      transition: 0.3s; padding: 12px;
+      font-weight: 700; border: none; border-radius: 50px;
+      padding: 10px 25px; transition: 0.3s;
     }
 
-    /* TABLA LUXURY (FONDO BLANCO PARA CONTRASTE) */
-    .table-container {
-        background: #fff;
-        border-radius: 20px;
-        padding: 25px;
-        overflow: hidden;
-    }
-    .table-luxury { color: #222 !important; }
-    .table-luxury thead th {
-        color: #888; font-size: 0.7rem; text-transform: uppercase;
-        border-bottom: 2px solid var(--gold);
-    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
 
-    .icon-box {
-      width: 45px; height: 45px;
-      background: #000;
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gold); font-size: 1.2rem;
-    }
-
-    .badge-vip {
-      background: var(--deep-black);
-      color: var(--gold);
-      font-size: 0.6rem; padding: 5px 10px; border-radius: 50px;
-    }
-
-    /* Responsivo Móvil */
+    /* RESPONSIVO */
     @media (max-width: 992px) {
       #sidebar { width: 80px; }
-      #sidebar .nav-link span, #sidebar .sidebar-logo h4, #sidebar small { display: none; }
+      #sidebar .sidebar-logo img { width: 40px; }
+      #sidebar span, #sidebar small { display: none; }
       #content { width: calc(100% - 80px); margin-left: 80px; }
-      .sidebar-logo img { width: 50px; }
     }
   </style>
 </head>
 
 <body>
 
-<nav id="sidebar" class="animate__animated animate__fadeInLeft">
+<nav id="sidebar">
     <div class="sidebar-logo">
-        <img src="IMG/LKSTUDIO.png" alt="LK Studio Logo" onerror="this.src='https://via.placeholder.com/150x50/000000/D4AF37?text=LK+STUDIO'">
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
         <div class="mt-2">
-          <small style="color:var(--golden-rose); font-size: 0.6rem; letter-spacing: 2px;">MANAGEMENT SYSTEM</small>
+          <small style="color:var(--golden-rose); font-size: 0.6rem; letter-spacing: 2px;">ELITE SYSTEM</small>
         </div>
     </div>
-    <div class="mt-4">
+
+    <div class="nav-menu">
         <a href="beneficios.html" class="nav-link active">
           <i class="fas fa-gem me-3"></i> <span>Beneficios VIP</span>
         </a>
@@ -181,12 +183,12 @@
         <a href="historial.html" class="nav-link">
           <i class="fas fa-history me-3"></i> <span>Historial</span>
         </a>
+    </div>
 
-        <div style="position: absolute; bottom: 20px; width: 100%;">
-            <a href="./PANEL_ADMIN.html" class="nav-link" style="border: none;">
-              <i class="fas fa-sign-out-alt me-3 text-danger"></i> <span class="text-danger">Salir</span>
-            </a>
-        </div>
+    <div class="nav-exit">
+        <a href="./PANEL_ADMIN.html" class="nav-link text-danger">
+          <i class="fas fa-sign-out-alt me-3"></i> <span>Salir</span>
+        </a>
     </div>
 </nav>
 
@@ -195,61 +197,54 @@
     
     <div class="row mb-5 animate__animated animate__fadeInDown">
         <div class="col-md-7">
-            <h1 class="luxury-font text-gold mb-1">PRIVILEGIOS VIP</h1>
-            <p class="text-white-50">Configuración del catálogo de experiencias exclusivas.</p>
+            <h1 class="luxury-font text-gold mb-1">GESTIÓN DE BENEFICIOS</h1>
+            <p class="text-white-50 small">Administra el catálogo de experiencias de lujo para tus clientas.</p>
         </div>
-        <div class="col-md-5">
-            <div class="row g-2">
-                <div class="col-6">
-                    <div class="stat-card">
-                        <small class="text-white-50 d-block">Items Totales</small>
-                        <h3 class="text-gold m-0" id="countTotal">0</h3>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="stat-card">
-                        <small class="text-white-50 d-block">Categorías</small>
-                        <h3 class="text-gold m-0">6</h3>
-                    </div>
-                </div>
+        <div class="col-md-5 d-flex gap-3 justify-content-end align-items-center">
+            <div class="stat-card">
+                <small class="text-white-50 d-block">TOTAL</small>
+                <span class="text-gold fw-bold h4 m-0" id="countTotal">0</span>
+            </div>
+            <div class="stat-card">
+                <small class="text-white-50 d-block">ESTADO</small>
+                <span class="text-success fw-bold h6 m-0">Sincronizado</span>
             </div>
         </div>
     </div>
 
     <div class="row g-4">
       <div class="col-xl-4 col-lg-5">
-        <div class="card card-luxury animate__animated animate__fadeIn">
+        <div class="card card-luxury animate__animated animate__fadeInLeft">
           <div class="card-body p-4">
-            <h5 class="text-gold luxury-font mb-4 border-bottom border-secondary pb-3">
-              <i class="fas fa-plus-circle me-2"></i>NUEVO REGISTRO
-            </h5>
+            <h6 class="text-gold luxury-font mb-4">
+              <i class="fas fa-edit me-2"></i>Editor de Ítem
+            </h6>
 
             <form id="formBeneficio">
               <input type="hidden" id="indexBeneficio">
-
+              
               <div class="mb-3">
                 <label class="form-label">Nombre del Beneficio</label>
-                <input type="text" id="titulo" class="form-control" placeholder="Ej. Copa de Bienvenida" required>
+                <input type="text" id="titulo" class="form-control" placeholder="..." required>
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Icono</label>
+                <label class="form-label">Categoría / Icono</label>
                 <select id="icono" class="form-select">
                   <option value="fa-glass-cheers">🍷 Bebidas</option>
-                  <option value="fa-star">✨ Premium</option>
-                  <option value="fa-couch">🛋️ Confort</option>
-                  <option value="fa-spa">🧖‍♀️ Spa</option>
-                  <option value="fa-wifi">📶 Conectividad</option>
+                  <option value="fa-spa">🧖‍♀️ Spa & Relax</option>
+                  <option value="fa-star">✨ Servicio Premium</option>
+                  <option value="fa-wifi">📶 Conexión</option>
                 </select>
               </div>
 
               <div class="mb-4">
-                <label class="form-label">Descripción</label>
-                <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del beneficio..." required></textarea>
+                <label class="form-label">Descripción Breve</label>
+                <textarea id="descripcion" class="form-control" rows="3" required></textarea>
               </div>
 
               <div class="d-grid gap-2">
-                <button type="submit" id="btnGuardar" class="btn btn-gold">GUARDAR</button>
+                <button type="submit" id="btnGuardar" class="btn btn-gold">GUARDAR CAMBIOS</button>
                 <button type="button" id="btnCancel" class="btn btn-sm text-white-50 d-none" onclick="resetForm()">Cancelar</button>
               </div>
             </form>
@@ -258,12 +253,12 @@
       </div>
 
       <div class="col-xl-8 col-lg-7">
-        <div class="table-container shadow-lg animate__animated animate__fadeInRight">
+        <div class="table-container animate__animated animate__fadeInRight">
           <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5 class="fw-bold m-0" style="color: #000">REGISTROS ACTIVOS</h5>
-              <div class="input-group" style="width: 250px;">
-                  <span class="input-group-text bg-transparent border-end-0"><i class="fas fa-search"></i></span>
-                  <input type="text" id="search" class="form-control border-start-0" placeholder="Buscar..." onkeyup="filtrar()">
+              <h6 class="fw-bold m-0 text-dark">CATÁLOGO VIGENTE</h6>
+              <div class="input-group" style="width: 200px;">
+                  <span class="input-group-text bg-light border-0"><i class="fas fa-search"></i></span>
+                  <input type="text" id="search" class="form-control bg-light border-0 small" placeholder="Filtrar..." onkeyup="filtrar()">
               </div>
           </div>
 
@@ -271,9 +266,9 @@
             <table class="table table-luxury align-middle">
               <thead>
                 <tr>
-                  <th>DETALLE</th>
+                  <th>BENEFICIO</th>
                   <th class="text-center">ESTADO</th>
-                  <th class="text-end">GESTIÓN</th>
+                  <th class="text-end">ACCIONES</th>
                 </tr>
               </thead>
               <tbody id="tablaBeneficios">
@@ -287,32 +282,32 @@
 </div>
 
 <script>
-/* Lógica de JavaScript se mantiene igual que la anterior */
 let beneficios = JSON.parse(localStorage.getItem("lk_vip_items")) || [
-  { titulo: "Barra Gourmet Ilimitada", descripcion: "Café y mimosas de cortesía.", icono: "fa-glass-cheers" },
-  { titulo: "Aromaterapia Relax", descripcion: "Ambiente con esencias naturales.", icono: "fa-spa" }
+  { titulo: "Barra Gourmet", descripcion: "Mimosas y snacks premium ilimitados.", icono: "fa-glass-cheers" },
+  { titulo: "Estación de Carga", descripcion: "Carga rápida para dispositivos en cada cubículo.", icono: "fa-wifi" }
 ];
 
 function renderTabla(datos = beneficios) {
   const tabla = document.getElementById("tablaBeneficios");
   document.getElementById("countTotal").innerText = datos.length;
   tabla.innerHTML = "";
+  
   datos.forEach((b, index) => {
     tabla.innerHTML += `
-      <tr class="animate__animated animate__fadeIn">
+      <tr>
         <td>
           <div class="d-flex align-items-center">
             <div class="icon-box me-3"><i class="fas ${b.icono}"></i></div>
             <div>
-              <div class="fw-bold text-dark text-uppercase">${b.titulo}</div>
-              <div class="text-muted small">${b.descripcion}</div>
+              <div class="fw-bold text-dark text-uppercase small">${b.titulo}</div>
+              <div class="text-muted" style="font-size: 0.7rem;">${b.descripcion}</div>
             </div>
           </div>
         </td>
-        <td class="text-center"><span class="badge-vip">ACTIVO</span></td>
+        <td class="text-center"><span class="badge rounded-pill bg-dark" style="font-size: 0.6rem; color: var(--gold);">VIP ELITE</span></td>
         <td class="text-end">
-          <button class="btn btn-sm text-primary me-2" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
+          <button class="btn btn-link text-primary p-1" onclick="editar(${index})"><i class="fas fa-pencil-alt"></i></button>
+          <button class="btn btn-link text-danger p-1" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
         </td>
       </tr>`;
   });
@@ -334,9 +329,8 @@ document.getElementById("formBeneficio").addEventListener("submit", function(e){
 });
 
 function filtrar() {
-    const busqueda = document.getElementById("search").value.toLowerCase();
-    const filtrados = beneficios.filter(b => b.titulo.toLowerCase().includes(busqueda));
-    renderTabla(filtrados);
+    const text = document.getElementById("search").value.toLowerCase();
+    renderTabla(beneficios.filter(b => b.titulo.toLowerCase().includes(text)));
 }
 
 function editar(index) {
@@ -345,12 +339,12 @@ function editar(index) {
   document.getElementById("descripcion").value = b.descripcion;
   document.getElementById("icono").value = b.icono;
   document.getElementById("indexBeneficio").value = index;
-  document.getElementById("btnGuardar").innerText = "ACTUALIZAR";
+  document.getElementById("btnGuardar").innerText = "ACTUALIZAR ÍTEM";
   document.getElementById("btnCancel").classList.remove('d-none');
 }
 
 function eliminar(index) {
-  if (confirm("¿Eliminar registro?")) {
+  if (confirm("¿Segura que deseas eliminar este privilegio?")) {
     beneficios.splice(index, 1);
     localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
     renderTabla();
@@ -360,7 +354,7 @@ function eliminar(index) {
 function resetForm() {
   document.getElementById("formBeneficio").reset();
   document.getElementById("indexBeneficio").value = "";
-  document.getElementById("btnGuardar").innerText = "GUARDAR";
+  document.getElementById("btnGuardar").innerText = "GUARDAR CAMBIOS";
   document.getElementById("btnCancel").classList.add('d-none');
 }
 
