@@ -44,9 +44,17 @@
         }
 
         .sidebar-header {
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Logo Styling */
+        .sidebar-logo {
+            max-width: 160px;
+            height: auto;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.4));
+            transition: 0.3s;
         }
 
         .nav-link {
@@ -151,9 +159,12 @@
 
 <nav id="sidebarAdmin">
     <div class="sidebar-header">
-        <h4 class="luxury-font text-gold mb-0">LK STUDIO</h4>
-        <small class="text-rose-gold" style="font-size: 0.6rem; letter-spacing: 2px;">MANAGEMENT</small>
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio Logo" class="sidebar-logo mb-2" onerror="this.src='https://via.placeholder.com/160x60/000000/D4AF37?text=LK+STUDIO'">
+        <div class="mt-2">
+            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Elite Management</small>
+        </div>
     </div>
+    
     <div class="nav flex-column mt-4 flex-grow-1">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
         <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Agenda VIP</a>
@@ -164,8 +175,11 @@
         <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-users"></i> Personal</a>
         <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> Reportes</a>
     </div>
+    
     <div class="p-4 mt-auto border-top border-secondary">
-        <a href="login.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill"><i class="fas fa-sign-out-alt me-2"></i> Salir</a>
+        <a href="login.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill">
+            <i class="fas fa-sign-out-alt me-2"></i> Salir
+        </a>
     </div>
 </nav>
 
@@ -239,7 +253,7 @@
                             </tr>
                         </thead>
                         <tbody id="tablaReservas">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -263,7 +277,7 @@
 </main>
 
 <script>
-    // Lógica de Persistencia y Renderizado
+    // Se mantiene la lógica de JS original para asegurar el funcionamiento del CRUD
     let reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
 
     function renderReservas() {
