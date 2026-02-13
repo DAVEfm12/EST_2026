@@ -45,8 +45,8 @@
             flex-direction: column;
         }
 
-        .sidebar-logo { padding: 40px 20px; text-align: center; }
-        .sidebar-logo img { max-width: 180px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3)); }
+        .sidebar-logo { padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
+        .sidebar-logo img { max-width: 150px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3)); }
 
         .nav-link {
             color: rgba(255,255,255,0.7) !important;
@@ -67,6 +67,8 @@
             color: var(--gold) !important;
         }
 
+        .nav-link i { width: 30px; }
+
         /* --- CONTENIDO --- */
         #content {
             width: calc(100% - var(--sidebar-width));
@@ -76,53 +78,78 @@
 
         /* --- SLIDER LUXURY --- */
         .carousel-luxury {
-            border-radius: 20px;
+            border-radius: 25px;
             overflow: hidden;
-            border: 1px solid var(--gold);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
-            margin-bottom: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+            margin-bottom: 60px;
         }
 
-        .carousel-item {
-            height: 450px;
-            background-color: #000;
-        }
+        .carousel-item { height: 400px; }
 
         .carousel-caption {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            border-radius: 15px;
-            padding: 30px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            bottom: 10%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--gold);
+            bottom: 15%;
+            max-width: 80%;
+            margin: 0 auto;
         }
 
         /* --- BOTONES Y CARDS --- */
         .btn-gold {
             background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
             color: #000 !important;
-            font-weight: 700; border: none; border-radius: 50px;
-            padding: 10px 25px; transition: 0.3s;
+            font-weight: 800; border: none; border-radius: 50px;
+            padding: 12px 30px; transition: 0.4s;
+            text-transform: uppercase;
         }
 
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
 
         .card-luxury {
             background: var(--soft-black);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
+        .form-control, .form-select {
+            background: #000 !important;
+            border: 1px solid #333 !important;
+            color: var(--gold-light) !important;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        /* --- TABLA LUXURY --- */
         .table-container {
             background: #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            color: #333;
+            border-radius: 20px;
+            padding: 25px;
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background: #000;
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            border: none;
+            padding: 15px;
+        }
+
+        .table tbody td {
+            color: #222;
+            font-weight: 600;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
         }
 
         @media (max-width: 992px) {
             #sidebar { width: 80px; }
-            #sidebar span, #sidebar small { display: none; }
+            #sidebar span, #sidebar .mt-2 { display: none; }
             #content { width: calc(100% - 80px); margin-left: 80px; }
         }
     </style>
@@ -138,18 +165,18 @@
         </div>
     </div>
 
-    <div class="nav-menu">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line me-3"></i> <span>Panel Admin</span></a>
-        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-calendar-check me-3"></i> <span>Reservaciones</span></a>
-        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem me-3"></i> <span>Beneficios</span></a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-concierge-bell me-3"></i> <span>Servicios</span></a>
-        <a href="punto_venta.html" class="nav-link"><i class="fas fa-shopping-cart me-3"></i> <span>Punto de Venta</span></a>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar me-3"></i> <span>Reportes</span></a>
+    <div class="nav-menu mt-4 flex-grow-1">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-calendar-check"></i> <span>Reservas</span></a>
+        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
+        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> <span>Ventas</span></a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-spa"></i> <span>Servicios</span></a>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> <span>Reportes</span></a>
     </div>
 
-    <div class="nav-exit mt-auto">
-        <a href="PANEL_ADMIN.html" class="nav-link text-danger">
-            <i class="fas fa-sign-out-alt me-3"></i> <span>Salir</span>
+    <div class="p-4 border-top border-secondary">
+        <a href="index.html" class="nav-link text-danger p-0 border-0">
+            <i class="fas fa-power-off me-2"></i> <span>Cerrar Sesión</span>
         </a>
     </div>
 </nav>
@@ -159,45 +186,26 @@
     <div id="luxurySlider" class="carousel slide carousel-fade carousel-luxury animate__animated animate__fadeIn" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1500') center/cover;">
+                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1500') center/cover;">
                     <div class="carousel-caption">
-                        <img src="IMG/LKSTUDIO.png" width="120" class="mb-3" alt="Logo" onerror="this.style.display='none'">
-                        <h1 class="luxury-font text-gold">ELITE PRIVILEGES</h1>
-                        <p style="color: var(--golden-rose);">Bienvenida al epicentro de la belleza y el lujo profesional.</p>
-                        <a href="citas.html" class="btn btn-gold">AGENDAR CITA</a>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=1500') center/cover;">
-                    <div class="carousel-caption">
-                        <h2 class="luxury-font" style="color: var(--gold-light);">CATÁLOGOS ELITE</h2>
-                        <p>Explora nuestros cursos, instructores y servicios exclusivos.</p>
-                        <div class="d-flex justify-content-center gap-2">
-                            <a href="catalogo_cursos.html" class="btn btn-outline-light rounded-pill px-4">CURSOS</a>
-                            <a href="catalogo_instruc.html" class="btn btn-outline-light rounded-pill px-4">STAFF</a>
-                        </div>
+                        <h1 class="luxury-font text-gold">EXPERIENCIA ELITE</h1>
+                        <p class="text-rose-gold">Personaliza los privilegios exclusivos para nuestras clientas VIP.</p>
+                        <button class="btn btn-gold" onclick="document.getElementById('titulo').focus()">AÑADIR NUEVO</button>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#luxurySlider" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#luxurySlider" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
     </div>
 
-    <div class="row mb-5">
-        <div class="col-md-7">
-            <h1 class="luxury-font text-gold mb-1">GESTIÓN DE BENEFICIOS</h1>
-            <p class="text-white-50 small">Configuración de privilegios LK Studio.</p>
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="luxury-font text-gold mb-0">Gestión de Beneficios</h1>
+            <p class="text-rose-gold small text-uppercase">Catálogo Maestro de Amenidades</p>
         </div>
-        <div class="col-md-5 d-flex gap-3 justify-content-end align-items-center">
-            <div class="stat-card p-3 border border-secondary rounded text-center">
-                <small class="text-white-50 d-block">TOTAL</small>
-                <span class="text-gold fw-bold h4 m-0" id="countTotal">0</span>
+        <div class="col-md-4 text-end">
+             <div class="p-3 bg-black border border-warning rounded-4 d-inline-block">
+                <small class="text-white-50 d-block">TOTAL ACTIVOS</small>
+                <span class="text-gold fw-bold h3 m-0" id="countTotal">0</span>
             </div>
         </div>
     </div>
@@ -205,41 +213,47 @@
     <div class="row g-4">
         <div class="col-xl-4">
             <div class="card card-luxury p-4 animate__animated animate__fadeInLeft">
-                <h6 class="text-gold luxury-font mb-4"><i class="fas fa-edit me-2"></i>Editor</h6>
+                <h5 class="text-gold luxury-font mb-4 border-bottom border-secondary pb-3"><i class="fas fa-edit me-2"></i>Editor VIP</h5>
                 <form id="formBeneficio">
                     <input type="hidden" id="indexBeneficio">
                     <div class="mb-3">
-                        <label class="form-label small">Nombre del Beneficio</label>
-                        <input type="text" id="titulo" class="form-control bg-dark text-white border-secondary" required>
+                        <label class="form-label text-rose-gold small fw-bold">NOMBRE DEL PRIVILEGIO</label>
+                        <input type="text" id="titulo" class="form-control" placeholder="Ej. Copa de Cortesía" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small">Categoría</label>
-                        <select id="icono" class="form-select bg-dark text-white border-secondary">
-                            <option value="fa-glass-cheers">🍷 Bebidas</option>
+                        <label class="form-label text-rose-gold small fw-bold">CATEGORÍA</label>
+                        <select id="icono" class="form-select">
+                            <option value="fa-glass-cheers">🍷 Bebidas & Brindis</option>
                             <option value="fa-spa">🧖‍♀️ Spa & Relax</option>
-                            <option value="fa-star">✨ Premium</option>
+                            <option value="fa-star">✨ Servicio Premium</option>
+                            <option value="fa-wifi">📶 Conexión VIP</option>
+                            <option value="fa-gift">🎁 Regalos</option>
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label class="form-label small">Descripción</label>
-                        <textarea id="descripcion" class="form-control bg-dark text-white border-secondary" rows="3" required></textarea>
+                        <label class="form-label text-rose-gold small fw-bold">DESCRIPCIÓN BREVE</label>
+                        <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del beneficio..." required></textarea>
                     </div>
-                    <button type="submit" id="btnGuardar" class="btn btn-gold w-100">GUARDAR</button>
+                    <button type="submit" id="btnGuardar" class="btn btn-gold w-100 py-3">
+                        <i class="fas fa-save me-2"></i>ACTUALIZAR CATÁLOGO
+                    </button>
                 </form>
             </div>
         </div>
 
         <div class="col-xl-8">
-            <div class="table-container animate__animated animate__fadeInRight shadow">
-                <table class="table align-middle">
-                    <thead class="table-light">
-                        <tr>
-                            <th>BENEFICIO</th>
-                            <th class="text-end">ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaBeneficios"></tbody>
-                </table>
+            <div class="table-container animate__animated animate__fadeInRight shadow-lg">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>AMENIDAD / PRIVILEGIO</th>
+                                <th class="text-end">GESTIÓN</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaBeneficios"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -248,10 +262,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Lógica de datos (Mantenida de tu código)
     let beneficios = JSON.parse(localStorage.getItem("lk_vip_items")) || [
-        { titulo: "Barra Gourmet", descripcion: "Mimosas y snacks premium.", icono: "fa-glass-cheers" },
-        { titulo: "Estación de Carga", descripcion: "Carga rápida disponible.", icono: "fa-wifi" }
+        { titulo: "Barra Gourmet", descripcion: "Mimosas y snacks premium durante el servicio.", icono: "fa-glass-cheers" },
+        { titulo: "Estación de Carga", descripcion: "Carga ultra rápida para todos sus dispositivos.", icono: "fa-wifi" }
     ];
 
     function renderTabla() {
@@ -261,16 +274,22 @@
             <tr>
                 <td>
                     <div class="d-flex align-items-center">
-                        <div class="p-2 border rounded me-3 text-gold bg-black"><i class="fas ${b.icono}"></i></div>
+                        <div class="p-3 rounded-circle me-3 text-gold bg-black border border-warning" style="width:50px; height:50px; display:flex; align-items:center; justify-content:center;">
+                            <i class="fas ${b.icono}"></i>
+                        </div>
                         <div>
-                            <div class="fw-bold small text-uppercase">${b.titulo}</div>
+                            <div class="text-dark fw-bold text-uppercase" style="letter-spacing:1px;">${b.titulo}</div>
                             <div class="text-muted small">${b.descripcion}</div>
                         </div>
                     </div>
                 </td>
                 <td class="text-end">
-                    <button class="btn btn-sm btn-outline-primary" onclick="editar(${i})"><i class="fas fa-pencil-alt"></i></button>
-                    <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${i})"><i class="fas fa-trash-alt"></i></button>
+                    <button class="btn btn-sm btn-outline-dark rounded-pill px-3 me-1" onclick="editar(${i})">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger rounded-pill px-3" onclick="eliminar(${i})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </td>
             </tr>
         `).join('');
@@ -290,11 +309,12 @@
         localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
         this.reset();
         document.getElementById("indexBeneficio").value = "";
+        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-save me-2"></i>ACTUALIZAR CATÁLOGO';
         renderTabla();
     });
 
     function eliminar(i) {
-        if(confirm("¿Eliminar?")) {
+        if(confirm("¿Segura que desea eliminar este privilegio de la lista?")) {
             beneficios.splice(i, 1);
             localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
             renderTabla();
@@ -307,6 +327,8 @@
         document.getElementById("descripcion").value = b.descripcion;
         document.getElementById("icono").value = b.icono;
         document.getElementById("indexBeneficio").value = i;
+        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-sync-alt me-2"></i>GUARDAR CAMBIOS';
+        window.scrollTo({ top: 300, behavior: 'smooth' });
     }
 
     renderTabla();
