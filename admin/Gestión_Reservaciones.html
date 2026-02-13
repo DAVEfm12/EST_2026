@@ -7,7 +7,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
@@ -15,24 +15,23 @@
             --gold: #D4AF37;
             --gold-bright: #F1D592;
             --rose-gold: #E6B8A2; 
-            --deep-black: #050505;
-            --soft-black: #121212;
+            --deep-black: #0A0A0A;
+            --soft-black: #161616;
             --sidebar-width: 280px;
         }
 
         body {
-            background: radial-gradient(circle at top right, #1a1a1a 0%, var(--deep-black) 100%);
+            background: radial-gradient(circle at top right, #1e1e1e, var(--deep-black));
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             display: flex;
             margin: 0;
-            overflow-x: hidden;
         }
 
         .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-        /* --- SIDEBAR --- */
+        /* --- SIDEBAR ELITE --- */
         #sidebarAdmin {
             width: var(--sidebar-width); 
             background: var(--deep-black);
@@ -44,127 +43,106 @@
             flex-direction: column;
         }
 
-        .sidebar-logo {
-            padding: 30px;
+        .sidebar-header {
+            padding: 30px 20px;
             text-align: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        .sidebar-logo img {
-            max-width: 150px;
-            filter: drop-shadow(0 0 5px var(--gold));
-        }
-
         .nav-link {
-            color: rgba(255,255,255,0.7) !important; 
-            padding: 12px 25px;
-            transition: 0.3s; 
+            color: rgba(255,255,255,0.6) !important; 
+            padding: 15px 25px;
+            transition: 0.4s; 
             font-size: 0.85rem; 
             margin: 5px 15px; 
-            border-radius: 12px;
+            border-radius: 50px;
             display: flex;
             align-items: center;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .nav-link i { width: 25px; font-size: 1.1rem; color: var(--gold); }
+        .nav-link i { width: 30px; font-size: 1.1rem; color: var(--gold); }
 
-        .nav-link:hover {
+        .nav-link:hover, .nav-link.active {
             color: var(--gold-bright) !important; 
             background: rgba(212, 175, 55, 0.1);
         }
 
         .nav-link.active {
-            color: var(--deep-black) !important;
-            background: linear-gradient(45deg, var(--gold), var(--gold-bright)) !important;
-            font-weight: 800;
+            border: 1px solid var(--gold);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent) !important;
+            font-weight: 700;
         }
 
-        /* --- CONTENIDO PRINCIPAL --- */
+        /* --- MAIN CONTENT --- */
         .main-content {
             margin-left: var(--sidebar-width); 
             width: calc(100% - var(--sidebar-width));
-            padding: 40px;
+            padding: 50px;
         }
 
-        /* --- FORMULARIO LUXURY --- */
+        /* --- CARDS & FORMS --- */
         .card-luxury {
             background: var(--soft-black);
-            border: 1px solid var(--gold);
-            border-radius: 1.5rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            position: sticky;
-            top: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
-        .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .form-label { color: var(--rose-gold); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
         
         .form-control, .form-select {
-            background-color: rgba(0,0,0,0.5) !important; 
+            background-color: rgba(0,0,0,0.3) !important; 
             border: 1px solid #333 !important;
-            color: var(--gold-bright) !important; 
-            border-radius: 10px; padding: 10px;
-            transition: 0.3s;
+            color: white !important; 
+            border-radius: 12px;
+            padding: 12px;
         }
 
-        .form-control:focus, .form-select:focus {
-            border-color: var(--gold) !important;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-        }
+        .form-control:focus { border-color: var(--gold) !important; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
 
         /* --- TABLA VIP --- */
-        .table-luxury-wrapper {
-            background: linear-gradient(135deg, var(--gold), var(--gold-bright));
-            border-radius: 1.5rem;
-            padding: 4px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        .table-container {
+            background: var(--soft-black);
+            border-radius: 25px;
+            padding: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
-        .table { margin-bottom: 0; background-color: white !important; border-radius: 1.2rem; overflow: hidden; }
-        
+        .table { color: white !important; vertical-align: middle; }
         .table thead th { 
-            background-color: var(--deep-black) !important;
-            color: var(--gold) !important; 
-            font-weight: 900; text-transform: uppercase;
-            font-size: 0.7rem; border: none; padding: 18px;
-            letter-spacing: 1px;
+            color: var(--gold); 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            border-bottom: 2px solid var(--gold);
+            padding: 15px;
         }
 
-        .table tbody td {
-            color: #1a1a1a !important; font-weight: 600 !important;
-            background-color: #ffffff !important; border-bottom: 1px solid #f2f2f2;
-            padding: 15px; font-size: 0.85rem;
+        /* --- BADGES --- */
+        .badge-status {
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
         }
+        .bg-paid { background: rgba(46, 125, 50, 0.2); color: #81c784; border: 1px solid #2e7d32; }
+        .bg-pending { background: rgba(245, 124, 0, 0.2); color: #ffb74d; border: 1px solid #f57c00; }
 
-        /* --- BADGES Y BOTONES --- */
-        .st-badge {
-            padding: 4px 10px; border-radius: 6px; font-size: 0.65rem; font-weight: 800;
+        .btn-gold {
+            background: linear-gradient(45deg, var(--gold), var(--gold-bright));
+            color: black;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            transition: 0.3s;
         }
-        .st-pagado { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
-        .st-pendiente { background: #fff8e1; color: #f57c00; border: 1px solid #f57c00; }
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); color: black; }
 
-        .btn-pro {
-            background: linear-gradient(45deg, var(--gold-dark, #b38f1d), var(--gold));
-            color: #000; font-weight: 800; border-radius: 50px; border: none; 
-            text-transform: uppercase; transition: 0.4s;
-        }
-
-        .btn-pro:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
-            color: #000;
-        }
-
-        .search-box {
-            background: #000; border: 1px solid var(--gold); border-radius: 50px;
-            padding: 12px 25px; color: var(--gold-bright); width: 350px;
-            outline: none;
-        }
-
-        @media (max-width: 1200px) {
+        @media (max-width: 992px) {
             #sidebarAdmin { transform: translateX(-100%); }
-            .main-content { margin-left: 0; width: 100%; }
+            .main-content { margin-left: 0; width: 100%; padding: 20px; }
         }
     </style>
 </head>
@@ -172,107 +150,92 @@
 <body>
 
 <nav id="sidebarAdmin">
-    <div class="sidebar-logo">
-        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
+    <div class="sidebar-header">
+        <h4 class="luxury-font text-gold mb-0">LK STUDIO</h4>
+        <small class="text-rose-gold" style="font-size: 0.6rem; letter-spacing: 2px;">MANAGEMENT</small>
     </div>
-    <div class="nav-flex-column mt-4 flex-grow-1">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
-        <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-calendar-check"></i> Reservaciones</a>
+    <div class="nav flex-column mt-4 flex-grow-1">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Agenda VIP</a>
+        <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-book-open"></i> Reservas</a>
         <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Punto de Venta</a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-spa"></i> Servicios</a>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Reportes</a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut"></i> Servicios</a>
+        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Academia</a>
+        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-users"></i> Personal</a>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> Reportes</a>
     </div>
-    <div class="p-4">
-        <a href="index.html" class="nav-link text-danger border border-danger-subtle"><i class="fas fa-power-off"></i> Salir</a>
+    <div class="p-4 mt-auto border-top border-secondary">
+        <a href="login.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill"><i class="fas fa-sign-out-alt me-2"></i> Salir</a>
     </div>
 </nav>
 
 <main class="main-content">
     
-    <div class="d-flex justify-content-between align-items-end mb-5 animate__animated animate__fadeInDown">
-        <div>
-            <h1 class="luxury-font fw-bold mb-0" style="color: var(--gold); font-size: 2.5rem;">Gestión VIP</h1>
-            <p style="color: var(--rose-gold);" class="fw-bold mb-0 small text-uppercase tracking-widest">Master Control Reservaciones</p>
-        </div>
-        <div class="position-relative">
-            <i class="fas fa-search position-absolute text-gold" style="top:15px; left:20px;"></i>
-            <input type="text" id="busqueda" class="search-box ps-5" placeholder="Filtrar agenda..." onkeyup="renderReservas()">
-        </div>
-    </div>
+    <header class="mb-5 animate__animated animate__fadeInDown">
+        <h5 class="text-rose-gold fw-bold mb-1" style="letter-spacing: 3px;">ADMINISTRACIÓN</h5>
+        <h1 class="luxury-font text-gold display-5 fw-bold">Gestión de Reservaciones</h1>
+    </header>
 
     <div class="row g-4">
-        <div class="col-xl-4 col-lg-5">
+        <div class="col-xl-4">
             <div class="card card-luxury p-4 animate__animated animate__fadeInLeft">
-                <h5 class="luxury-font text-gold mb-4 text-center border-bottom border-secondary pb-3">Nueva Entrada</h5>
+                <h5 class="luxury-font text-gold mb-4"><i class="fas fa-plus-circle me-2"></i>Nueva Reserva</h5>
                 <form id="formReserva">
                     <input type="hidden" id="indexReserva">
-                    
                     <div class="mb-3">
-                        <label class="form-label">Clienta Premium</label>
+                        <label class="form-label">Cliente Premium</label>
                         <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
                     </div>
-
-                    <div class="row g-2 mb-3">
-                        <div class="col-7">
-                            <label class="form-label">Servicio Elite</label>
-                            <select id="servicio" class="form-select" required>
-                                <option value="" selected disabled>Seleccionar...</option>
-                                <option value="Uñas Acrílicas #2">Uñas Acrílicas #2</option>
-                                <option value="Balayage Elite">Balayage Elite</option>
-                                <option value="Diseño Mariposa">Diseño Mariposa</option>
-                                <option value="Curso Gel 21 Días">Curso Gel 21 Días</option>
-                            </select>
+                    <div class="mb-3">
+                        <label class="form-label">Servicio Elite</label>
+                        <select id="servicio" class="form-select" required>
+                            <option value="" selected disabled>Seleccione...</option>
+                            <option value="Uñas Acrílicas">Uñas Acrílicas</option>
+                            <option value="Balayage Elite">Balayage Elite</option>
+                            <option value="Diseño Mariposa">Diseño Mariposa</option>
+                            <option value="Curso Gel">Curso Master Gel</option>
+                        </select>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" id="fecha" class="form-control" required>
                         </div>
-                        <div class="col-5">
-                            <label class="form-label">Estado</label>
+                        <div class="col-6">
+                            <label class="form-label">Estatus</label>
                             <select id="pago" class="form-select">
                                 <option value="Pendiente">Pendiente</option>
                                 <option value="Pagado">Pagado</option>
                             </select>
                         </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Experta Asignada</label>
-                        <input type="text" id="instructor" class="form-control" placeholder="Nombre de la especialista" required>
-                    </div>
-
-                    <div class="row g-2 mb-3">
-                        <div class="col-6">
-                            <label class="form-label">Fecha</label>
-                            <input type="date" id="fecha" class="form-control" required>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label">Hora</label>
-                            <input type="time" id="hora" class="form-control" required>
-                        </div>
-                    </div>
-
                     <div class="mb-4">
-                        <label class="form-label">Inversión ($)</label>
-                        <input type="number" id="costo" class="form-control fw-bold" placeholder="0.00" required>
+                        <label class="form-label">Monto de Inversión ($)</label>
+                        <input type="number" id="costo" class="form-control fw-bold" style="color: var(--gold-bright) !important;" placeholder="0.00" required>
                     </div>
-
-                    <button type="submit" id="btnSubmit" class="btn btn-pro w-100 py-3 mb-2">
-                        <i class="fas fa-star me-2"></i>Agendar Reserva
+                    <button type="submit" id="btnSubmit" class="btn btn-gold w-100 py-3">
+                        <i class="fas fa-check-double me-2"></i>Confirmar Reserva
                     </button>
-                    <button type="button" id="btnCancelarEdit" class="btn btn-sm btn-outline-secondary w-100 d-none" onclick="cancelarEdicion()">Cancelar Edición</button>
+                    <button type="button" id="btnCancelarEdit" class="btn btn-sm btn-outline-secondary w-100 mt-2 d-none" onclick="cancelarEdicion()">Cancelar</button>
                 </form>
             </div>
         </div>
 
-        <div class="col-xl-8 col-lg-7">
-            <div class="table-luxury-wrapper animate__animated animate__fadeInRight">
+        <div class="col-xl-8">
+            <div class="table-container animate__animated animate__fadeInRight">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="luxury-font text-white mb-0">Listado Maestro</h5>
+                    <input type="text" id="busqueda" class="form-control w-50" placeholder="Buscar por cliente..." onkeyup="renderReservas()">
+                </div>
                 <div class="table-responsive">
-                    <table class="table align-middle">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Clienta / Servicio</th>
-                                <th>Cita</th>
-                                <th>Experta</th>
-                                <th>Pago</th>
+                                <th>Cliente / Servicio</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
                                 <th>Total</th>
-                                <th class="text-center">Acciones</th>
+                                <th class="text-end">Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tablaReservas">
@@ -280,18 +243,18 @@
                     </table>
                 </div>
             </div>
-            
-            <div class="mt-4 row g-3 text-center">
+
+            <div class="row g-3 mt-3">
                 <div class="col-md-6">
-                    <div class="p-3 bg-black border border-secondary rounded-4">
-                        <small class="text-white-50 d-block text-uppercase">Total Reservaciones</small>
-                        <span id="countTotal" class="h3 text-gold luxury-font">0</span>
+                    <div class="card-luxury p-3 text-center">
+                        <small class="text-rose-gold text-uppercase d-block">Total Reservas</small>
+                        <span id="countTotal" class="h3 luxury-font text-gold">0</span>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="p-3 bg-black border border-secondary rounded-4">
-                        <small class="text-white-50 d-block text-uppercase">Ingreso Proyectado</small>
-                        <span id="montoTotal" class="h3 text-gold luxury-font">$0.00</span>
+                    <div class="card-luxury p-3 text-center">
+                        <small class="text-rose-gold text-uppercase d-block">Ingreso Proyectado</small>
+                        <span id="montoTotal" class="h3 luxury-font text-gold">$0.00</span>
                     </div>
                 </div>
             </div>
@@ -300,45 +263,40 @@
 </main>
 
 <script>
+    // Lógica de Persistencia y Renderizado
     let reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
 
     function renderReservas() {
         const tabla = document.getElementById("tablaReservas");
         const filtro = document.getElementById("busqueda").value.toLowerCase();
         tabla.innerHTML = "";
-        let totalDinero = 0;
-        let contador = 0;
+        let suma = 0;
 
         reservaciones.forEach((r, index) => {
-            if (r.cliente.toLowerCase().includes(filtro) || r.instructor.toLowerCase().includes(filtro)) {
-                totalDinero += parseFloat(r.costo);
-                contador++;
-                const badgeClass = r.pago === 'Pagado' ? 'st-pagado' : 'st-pendiente';
+            if (r.cliente.toLowerCase().includes(filtro)) {
+                suma += parseFloat(r.costo);
+                const statusClass = r.pago === 'Pagado' ? 'bg-paid' : 'bg-pending';
+                
                 tabla.innerHTML += `
-                    <tr class="animate__animated animate__fadeIn">
+                    <tr>
                         <td>
-                            <div class="text-uppercase fw-bold text-dark">${r.cliente}</div>
-                            <div class="text-muted" style="font-size: 0.7rem;">${r.servicio}</div>
+                            <div class="fw-bold">${r.cliente}</div>
+                            <small class="text-rose-gold">${r.servicio}</small>
                         </td>
-                        <td>
-                            <div class="fw-bold">${r.fecha}</div>
-                            <div class="small text-muted">${r.hora}</div>
-                        </td>
-                        <td><span class="small text-uppercase">${r.instructor}</span></td>
-                        <td><span class="st-badge ${badgeClass}">${r.pago}</span></td>
-                        <td class="fw-bold text-dark">$${parseFloat(r.costo).toFixed(2)}</td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button class="btn btn-sm btn-outline-dark" onclick="editar(${index})"><i class="fas fa-pen"></i></button>
-                                <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
-                            </div>
+                        <td>${r.fecha}</td>
+                        <td><span class="badge-status ${statusClass}">${r.pago}</span></td>
+                        <td class="text-gold fw-bold">$${parseFloat(r.costo).toLocaleString()}</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
             }
         });
-        document.getElementById("countTotal").innerText = contador;
-        document.getElementById("montoTotal").innerText = `$${totalDinero.toLocaleString()}`;
+
+        document.getElementById("countTotal").innerText = reservaciones.length;
+        document.getElementById("montoTotal").innerText = `$${suma.toLocaleString()}`;
     }
 
     document.getElementById("formReserva").addEventListener("submit", function(e){
@@ -347,9 +305,7 @@
             cliente: document.getElementById("cliente").value,
             servicio: document.getElementById("servicio").value,
             pago: document.getElementById("pago").value,
-            instructor: document.getElementById("instructor").value,
             fecha: document.getElementById("fecha").value,
-            hora: document.getElementById("hora").value,
             costo: document.getElementById("costo").value
         };
         const id = document.getElementById("indexReserva").value;
@@ -362,7 +318,7 @@
     });
 
     function eliminar(i) {
-        if(confirm("¿Desea eliminar este registro VIP?")) {
+        if(confirm("¿Eliminar registro?")) {
             reservaciones.splice(i, 1);
             localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
             renderReservas();
@@ -375,22 +331,21 @@
         document.getElementById("cliente").value = r.cliente;
         document.getElementById("servicio").value = r.servicio;
         document.getElementById("pago").value = r.pago;
-        document.getElementById("instructor").value = r.instructor;
         document.getElementById("fecha").value = r.fecha;
-        document.getElementById("hora").value = r.hora;
         document.getElementById("costo").value = r.costo;
-        document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-sync me-2"></i>Actualizar Datos';
+        document.getElementById("btnSubmit").innerText = "Actualizar Registro";
         document.getElementById("btnCancelarEdit").classList.remove("d-none");
     }
 
     function cancelarEdicion() {
         document.getElementById("formReserva").reset();
         document.getElementById("indexReserva").value = "";
-        document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-star me-2"></i>Agendar Reserva';
+        document.getElementById("btnSubmit").innerText = "Confirmar Reserva";
         document.getElementById("btnCancelarEdit").classList.add("d-none");
     }
 
     renderReservas();
 </script>
+
 </body>
 </html>
