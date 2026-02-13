@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>LK Studio | Executive Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -13,62 +12,45 @@
     <style>
         :root { 
             --gold: #D4AF37; 
-            --gold-glow: rgba(212, 175, 55, 0.3);
-            --rose: #E6B8A2; 
-            --deep-black: #050505;
-            --card-bg: #0d0d0d;
-            --sidebar-width: 280px;
+            --gold-light: #F1D592; 
+            --rose-gold: #E6B8A2; 
+            --deep-black: #0A0A0A;
+            --card-bg: #121212;
         }
 
         body { 
             background-color: var(--deep-black);
+            background-image: radial-gradient(circle at 50% -20%, #252525, #0a0a0a);
             color: white; 
             font-family: 'Poppins', sans-serif; 
-            margin: 0;
-            display: flex;
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
-        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
+        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 3px; }
 
-        /* --- SIDEBAR --- */
-        #sidebarAdmin {
-            width: var(--sidebar-width);
-            background: #000;
-            border-right: 1px solid var(--gold);
-            height: 100vh;
-            position: fixed;
-            display: flex;
-            flex-direction: column;
-            z-index: 1100;
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .nav-link {
-            color: rgba(255,255,255,0.5) !important;
-            padding: 12px 25px;
-            transition: 0.3s;
-            font-size: 0.85rem;
-            margin: 0 15px 5px 0;
-            border-radius: 0 25px 25px 0;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--gold) !important;
-            background: rgba(212, 175, 55, 0.08);
-            border-left: 3px solid var(--gold);
-        }
-
-        /* --- MAIN CONTENT --- */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            width: calc(100% - var(--sidebar-width));
+        /* --- HEADER CARD --- */
+        .header-card {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 1px solid var(--gold);
+            border-radius: 30px;
             padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            text-align: center;
         }
 
-        /* --- LUXURY CARDS SYSTEM --- */
+        /* --- MODULE CARDS --- */
         .module-card {
             background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 25px;
             padding: 35px 25px;
             text-align: center;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -76,201 +58,198 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100%;
             position: relative;
             overflow: hidden;
         }
 
-        /* Efecto de brillo dorado al pasar el mouse */
         .module-card::after {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(212, 175, 55, 0.05), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(transparent, rgba(230, 184, 162, 0.1));
+            transition: 0.5s;
         }
 
         .module-card:hover {
             transform: translateY(-12px);
-            border-color: var(--gold);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.8), 0 0 15px var(--gold-glow);
+            border-color: var(--rose-gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 15px rgba(230, 184, 162, 0.2);
         }
 
-        .module-card:hover::after {
-            transform: translateX(100%);
-        }
+        .module-card:hover::after { height: 100%; }
 
         .icon-circle {
             width: 70px;
             height: 70px;
-            background: #151515;
-            border: 1px solid var(--gold);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--gold);
+            border: 1px solid var(--gold);
             transition: 0.4s;
         }
 
         .module-card:hover .icon-circle {
             background: var(--gold);
-            color: black;
+            color: var(--deep-black);
+            transform: scale(1.1) rotate(10deg);
             box-shadow: 0 0 20px var(--gold);
         }
 
         .card-title {
-            color: white;
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
+            color: var(--gold-light);
+            font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 12px;
-            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .card-desc {
-            color: var(--rose);
-            font-size: 0.75rem;
+            color: #888;
+            font-size: 0.8rem;
             line-height: 1.5;
-            opacity: 0.7;
+            margin-bottom: 0;
         }
 
-        .header-line {
-            height: 2px;
-            width: 50px;
-            background: var(--gold);
-            margin-bottom: 20px;
+        /* --- BOTÓN CERRAR --- */
+        .logout-card {
+            background: rgba(255, 0, 0, 0.05);
+            border: 1px solid rgba(255, 80, 80, 0.2);
+            transition: 0.3s;
+        }
+        .logout-card:hover {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: #ff4d4d;
         }
 
-        @media (max-width: 992px) {
-            #sidebarAdmin { transform: translateX(-100%); }
-            .main-content { margin-left: 0; width: 100%; padding: 20px; }
-        }
+        #reloj { color: var(--rose-gold); text-shadow: 0 0 10px rgba(230, 184, 162, 0.5); }
+
     </style>
 </head>
 <body>
 
-<nav id="sidebarAdmin">
-    <div class="p-4 mb-4 text-center">
-        <h4 class="luxury-font text-white mb-0" style="font-size: 1.4rem; color: var(--gold) !important;">LK STUDIO</h4>
-        <div class="small fw-bold" style="color: var(--rose); font-size: 0.6rem; letter-spacing: 3px;">EXECUTIVE PANEL</div>
-    </div>
-
-    <div class="nav flex-column">
-        <a href="#" class="nav-link active"><i class="fas fa-th-large me-3"></i> Dashboard</a>
-        <a href="#" class="nav-link"><i class="fas fa-calendar-alt me-3"></i> Agenda</a>
-        <a href="#" class="nav-link"><i class="fas fa-cash-register me-3"></i> Ventas</a>
-        <a href="#" class="nav-link"><i class="fas fa-chart-line me-3"></i> Reportes</a>
-        <a href="#" class="nav-link"><i class="fas fa-gem me-3"></i> Clientes VIP</a>
-    </div>
-
-    <div class="mt-auto p-4">
-        <button class="btn btn-outline-light w-100 rounded-pill border-secondary small" style="font-size: 0.7rem; border-color: rgba(212,175,55,0.3) !important;">
-            SALIR DEL SISTEMA
-        </button>
-    </div>
-</nav>
-
-<main class="main-content">
-    <header class="mb-5 animate__animated animate__fadeIn">
-        <div class="row align-items-center">
-            <div class="col-md-7">
-                <div class="header-line"></div>
-                <h1 class="luxury-font display-5 mb-0">CENTRAL <span style="color: var(--gold);">CONTROL</span></h1>
-                <p class="text-white-50 mt-2">Bienvenido al núcleo de gestión LK Studio.</p>
-            </div>
-            <div class="col-md-5 text-md-end">
-                <div id="reloj" class="h2 luxury-font mb-0 text-white">00:00:00</div>
-                <div id="fecha-text" style="color: var(--rose); font-size: 0.8rem; letter-spacing: 1px;"></div>
+<div class="admin-container">
+    
+    <header class="header-card animate__animated animate__fadeIn">
+        <div class="mb-3 mx-auto" style="width: 80px; height: 80px; border: 2px solid var(--gold); border-radius: 50%; padding: 10px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/606/606548.png" class="img-fluid" style="filter: sepia(1) saturate(5) hue-rotate(10deg);">
+        </div>
+        <h1 class="luxury-font text-gold mb-1">LK STUDIO</h1>
+        <p class="text-rose-gold fw-bold mb-4" style="letter-spacing: 5px; font-size: 0.8rem;">SISTEMA ADMINISTRATIVO DE ÉLITE</p>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div id="reloj" class="h2 luxury-font mb-0">00:00:00</div>
+                <small class="text-white-50" id="fecha-text"></small>
             </div>
         </div>
     </header>
 
-    <div class="row g-4 animate__animated animate__fadeInUp">
+    <div class="row g-4 justify-content-center">
         
-        <div class="col-xl-3 col-md-6">
-            <a href="citas.html" class="module-card">
-                <div class="icon-circle"><i class="fas fa-calendar-check"></i></div>
-                <h3 class="card-title">AGENDA VIP</h3>
-                <p class="card-desc">Control total de tiempos, citas premium y disponibilidad de cabinas.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.1s;">
+            <a href="Gestión_Reservaciones.html" class="module-card">
+                <div class="icon-circle"><i class="fas fa-book-open"></i></div>
+                <h3 class="card-title">Reservaciones</h3>
+                <p class="card-desc">Control de depósitos, abonos y estatus de citas.</p>
             </a>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <a href="punto_venta.html" class="module-card">
-                <div class="icon-circle"><i class="fas fa-wallet"></i></div>
-                <h3 class="card-title">PUNTO DE VENTA</h3>
-                <p class="card-desc">Procesamiento de pagos, facturación rápida y flujo de caja diario.</p>
-            </a>
-        </div>
-
-        <div class="col-xl-3 col-md-6">
-            <a href="#" class="module-card">
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.2s;">
+            <a href="PANEL_ADMIN.html" class="module-card">
                 <div class="icon-circle"><i class="fas fa-chart-pie"></i></div>
-                <h3 class="card-title">ANALÍTICA</h3>
-                <p class="card-desc">Reportes detallados de ingresos y métricas de rendimiento mensual.</p>
+                <h3 class="card-title">Panel General</h3>
+                <p class="card-desc">Vista global de métricas y rendimiento del estudio.</p>
             </a>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <a href="#" class="module-card">
-                <div class="icon-circle"><i class="fas fa-user-tie"></i></div>
-                <h3 class="card-title">PERSONAL</h3>
-                <p class="card-desc">Gestión de instructores, comisiones y horarios de trabajo.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.3s;">
+            <a href="catalogo_beneficios.html" class="module-card">
+                <div class="icon-circle"><i class="fas fa-gem"></i></div>
+                <h3 class="card-title">Membresías</h3>
+                <p class="card-desc">Fidelización de clientes y beneficios exclusivos.</p>
             </a>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <a href="#" class="module-card" style="border-color: rgba(230, 184, 162, 0.2);">
-                <div class="icon-circle" style="color: var(--rose); border-color: var(--rose);"><i class="fas fa-mortar-board"></i></div>
-                <h3 class="card-title">ACADEMIA</h3>
-                <p class="card-desc">Control de cursos, alumnos inscritos y entrega de certificados.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.4s;">
+            <a href="catalogo_cursos.html" class="module-card">
+                <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
+                <h3 class="card-title">Academia</h3>
+                <p class="card-desc">Gestión de cursos, talleres y certificaciones.</p>
             </a>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <a href="#" class="module-card" style="border-color: rgba(230, 184, 162, 0.2);">
-                <div class="icon-circle" style="color: var(--rose); border-color: var(--rose);"><i class="fas fa-tags"></i></div>
-                <h3 class="card-title">SERVICIOS</h3>
-                <p class="card-desc">Catálogo de tratamientos, precios y promociones especiales.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.5s;">
+            <a href="catalogo_instruc.html" class="module-card">
+                <div class="icon-circle"><i class="fas fa-chalkboard-teacher"></i></div>
+                <h3 class="card-title">Instructores</h3>
+                <p class="card-desc">Administración de personal y coaches.</p>
             </a>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <a href="#" class="module-card" style="border-color: rgba(230, 184, 162, 0.2);">
-                <div class="icon-circle" style="color: var(--rose); border-color: var(--rose);"><i class="fas fa-crown"></i></div>
-                <h3 class="card-title">MEMBRESÍAS</h3>
-                <p class="card-desc">Programas de lealtad y beneficios exclusivos para clientes frecuentes.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.6s;">
+            <a href="catalogo_servicios.html" class="module-card">
+                <div class="icon-circle"><i class="fas fa-concierge-bell"></i></div>
+                <h3 class="card-title">Servicios</h3>
+                <p class="card-desc">Configuración de tratamientos y precios.</p>
             </a>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <a href="#" class="module-card" style="border-color: rgba(230, 184, 162, 0.2);">
-                <div class="icon-circle" style="color: var(--rose); border-color: var(--rose);"><i class="fas fa-cog"></i></div>
-                <h3 class="card-title">AJUSTES</h3>
-                <p class="card-desc">Configuración del sistema, seguridad y perfiles de usuario.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.7s;">
+            <a href="citas.html" class="module-card">
+                <div class="icon-circle"><i class="fas fa-calendar-alt"></i></div>
+                <h3 class="card-title">Agenda VIP</h3>
+                <p class="card-desc">Calendario de citas y disponibilidad diaria.</p>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.8s;">
+            <a href="punto_venta.html" class="module-card">
+                <div class="icon-circle"><i class="fas fa-cash-register"></i></div>
+                <h3 class="card-title">Punto de Venta</h3>
+                <p class="card-desc">Cobros rápidos, tickets y flujo de caja.</p>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.9s;">
+            <a href="reportes.html" class="module-card">
+                <div class="icon-circle"><i class="fas fa-file-invoice-dollar"></i></div>
+                <h3 class="card-title">Reportes</h3>
+                <p class="card-desc">Análisis de ingresos y balances contables.</p>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 1s;">
+            <a href="login.html" class="module-card logout-card">
+                <div class="icon-circle" style="color: #ff4d4d; border-color: #ff4d4d;"><i class="fas fa-power-off"></i></div>
+                <h3 class="card-title" style="color: #ff4d4d;">Cerrar</h3>
+                <p class="card-desc">Finalizar sesión de forma segura.</p>
             </a>
         </div>
 
     </div>
 
-    <footer class="mt-5 pt-4 border-top border-dark opacity-50">
-        <div class="row small">
-            <div class="col-6">© 2026 LK STUDIO - SISTEMA DE ALTA GAMA</div>
-            <div class="col-6 text-end text-gold luxury-font">VERSION 2.4.0 ELITE</div>
-        </div>
+    <footer class="text-center mt-5 opacity-50 small">
+        <p>© 2026 LK STUDIO - VERSIÓN 2.4.0 ELITE</p>
     </footer>
-</main>
+
+</div>
 
 <script>
     function updateClock() {
         const now = new Date();
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('reloj').innerText = now.toLocaleTimeString('es-MX');
-        document.getElementById('fecha-text').innerText = now.toLocaleDateString('es-MX', options).toUpperCase();
+        document.getElementById('reloj').innerText = now.toLocaleTimeString();
+        document.getElementById('fecha-text').innerText = now.toLocaleDateString('es-MX', options);
     }
     setInterval(updateClock, 1000);
     updateClock();
