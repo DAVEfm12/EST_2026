@@ -338,6 +338,11 @@
     }
 
     renderTable();
+    
+    let instructores = JSON.parse(localStorage.getItem("LK_INSTRUCTORES_MASTER")) || [];
+document.getElementById("tuSelectDeInstructores").innerHTML = instructores.map(i => 
+    `<option value="${i.nombre}">${i.nombre}</option>`
+).join('');
 </script>
 </body>
 </html>
