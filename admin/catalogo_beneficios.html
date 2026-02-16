@@ -14,299 +14,202 @@
         :root {
             --gold: #D4AF37;
             --gold-light: #F1D592;
-            --rose: #FFC0CB; /* Rose Gold más brillante para lectura */
+            --rose: #E6B8A2; 
             --deep-black: #050505;
-            --card-bg: #121212;
+            --gray-table: #1A1A1A; /* El gris que buscabas */
             --sidebar-width: 280px;
-            --text-main: #FFFFFF; /* Blanco puro para legibilidad */
         }
 
         body {
             background-color: var(--deep-black);
-            background-image: radial-gradient(circle at top right, #1a1a1a, #050505);
-            color: var(--text-main);
+            color: #FFFFFF;
             font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
             margin: 0;
             display: flex;
         }
 
-        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
+        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 1px; }
 
-        /* --- SIDEBAR MAESTRO --- */
+        /* --- SIDEBAR --- */
         #sidebarAdmin {
             width: var(--sidebar-width);
-            background: #000000;
-            border-right: 2px solid var(--gold);
+            background: #000;
+            border-right: 1px solid var(--gold);
             height: 100vh;
             position: fixed;
-            z-index: 1000;
             display: flex;
             flex-direction: column;
         }
 
-        .sidebar-logo-container {
-            padding: 35px 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .sidebar-logo-container img {
-            max-width: 160px;
-            height: auto;
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
-        }
-
-        .sidebar-divider {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: var(--gold);
-            padding: 25px 25px 10px;
-            letter-spacing: 2px;
-            font-weight: 800;
-        }
+        .sidebar-logo { padding: 30px; text-align: center; }
+        .sidebar-logo img { max-width: 140px; filter: drop-shadow(0 0 5px var(--gold)); }
 
         .nav-link {
-            color: #E0E0E0 !important; /* Gris muy claro para el menú */
-            padding: 14px 25px;
-            transition: 0.3s;
-            font-size: 0.9rem;
-            margin: 4px 15px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
+            color: rgba(255,255,255,0.8) !important;
+            padding: 12px 25px;
+            margin: 2px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
         }
 
-        .nav-link i { width: 30px; color: var(--gold); font-size: 1.1rem; }
+        .nav-link i { color: var(--gold); margin-right: 10px; }
+        .nav-link.active { background: rgba(212, 175, 55, 0.15); color: var(--gold) !important; border-left: 4px solid var(--rose); }
 
-        .nav-link:hover {
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--gold-light) !important;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(45deg, rgba(212, 175, 55, 0.2), rgba(255, 192, 203, 0.1));
-            color: var(--gold) !important;
-            border-left: 5px solid var(--rose);
-            font-weight: 600;
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
+        /* --- MAIN CONTENT --- */
         .main-content {
             margin-left: var(--sidebar-width);
             width: calc(100% - var(--sidebar-width));
-            padding: 50px;
+            padding: 40px;
         }
 
-        .page-header h1 { color: var(--gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .text-rose-gold { color: var(--rose) !important; font-weight: 600; }
+        .title-gold { color: var(--gold); font-weight: 900; }
+        .subtitle-rose { color: var(--rose); font-weight: 600; font-size: 0.8rem; letter-spacing: 2px; }
 
-        /* --- TABLA ELITE --- */
+        /* --- TABLA GRIS DE LUJO --- */
         .luxury-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 30px;
-            padding: 30px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .table-container { margin-top: 20px; }
-
-        .table { color: var(--text-main); border-collapse: separate; border-spacing: 0 12px; }
+        .table {
+            color: #FFFFFF !important; /* Letras blancas siempre visibles */
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
 
         .table thead th {
-            background: #1a1a1a;
-            color: var(--rose);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            padding: 20px;
+            background: transparent;
+            color: var(--gold);
             border: none;
-            border-bottom: 2px solid var(--gold);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 15px;
         }
 
         .table tbody tr {
-            background: #1e1e1e;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background-color: var(--gray-table) !important; /* Fondo gris para las filas */
+            transition: 0.3s;
         }
 
         .table tbody tr:hover {
-            background: #252525;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
+            background-color: #252525 !important; /* Gris un poco más claro al pasar el mouse */
+            transform: scale(1.005);
         }
 
         .table td {
-            padding: 20px !important;
-            border: none;
+            padding: 20px 15px !important;
+            border: none !important;
             vertical-align: middle;
-            color: #FFFFFF !important; /* Asegura que el texto dentro de celdas sea blanco */
         }
 
-        /* Bordes redondeados por fila */
-        .table tr td:first-child { border-radius: 15px 0 0 15px; }
-        .table tr td:last-child { border-radius: 0 15px 15px 0; }
+        /* Redondear esquinas de filas */
+        .table tr td:first-child { border-radius: 12px 0 0 12px; border-left: 3px solid var(--gold); }
+        .table tr td:last-child { border-radius: 0 12px 12px 0; }
 
-        /* --- COMPONENTES VISUALES --- */
+        /* --- DETALLES --- */
         .pts-badge {
-            background: rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.1);
             color: var(--gold-light);
-            padding: 8px 15px;
-            border-radius: 12px;
             border: 1px solid var(--gold);
-            font-weight: 800;
-            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: 700;
         }
 
-        .badge-vip {
-            border: 1px solid var(--rose);
+        .badge-nivel {
             color: var(--rose);
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            background: rgba(255, 192, 203, 0.05);
+            border: 1px solid var(--rose);
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
         }
 
         .btn-gold {
             background: linear-gradient(45deg, var(--gold), var(--gold-light));
-            color: #000;
-            font-weight: 800;
-            border: none;
-            border-radius: 15px;
-            padding: 12px 25px;
-            transition: 0.4s;
+            color: #000; font-weight: 800; border: none; border-radius: 10px;
         }
 
-        .btn-gold:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-            color: #000;
-        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
 
-        /* --- FORMULARIOS MODAL --- */
-        .modal-content {
-            background: #111;
-            border: 2px solid var(--gold);
-            border-radius: 30px;
-            color: #fff;
-        }
+        /* --- MODAL --- */
+        .modal-content { background: #111; border: 1px solid var(--gold); border-radius: 20px; color: #fff; }
+        .form-control, .form-select { background: #000; border: 1px solid #333; color: #fff; border-radius: 10px; }
+        .form-control:focus { background: #050505; border-color: var(--rose); color: #fff; box-shadow: none; }
+        label { color: var(--rose); font-size: 0.8rem; margin-bottom: 5px; }
 
-        .form-control, .form-select {
-            background: #000;
-            border: 1px solid #444;
-            color: #fff !important;
-            padding: 12px;
-            border-radius: 12px;
-        }
-
-        .form-control:focus {
-            background: #050505;
-            border-color: var(--rose);
-            box-shadow: 0 0 10px rgba(255, 192, 203, 0.2);
-            color: #fff;
-        }
-
-        label { color: var(--rose); font-weight: 600; margin-bottom: 8px; font-size: 0.85rem; }
-
-        @media (max-width: 992px) {
-            #sidebarAdmin { display: none; }
-            .main-content { margin-left: 0; width: 100%; padding: 20px; }
-        }
     </style>
 </head>
 <body>
 
 <nav id="sidebarAdmin">
-    <div class="sidebar-logo-container">
-        <img src="IMG/LKSTUDIO.png" alt="LK STUDIO">
+    <div class="sidebar-logo">
+        <img src="IMG/LKSTUDIO.png" alt="Logo">
     </div>
-    <div class="nav flex-column overflow-auto">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+    <div class="nav flex-column mt-2">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
         <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Agenda VIP</a>
         <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-concierge-bell"></i> Reservaciones</a>
         <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Punto de Venta</a>
-        
-        <div class="sidebar-divider">Catálogos Master</div>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-sparkles"></i> Servicios</a>
+        <div class="sidebar-divider">Catálogos</div>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut"></i> Servicios</a>
         <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Cursos</a>
         <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie"></i> Instructores</a>
         <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> Beneficios VIP</a>
-        
-        <div class="sidebar-divider">Análisis</div>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-pie"></i> Reportes</a>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Reportes</a>
     </div>
 </nav>
 
 <main class="main-content">
-    <header class="page-header d-flex justify-content-between align-items-end mb-5 animate__animated animate__fadeIn">
+    <div class="d-flex justify-content-between align-items-end mb-4">
         <div>
-            <h1 class="luxury-font fw-black mb-1">CATÁLOGO DE BENEFICIOS</h1>
-            <p class="text-rose-gold text-uppercase small mb-0">Gestión de Recompensas y Fidelización Élite</p>
+            <h1 class="luxury-font title-gold mb-0">BENEFICIOS VIP</h1>
+            <p class="subtitle-rose text-uppercase mb-0">Control de Premios y Fidelización</p>
         </div>
-        <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#modalBeneficio" onclick="resetForm()">
-            <i class="fas fa-plus-circle me-2"></i> AGREGAR NUEVO BENEFICIO
+        <button class="btn btn-gold px-4 py-2" data-bs-toggle="modal" data-bs-target="#modalBen" onclick="resetForm()">
+            <i class="fas fa-plus-circle me-2"></i> NUEVO BENEFICIO
         </button>
-    </header>
-
-    <div class="row g-4 mb-5">
-        <div class="col-md-4">
-            <div class="luxury-card border-0 text-center animate__animated animate__zoomIn">
-                <h6 class="text-rose-gold small">BENEFICIOS ACTIVOS</h6>
-                <h2 id="totalCount" class="luxury-font text-white">0</h2>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="luxury-card border-0 text-center animate__animated animate__zoomIn" style="animation-delay: 0.1s;">
-                <h6 class="text-rose-gold small">NIVEL PROMEDIO</h6>
-                <h2 class="luxury-font text-white">GOLD</h2>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="luxury-card border-0 text-center animate__animated animate__zoomIn" style="animation-delay: 0.2s;">
-                <h6 class="text-rose-gold small">PUNTOS EN CIRCULACIÓN</h6>
-                <h2 class="luxury-font text-white">15,400</h2>
-            </div>
-        </div>
     </div>
 
-    <div class="luxury-card animate__animated animate__fadeInUp">
+    <div class="luxury-card animate__animated animate__fadeIn">
         <div class="table-responsive">
             <table class="table align-middle">
                 <thead>
                     <tr>
-                        <th width="40%">BENEFICIO / DETALLE</th>
-                        <th>NIVEL REQUERIDO</th>
-                        <th>CANJE (PTS)</th>
+                        <th width="40%">RECOMPENSA</th>
+                        <th>NIVEL</th>
+                        <th>COSTO</th>
                         <th>ESTADO</th>
                         <th class="text-end">ACCIONES</th>
                     </tr>
                 </thead>
-                <tbody id="tablaBeneficios">
+                <tbody id="listaBeneficios">
                     </tbody>
             </table>
         </div>
     </div>
 </main>
 
-<div class="modal fade" id="modalBeneficio" tabindex="-1">
+<div class="modal fade" id="modalBen" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header border-secondary p-4">
-                <h5 class="modal-title luxury-font text-gold">DETALLES DEL BENEFICIO VIP</h5>
+                <h5 class="modal-title luxury-font text-gold">GESTIÓN DE BENEFICIO</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <form id="formBeneficio">
+            <form id="formBen">
                 <div class="modal-body p-4">
                     <input type="hidden" id="editIndex">
-                    <div class="mb-4">
-                        <label>NOMBRE DE LA RECOMPENSA</label>
-                        <input type="text" class="form-control" id="benNombre" placeholder="Ej: Retoque de Pestañas Gratis" required>
+                    <div class="mb-3">
+                        <label>NOMBRE DEL BENEFICIO</label>
+                        <input type="text" class="form-control" id="benNombre" required>
                     </div>
-                    <div class="row g-3 mb-4">
+                    <div class="row mb-3">
                         <div class="col-6">
-                            <label>NIVEL ELITE</label>
+                            <label>NIVEL VIP</label>
                             <select class="form-select" id="benNivel">
                                 <option>Silver</option>
                                 <option>Gold</option>
@@ -314,21 +217,21 @@
                             </select>
                         </div>
                         <div class="col-6">
-                            <label>COSTO EN PUNTOS</label>
-                            <input type="number" class="form-control" id="benPuntos" placeholder="Ej: 300" required>
+                            <label>COSTO PUNTOS</label>
+                            <input type="number" class="form-control" id="benPuntos" required>
                         </div>
                     </div>
-                    <div class="mb-4">
-                        <label>DESCRIPCIÓN DEL BENEFICIO</label>
-                        <textarea class="form-control" id="benDesc" rows="3" placeholder="¿Qué incluye este beneficio?"></textarea>
+                    <div class="mb-3">
+                        <label>DESCRIPCIÓN BREVE</label>
+                        <textarea class="form-control" id="benDesc" rows="2"></textarea>
                     </div>
-                    <div class="form-check form-switch custom-switch">
+                    <div class="form-check form-switch mt-3">
                         <input class="form-check-input" type="checkbox" id="benActivo" checked>
-                        <label class="form-check-label text-white ms-2">Beneficio Activo para Canje</label>
+                        <label class="text-white ms-2">Beneficio Activo</label>
                     </div>
                 </div>
-                <div class="modal-footer border-0 p-4">
-                    <button type="submit" class="btn btn-gold w-100">GUARDAR EN EL SISTEMA</button>
+                <div class="modal-footer border-0 p-4 pt-0">
+                    <button type="submit" class="btn btn-gold w-100 py-3">GUARDAR CAMBIOS</button>
                 </div>
             </form>
         </div>
@@ -337,47 +240,37 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Base de datos local
     let beneficios = JSON.parse(localStorage.getItem("LK_BENEFICIOS")) || [
-        {nombre: "Limpieza Profunda", nivel: "Silver", puntos: 100, desc: "Servicio de spa para pestañas", activo: true},
-        {nombre: "Cortesía Bebida Diamond", nivel: "Diamond", puntos: 0, desc: "Copa de vino o café premium ilimitado", activo: true},
-        {nombre: "Descuento 20% Cursos", nivel: "Gold", puntos: 600, desc: "Válido para cualquier masterclass", activo: true}
+        {nombre: "Retoque Express 15min", nivel: "Silver", puntos: 150, desc: "Aplica en servicios de menos de 2 semanas", activo: true},
+        {nombre: "Kit de Limpieza Pro", nivel: "Diamond", puntos: 500, desc: "Shampoo de pestañas y brocha", activo: true}
     ];
 
-    const tabla = document.getElementById('tablaBeneficios');
-    const form = document.getElementById('formBeneficio');
+    const tabla = document.getElementById('listaBeneficios');
+    const form = document.getElementById('formBen');
 
-    function renderTable() {
+    function render() {
         tabla.innerHTML = '';
-        beneficios.forEach((b, index) => {
-            const fila = `
-                <tr>
+        beneficios.forEach((b, i) => {
+            tabla.innerHTML += `
+                <tr class="animate__animated animate__fadeIn">
                     <td>
-                        <div class="fw-bold fs-5 text-white">${b.nombre}</div>
-                        <div class="text-rose-gold small opacity-75">${b.desc}</div>
+                        <div class="fw-bold text-white fs-5">${b.nombre}</div>
+                        <div class="text-rose opacity-75 small">${b.desc}</div>
                     </td>
-                    <td><span class="badge-vip uppercase">${b.nivel}</span></td>
+                    <td><span class="badge-nivel">${b.nivel}</span></td>
                     <td><span class="pts-badge">${b.puntos} PTS</span></td>
                     <td>
-                        <span class="badge ${b.activo ? 'bg-success' : 'bg-danger'} p-2">
+                        <span class="badge ${b.activo ? 'bg-success' : 'bg-danger'} text-dark">
                             ${b.activo ? 'ACTIVO' : 'PAUSADO'}
                         </span>
                     </td>
                     <td class="text-end">
-                        <div class="btn-group">
-                            <button class="btn btn-sm btn-outline-info me-2" onclick="editBen(${index})">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteBen(${index})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
+                        <button class="btn btn-sm btn-outline-warning me-2" onclick="editBen(${i})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteBen(${i})"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>
             `;
-            tabla.innerHTML += fila;
         });
-        document.getElementById('totalCount').innerText = beneficios.length;
         localStorage.setItem("LK_BENEFICIOS", JSON.stringify(beneficios));
     }
 
@@ -391,44 +284,27 @@
             desc: document.getElementById('benDesc').value,
             activo: document.getElementById('benActivo').checked
         };
-
-        if(index === "") {
-            beneficios.push(data);
-        } else {
-            beneficios[index] = data;
-        }
-
-        renderTable();
-        bootstrap.Modal.getInstance(document.getElementById('modalBeneficio')).hide();
-        form.reset();
+        if(index === "") beneficios.push(data);
+        else beneficios[index] = data;
+        render();
+        bootstrap.Modal.getInstance(document.getElementById('modalBen')).hide();
     };
 
-    window.editBen = (index) => {
-        const b = beneficios[index];
-        document.getElementById('editIndex').value = index;
+    window.editBen = (i) => {
+        const b = beneficios[i];
+        document.getElementById('editIndex').value = i;
         document.getElementById('benNombre').value = b.nombre;
         document.getElementById('benNivel').value = b.nivel;
         document.getElementById('benPuntos').value = b.puntos;
         document.getElementById('benDesc').value = b.desc;
         document.getElementById('benActivo').checked = b.activo;
-        new bootstrap.Modal(document.getElementById('modalBeneficio')).show();
+        new bootstrap.Modal(document.getElementById('modalBen')).show();
     };
 
-    window.deleteBen = (index) => {
-        if(confirm("¿Seguro que deseas eliminar este beneficio del catálogo?")) {
-            beneficios.splice(index, 1);
-            renderTable();
-        }
-    };
+    window.deleteBen = (i) => { if(confirm("¿Eliminar beneficio?")) { beneficios.splice(i, 1); render(); } };
+    window.resetForm = () => { form.reset(); document.getElementById('editIndex').value = ""; };
 
-    window.resetForm = () => {
-        form.reset();
-        document.getElementById('editIndex').value = "";
-    };
-
-    // Inicio
-    renderTable();
+    render();
 </script>
-
 </body>
 </html>
