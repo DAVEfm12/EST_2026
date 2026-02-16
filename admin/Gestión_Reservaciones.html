@@ -2,16 +2,15 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LK Studio | Gestión de Reservaciones VIP</title>
+    <title>Elite Management | LK Studio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
-        /* --- ADN VISUAL LK STUDIO --- */
         :root {
             --oro: #D4AF37;
             --oro-brillante: #F1D592;
@@ -34,343 +33,336 @@
         }
 
         .fuente-lujo { font-family: 'Cinzel', serif; letter-spacing: 2px; }
-        .texto-oro { color: var(--oro); }
 
-        /* --- SIDEBAR ELITE --- */
+        /* --- SIDEBAR --- */
         #sidebar {
-            width: var(--sidebar-width); 
+            width: var(--sidebar-width);
             background: var(--negro-profundo);
-            border-right: 1px solid var(--oro); 
+            border-right: 1px solid var(--oro);
             height: 100vh;
-            position: fixed; 
-            z-index: 1000; 
-            display: flex; 
+            position: fixed;
+            z-index: 1000;
+            display: flex;
             flex-direction: column;
-            transition: 0.4s;
+            transition: 0.3s;
         }
 
-        .sidebar-logo-container {
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--borde-lujo);
-        }
-
-        .sidebar-logo {
-            max-width: 150px;
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
-        }
-
-        .nav-menu {
-            overflow-y: auto;
-            flex-grow: 1;
-            padding-top: 20px;
-        }
+        .sidebar-logo { padding: 40px 20px; text-align: center; border-bottom: 1px solid var(--borde-lujo); }
+        .sidebar-logo img { max-width: 150px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4)); }
 
         .nav-link {
-            color: rgba(255,255,255,0.6) !important; 
-            padding: 12px 25px;
-            transition: 0.4s; 
-            font-size: 0.75rem; 
-            margin: 4px 15px; 
-            border-radius: 50px;
+            color: rgba(255,255,255,0.6) !important;
+            padding: 14px 25px;
             display: flex;
             align-items: center;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            text-decoration: none;
-        }
-
-        .nav-link i { width: 25px; font-size: 1rem; color: var(--oro); margin-right: 10px; }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--oro-brillante) !important; 
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        .nav-link.active {
-            border: 1px solid var(--oro);
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), transparent) !important;
-            font-weight: 700;
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        .main-content {
-            margin-left: var(--sidebar-width); 
-            width: calc(100% - var(--sidebar-width));
-            padding: 50px;
             transition: 0.4s;
+            text-decoration: none;
+            margin: 4px 15px;
+            border-radius: 50px;
         }
 
+        .nav-link:hover, .nav-link.active { background: rgba(212, 175, 55, 0.1); color: var(--oro-brillante) !important; }
+        .nav-link.active { border: 1px solid var(--oro); background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), transparent) !important; font-weight: 700; }
+        .nav-link i { width: 30px; font-size: 1.1rem; color: var(--oro); }
+
+        /* --- CONTENIDO --- */
+        #content {
+            width: calc(100% - var(--sidebar-width));
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            transition: 0.3s;
+        }
+
+        /* --- TARJETAS Y FORMULARIO --- */
         .tarjeta-elite {
             background: var(--negro-suave);
             border: 1px solid var(--borde-lujo);
             border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
-        /* --- FORMULARIOS --- */
-        .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .form-control, .form-select {
-            background-color: rgba(0,0,0,0.5) !important; 
-            border: 1px solid #333 !important;
-            color: var(--oro-brillante) !important; 
-            border-radius: 15px;
-            padding: 12px;
+        .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .form-control, .form-select { 
+            background: rgba(0,0,0,0.4) !important; 
+            border: 1px solid #333 !important; 
+            color: #fff !important; 
+            border-radius: 12px; 
+            padding: 10px;
         }
+        .form-control:focus { border-color: var(--oro) !important; box-shadow: 0 0 8px rgba(212, 175, 55, 0.2); }
 
-        .form-control:focus { border-color: var(--oro) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        .btn-oro { 
+            background: linear-gradient(135deg, var(--oro), var(--oro-brillante)); 
+            color: #000 !important; font-weight: 800; border: none; border-radius: 50px; 
+            padding: 12px 30px; transition: 0.4s; text-transform: uppercase; 
+        }
+        .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
 
-        /* --- TABLA VIP --- */
+        /* --- TABLA --- */
         .tabla-contenedor {
-            background: var(--negro-suave);
+            background: rgba(22, 22, 22, 0.6);
             border-radius: 30px;
             padding: 25px;
             border: 1px solid var(--borde-lujo);
+            backdrop-filter: blur(10px);
         }
 
-        .table { background: transparent !important; color: white !important; margin-bottom: 0; }
+        .table { color: #fff !important; border-collapse: separate; border-spacing: 0 10px; }
         .table thead th { 
-            color: var(--oro); 
+            color: var(--oro) !important; 
+            font-family: 'Cinzel', serif; 
+            border: none; 
             text-transform: uppercase; 
-            font-size: 0.7rem; 
-            border-bottom: 2px solid var(--oro);
-            padding: 15px;
+            font-size: 0.75rem;
+            padding-left: 15px;
+        }
+        
+        .table tbody tr { background: rgba(255, 255, 255, 0.03); border-radius: 15px; transition: 0.3s; }
+        .table tbody tr:hover { background: rgba(212, 175, 55, 0.07); transform: scale(1.005); }
+        
+        .table td { border: none !important; padding: 15px !important; vertical-align: middle; }
+
+        /* VISIBILIDAD DE NOMBRES MEJORADA */
+        .nombre-cliente { 
+            color: var(--oro-brillante) !important; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            font-size: 0.95rem; 
+            display: block;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        .servicio-detalle { color: var(--rose-gold); font-size: 0.75rem; opacity: 0.9; }
+
+        .icono-preview {
+            width: 45px; height: 45px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--oro);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--oro);
+            font-size: 1.2rem;
         }
 
-        .table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
-        .table tbody tr:hover { background: rgba(255,255,255,0.02); }
+        .widget-total { background: var(--negro-suave); border: 1px solid var(--oro); border-radius: 20px; padding: 10px 25px; }
 
-        /* --- ESTADOS --- */
-        .badge-vip {
-            padding: 6px 12px;
-            border-radius: 50px;
-            font-size: 0.6rem;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-        .bg-pagado { background: rgba(46, 125, 50, 0.2); color: #81c784; border: 1px solid #2e7d32; }
-        .bg-pendiente { background: rgba(245, 124, 0, 0.2); color: #ffb74d; border: 1px solid #f57c00; }
-
-        .btn-oro {
-            background: linear-gradient(45deg, var(--oro), var(--oro-brillante));
-            color: #000 !important;
-            font-weight: 700; border: none; border-radius: 50px;
-            padding: 12px 25px; text-transform: uppercase;
-        }
-
-        .widget-stats {
-            background: var(--negro-suave);
-            border: 1px solid var(--borde-lujo);
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-        }
+        /* Estilo para Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--negro-profundo); }
+        ::-webkit-scrollbar-thumb { background: var(--oro); border-radius: 10px; }
 
         @media (max-width: 992px) {
             #sidebar { width: 80px; }
-            #sidebar span, #sidebar small { display: none; }
-            .main-content { margin-left: 80px; width: calc(100% - 80px); padding: 20px; }
+            #sidebar span, .sidebar-logo div { display: none; }
+            #content { width: calc(100% - 80px); margin-left: 80px; padding: 20px; }
+            .nombre-cliente { font-size: 0.85rem; }
         }
     </style>
 </head>
+
 <body>
 
 <nav id="sidebar">
-    <div class="sidebar-logo-container">
-        <img src="IMG/LKSTUDIO.png" class="sidebar-logo" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
-        <div class="mt-2"><small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.5rem; letter-spacing: 2px;">Elite System</small></div>
+    <div class="sidebar-logo">
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
+        <div class="mt-2 text-center">
+            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Elite System</small>
+        </div>
     </div>
-
-    <div class="nav-menu">
-        <small class="text-muted px-4 mb-2 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">PRINCIPAL</small>
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
-        
-        <small class="text-muted px-4 mb-2 mt-3 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">GESTIÓN</small>
-        <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-calendar-check"></i> <span>Reservaciones</span></a>
-        <a href="citas.html" class="nav-link"><i class="fas fa-clock"></i> <span>Citas</span></a>
-        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> <span>Punto de Venta</span></a>
-
-        <small class="text-muted px-4 mb-2 mt-3 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">CATÁLOGOS</small>
-        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-concierge-bell"></i> <span>Servicios</span></a>
-        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> <span>Cursos</span></a>
-        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie"></i> <span>Instructores</span></a>
-
-        <small class="text-muted px-4 mb-2 mt-3 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">ANÁLISIS</small>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> <span>Reportes</span></a>
+    <div class="nav-menu mt-4 flex-grow-1">
+        <a href="#" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+        <a href="#" class="nav-link active"><i class="fas fa-calendar-check"></i> <span>Reservas</span></a>
+        <a href="#" class="nav-link"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
+        <a href="#" class="nav-link"><i class="fas fa-cash-register"></i> <span>Ventas</span></a>
     </div>
-
-    <div class="p-3 border-top border-secondary text-center">
-        <a href="index.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill" style="font-size: 0.7rem;">SALIR</a>
+    <div class="p-4">
+        <button class="btn btn-outline-danger btn-sm w-100 rounded-pill" onclick="location.reload()">Salir</button>
     </div>
 </nav>
 
-<main class="main-content">
-    <header class="mb-5 animate__animated animate__fadeInDown">
-        <p class="text-rose-gold fw-bold mb-0" style="letter-spacing: 4px; font-size: 0.8rem;">RESERVACIONES</p>
-        <h1 class="fuente-lujo texto-oro display-5 fw-bold">Gestión Elite</h1>
-    </header>
+<div id="content">
+    <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
+        <div class="col-md-8">
+            <h1 class="fuente-lujo mb-1" style="color:var(--oro)">Gestión de Reservas</h1>
+            <p class="text-rose-gold text-uppercase small">Panel Administrativo LK Studio</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <div class="widget-total shadow">
+                <small class="text-white-50 d-block text-uppercase" style="font-size: 0.6rem;">Citas Activas</small>
+                <span class="fw-bold h3 m-0" id="countTotal" style="color:var(--oro)">0</span>
+            </div>
+        </div>
+    </div>
 
     <div class="row g-4">
         <div class="col-xl-4">
             <div class="tarjeta-elite animate__animated animate__fadeInLeft">
-                <h5 class="fuente-lujo texto-oro mb-4 border-bottom border-secondary pb-3">Nuevo Registro</h5>
-                <form id="formReserva">
-                    <input type="hidden" id="indexReserva">
+                <h5 class="fuente-lujo mb-4 border-bottom border-secondary pb-3" style="color:var(--oro)">Nueva Cita</h5>
+                <form id="reservaForm">
+                    <input type="hidden" id="editIndex" value="">
                     <div class="mb-3">
-                        <label class="form-label">Cliente</label>
-                        <input type="text" id="cliente" class="form-control" required>
+                        <label class="form-label">Nombre del Cliente</label>
+                        <input type="text" id="clienteNombre" class="form-control" placeholder="Ej. Isabella Martínez" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Servicio</label>
-                        <select id="servicio" class="form-select" required>
-                            <option value="" disabled selected>Seleccione...</option>
-                            <option value="Uñas Acrílicas">Uñas Acrílicas</option>
-                            <option value="Manicure VIP">Manicure VIP</option>
-                            <option value="Pedicure Elite">Pedicure Elite</option>
+                        <label class="form-label">WhatsApp</label>
+                        <input type="tel" id="clienteWhatsApp" class="form-control" placeholder="+52 1..." required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Servicio Principal</label>
+                        <select id="servicioTipo" class="form-select">
+                            <option value="Corte Master">Corte Master</option>
+                            <option value="Coloración">Coloración Premium</option>
+                            <option value="Balayage">Balayage Elite</option>
+                            <option value="Manicura">Manicura Pro</option>
                         </select>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-6">
+                    <div class="row">
+                        <div class="col-6 mb-3">
                             <label class="form-label">Fecha</label>
-                            <input type="date" id="fecha" class="form-control" required>
+                            <input type="date" id="citaFecha" class="form-control" required>
                         </div>
-                        <div class="col-6">
-                            <label class="form-label">Estatus</label>
-                            <select id="pago" class="form-select">
-                                <option value="Pendiente">Pendiente</option>
-                                <option value="Pagado">Pagado</option>
-                            </select>
+                        <div class="col-6 mb-3">
+                            <label class="form-label">Hora</label>
+                            <input type="time" id="citaHora" class="form-control" required>
                         </div>
                     </div>
                     <div class="mb-4">
-                        <label class="form-label">Inversión ($)</label>
-                        <input type="number" id="costo" class="form-control" placeholder="0.00" required>
+                        <label class="form-label">Anticipo / Pago ($)</label>
+                        <input type="number" id="pagoMonto" class="form-control" placeholder="0.00">
                     </div>
-                    <button type="submit" id="btnSubmit" class="btn-oro w-100">Guardar Reserva</button>
-                    <button type="button" id="btnCancelarEdit" class="btn btn-link text-white-50 w-100 mt-2 d-none" onclick="cancelarEdicion()">Cancelar</button>
+                    <button type="submit" id="btnGuardar" class="btn-oro w-100">Registrar Reserva</button>
                 </form>
             </div>
         </div>
 
         <div class="col-xl-8">
-            <div class="tabla-contenedor animate__animated animate__fadeInRight">
+            <div class="tabla-contenedor shadow-lg animate__animated animate__fadeInRight">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table align-middle">
                         <thead>
                             <tr>
                                 <th>Cliente / Servicio</th>
-                                <th>Fecha</th>
-                                <th>Estatus</th>
-                                <th>Monto</th>
+                                <th>Fecha y Hora</th>
                                 <th class="text-end">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaReservas"></tbody>
+                        <tbody id="tablaReservas">
+                            </tbody>
                     </table>
-                </div>
-            </div>
-
-            <div class="row g-3 mt-3">
-                <div class="col-md-6">
-                    <div class="widget-stats">
-                        <small class="text-rose-gold text-uppercase d-block mb-1">Total Reservas</small>
-                        <span id="countTotal" class="h2 fuente-lujo texto-oro">0</span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="widget-stats">
-                        <small class="text-rose-gold text-uppercase d-block mb-1">Total Proyectado</small>
-                        <span id="montoTotal" class="h2 fuente-lujo texto-oro">$0.00</span>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
 
 <script>
-    let reservaciones = JSON.parse(localStorage.getItem("lk_reservas")) || [];
+    // Inicialización de datos
+    let reservas = JSON.parse(localStorage.getItem("lk_reservas")) || [
+        { nombre: "Isabella Martínez", whatsapp: "5512345678", servicio: "Balayage Elite", fecha: "2024-05-20", hora: "14:00", pago: "500" },
+        { nombre: "Julián Casablancas", whatsapp: "5598765432", servicio: "Corte Master", fecha: "2024-05-21", hora: "10:30", pago: "200" }
+    ];
 
-    function renderReservas() {
-        const tabla = document.getElementById("tablaReservas");
+    const form = document.getElementById("reservaForm");
+    const tabla = document.getElementById("tablaReservas");
+    const countTotal = document.getElementById("countTotal");
+
+    function renderTabla() {
+        countTotal.innerText = reservas.length;
         tabla.innerHTML = "";
-        let suma = 0;
 
-        reservaciones.forEach((r, index) => {
-            suma += parseFloat(r.costo);
-            const statusClass = r.pago === 'Pagado' ? 'bg-pagado' : 'bg-pendiente';
-            
-            tabla.innerHTML += `
-                <tr>
-                    <td>
-                        <div class="fw-bold text-white text-uppercase" style="font-size:0.8rem">${r.cliente}</div>
-                        <small class="text-rose-gold">${r.servicio}</small>
-                    </td>
-                    <td class="small">${r.fecha}</td>
-                    <td><span class="badge-vip ${statusClass}">${r.pago}</span></td>
-                    <td class="fw-bold texto-oro">$${parseFloat(r.costo).toFixed(2)}</td>
-                    <td class="text-end">
-                        <button class="btn btn-sm text-warning me-2" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
-                    </td>
-                </tr>
+        if(reservas.length === 0) {
+            tabla.innerHTML = `<tr><td colspan="3" class="text-center py-5 text-white-50 small">No hay reservas registradas</td></tr>`;
+            return;
+        }
+
+        reservas.forEach((r, i) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="icono-preview me-3">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div>
+                            <span class="nombre-cliente">${r.nombre}</span>
+                            <span class="servicio-detalle">${r.servicio} • <span class="text-success fw-bold">$${r.pago}</span></span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="small text-white-50">${r.fecha}</div>
+                    <div class="fw-bold" style="color:var(--oro)">${r.hora} hrs</div>
+                </td>
+                <td class="text-end">
+                    <div class="btn-group">
+                        <a href="https://wa.me/${r.whatsapp}" target="_blank" class="btn btn-sm" title="WhatsApp" style="color: #25D366"><i class="fab fa-whatsapp fa-lg"></i></a>
+                        <button class="btn btn-sm text-warning" onclick="editar(${i})" title="Editar"><i class="fas fa-pen"></i></button>
+                        <button class="btn btn-sm text-danger" onclick="eliminar(${i})" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </td>
             `;
+            tabla.appendChild(row);
         });
-
-        document.getElementById("countTotal").innerText = reservaciones.length;
-        document.getElementById("montoTotal").innerText = `$${suma.toFixed(2)}`;
     }
 
-    document.getElementById("formReserva").addEventListener("submit", function(e){
+    form.addEventListener("submit", function(e) {
         e.preventDefault();
-        const r = {
-            cliente: document.getElementById("cliente").value,
-            servicio: document.getElementById("servicio").value,
-            pago: document.getElementById("pago").value,
-            fecha: document.getElementById("fecha").value,
-            costo: document.getElementById("costo").value
+        const index = document.getElementById("editIndex").value;
+        
+        const nuevaReserva = {
+            nombre: document.getElementById("clienteNombre").value,
+            whatsapp: document.getElementById("clienteWhatsApp").value,
+            servicio: document.getElementById("servicioTipo").value,
+            fecha: document.getElementById("citaFecha").value,
+            hora: document.getElementById("citaHora").value,
+            pago: document.getElementById("pagoMonto").value || 0
         };
 
-        const id = document.getElementById("indexReserva").value;
-        if(id === "") reservaciones.push(r);
-        else reservaciones[id] = r;
+        if(index === "") {
+            reservas.push(nuevaReserva);
+        } else {
+            reservas[index] = nuevaReserva;
+            document.getElementById("editIndex").value = "";
+            document.getElementById("btnGuardar").innerText = "Registrar Reserva";
+        }
 
-        localStorage.setItem("lk_reservas", JSON.stringify(reservaciones));
-        cancelarEdicion();
-        renderReservas();
+        localStorage.setItem("lk_reservas", JSON.stringify(reservas));
+        form.reset();
+        renderTabla();
     });
 
-    function eliminar(i) {
-        if(confirm("¿Eliminar registro?")) {
-            reservaciones.splice(i, 1);
-            localStorage.setItem("lk_reservas", JSON.stringify(reservaciones));
-            renderReservas();
+    window.eliminar = function(i) {
+        if(confirm("¿Estás seguro de cancelar la reserva de " + reservas[i].nombre + "?")) {
+            reservas.splice(i, 1);
+            localStorage.setItem("lk_reservas", JSON.stringify(reservas));
+            renderTabla();
         }
     }
 
-    function editar(i) {
-        const r = reservaciones[i];
-        document.getElementById("indexReserva").value = i;
-        document.getElementById("cliente").value = r.cliente;
-        document.getElementById("servicio").value = r.servicio;
-        document.getElementById("pago").value = r.pago;
-        document.getElementById("fecha").value = r.fecha;
-        document.getElementById("costo").value = r.costo;
-        document.getElementById("btnSubmit").innerText = 'Actualizar Registro';
-        document.getElementById("btnCancelarEdit").classList.remove("d-none");
+    window.editar = function(i) {
+        const r = reservas[i];
+        document.getElementById("clienteNombre").value = r.nombre;
+        document.getElementById("clienteWhatsApp").value = r.whatsapp;
+        document.getElementById("servicioTipo").value = r.servicio;
+        document.getElementById("citaFecha").value = r.fecha;
+        document.getElementById("citaHora").value = r.hora;
+        document.getElementById("pagoMonto").value = r.pago;
+        
+        document.getElementById("editIndex").value = i;
+        document.getElementById("btnGuardar").innerText = "Actualizar Cita";
+        
+        // Efecto scroll suave al formulario
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
-    function cancelarEdicion() {
-        document.getElementById("formReserva").reset();
-        document.getElementById("indexReserva").value = "";
-        document.getElementById("btnSubmit").innerText = 'Guardar Reserva';
-        document.getElementById("btnCancelarEdit").classList.add("d-none");
-    }
-
-    renderReservas();
+    // Carga inicial
+    renderTabla();
 </script>
+
 </body>
 </html>
+
