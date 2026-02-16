@@ -2,427 +2,326 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title>LK Studio | Gestión VIP Funcional</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publisher Elite | LK Studio</title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --gold: #D4AF37;
-            --gold-bright: #F1D592;
-            --golden-rose: #E6B8A2;
-            --deep-black: #050505;
-            --soft-black: #121212;
+            --gold-bright: #FFD700;
+            --rose: #E6B8A2;
+            --deep-black: #000000;
+            --grey-row: #1C1C1C; 
+            --white-text: #FFFFFF;
+            --sidebar-width: 280px;
         }
 
         body {
-            background: radial-gradient(circle at top, #1a1a1a, var(--deep-black));
-            color: #ffffff;
+            background: var(--deep-black);
+            color: var(--white-text);
             font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
             min-height: 100vh;
         }
 
-        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
-
-        /* HEADER PROFESIONAL CON LOGO */
-        .admin-header {
-            background: rgba(5, 5, 5, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--gold);
-            padding: 10px 0;
-            position: sticky;
+        /* --- SIDEBAR MASTER --- */
+        #sidebarAdmin {
+            width: var(--sidebar-width);
+            background: #000;
+            border-right: 2px solid var(--gold);
+            height: 100vh;
+            position: fixed;
+            left: 0;
             top: 0;
+            display: flex;
+            flex-direction: column;
             z-index: 1000;
         }
 
-        .header-logo {
-            height: 50px;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+        .sidebar-logo { 
+            padding: 30px; 
+            text-align: center; 
+            border-bottom: 1px solid #333; 
         }
+        .sidebar-logo img { width: 140px; filter: drop-shadow(0 0 5px var(--gold)); }
 
-        /* CARD DE FORMULARIO */
-        .form-card {
-            background: var(--soft-black);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 25px;
-            padding: 35px;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.6);
-            position: sticky;
-            top: 110px;
-        }
-
-        .form-label {
-            color: var(--golden-rose) !important;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
-
-        .form-control, .form-select {
-            background: #000 !important;
-            border: 1px solid #333 !important;
-            color: var(--gold-bright) !important;
-            border-radius: 12px;
-            padding: 12px;
-            transition: 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-        }
-
-        /* PREVIEW DE PORTADA */
-        .img-preview {
-            width: 100%;
-            height: 200px;
-            background: #000;
-            border: 2px dashed #333;
-            border-radius: 15px;
+        .nav-link {
+            color: #FFFFFF !important;
+            padding: 15px 25px;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            overflow: hidden;
+            border-bottom: 1px solid #111;
+            text-decoration: none;
             transition: 0.3s;
-        }
-        .img-preview img { width: 100%; height: 100%; object-fit: cover; }
-        .img-preview:hover { border-color: var(--gold); }
-
-        /* TARJETAS DE CURSOS */
-        .course-card {
-            background: #ffffff;
-            border-radius: 22px;
-            border: none;
-            overflow: hidden;
-            height: 100%;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .course-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2); }
-
-        .card-img-wrapper {
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-img-top {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.5s;
-        }
-
-        .course-card:hover .card-img-top { transform: scale(1.1); }
-
-        .card-body { color: #111 !important; padding: 25px; }
-        .card-title {
-            font-family: 'Cinzel', serif;
-            font-weight: 900;
-            color: #000;
-            font-size: 1.25rem;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
-
-        .badge-cat {
-            background: var(--deep-black);
-            color: var(--gold);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .price-tag {
-            font-family: 'Cinzel', serif;
-            color: #000;
-            font-weight: 900;
-            font-size: 1.6rem;
-        }
-
-        /* BOTONES */
-        .btn-gold {
-            background: linear-gradient(45deg, var(--gold), var(--gold-bright));
-            color: #000 !important;
-            font-weight: 800;
-            border: none;
-            border-radius: 12px;
-            padding: 14px;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        .nav-link i { width: 30px; color: var(--gold-bright); font-size: 1.1rem; }
+        .nav-link:hover, .nav-link.active { 
+            background: rgba(212, 175, 55, 0.15); 
+            color: var(--gold-bright) !important; 
+            border-left: 4px solid var(--gold);
+        }
+
+        .sidebar-divider {
+            font-size: 0.7rem;
+            color: var(--gold);
+            padding: 20px 25px 5px;
+            font-weight: 800;
+            opacity: 0.6;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 50px;
+        }
+
+        .luxury-font { font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 2px; }
+
+        /* --- TABLA GRIS CARBÓN --- */
+        .table-custom {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+        }
+
+        .table-custom thead th {
+            color: var(--rose);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px;
+            font-size: 0.75rem;
+            border: none;
+        }
+
+        .table-custom tbody tr {
+            background-color: var(--grey-row) !important;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .table-custom tbody tr:hover {
+            transform: scale(1.01);
+            background-color: #252525 !important;
+        }
+
+        .table-custom td {
+            padding: 20px !important;
+            color: #FFFFFF !important; /* FORZADO BLANCO */
+            vertical-align: middle;
+            border: none;
+        }
+
+        .benefit-title { font-size: 1.05rem; font-weight: 700; color: #FFFFFF !important; display: block; margin-bottom: 3px; }
+        .benefit-desc { font-size: 0.8rem; color: var(--rose) !important; opacity: 0.8; }
+
+        .table-custom tr td:first-child { border-radius: 12px 0 0 12px; border-left: 5px solid var(--gold); }
+        .table-custom tr td:last-child { border-radius: 0 12px 12px 0; }
+
+        /* --- COMPONENTES --- */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+            color: #000;
+            font-weight: 800;
+            border-radius: 50px;
+            padding: 12px 30px;
+            border: none;
             transition: 0.3s;
         }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
 
-        .btn-gold:hover {
-            filter: brightness(1.1);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .search-input {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--gold);
-            border-radius: 50px;
-            padding: 12px 25px;
-            color: white !important;
-            width: 100%;
+        .pts-badge {
+            background: #000;
+            border: 1px solid var(--gold-bright);
+            color: var(--gold-bright);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
         }
 
-        /* MODO EDICIÓN */
-        .editing {
-            border: 2px solid var(--gold-bright) !important;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(241, 213, 146, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(241, 213, 146, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(241, 213, 146, 0); }
-        }
+        /* --- MODAL --- */
+        .modal-content { background: #111; border: 2px solid var(--gold); color: #fff; border-radius: 20px; }
+        .form-control, .form-select { background: #000; border: 1px solid #333; color: #fff !important; padding: 12px; }
+        .form-control:focus { border-color: var(--gold); box-shadow: none; background: #050505; }
+        label { font-size: 0.75rem; font-weight: 600; margin-bottom: 5px; color: var(--rose); }
     </style>
 </head>
 <body>
 
-<header class="admin-header shadow-lg">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center">
-            <img src="IMG/LKSTUDIO.png" alt="LK Studio Logo" class="header-logo me-3" onerror="this.src='https://via.placeholder.com/150x50/000/D4AF37?text=LK+STUDIO'">
-            <div>
-                <h4 class="luxury-font m-0 text-gold d-none d-md-block">LK ACADEMY</h4>
-                <span class="text-white-50 small fw-bold text-uppercase" style="letter-spacing: 2px;">Sistema de Publicación</span>
-            </div>
-        </div>
-        <div class="d-flex gap-3">
-            <a href="PANEL_ADMIN.html" class="btn btn-outline-warning btn-sm rounded-pill px-4">
-                <i class="fas fa-arrow-left me-2"></i>PANEL CENTRAL
-            </a>
-        </div>
+<nav id="sidebarAdmin">
+    <div class="sidebar-logo">
+        <img src="IMG/LKSTUDIO.png" alt="LK STUDIO">
     </div>
-</header>
+    <div class="nav flex-column mt-2">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Citas VIP</a>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-clock"></i> Reservaciones</a>
+        
+        <div class="sidebar-divider">ADMINISTRACIÓN</div>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-list"></i> Servicios</a>
+        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Cursos</a>
+        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> Beneficios VIP</a>
+        
+        <div class="sidebar-divider">REPORTES</div>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-pie"></i> Estadísticas</a>
+    </div>
+</nav>
 
-<div class="container mt-5">
-    <div class="row g-5">
-        <div class="col-lg-4">
-            <div class="form-card animate__animated animate__fadeInLeft" id="mainFormCard">
-                <h4 class="luxury-font text-gold text-center mb-4" id="formTitle">NUEVO CURSO</h4>
-                
-                <form id="formCurso">
-                    <input type="hidden" id="indexCurso">
-                    
-                    <div class="img-preview" id="previewContainer">
-                        <div class="text-center">
-                            <i class="fas fa-image fa-3x text-white-50 mb-2"></i><br>
-                            <span class="text-white-50 small">Portada del curso</span>
-                        </div>
+<main class="main-content">
+    <div class="d-flex justify-content-between align-items-end mb-5">
+        <div>
+            <h2 class="luxury-font mb-1">GESTIÓN DE BENEFICIOS</h2>
+            <p class="text-rose small mb-0 uppercase">Catálogo de recompensas para clientes élite</p>
+        </div>
+        <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#modalBen" onclick="limpiarForm()">
+            <i class="fas fa-plus-circle me-2"></i> AGREGAR RECOMPENSA
+        </button>
+    </div>
+
+    <table class="table-custom">
+        <thead>
+            <tr>
+                <th width="45%">RECOMPENSA / DETALLE</th>
+                <th>NIVEL REQUERIDO</th>
+                <th>CANJE (PUNTOS)</th>
+                <th class="text-end">ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody">
+            </tbody>
+    </table>
+</main>
+
+<div class="modal fade" id="modalBen" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header border-secondary">
+                <h5 class="luxury-font text-white">CONFIGURAR BENEFICIO</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="benForm">
+                    <input type="hidden" id="editIndex">
+                    <div class="mb-4">
+                        <label>NOMBRE DE LA RECOMPENSA</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Ej: Retoque de Pestañas Gratis" required>
                     </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Subir Imagen</label>
-                        <input type="file" id="inputImagen" class="form-control" accept="image/*" onchange="previewImage(this)">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Título del Curso</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Ej. Master en Keratina" required>
-                    </div>
-
-                    <div class="row mb-3">
+                    <div class="row mb-4">
                         <div class="col-6">
-                            <label class="form-label">Categoría</label>
-                            <select id="categoria" class="form-select">
-                                <option value="Uñas">Uñas</option>
-                                <option value="Cabello">Cabello</option>
-                                <option value="Maquillaje">Maquillaje</option>
-                                <option value="Pestañas">Pestañas</option>
-                                <option value="Barbería">Barbería</option>
+                            <label>NIVEL DE ACCESO</label>
+                            <select id="nivel" class="form-select">
+                                <option>Silver</option>
+                                <option>Gold</option>
+                                <option>Diamond</option>
                             </select>
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Precio ($)</label>
-                            <input type="number" id="precio" class="form-control" placeholder="2500" required>
+                            <label>COSTO EN PUNTOS</label>
+                            <input type="number" id="puntos" class="form-control" placeholder="0" required>
                         </div>
                     </div>
-
                     <div class="mb-4">
-                        <label class="form-label">Breve Descripción</label>
-                        <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del curso..."></textarea>
+                        <label>DESCRIPCIÓN DEL BENEFICIO</label>
+                        <textarea id="desc" class="form-control" rows="3" placeholder="¿Qué incluye este beneficio?"></textarea>
                     </div>
-
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-gold" id="btnSubmit">
-                            <i class="fas fa-paper-plane me-2"></i>PUBLICAR CURSO
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm text-white-50" onclick="resetForm()">Cancelar / Limpiar</button>
-                    </div>
+                    <button type="submit" class="btn btn-gold w-100 py-3">GUARDAR EN EL SISTEMA</button>
                 </form>
             </div>
-        </div>
-
-        <div class="col-lg-8">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-                <h3 class="luxury-font text-gold m-0">CURSOS ACTIVOS</h3>
-                <div style="min-width: 300px;">
-                    <input type="text" id="searchCurso" class="search-input" placeholder=" Buscar curso..." onkeyup="filterCursos()">
-                </div>
-            </div>
-
-            <div class="row g-4" id="galeriaCursos">
-                </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    let cursos = JSON.parse(localStorage.getItem("lk_cursos_v4")) || [];
+    // Inicializar datos con LocalStorage
+    let beneficios = JSON.parse(localStorage.getItem('LK_BENEFICIOS_DATA')) || [
+        {nombre: "LIMPIEZA PROFUNDA GRATIS", nivel: "Silver", puntos: 150, desc: "Aplica en servicios de aplicación completa."},
+        {nombre: "KIT DE CUIDADO POST-CITA", nivel: "Gold", puntos: 400, desc: "Shampoo especial y cepillo de diseño."},
+        {nombre: "DESCUENTO 50% CURSOS", nivel: "Diamond", puntos: 1000, desc: "Válido para Masterclass presenciales."}
+    ];
 
-    function previewImage(input) {
-        const preview = document.getElementById('previewContainer');
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.innerHTML = `<img src="${e.target.result}" class="animate__animated animate__zoomIn">`;
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+    const tabla = document.getElementById('tablaBody');
+    const form = document.getElementById('benForm');
 
-    function renderCursos(data = cursos) {
-        const galeria = document.getElementById("galeriaCursos");
-        galeria.innerHTML = "";
-
-        if(data.length === 0) {
-            galeria.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <i class="fas fa-folder-open fa-4x text-white-50 mb-3"></i>
-                    <p class="text-white-50">No se encontraron cursos en el inventario.</p>
-                </div>`;
-            return;
-        }
-
-        data.forEach((c, index) => {
-            galeria.innerHTML += `
-                <div class="col-md-6 animate__animated animate__fadeInUp">
-                    <div class="course-card shadow">
-                        <div class="card-img-wrapper">
-                            <img src="${c.imagen}" class="card-img-top" onerror="this.src='https://via.placeholder.com/400x250/000/D4AF37?text=LK+STUDIO'">
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <span class="badge-cat">${c.categoria}</span>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-sm btn-light shadow-sm text-primary" onclick="editarCurso(${index})"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-light shadow-sm text-danger" onclick="eliminarCurso(${index})"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-                            <h4 class="card-title text-uppercase">${c.nombre}</h4>
-                            <p class="card-text text-muted small" style="height: 40px; overflow: hidden;">${c.descripcion}</p>
-                            <hr class="my-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="text-muted small fw-bold">INVERSIÓN</span>
-                                <span class="price-tag">$${parseFloat(c.precio).toLocaleString()}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    function renderTable() {
+        tabla.innerHTML = '';
+        beneficios.forEach((b, i) => {
+            tabla.innerHTML += `
+                <tr class="animate__animated animate__fadeIn">
+                    <td>
+                        <b class="benefit-title">${b.nombre}</b>
+                        <span class="benefit-desc">${b.desc}</span>
+                    </td>
+                    <td><span class="badge" style="background: rgba(230,184,162,0.2); color: var(--rose); border: 1px solid var(--rose); padding: 5px 12px; border-radius: 5px;">${b.nivel.toUpperCase()}</span></td>
+                    <td><span class="pts-badge">${b.puntos} PUNTOS</span></td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-info me-2 border-0" onclick="cargarEdicion(${i})" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${i})" title="Eliminar">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
             `;
         });
+        localStorage.setItem('LK_BENEFICIOS_DATA', JSON.stringify(beneficios));
     }
 
-    document.getElementById("formCurso").addEventListener("submit", function(e) {
+    form.onsubmit = (e) => {
         e.preventDefault();
-        const file = document.getElementById("inputImagen").files[0];
-        const index = document.getElementById("indexCurso").value;
-
-        const guardar = (imgSrc) => {
-            const cursoData = {
-                nombre: document.getElementById("nombre").value,
-                categoria: document.getElementById("categoria").value,
-                precio: document.getElementById("precio").value,
-                descripcion: document.getElementById("descripcion").value,
-                imagen: imgSrc || (index !== "" ? cursos[index].imagen : "https://via.placeholder.com/400x250/000000/D4AF37?text=LK+STUDIO")
-            };
-
-            if (index === "") {
-                cursos.push(cursoData);
-            } else {
-                cursos[index] = cursoData;
-            }
-
-            try {
-                localStorage.setItem("lk_cursos_v4", JSON.stringify(cursos));
-                resetForm();
-                renderCursos();
-                alert("¡Curso publicado con éxito!");
-            } catch (error) {
-                alert("Error: La imagen es demasiado pesada para el almacenamiento local. Intenta con una imagen más pequeña.");
-            }
+        const index = document.getElementById('editIndex').value;
+        const nuevoBen = {
+            nombre: document.getElementById('nombre').value.toUpperCase(),
+            nivel: document.getElementById('nivel').value,
+            puntos: document.getElementById('puntos').value,
+            desc: document.getElementById('desc').value
         };
 
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => guardar(e.target.result);
-            reader.readAsDataURL(file);
+        if(index === "") {
+            beneficios.push(nuevoBen);
         } else {
-            guardar();
+            beneficios[index] = nuevoBen;
         }
-    });
 
-    function editarCurso(index) {
-        const c = cursos[index];
-        document.getElementById("indexCurso").value = index;
-        document.getElementById("nombre").value = c.nombre;
-        document.getElementById("categoria").value = c.categoria;
-        document.getElementById("precio").value = c.precio;
-        document.getElementById("descripcion").value = c.descripcion;
-        document.getElementById("previewContainer").innerHTML = `<img src="${c.imagen}">`;
-        
-        document.getElementById("formTitle").innerText = "EDITAR CURSO";
-        document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-sync-alt me-2"></i>ACTUALIZAR CURSO';
-        document.getElementById("mainFormCard").classList.add("editing");
+        renderTable();
+        bootstrap.Modal.getInstance(document.getElementById('modalBen')).hide();
+        form.reset();
+    };
 
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.cargarEdicion = (i) => {
+        const b = beneficios[i];
+        document.getElementById('editIndex').value = i;
+        document.getElementById('nombre').value = b.nombre;
+        document.getElementById('nivel').value = b.nivel;
+        document.getElementById('puntos').value = b.puntos;
+        document.getElementById('desc').value = b.desc;
+        new bootstrap.Modal(document.getElementById('modalBen')).show();
+    };
 
-    function eliminarCurso(index) {
-        if (confirm("¿Deseas eliminar permanentemente este curso?")) {
-            cursos.splice(index, 1);
-            localStorage.setItem("lk_cursos_v4", JSON.stringify(cursos));
-            renderCursos();
+    window.eliminar = (i) => {
+        if(confirm("¿Estás seguro de que deseas eliminar este beneficio del catálogo?")) {
+            beneficios.splice(i, 1);
+            renderTable();
         }
-    }
+    };
 
-    function filterCursos() {
-        const term = document.getElementById("searchCurso").value.toLowerCase();
-        const filtrados = cursos.filter(c => 
-            c.nombre.toLowerCase().includes(term) || 
-            c.categoria.toLowerCase().includes(term)
-        );
-        renderCursos(filtrados);
-    }
+    window.limpiarForm = () => {
+        form.reset();
+        document.getElementById('editIndex').value = "";
+    };
 
-    function resetForm() {
-        document.getElementById("formCurso").reset();
-        document.getElementById("indexCurso").value = "";
-        document.getElementById("previewContainer").innerHTML = `
-            <div class="text-center">
-                <i class="fas fa-image fa-3x text-white-50 mb-2"></i><br>
-                <span class="text-white-50 small">Portada del curso</span>
-            </div>`;
-        document.getElementById("formTitle").innerText = "NUEVO CURSO";
-        document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-paper-plane me-2"></i>PUBLICAR CURSO';
-        document.getElementById("mainFormCard").classList.remove("editing");
-    }
-
-    renderCursos();
+    // Primera carga
+    renderTable();
 </script>
-
 </body>
 </html>
