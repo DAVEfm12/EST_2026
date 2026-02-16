@@ -38,8 +38,6 @@
             height: 100vh;
             position: fixed;
             left: 0; top: 0;
-            display: flex;
-            flex-direction: column;
             z-index: 1000;
         }
 
@@ -66,16 +64,6 @@
             border-left: 5px solid var(--gold);
         }
 
-        .sidebar-divider {
-            font-size: 0.65rem;
-            color: var(--gold);
-            padding: 25px 25px 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.7;
-        }
-
         /* --- CONTENIDO --- */
         .main-content {
             margin-left: var(--sidebar-width);
@@ -85,9 +73,8 @@
 
         .luxury-font { font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 2px; }
 
-        /* --- TABLA GRIS CARBÓN --- */
+        /* --- TABLA --- */
         .table-custom { width: 100%; border-collapse: separate; border-spacing: 0 15px; }
-
         .table-custom thead th {
             color: var(--rose);
             text-transform: uppercase;
@@ -96,65 +83,32 @@
             font-size: 0.8rem;
             border: none;
         }
-
-        .table-custom tbody tr {
-            background-color: var(--grey-row) !important;
-            transition: 0.3s;
-        }
-        
-        .table-custom td {
-            padding: 20px !important;
-            color: var(--white-text) !important;
-            vertical-align: middle;
-            border: none;
-        }
-
+        .table-custom tbody tr { background-color: var(--grey-row) !important; transition: 0.3s; }
+        .table-custom td { padding: 20px !important; color: var(--white-text) !important; vertical-align: middle; border: none; }
         .table-custom tr td:first-child { border-radius: 15px 0 0 15px; border-left: 5px solid var(--gold); }
         .table-custom tr td:last-child { border-radius: 0 15px 15px 0; }
 
-        /* --- IMAGEN DEL CURSO --- */
-        .img-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid var(--gold);
-        }
-
+        .img-preview { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 1px solid var(--gold); }
         .course-title { font-size: 1.1rem; font-weight: 700; display: block; color: #FFF !important; }
         .course-info { font-size: 0.85rem; color: var(--rose); opacity: 0.9; }
 
-        /* --- BOTONES Y BADGES --- */
+        /* --- BOTONES Y MODAL --- */
         .btn-gold {
             background: linear-gradient(135deg, var(--gold-bright), var(--gold));
-            color: #000;
-            font-weight: 800;
-            border-radius: 50px;
-            padding: 12px 35px;
-            border: none;
-            font-size: 0.85rem;
+            color: #000; font-weight: 800; border-radius: 50px;
+            padding: 12px 35px; border: none; font-size: 0.85rem;
         }
-
-        .price-tag { color: var(--gold-bright); font-weight: 700; font-size: 1.1rem; }
-
-        /* --- MODAL --- */
         .modal-content { background: #111; border: 2px solid var(--gold); color: #fff; border-radius: 25px; }
         .form-control, .form-select { 
-            background: #050505; 
-            border: 1px solid #333; 
-            color: #fff !important; 
-            padding: 12px;
+            background: #050505 !important; border: 1px solid #333 !important; 
+            color: #fff !important; padding: 12px;
         }
         #imgPreviewForm {
-            width: 100%;
-            height: 150px;
-            object-fit: contain;
-            background: #000;
-            border-radius: 15px;
-            border: 1px dashed var(--gold);
-            margin-top: 10px;
-            display: none;
+            width: 100%; height: 150px; object-fit: contain;
+            background: #000; border-radius: 15px;
+            border: 1px dashed var(--gold); margin-top: 10px; display: none;
         }
+        .price-tag { color: var(--gold-bright); font-weight: 700; font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -166,9 +120,7 @@
     <div class="nav flex-column mt-2">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
         <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> <span>Citas VIP</span></a>
-        
-        <div class="sidebar-divider">Catálogos</div>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-magic"></i> <span>Servicios</span></a>
+        <a href="catalogo_instructores.html" class="nav-link"><i class="fas fa-user-tie"></i> <span>Instructores</span></a>
         <a href="catalogo_cursos.html" class="nav-link active"><i class="fas fa-graduation-cap"></i> <span>Cursos</span></a>
         <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
     </div>
@@ -180,7 +132,7 @@
             <h2 class="luxury-font mb-1">CATÁLOGO DE CURSOS</h2>
             <p class="text-rose small mb-0 fw-bold">ALTA Y GESTIÓN DE MASTERCLASSES</p>
         </div>
-        <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#modalCurso" onclick="limpiarForm()">
+        <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#modalCurso" onclick="prepararModal()">
             <i class="fas fa-plus-circle me-2"></i> AGREGAR CURSO
         </button>
     </div>
@@ -195,8 +147,7 @@
                 <th class="text-end">ACCIONES</th>
             </tr>
         </thead>
-        <tbody id="tablaCursos">
-            </tbody>
+        <tbody id="tablaCursos"></tbody>
     </table>
 </main>
 
@@ -210,10 +161,12 @@
             <div class="modal-body p-4 pt-0">
                 <form id="cursoForm">
                     <input type="hidden" id="editIndex">
+                    
                     <div class="mb-3">
                         <label class="small text-rose">NOMBRE DEL CURSO</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Ej: Master en Fibras Tecnológicas" required>
+                        <input type="text" id="nombre" class="form-control" required>
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-6">
                             <label class="small text-rose">DURACIÓN</label>
@@ -221,18 +174,23 @@
                         </div>
                         <div class="col-6">
                             <label class="small text-rose">PRECIO ($)</label>
-                            <input type="number" id="precio" class="form-control" placeholder="0.00" required>
+                            <input type="number" id="precio" class="form-control" required>
                         </div>
                     </div>
+
                     <div class="mb-3">
-                        <label class="small text-rose">INSTRUCTOR</label>
-                        <input type="text" id="instructor" class="form-control" placeholder="Nombre del Master">
+                        <label class="small text-rose">INSTRUCTOR ASIGNADO</label>
+                        <select id="instructorSelect" class="form-select" required>
+                            </select>
+                        <div class="mt-1"><a href="catalogo_instructores.html" class="text-gold" style="font-size: 0.7rem; text-decoration: none;">+ Registrar nuevo instructor</a></div>
                     </div>
+
                     <div class="mb-3">
                         <label class="small text-rose">PORTADA DEL CURSO</label>
                         <input type="file" id="fotoInput" class="form-control" accept="image/*" onchange="previewImage(this)">
                         <img id="imgPreviewForm" src="#" alt="Previsualización">
                     </div>
+
                     <button type="submit" class="btn btn-gold w-100 py-3 mt-3">GUARDAR CURSO</button>
                 </form>
             </div>
@@ -245,13 +203,31 @@
     let cursos = JSON.parse(localStorage.getItem('LK_CURSOS_DATA')) || [];
     let base64Image = "";
 
+    // CARGAR INSTRUCTORES DESDE EL OTRO FORMULARIO
+    function cargarInstructores() {
+        const instructores = JSON.parse(localStorage.getItem("LK_INSTRUCTORES_MASTER")) || [];
+        const select = document.getElementById("instructorSelect");
+        
+        if (instructores.length === 0) {
+            select.innerHTML = '<option value="">Sin instructores registrados</option>';
+        } else {
+            select.innerHTML = '<option value="" disabled selected>Selecciona un Master...</option>' + 
+                instructores.map(inst => `<option value="${inst.nombre}">${inst.nombre}</option>`).join('');
+        }
+    }
+
+    function prepararModal() {
+        limpiarForm();
+        cargarInstructores();
+    }
+
     function previewImage(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = (e) => {
                 document.getElementById('imgPreviewForm').src = e.target.result;
                 document.getElementById('imgPreviewForm').style.display = 'block';
-                base64Image = e.target.result; // Guardamos la imagen en texto
+                base64Image = e.target.result;
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -268,15 +244,11 @@
                         <b class="course-title">${c.nombre}</b>
                         <span class="course-info"><i class="far fa-clock me-1"></i> ${c.duracion}</span>
                     </td>
-                    <td><span class="fw-bold">${c.instructor}</span></td>
+                    <td><span class="fw-bold text-gold">${c.instructor}</span></td>
                     <td><span class="price-tag">$${c.precio}</span></td>
                     <td class="text-end">
-                        <button class="btn btn-outline-info border-0 me-2" onclick="editCurso(${i})" style="color:var(--gold-bright)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-outline-danger border-0" onclick="deleteCurso(${i})">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
+                        <button class="btn btn-link text-gold me-2" onclick="editCurso(${i})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-link text-danger" onclick="deleteCurso(${i})"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>
             `;
@@ -291,30 +263,29 @@
             nombre: document.getElementById('nombre').value.toUpperCase(),
             duracion: document.getElementById('duracion').value,
             precio: document.getElementById('precio').value,
-            instructor: document.getElementById('instructor').value,
+            instructor: document.getElementById('instructorSelect').value,
             foto: base64Image
         };
 
-        if(index === "") {
-            cursos.push(curso);
-        } else {
-            // Si no se subió foto nueva, mantenemos la anterior
+        if(index === "") cursos.push(curso);
+        else {
             if(base64Image === "") curso.foto = cursos[index].foto;
             cursos[index] = curso;
         }
 
         renderTable();
         bootstrap.Modal.getInstance(document.getElementById('modalCurso')).hide();
-        limpiarForm();
     };
 
     window.editCurso = (i) => {
+        cargarInstructores();
         const c = cursos[i];
         document.getElementById('editIndex').value = i;
         document.getElementById('nombre').value = c.nombre;
         document.getElementById('duracion').value = c.duracion;
         document.getElementById('precio').value = c.precio;
-        document.getElementById('instructor').value = c.instructor;
+        document.getElementById('instructorSelect').value = c.instructor;
+        
         if(c.foto) {
             document.getElementById('imgPreviewForm').src = c.foto;
             document.getElementById('imgPreviewForm').style.display = 'block';
@@ -338,11 +309,6 @@
     }
 
     renderTable();
-    
-    let instructores = JSON.parse(localStorage.getItem("LK_INSTRUCTORES_MASTER")) || [];
-document.getElementById("tuSelectDeInstructores").innerHTML = instructores.map(i => 
-    `<option value="${i.nombre}">${i.nombre}</option>`
-).join('');
 </script>
 </body>
 </html>
