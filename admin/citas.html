@@ -18,9 +18,9 @@
             --rose: #E6B8A2;
             --deep: #050505;
             --sidebar-width: 280px;
-            --success: #1d976c;
-            --danger: #8b0000;
-            --warning: #b8860b;
+            --success-glass: rgba(29, 151, 108, 0.2);
+            --warning-glass: rgba(212, 175, 55, 0.2);
+            --danger-glass: rgba(139, 0, 0, 0.2);
         }
 
         body {
@@ -59,9 +59,8 @@
         .nav-link:hover, .nav-link.active {
             color: var(--gold-br) !important;
             background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold);
         }
-
-        .nav-link.active { border-left: 4px solid var(--gold); }
 
         /* --- MAIN CONTENT --- */
         .main-content {
@@ -70,67 +69,52 @@
             padding: 40px;
         }
 
-        /* --- CALENDAR STYLING --- */
+        /* --- CALENDAR CUSTOM --- */
         .calendar-card {
-            background: rgba(15, 15, 15, 0.95);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 25px;
-            padding: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
         }
 
-        .fc { --fc-border-color: #333; --fc-today-bg-color: rgba(212, 175, 55, 0.05); }
-        .fc-toolbar-title { font-family: 'Cinzel'; color: var(--gold-br) !important; text-transform: uppercase; }
+        /* Indicadores de Saturación en el Calendario */
+        .day-status-full { background-color: var(--danger-glass) !important; border: 1px solid #ff4d4d !important; }
+        .day-status-busy { background-color: var(--warning-glass) !important; border: 1px solid var(--gold) !important; }
+        .day-status-free { background-color: var(--success-glass) !important; border: 1px solid #1d976c !important; }
+
+        .fc { --fc-border-color: #222; }
+        .fc-daygrid-day-top { flex-direction: row !important; }
+        .fc-event { border-radius: 5px !important; padding: 2px 5px !important; font-size: 0.75rem !important; }
         
-        /* Botones del Calendario */
-        .fc-button { 
-            background: #111 !important; border: 1px solid var(--gold) !important; 
-            color: var(--gold) !important; text-transform: capitalize !important;
-            border-radius: 10px !important; font-size: 0.8rem !important;
-            transition: 0.3s !important;
-        }
-        .fc-button:hover { background: var(--gold) !important; color: #000 !important; }
-        .fc-button-active { background: var(--gold) !important; color: #000 !important; }
+        /* Estilos de Turnos */
+        .badge-turno-clase { background: #4a90e2; color: white; }
+        .badge-turno-servicio { background: #a269ff; color: white; }
 
-        /* Celdas de Día */
-        .fc-daygrid-day { transition: 0.3s; }
-        .fc-daygrid-day:hover { background: rgba(255,255,255,0.03); }
-        
-        /* Indicadores de Disponibilidad */
-        .day-status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 2px;
-        }
-        .status-full { background-color: #ff4d4d; box-shadow: 0 0 10px #ff4d4d; }
-        .status-medium { background-color: #ffd700; }
-        .status-free { background-color: #2ecc71; }
-
-        /* Eventos */
-        .event-pagado { border-left: 4px solid #93f9b9 !important; background: rgba(29, 151, 108, 0.2) !important; color: #fff !important; }
-        .event-pendiente { border-left: 4px solid #ffd700 !important; background: rgba(184, 134, 11, 0.2) !important; color: #fff !important; }
-
-        /* --- QUICK CARDS --- */
-        .quick-card {
-            background: #111;
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid #222;
-        }
-
-        .stat-box {
-            border-left: 3px solid var(--gold);
-            padding-left: 15px;
-            margin-bottom: 20px;
-        }
-
-        /* --- MODAL --- */
+        /* --- MODALES --- */
         .modal-content {
-            background: #0a0a0a;
-            border: 1px solid var(--gold);
-            border-radius: 25px;
+            background: #0d0d0d;
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+        .client-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 5px solid var(--gold);
+            transition: 0.3s;
+        }
+        .client-item:hover { background: rgba(212, 175, 55, 0.1); transform: translateX(5px); }
+
+        .btn-gold {
+            background: linear-gradient(45deg, var(--gold), #f1d592);
+            color: #000;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
         }
 
         @media (max-width: 992px) {
@@ -144,7 +128,7 @@
 <nav id="sidebarAdmin">
     <div class="p-4 mb-3 border-bottom border-secondary">
         <h4 class="luxury-font text-gold mb-0">LK STUDIO</h4>
-        <small class="text-white-50 small">SISTEMA ADMINISTRATIVO</small>
+        <small class="text-white-50 small">ADMINISTRACIÓN MASTER</small>
     </div>
     <div class="nav flex-column">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large me-2"></i> Dashboard</a>
@@ -153,56 +137,52 @@
         <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register me-2"></i> Punto de Venta</a>
         <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line me-2"></i> Reportes</a>
     </div>
-
-    <div class="mt-auto p-4">
-        <div class="stat-box">
-            <small class="text-white-50 d-block">Clases Mañana</small>
-            <span id="clasesCount" class="fw-bold text-gold">0 / 5 Cupos</span>
-        </div>
-        <div class="stat-box">
-            <small class="text-white-50 d-block">Servicios Tarde</small>
-            <span id="serviciosCount" class="fw-bold text-rose">0 / 8 Cupos</span>
-        </div>
-    </div>
 </nav>
 
 <main class="main-content">
-    <div class="d-flex justify-content-between align-items-end mb-4 animate__animated animate__fadeInDown">
+    <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
         <div>
-            <h1 class="luxury-font text-gold fw-bold mb-0">CALENDARIO MAESTRO</h1>
-            <p class="text-rose small fw-bold mb-0">GESTIÓN DE TURNOS: 10AM-1PM | 4PM-7PM</p>
+            <h1 class="luxury-font text-gold fw-bold mb-0">CALENDARIO DE CONTROL</h1>
+            <div class="d-flex gap-3 mt-2">
+                <span class="badge bg-success opacity-75">● Disponible</span>
+                <span class="badge bg-warning text-dark">● Ocupado (1-4)</span>
+                <span class="badge bg-danger">● Saturado (5+)</span>
+            </div>
         </div>
         <div class="text-end">
-            <h4 id="clock" class="luxury-font mb-0">00:00:00</h4>
-            <span id="date-now" class="text-white-50 small text-uppercase"></span>
+            <h2 id="clock" class="luxury-font text-white mb-0">00:00:00</h2>
+            <span id="date-now" class="text-rose fw-bold text-uppercase small"></span>
         </div>
     </div>
 
     <div class="row g-4">
         <div class="col-xl-3">
-            <div class="quick-card mb-4 animate__animated animate__fadeInLeft">
-                <h6 class="text-gold fw-bold mb-3 small text-uppercase"><i class="fas fa-eye me-2"></i>Disponibilidad</h6>
-                <div class="d-flex align-items-center mb-2">
-                    <span class="day-status-dot status-free me-2"></span> <small>Disponible (Baja)</small>
+            <div class="calendar-card mb-4 animate__animated animate__fadeInLeft">
+                <h6 class="text-gold luxury-font mb-4"><i class="fas fa-clock me-2"></i>HORARIOS MASTER</h6>
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-1">
+                        <small>Clases (Morfología)</small>
+                        <small class="text-info">10am-1pm</small>
+                    </div>
+                    <div class="progress" style="height: 5px; background: #222;">
+                        <div class="progress-bar bg-info" style="width: 100%"></div>
+                    </div>
                 </div>
-                <div class="d-flex align-items-center mb-2">
-                    <span class="day-status-dot status-medium me-2"></span> <small>Moderado (Media)</small>
-                </div>
-                <div class="d-flex align-items-center mb-4">
-                    <span class="day-status-dot status-full me-2"></span> <small>Saturado (Full)</small>
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-1">
+                        <small>Servicios Studio</small>
+                        <small class="text-warning">4pm-7pm</small>
+                    </div>
+                    <div class="progress" style="height: 5px; background: #222;">
+                        <div class="progress-bar bg-warning" style="width: 100%"></div>
+                    </div>
                 </div>
 
                 <hr class="border-secondary">
-
-                <h6 class="text-gold fw-bold mb-3 small"><i class="fas fa-bolt me-2"></i>ACCIONES RÁPIDAS</h6>
-                <button class="btn w-100 py-3 mb-3" style="background: linear-gradient(45deg, var(--gold), #fff); color:#000; font-weight:800; border-radius:15px; border:none;" onclick="location.href='Gestión_Reservaciones.html'">
-                    <i class="fas fa-plus-circle me-2"></i> NUEVA CITA VIP
-                </button>
                 
-                <div class="p-3 rounded bg-dark border border-secondary shadow-sm">
-                    <small class="text-white-50 d-block mb-1">Próximo Compromiso:</small>
-                    <div id="nextAppointment" class="fw-bold text-rose animate__animated animate__pulse animate__infinite">Calculando...</div>
-                </div>
+                <button class="btn btn-gold w-100 py-3 shadow-lg" onclick="location.href='Gestión_Reservaciones.html'">
+                    <i class="fas fa-plus-circle me-2"></i> AGENDAR NUEVA CITA
+                </button>
             </div>
         </div>
 
@@ -214,32 +194,16 @@
     </div>
 </main>
 
-<div class="modal fade" id="eventModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="dayDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-header border-secondary">
-                <h5 class="modal-title luxury-font text-gold" id="modalTitle">Detalle de Operación</h5>
+            <div class="modal-header border-0">
+                <h4 class="modal-title luxury-font text-gold" id="modalDateTitle">CITAS DEL DÍA</h4>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body py-4">
-                <div class="row g-4">
-                    <div class="col-6">
-                        <label class="text-rose small fw-bold d-block">CLIENTA / ALUMNA</label>
-                        <span id="mCliente" class="fw-bold fs-5 text-white"></span>
+            <div class="modal-body">
+                <div id="dayClientsList">
                     </div>
-                    <div class="col-6 text-end">
-                        <label class="text-rose small fw-bold d-block">ESTADO</label>
-                        <span id="mEstado" class="badge rounded-pill"></span>
-                    </div>
-                    <div class="col-6">
-                        <label class="text-rose small fw-bold d-block">HORARIO</label>
-                        <span id="mHora" class="text-white"></span>
-                    </div>
-                    <div class="col-6 text-end">
-                        <label class="text-rose small fw-bold d-block">COSTO</label>
-                        <span id="mCosto" class="text-gold fw-bold"></span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -251,94 +215,105 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // 1. Reloj y Fecha
+        const calendarEl = document.getElementById('calendar');
+        const dayModal = new bootstrap.Modal(document.getElementById('dayDetailModal'));
+
+        // Reloj
         setInterval(() => {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString();
-            document.getElementById('date-now').innerText = now.toLocaleDateString('es-MX', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+            document.getElementById('date-now').innerText = now.toLocaleDateString('es-MX', {weekday:'long', day:'numeric', month:'long'});
         }, 1000);
 
-        // 2. Cargar Datos
+        // Datos desde LocalStorage
         const reservaciones = JSON.parse(localStorage.getItem("Gestión_Reservaciones")) || [];
-        const calendarEl = document.getElementById('calendar');
-        const eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
 
-        // 3. Mapeo de Eventos
-        const eventos = reservaciones.map(res => ({
-            title: res.cliente,
-            start: `${res.fecha}T${res.hora}`,
-            className: res.pago === 'Pagado' ? 'event-pagado' : 'event-pendiente',
-            extendedProps: { ...res }
-        }));
+        // Función para determinar clase de saturación
+        function getDayStatusClass(dateStr) {
+            const count = reservaciones.filter(r => r.fecha === dateStr).length;
+            if (count === 0) return 'day-status-free';
+            if (count >= 5) return 'day-status-full';
+            return 'day-status-busy';
+        }
 
-        // 4. Inicializar FullCalendar
         const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'es',
-            firstDay: 1, // Lunes
-            fixedWeekCount: false, // Muestra solo las semanas necesarias del mes (normalmente 5)
+            fixedWeekCount: false, // Permite ver las semanas reales del mes
+            showNonCurrentDates: true,
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridDay,listMonth'
+                right: 'dayGridMonth,timeGridWeek'
             },
-            events: eventos,
-            
-            // Función para personalizar el contenido del día (Saturación)
-            dayCellContent: function(arg) {
-                const dateStr = arg.date.toISOString().split('T')[0];
-                const appointments = reservaciones.filter(r => r.fecha === dateStr);
-                
-                // Contenedor personalizado
-                let dotClass = 'status-free';
-                if(appointments.length >= 5) dotClass = 'status-full';
-                else if(appointments.length >= 3) dotClass = 'status-medium';
+            // Formatear eventos
+            events: reservaciones.map(res => ({
+                title: res.cliente,
+                start: `${res.fecha}T${res.hora}`,
+                className: parseInt(res.hora) < 14 ? 'badge-turno-clase' : 'badge-turno-servicio',
+                extendedProps: res
+            })),
 
-                const dot = document.createElement('div');
-                dot.className = `day-status-dot ${dotClass}`;
-                
-                const dayNum = document.createElement('span');
-                dayNum.innerText = arg.dayNumberText;
-
-                const container = document.createElement('div');
-                container.appendChild(dayNum);
-                container.appendChild(dot);
-                
-                return { domNodes: [container] };
+            // Colorear el fondo de los días según saturación
+            dayCellDidMount: function(info) {
+                const dateStr = info.date.toISOString().split('T')[0];
+                const statusClass = getDayStatusClass(dateStr);
+                info.el.classList.add(statusClass);
             },
 
+            // Click en el día (Cualquier parte del cuadro)
+            dateClick: function(info) {
+                mostrarDetalleDia(info.dateStr);
+            },
+
+            // Click en evento específico
             eventClick: function(info) {
-                const p = info.event.extendedProps;
-                document.getElementById('mCliente').innerText = info.event.title;
-                document.getElementById('mHora').innerText = p.hora + " hrs";
-                document.getElementById('mCosto').innerText = `$${p.costo}`;
-                
-                const badge = document.getElementById('mEstado');
-                badge.innerText = p.pago;
-                badge.className = `badge rounded-pill ${p.pago === 'Pagado' ? 'bg-success' : 'bg-warning'}`;
-                
-                eventModal.show();
+                mostrarDetalleDia(info.event.startStr.split('T')[0]);
             }
         });
 
         calendar.render();
 
-        // 5. Lógica de Status Operativo
-        actualizarStats();
-
-        function actualizarStats() {
-            const hoy = new Date().toISOString().split('T')[0];
-            const hoyCitas = reservaciones.filter(r => r.fecha === hoy);
+        function mostrarDetalleDia(fecha) {
+            const filtradas = reservaciones.filter(r => r.fecha === fecha);
+            const container = document.getElementById('dayClientsList');
+            const title = document.getElementById('modalDateTitle');
             
-            // Separar por bloques
-            const clases = hoyCitas.filter(r => r.hora >= "10:00" && r.hora <= "13:00").length;
-            const servicios = hoyCitas.filter(r => r.hora >= "16:00" && r.hora <= "19:00").length;
+            title.innerText = `AGENDA: ${fecha}`;
+            container.innerHTML = '';
 
-            document.getElementById('clasesCount').innerText = `${clases} / 5 Cupos`;
-            document.getElementById('serviciosCount').innerText = `${servicios} / 8 Cupos`;
-
-            const proxima = hoyCitas.sort((a,b) => a.hora.localeCompare(b.hora))[0];
-            document.getElementById('nextAppointment').innerText = proxima ? `${proxima.hora} - ${proxima.cliente}` : "Sin citas para hoy";
+            if (filtradas.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-calendar-check fa-3x text-muted mb-3"></i>
+                        <p class="text-white-50">No hay citas programadas para este día.</p>
+                        <button class="btn btn-outline-gold" onclick="location.href='Gestión_Reservaciones.html'">Agendar Ahora</button>
+                    </div>`;
+            } else {
+                filtradas.sort((a,b) => a.hora.localeCompare(b.hora)).forEach(c => {
+                    const esClase = parseInt(c.hora) < 14;
+                    container.innerHTML += `
+                        <div class="client-item d-flex justify-content-between align-items-center animate__animated animate__fadeInUp">
+                            <div>
+                                <span class="badge ${esClase ? 'badge-turno-clase' : 'badge-turno-servicio'} mb-2">
+                                    ${esClase ? 'TURNO MAÑANA (CLASE)' : 'TURNO TARDE (SERVICIO)'}
+                                </span>
+                                <h5 class="mb-1 text-white">${c.cliente}</h5>
+                                <p class="mb-0 text-white-50 small">
+                                    <i class="far fa-clock me-1 text-gold"></i> ${c.hora} hs | 
+                                    <i class="fas fa-magic me-1 text-gold"></i> ${c.servicio}
+                                </p>
+                            </div>
+                            <div class="text-end">
+                                <span class="d-block text-gold fw-bold">$${c.costo}</span>
+                                <span class="badge border border-secondary text-uppercase" style="font-size:10px">${c.pago}</span>
+                                <button class="btn btn-sm btn-dark ms-2 border-secondary"><i class="fab fa-whatsapp text-success"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            dayModal.show();
         }
     });
 </script>
