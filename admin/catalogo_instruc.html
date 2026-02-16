@@ -2,25 +2,27 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LK Studio | Gestión Académica Pro</title>
+    <title>LK Studio | Expedientes & Vinculación</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --gold: #D4AF37;
-            --gold-bright: #FFD700;
-            --rose: #E6B8A2;
+            --gold-dark: #b38f1d;
+            --gold-light: #f1d592;
+            --golden-rose: #e6b8a2;
             --deep-black: #050505;
-            --grey-row: #1A1A1A; /* Tu gris carbón preferido */
+            --grey-form: #1A1A1A;
             --sidebar-width: 260px;
         }
 
         body {
-            background: var(--deep-black);
+            background: radial-gradient(circle at top, #1a1a1a 0%, var(--deep-black) 100%);
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -28,287 +30,307 @@
             min-height: 100vh;
         }
 
-        /* --- SIDEBAR --- */
+        /* --- SIDEBAR MASTER --- */
         #sidebar {
             width: var(--sidebar-width);
-            background: #000;
-            border-right: 2px solid var(--gold);
+            background: rgba(0, 0, 0, 0.98);
+            border-right: 1px solid var(--gold);
             height: 100vh;
             position: fixed;
-            z-index: 1000;
+            z-index: 100;
         }
 
         .nav-link {
             color: #fff !important;
             padding: 15px 25px;
+            display: flex;
+            align-items: center;
             font-size: 0.85rem;
             text-transform: uppercase;
             transition: 0.3s;
-            display: flex;
-            align-items: center;
+            border-left: 4px solid transparent;
         }
 
         .nav-link:hover, .nav-link.active {
-            background: rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.1);
             border-left: 4px solid var(--gold);
-            color: var(--gold-bright) !important;
+            color: var(--gold) !important;
         }
 
-        /* --- CONTENIDO --- */
         #content {
             width: calc(100% - var(--sidebar-width));
             margin-left: var(--sidebar-width);
             padding: 40px;
         }
 
-        .luxury-font { font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 2px; }
-
-        /* --- TABLAS GRIS CARBÓN (CON LETRAS BLANCAS) --- */
-        .table-custom {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 12px;
+        /* --- FORMULARIO GRIS CARBÓN --- */
+        .card-form {
+            background: var(--grey-form);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .table-custom thead th {
-            color: var(--rose);
+        .section-title {
+            color: var(--gold);
+            font-weight: 800;
+            font-size: 0.85rem;
+            border-left: 4px solid var(--gold);
+            padding-left: 15px;
+            margin-bottom: 25px;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            padding: 15px;
-            border: none;
         }
 
-        .table-custom tbody tr {
-            background: var(--grey-row) !important;
-            transition: 0.3s;
+        /* --- TABLA BLANCA --- */
+        .table-container-white {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            color: #222;
         }
 
-        .table-custom td {
-            padding: 20px !important;
-            color: #FFFFFF !important; /* LETRAS SIEMPRE VISIBLES */
-            vertical-align: middle;
-            border: none;
+        .table { color: #222 !important; }
+        .table thead th { 
+            background: #f8f9fa; 
+            color: #666; 
+            font-size: 0.7rem; 
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--gold);
         }
 
-        .table-custom tr td:first-child { border-radius: 12px 0 0 12px; border-left: 5px solid var(--gold); }
-        .table-custom tr td:last-child { border-radius: 0 12px 12px 0; }
-
-        /* --- INPUTS --- */
+        /* INPUTS */
+        .form-label { color: var(--golden-rose) !important; font-size: 0.75rem; font-weight: bold; }
         .form-control, .form-select {
             background: #000 !important;
             border: 1px solid #333 !important;
-            color: var(--gold-bright) !important;
-            padding: 12px;
-        }
-
-        /* --- IMÁGENES --- */
-        .img-thumb {
-            width: 60px; height: 60px; object-fit: cover;
-            border-radius: 10px; border: 1px solid var(--gold);
+            color: var(--gold-light) !important;
+            border-radius: 12px;
         }
 
         .btn-gold {
-            background: linear-gradient(45deg, #b38f1d, var(--gold));
-            color: #000; font-weight: 800; border-radius: 50px; border: none;
-            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--gold-dark), var(--gold-light));
+            color: #000; font-weight: 800; border-radius: 50px;
+            border: none; padding: 12px; transition: 0.3s;
         }
 
-        .doc-icon { font-size: 1.2rem; margin: 0 5px; cursor: pointer; }
-        .exists { color: var(--gold-bright); }
-        .missing { color: #444; }
+        /* ICONOS DOCUMENTOS */
+        .doc-status { font-size: 1.1rem; margin: 0 4px; cursor: pointer; transition: 0.3s; }
+        .doc-exists { color: var(--gold); filter: drop-shadow(0 0 3px var(--gold)); }
+        .doc-none { color: #ddd; opacity: 0.3; }
+
+        .badge-curso {
+            background: #f1d592;
+            color: #000;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-right: 4px;
+            font-weight: 600;
+        }
     </style>
 </head>
+
 <body>
 
 <nav id="sidebar">
     <div class="p-4 text-center">
-        <h4 class="luxury-font">LK STUDIO</h4>
-        <small style="color:var(--rose)">SISTEMA ACADÉMICO</small>
+        <h4 style="color:var(--gold); font-weight: 900;">LK STUDIO</h4>
+        <small style="color:var(--golden-rose); font-size: 0.6rem;">ADMIN v2.0</small>
     </div>
-    <div class="mt-4">
-        <a href="javascript:showSection('instructores')" class="nav-link active" id="btn-ins"><i class="fas fa-user-tie me-3"></i> Expedientes</a>
-        <a href="javascript:showSection('cursos')" class="nav-link" id="btn-cur"><i class="fas fa-certificate me-3"></i> Catálogo Cursos</a>
-        <a href="./PANEL_ADMIN.html" class="nav-link mt-5"><i class="fas fa-sign-out-alt me-3"></i> Volver</a>
+    <div class="mt-3">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line me-3"></i> Dashboard</a>
+        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-certificate me-3"></i> Cursos</a>
+        <a href="#" class="nav-link active"><i class="fas fa-user-tie me-3"></i> Instructores</a>
+        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem me-3"></i> Beneficios</a>
     </div>
 </nav>
 
 <div id="content">
-    
-    <section id="sec-instructores" class="animate__animated animate__fadeIn">
-        <h2 class="luxury-font mb-4">EXPEDIENTES DE INSTRUCTORES</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="p-4 bg-dark rounded-4 border border-secondary">
-                    <h5 class="text-white mb-4">Alta de Instructor</h5>
-                    <form id="formIns">
-                        <div class="mb-3">
-                            <label class="small text-rose">NOMBRE COMPLETO</label>
-                            <input type="text" id="ins-nombre" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="small text-rose">ESPECIALIDAD</label>
-                            <input type="text" id="ins-especialidad" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="small text-rose">INE (FOTO/PDF)</label>
-                            <input type="file" id="ins-ine" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-gold w-100">GUARDAR EXPEDIENTE</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <th>Instructor</th>
-                            <th>Especialidad</th>
-                            <th>Docs</th>
-                            <th class="text-end">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaIns"></tbody>
-                </table>
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="fw-bold" style="color: var(--gold);">EXPEDIENTES DE INSTRUCTORES</h2>
+            <p style="color: var(--golden-rose);">Vinculación académica y gestión de documentos</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <div class="card bg-dark border-secondary p-2">
+                <small class="text-white-50">Instructores Activos</small>
+                <h4 class="text-gold mb-0" id="totalCount">0</h4>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="sec-cursos" class="animate__animated animate__fadeIn" style="display:none;">
-        <h2 class="luxury-font mb-4">CATÁLOGO DE CURSOS</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="p-4 bg-dark rounded-4 border border-secondary">
-                    <h5 class="text-white mb-4">Nuevo Curso</h5>
-                    <form id="formCur">
-                        <div class="mb-3">
-                            <label class="small text-rose">NOMBRE DEL CURSO</label>
-                            <input type="text" id="cur-nombre" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="small text-rose">INSTRUCTOR ASIGNADO</label>
-                            <select id="cur-instructor" class="form-select" required>
-                                <option value="">Seleccione Instructor...</option>
+    <div class="row g-4">
+        <div class="col-xl-4 col-lg-5">
+            <div class="card-form animate__animated animate__fadeInLeft">
+                <form id="formInstructor">
+                    <div class="section-title">Datos Maestros</div>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre del Profesional</label>
+                        <input type="text" id="nombre" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Especialidad Principal</label>
+                        <input type="text" id="especialidad" class="form-control" placeholder="Ej. Lash Artist Senior">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Vincular a Curso(s)</label>
+                        <select id="selectCursos" class="form-select" multiple style="height: 100px;">
                             </select>
+                        <small class="text-muted mt-1 d-block">Mantén presionado Ctrl para seleccionar varios.</small>
+                    </div>
+
+                    <div class="section-title mt-4">Expediente Digital</div>
+                    <div class="row g-2 mb-4">
+                        <div class="col-6">
+                            <label class="form-label small">INE (PDF)</label>
+                            <input type="file" id="file_ine" class="form-control form-control-sm" accept=".pdf">
                         </div>
-                        <div class="mb-3">
-                            <label class="small text-rose">FOTO PORTADA</label>
-                            <input type="file" id="cur-foto" class="form-control" accept="image/*">
+                        <div class="col-6">
+                            <label class="form-label small">RFC (PDF)</label>
+                            <input type="file" id="file_rfc" class="form-control form-control-sm" accept=".pdf">
                         </div>
-                        <button type="submit" class="btn btn-gold w-100">PUBLICAR CURSO</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <th>Imagen</th>
-                            <th>Curso</th>
-                            <th>Instructor</th>
-                            <th class="text-end">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaCur"></tbody>
-                </table>
+                        <div class="col-6">
+                            <label class="form-label small">Título</label>
+                            <input type="file" id="file_titulo" class="form-control form-control-sm" accept=".pdf">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small">CV</label>
+                            <input type="file" id="file_cv" class="form-control form-control-sm" accept=".pdf">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-gold w-100" id="btnSubmit">
+                        <i class="fas fa-user-plus me-2"></i> REGISTRAR INSTRUCTOR
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
+
+        <div class="col-xl-8 col-lg-7">
+            <div class="table-container-white shadow-lg animate__animated animate__fadeInRight">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Instructor / Especialidad</th>
+                                <th>Cursos Asignados</th>
+                                <th class="text-center">Docs</th>
+                                <th class="text-center">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaInstructores">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-// --- DATOS CENTRALIZADOS ---
-let dataInstructores = JSON.parse(localStorage.getItem("LK_INS")) || [];
-let dataCursos = JSON.parse(localStorage.getItem("LK_CUR")) || [];
+    // 1. CARGA DE DATOS DE CURSOS PARA EL SELECT
+    function cargarCursosEnSelect() {
+        const cursos = JSON.parse(localStorage.getItem('LK_CURSOS_DATA')) || [];
+        const select = document.getElementById('selectCursos');
+        select.innerHTML = '';
+        
+        if(cursos.length === 0) {
+            select.innerHTML = '<option disabled>No hay cursos registrados</option>';
+        }
 
-// Convertidor Universal a Base64
-const getBase64 = file => new Promise((res, rej) => {
-    if(!file) res(null);
-    const r = new FileReader();
-    r.readAsDataURL(file);
-    r.onload = () => res(r.result);
-});
+        cursos.forEach(c => {
+            const option = document.createElement('option');
+            option.value = c.nombre;
+            option.textContent = c.nombre;
+            select.appendChild(option);
+        });
+    }
 
-// --- LÓGICA DE SECCIONES ---
-function showSection(sec) {
-    document.getElementById('sec-instructores').style.display = sec === 'instructores' ? 'block' : 'none';
-    document.getElementById('sec-cursos').style.display = sec === 'cursos' ? 'block' : 'none';
-    document.getElementById('btn-ins').classList.toggle('active', sec === 'instructores');
-    document.getElementById('btn-cur').classList.toggle('active', sec === 'cursos');
-    if(sec === 'cursos') actualizarSelectInstructores();
-}
+    // 2. LÓGICA DE INSTRUCTORES
+    let instructores = JSON.parse(localStorage.getItem("lk_expedientes")) || [];
 
-// --- GESTIÓN DE INSTRUCTORES ---
-document.getElementById('formIns').onsubmit = async (e) => {
-    e.preventDefault();
-    const nuevo = {
-        nombre: document.getElementById('ins-nombre').value,
-        especialidad: document.getElementById('ins-especialidad').value,
-        ine: await getBase64(document.getElementById('ins-ine').files[0])
+    const toBase64 = file => new Promise((resolve) => {
+        if(!file) resolve(null);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+    });
+
+    async function renderTabla() {
+        const tabla = document.getElementById("tablaInstructores");
+        document.getElementById("totalCount").innerText = instructores.length;
+        tabla.innerHTML = "";
+
+        instructores.forEach((ins, idx) => {
+            // Crear etiquetas de cursos
+            let cursosBadges = ins.cursosAsignados.map(c => `<span class="badge-curso">${c}</span>`).join('');
+            
+            tabla.innerHTML += `
+                <tr>
+                    <td>
+                        <div class="fw-bold" style="color:#000">${ins.nombre}</div>
+                        <small class="text-muted">${ins.especialidad}</small>
+                    </td>
+                    <td>${cursosBadges || '<span class="text-muted small">Sin asignar</span>'}</td>
+                    <td class="text-center">
+                        <i class="fas fa-file-pdf doc-status ${ins.docs.ine ? 'doc-exists' : 'doc-none'}" onclick="verDoc(${idx}, 'ine')"></i>
+                        <i class="fas fa-file-pdf doc-status ${ins.docs.titulo ? 'doc-exists' : 'doc-none'}" onclick="verDoc(${idx}, 'titulo')"></i>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-sm text-danger" onclick="eliminar(${idx})"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    document.getElementById("formInstructor").onsubmit = async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('btnSubmit');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
+        
+        // Obtener cursos seleccionados
+        const selectedOptions = Array.from(document.getElementById('selectCursos').selectedOptions).map(opt => opt.value);
+
+        const nuevo = {
+            nombre: document.getElementById('nombre').value,
+            especialidad: document.getElementById('especialidad').value,
+            cursosAsignados: selectedOptions,
+            docs: {
+                ine: await toBase64(document.getElementById("file_ine").files[0]),
+                rfc: await toBase64(document.getElementById("file_rfc").files[0]),
+                titulo: await toBase64(document.getElementById("file_titulo").files[0]),
+                cv: await toBase64(document.getElementById("file_cv").files[0])
+            }
+        };
+
+        instructores.push(nuevo);
+        localStorage.setItem("lk_expedientes", JSON.stringify(instructores));
+        
+        this.reset();
+        btn.innerHTML = '<i class="fas fa-user-plus me-2"></i> REGISTRAR INSTRUCTOR';
+        renderTabla();
     };
-    dataInstructores.push(nuevo);
-    localStorage.setItem("LK_INS", JSON.stringify(dataInstructores));
-    e.target.reset();
-    renderIns();
-};
 
-function renderIns() {
-    const t = document.getElementById('tablaIns');
-    t.innerHTML = '';
-    dataInstructores.forEach((ins, i) => {
-        t.innerHTML += `
-            <tr>
-                <td><b class="text-white">${ins.nombre}</b></td>
-                <td><span class="badge bg-outline-gold">${ins.especialidad}</span></td>
-                <td><i class="fas fa-file-pdf doc-icon ${ins.ine ? 'exists' : 'missing'}" onclick="verDoc('${ins.ine}')"></i></td>
-                <td class="text-end"><button class="btn btn-link text-danger" onclick="delIns(${i})"><i class="fas fa-trash"></i></button></td>
-            </tr>`;
-    });
-}
-
-// --- GESTIÓN DE CURSOS (LA CONEXIÓN) ---
-function actualizarSelectInstructores() {
-    const sel = document.getElementById('cur-instructor');
-    sel.innerHTML = '<option value="">Seleccione Instructor...</option>';
-    dataInstructores.forEach(ins => {
-        sel.innerHTML += `<option value="${ins.nombre}">${ins.nombre}</option>`;
-    });
-}
-
-document.getElementById('formCur').onsubmit = async (e) => {
-    e.preventDefault();
-    const nuevo = {
-        nombre: document.getElementById('cur-nombre').value,
-        instructor: document.getElementById('cur-instructor').value,
-        foto: await getBase64(document.getElementById('cur-foto').files[0])
+    window.verDoc = (idx, tipo) => {
+        const doc = instructores[idx].docs[tipo];
+        if(!doc) return;
+        const newTab = window.open();
+        newTab.document.write(`<iframe src="${doc}" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>`);
     };
-    dataCursos.push(nuevo);
-    localStorage.setItem("LK_CUR", JSON.stringify(dataCursos));
-    e.target.reset();
-    renderCur();
-};
 
-function renderCur() {
-    const t = document.getElementById('tablaCur');
-    t.innerHTML = '';
-    dataCursos.forEach((cur, i) => {
-        t.innerHTML += `
-            <tr>
-                <td><img src="${cur.foto || 'https://via.placeholder.com/60'}" class="img-thumb"></td>
-                <td><b class="text-white">${cur.nombre}</b></td>
-                <td><i class="fas fa-user-graduate me-2 text-gold"></i>${cur.instructor}</td>
-                <td class="text-end"><button class="btn btn-link text-danger" onclick="delCur(${i})"><i class="fas fa-trash"></i></button></td>
-            </tr>`;
-    });
-}
+    window.eliminar = (idx) => {
+        if(confirm("¿Eliminar expediente?")) {
+            instructores.splice(idx, 1);
+            localStorage.setItem("lk_expedientes", JSON.stringify(instructores));
+            renderTabla();
+        }
+    }
 
-// --- FUNCIONES COMUNES ---
-window.verDoc = (b64) => { if(b64) { const w = window.open(); w.document.write(`<iframe src="${b64}" frameborder="0" style="border:0; top:0; left:0; bottom:0; right:0; width:100%; height:100%;" allowfullscreen></iframe>`); } }
-window.delIns = (i) => { if(confirm("¿Eliminar instructor?")) { dataInstructores.splice(i,1); localStorage.setItem("LK_INS", JSON.stringify(dataInstructores)); renderIns(); } }
-window.delCur = (i) => { if(confirm("¿Eliminar curso?")) { dataCursos.splice(i,1); localStorage.setItem("LK_CUR", JSON.stringify(dataCursos)); renderCur(); } }
-
-// Inicio
-renderIns();
-renderCur();
+    // Inicialización
+    cargarCursosEnSelect();
+    renderTabla();
 </script>
 
 </body>
