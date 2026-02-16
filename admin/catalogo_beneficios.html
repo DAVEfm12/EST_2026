@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LK Studio | Gestión VIP</title>
+    <title>LK Studio | Gestión VIP Funcional</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -15,8 +15,8 @@
             --gold-bright: #FFD700;
             --rose: #E6B8A2;
             --deep-black: #000000;
-            --grey-row: #1C1C1C; /* Gris oscuro sólido */
-            --white-text: #FFFFFF; /* Blanco puro */
+            --grey-row: #1C1C1C; 
+            --white-text: #FFFFFF;
             --sidebar-width: 280px;
         }
 
@@ -43,12 +43,13 @@
         .sidebar-logo img { width: 150px; }
 
         .nav-link {
-            color: #FFFFFF !important; /* Forzado a blanco */
+            color: #FFFFFF !important;
             padding: 15px 25px;
             font-size: 0.9rem;
             display: flex;
             align-items: center;
             border-bottom: 1px solid #111;
+            text-decoration: none;
         }
 
         .nav-link i { width: 30px; color: var(--gold-bright); }
@@ -63,11 +64,11 @@
 
         .luxury-font { font-family: 'Cinzel', serif; color: var(--gold); }
 
-        /* --- TABLA DE ALTO CONTRASTE --- */
+        /* --- TABLA --- */
         .table-custom {
             width: 100%;
             border-collapse: separate;
-            border-spacing: 0 10px;
+            border-spacing: 0 12px;
         }
 
         .table-custom thead th {
@@ -75,49 +76,34 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             padding: 15px;
-            border: none;
             font-size: 0.8rem;
         }
 
-        /* Filas Grises */
         .table-custom tbody tr {
             background-color: var(--grey-row) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: 0.3s;
         }
 
-        /* ESTO ASEGURA QUE LAS LETRAS SE VEAN */
         .table-custom td {
             padding: 20px !important;
-            color: #FFFFFF !important; /* Blanco Absoluto */
-            font-weight: 500;
+            color: #FFFFFF !important; /* FORZADO BLANCO */
             vertical-align: middle;
             border: none;
         }
 
-        .benefit-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #FFFFFF !important;
-            display: block;
-        }
+        .benefit-title { font-size: 1.1rem; font-weight: 700; color: #FFFFFF !important; display: block; }
+        .benefit-desc { font-size: 0.85rem; color: var(--rose) !important; }
 
-        .benefit-desc {
-            font-size: 0.8rem;
-            color: var(--rose) !important;
-            opacity: 0.9;
-        }
+        .table-custom tr td:first-child { border-radius: 12px 0 0 12px; border-left: 5px solid var(--gold); }
+        .table-custom tr td:last-child { border-radius: 0 12px 12px 0; }
 
-        /* Bordes redondeados */
-        .table-custom tr td:first-child { border-radius: 10px 0 0 10px; border-left: 4px solid var(--gold); }
-        .table-custom tr td:last-child { border-radius: 0 10px 10px 0; }
-
-        /* Botones y Badges */
+        /* --- BOTONES Y MODAL --- */
         .btn-gold {
             background: var(--gold);
             color: #000;
             font-weight: 800;
             border-radius: 50px;
-            padding: 10px 25px;
+            padding: 10px 30px;
             border: none;
         }
 
@@ -125,12 +111,14 @@
             background: #000;
             border: 1px solid var(--gold-bright);
             color: var(--gold-bright);
-            padding: 5px 12px;
+            padding: 5px 15px;
             border-radius: 8px;
             font-weight: 700;
         }
 
-        .status-active { color: #00FF00; font-weight: 700; }
+        .modal-content { background: #111; border: 2px solid var(--gold); color: #fff; border-radius: 20px; }
+        .form-control, .form-select { background: #000; border: 1px solid #444; color: #fff !important; }
+        .form-control:focus { border-color: var(--gold); box-shadow: none; background: #050505; color: #fff; }
     </style>
 </head>
 <body>
@@ -149,9 +137,11 @@
 </nav>
 
 <main class="main-content">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-5">
         <h2 class="luxury-font mb-0">CATÁLOGO DE BENEFICIOS</h2>
-        <button class="btn btn-gold">NUEVA RECOMPENSA</button>
+        <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#modalBen" onclick="limpiarForm()">
+            <i class="fas fa-plus me-2"></i> NUEVA RECOMPENSA
+        </button>
     </div>
 
     <table class="table-custom">
@@ -159,41 +149,132 @@
             <tr>
                 <th>BENEFICIO Y DETALLE</th>
                 <th>NIVEL</th>
-                <th>PUNTOS</th>
-                <th>ESTADO</th>
-                <th class="text-end">ACCIONES</th>
+                <th>COSTO PUNTOS</th>
+                <th class="text-end">GESTIÓN</th>
             </tr>
         </thead>
-        <tbody id="lista">
-            <tr>
-                <td>
-                    <span class="benefit-title">LIMPIEZA PROFUNDA GRATIS</span>
-                    <span class="benefit-desc">Incluye kit de limpieza y cepillo premium.</span>
-                </td>
-                <td><b style="color: var(--rose)">DIAMOND</b></td>
-                <td><span class="pts-badge">500 PTS</span></td>
-                <td><span class="status-active">● ACTIVO</span></td>
-                <td class="text-end">
-                    <button class="btn btn-sm btn-outline-light me-1"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="benefit-title">COPA DE VINO CORTESÍA</span>
-                    <span class="benefit-desc">Disponible en todas las citas de aplicación.</span>
-                </td>
-                <td><b style="color: var(--rose)">GOLD</b></td>
-                <td><span class="pts-badge">100 PTS</span></td>
-                <td><span class="status-active">● ACTIVO</span></td>
-                <td class="text-end">
-                    <button class="btn btn-sm btn-outline-light me-1"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
+        <tbody id="tablaBody">
+            </tbody>
     </table>
 </main>
 
+<div class="modal fade" id="modalBen" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-secondary">
+                <h5 class="luxury-font">CONFIGURAR BENEFICIO</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="benForm">
+                    <input type="hidden" id="editIndex">
+                    <div class="mb-3">
+                        <label class="small text-rose">NOMBRE DEL BENEFICIO</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Ej: Retoque Gratis" required>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="small text-rose">NIVEL VIP</label>
+                            <select id="nivel" class="form-select">
+                                <option>Silver</option>
+                                <option>Gold</option>
+                                <option>Diamond</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label class="small text-rose">PUNTOS</label>
+                            <input type="number" id="puntos" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="small text-rose">DESCRIPCIÓN BREVE</label>
+                        <textarea id="desc" class="form-control" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gold w-100">GUARDAR CAMBIOS</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let beneficios = JSON.parse(localStorage.getItem('LK_BENS')) || [
+        {nombre: "LIMPIEZA PROFUNDA", nivel: "Silver", puntos: 100, desc: "Kit básico de limpieza."},
+        {nombre: "KIT CRYSTAL LASH", nivel: "Diamond", puntos: 600, desc: "Shampoo y cepillo de cristal."}
+    ];
+
+    const tabla = document.getElementById('tablaBody');
+    const form = document.getElementById('benForm');
+
+    function render() {
+        tabla.innerHTML = '';
+        beneficios.forEach((b, i) => {
+            tabla.innerHTML += `
+                <tr>
+                    <td>
+                        <b class="benefit-title">${b.nombre}</b>
+                        <span class="benefit-desc">${b.desc}</span>
+                    </td>
+                    <td><b style="color: var(--rose)">${b.nivel.toUpperCase()}</b></td>
+                    <td><span class="pts-badge">${b.puntos} PTS</span></td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-light me-2" onclick="cargarEdicion(${i})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${i})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+        localStorage.setItem('LK_BENS', JSON.stringify(beneficios));
+    }
+
+    form.onsubmit = (e) => {
+        e.preventDefault();
+        const index = document.getElementById('editIndex').value;
+        const nuevo = {
+            nombre: document.getElementById('nombre').value.toUpperCase(),
+            nivel: document.getElementById('nivel').value,
+            puntos: document.getElementById('puntos').value,
+            desc: document.getElementById('desc').value
+        };
+
+        if(index === "") {
+            beneficios.push(nuevo);
+        } else {
+            beneficios[index] = nuevo;
+        }
+
+        render();
+        bootstrap.Modal.getInstance(document.getElementById('modalBen')).hide();
+    };
+
+    window.cargarEdicion = (i) => {
+        const b = beneficios[i];
+        document.getElementById('editIndex').value = i;
+        document.getElementById('nombre').value = b.nombre;
+        document.getElementById('nivel').value = b.nivel;
+        document.getElementById('puntos').value = b.puntos;
+        document.getElementById('desc').value = b.desc;
+        new bootstrap.Modal(document.getElementById('modalBen')).show();
+    };
+
+    window.eliminar = (i) => {
+        if(confirm("¿Eliminar este beneficio?")) {
+            beneficios.splice(i, 1);
+            render();
+        }
+    };
+
+    window.limpiarForm = () => {
+        form.reset();
+        document.getElementById('editIndex').value = "";
+    };
+
+    render();
+</script>
 </body>
 </html>
