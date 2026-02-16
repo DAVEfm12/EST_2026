@@ -3,66 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>LK Studio | Gestión de Reservaciones VIP</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
+        /* --- ADN VISUAL LK STUDIO (SISTEMA GLOBAL) --- */
         :root {
-            --gold: #D4AF37;
-            --gold-bright: #F1D592;
+            --oro: #D4AF37;
+            --oro-brillante: #F1D592;
             --rose-gold: #E6B8A2; 
-            --deep-black: #0A0A0A;
-            --soft-black: #161616;
+            --negro-profundo: #0A0A0A;
+            --negro-suave: #161616;
             --sidebar-width: 280px;
+            --borde-lujo: rgba(212, 175, 55, 0.25);
         }
 
         body {
-            background: radial-gradient(circle at top right, #1e1e1e, var(--deep-black));
+            background-color: var(--negro-profundo);
+            background-image: radial-gradient(circle at top right, #1e1e1e, var(--negro-profundo));
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             display: flex;
             margin: 0;
+            overflow-x: hidden;
         }
 
-        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
+        .fuente-lujo { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
         /* --- SIDEBAR ELITE --- */
         #sidebarAdmin {
             width: var(--sidebar-width); 
-            background: var(--deep-black);
-            border-right: 1px solid var(--gold); 
+            background: var(--negro-profundo);
+            border-right: 1px solid var(--oro); 
             height: 100vh;
             position: fixed; 
             z-index: 1000; 
             display: flex; 
             flex-direction: column;
+            transition: 0.4s;
         }
 
         .sidebar-header {
             padding: 40px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid var(--borde-lujo);
         }
 
-        /* Logo Styling */
         .sidebar-logo {
             max-width: 160px;
-            height: auto;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.4));
-            transition: 0.3s;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
         }
 
         .nav-link {
             color: rgba(255,255,255,0.6) !important; 
-            padding: 15px 25px;
+            padding: 14px 25px;
             transition: 0.4s; 
-            font-size: 0.85rem; 
-            margin: 5px 15px; 
+            font-size: 0.8rem; 
+            margin: 4px 15px; 
             border-radius: 50px;
             display: flex;
             align-items: center;
@@ -70,83 +72,102 @@
             letter-spacing: 1px;
         }
 
-        .nav-link i { width: 30px; font-size: 1.1rem; color: var(--gold); }
+        .nav-link i { width: 30px; font-size: 1.1rem; color: var(--oro); }
 
         .nav-link:hover, .nav-link.active {
-            color: var(--gold-bright) !important; 
+            color: var(--oro-brillante) !important; 
             background: rgba(212, 175, 55, 0.1);
         }
 
         .nav-link.active {
-            border: 1px solid var(--gold);
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent) !important;
+            border: 1px solid var(--oro);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), transparent) !important;
             font-weight: 700;
         }
 
-        /* --- MAIN CONTENT --- */
+        /* --- CONTENIDO PRINCIPAL --- */
         .main-content {
             margin-left: var(--sidebar-width); 
             width: calc(100% - var(--sidebar-width));
             padding: 50px;
+            transition: 0.4s;
         }
 
-        /* --- CARDS & FORMS --- */
-        .card-luxury {
-            background: var(--soft-black);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 25px;
+        /* --- COMPONENTES DE LUJO --- */
+        .tarjeta-elite {
+            background: var(--negro-suave);
+            border: 1px solid var(--borde-lujo);
+            border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            padding: 30px;
         }
 
-        .form-label { color: var(--rose-gold); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         
         .form-control, .form-select {
-            background-color: rgba(0,0,0,0.3) !important; 
+            background-color: rgba(0,0,0,0.4) !important; 
             border: 1px solid #333 !important;
             color: white !important; 
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 12px;
+            font-size: 0.9rem;
         }
 
-        .form-control:focus { border-color: var(--gold) !important; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+        .form-control:focus { border-color: var(--oro) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 
         /* --- TABLA VIP --- */
-        .table-container {
-            background: var(--soft-black);
-            border-radius: 25px;
-            padding: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+        .tabla-contenedor {
+            background: var(--negro-suave);
+            border-radius: 30px;
+            padding: 25px;
+            border: 1px solid var(--borde-lujo);
         }
 
-        .table { color: white !important; vertical-align: middle; }
+        .table { color: white !important; vertical-align: middle; margin-bottom: 0; }
         .table thead th { 
-            color: var(--gold); 
+            color: var(--oro); 
             text-transform: uppercase; 
-            font-size: 0.75rem; 
-            border-bottom: 2px solid var(--gold);
+            font-size: 0.7rem; 
+            border-bottom: 2px solid var(--oro);
             padding: 15px;
+            letter-spacing: 1px;
         }
 
-        /* --- BADGES --- */
-        .badge-status {
-            padding: 6px 12px;
+        .table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* --- ESTADOS --- */
+        .badge-vip {
+            padding: 6px 14px;
             border-radius: 50px;
             font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
         }
-        .bg-paid { background: rgba(46, 125, 50, 0.2); color: #81c784; border: 1px solid #2e7d32; }
-        .bg-pending { background: rgba(245, 124, 0, 0.2); color: #ffb74d; border: 1px solid #f57c00; }
+        .bg-pagado { background: rgba(46, 125, 50, 0.2); color: #81c784; border: 1px solid #2e7d32; }
+        .bg-pendiente { background: rgba(245, 124, 0, 0.2); color: #ffb74d; border: 1px solid #f57c00; }
 
-        .btn-gold {
-            background: linear-gradient(45deg, var(--gold), var(--gold-bright));
-            color: black;
+        .btn-oro {
+            background: linear-gradient(45deg, var(--oro), var(--oro-brillante));
+            color: #000;
             font-weight: 700;
             border: none;
             border-radius: 50px;
+            padding: 12px 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: 0.3s;
         }
-        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); color: black; }
+
+        .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); color: #000; }
+
+        .widget-stats {
+            background: var(--negro-suave);
+            border: 1px solid var(--borde-lujo);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+        }
 
         @media (max-width: 992px) {
             #sidebarAdmin { transform: translateX(-100%); }
@@ -154,52 +175,52 @@
         }
     </style>
 </head>
-
 <body>
 
 <nav id="sidebarAdmin">
     <div class="sidebar-header">
-        <img src="IMG/LKSTUDIO.png" alt="LK Studio Logo" class="sidebar-logo mb-2" onerror="this.src='https://via.placeholder.com/160x60/000000/D4AF37?text=LK+STUDIO'">
-        <div class="mt-2">
-            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Elite Management</small>
+        <img src="IMG/LKSTUDIO.png" alt="Logo" class="sidebar-logo mb-2" onerror="this.src='https://via.placeholder.com/160x60/0A0A0A/D4AF37?text=LK+STUDIO'">
+        <div class="mt-2 text-center">
+            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Gestión de Élite</small>
         </div>
     </div>
     
     <div class="nav flex-column mt-4 flex-grow-1">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Inicio</a>
         <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Agenda VIP</a>
-        <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-book-open"></i> Reservas</a>
-        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Punto de Venta</a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut"></i> Servicios</a>
+        <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-receipt"></i> Reservaciones</a>
+        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Ventas</a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-concierge-bell"></i> Servicios</a>
         <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Academia</a>
-        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-users"></i> Personal</a>
+        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-star"></i> Personal</a>
         <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> Reportes</a>
     </div>
-    
-    <div class="p-4 mt-auto border-top border-secondary">
+
+    <div class="p-4 mt-auto">
         <a href="login.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill">
-            <i class="fas fa-sign-out-alt me-2"></i> Salir
+            <i class="fas fa-power-off me-2"></i> Cerrar Sesión
         </a>
     </div>
 </nav>
 
 <main class="main-content">
-    
     <header class="mb-5 animate__animated animate__fadeInDown">
-        <h5 class="text-rose-gold fw-bold mb-1" style="letter-spacing: 3px;">ADMINISTRACIÓN</h5>
-        <h1 class="luxury-font text-gold display-5 fw-bold">Gestión de Reservaciones</h1>
+        <p class="text-rose-gold fw-bold mb-0" style="letter-spacing: 4px; font-size: 0.8rem;">SISTEMA ADMINISTRATIVO</p>
+        <h1 class="fuente-lujo texto-oro display-5 fw-bold">Gestión de Reservaciones</h1>
     </header>
 
     <div class="row g-4">
         <div class="col-xl-4">
-            <div class="card card-luxury p-4 animate__animated animate__fadeInLeft">
-                <h5 class="luxury-font text-gold mb-4"><i class="fas fa-plus-circle me-2"></i>Nueva Reserva</h5>
+            <div class="tarjeta-elite animate__animated animate__fadeInLeft">
+                <h5 class="fuente-lujo texto-oro mb-4"><i class="fas fa-plus-circle me-2"></i>Nueva Reserva</h5>
                 <form id="formReserva">
                     <input type="hidden" id="indexReserva">
+                    
                     <div class="mb-3">
                         <label class="form-label">Cliente Premium</label>
                         <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Servicio Elite</label>
                         <select id="servicio" class="form-select" required>
@@ -207,9 +228,10 @@
                             <option value="Uñas Acrílicas">Uñas Acrílicas</option>
                             <option value="Balayage Elite">Balayage Elite</option>
                             <option value="Diseño Mariposa">Diseño Mariposa</option>
-                            <option value="Curso Gel">Curso Master Gel</option>
+                            <option value="Curso Master Gel">Curso Master Gel</option>
                         </select>
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-6">
                             <label class="form-label">Fecha</label>
@@ -223,52 +245,58 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="mb-4">
-                        <label class="form-label">Monto de Inversión ($)</label>
-                        <input type="number" id="costo" class="form-control fw-bold" style="color: var(--gold-bright) !important;" placeholder="0.00" required>
+                        <label class="form-label">Inversión ($)</label>
+                        <input type="number" id="costo" class="form-control fw-bold" style="color: var(--oro-brillante) !important;" placeholder="0.00" required>
                     </div>
-                    <button type="submit" id="btnSubmit" class="btn btn-gold w-100 py-3">
-                        <i class="fas fa-check-double me-2"></i>Confirmar Reserva
+
+                    <button type="submit" id="btnSubmit" class="btn-oro w-100">
+                        <i class="fas fa-save me-2"></i>Guardar Registro
                     </button>
-                    <button type="button" id="btnCancelarEdit" class="btn btn-sm btn-outline-secondary w-100 mt-2 d-none" onclick="cancelarEdicion()">Cancelar</button>
+                    <button type="button" id="btnCancelarEdit" class="btn btn-sm btn-link text-white-50 w-100 mt-2 d-none" onclick="cancelarEdicion()">Cancelar Edición</button>
                 </form>
             </div>
         </div>
 
         <div class="col-xl-8">
-            <div class="table-container animate__animated animate__fadeInRight">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h5 class="luxury-font text-white mb-0">Listado Maestro</h5>
-                    <input type="text" id="busqueda" class="form-control w-50" placeholder="Buscar por cliente..." onkeyup="renderReservas()">
+            <div class="tabla-contenedor animate__animated animate__fadeInRight">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                    <h5 class="fuente-lujo text-white mb-0">Listado Maestro</h5>
+                    <div class="position-relative">
+                        <input type="text" id="busqueda" class="form-control ps-5" placeholder="Buscar cliente..." onkeyup="renderReservas()">
+                        <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-white-50"></i>
+                    </div>
                 </div>
+
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Cliente / Servicio</th>
                                 <th>Fecha</th>
-                                <th>Estado</th>
-                                <th>Total</th>
+                                <th>Estatus</th>
+                                <th>Monto</th>
                                 <th class="text-end">Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tablaReservas">
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
             </div>
 
             <div class="row g-3 mt-3">
                 <div class="col-md-6">
-                    <div class="card-luxury p-3 text-center">
-                        <small class="text-rose-gold text-uppercase d-block">Total Reservas</small>
-                        <span id="countTotal" class="h3 luxury-font text-gold">0</span>
+                    <div class="widget-stats">
+                        <small class="text-rose-gold text-uppercase d-block mb-1 fw-bold">Reservaciones Totales</small>
+                        <span id="countTotal" class="h2 fuente-lujo texto-oro">0</span>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card-luxury p-3 text-center">
-                        <small class="text-rose-gold text-uppercase d-block">Ingreso Proyectado</small>
-                        <span id="montoTotal" class="h3 luxury-font text-gold">$0.00</span>
+                    <div class="widget-stats">
+                        <small class="text-rose-gold text-uppercase d-block mb-1 fw-bold">Ingresos Proyectados</small>
+                        <span id="montoTotal" class="h2 fuente-lujo texto-oro">$0.00</span>
                     </div>
                 </div>
             </div>
@@ -277,7 +305,6 @@
 </main>
 
 <script>
-    // Se mantiene la lógica de JS original para asegurar el funcionamiento del CRUD
     let reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
 
     function renderReservas() {
@@ -289,17 +316,17 @@
         reservaciones.forEach((r, index) => {
             if (r.cliente.toLowerCase().includes(filtro)) {
                 suma += parseFloat(r.costo);
-                const statusClass = r.pago === 'Pagado' ? 'bg-paid' : 'bg-pending';
+                const statusClass = r.pago === 'Pagado' ? 'bg-pagado' : 'bg-pendiente';
                 
                 tabla.innerHTML += `
-                    <tr>
+                    <tr class="animate__animated animate__fadeIn">
                         <td>
-                            <div class="fw-bold">${r.cliente}</div>
+                            <div class="fw-bold text-white">${r.cliente}</div>
                             <small class="text-rose-gold">${r.servicio}</small>
                         </td>
-                        <td>${r.fecha}</td>
-                        <td><span class="badge-status ${statusClass}">${r.pago}</span></td>
-                        <td class="text-gold fw-bold">$${parseFloat(r.costo).toLocaleString()}</td>
+                        <td class="small">${r.fecha}</td>
+                        <td><span class="badge-vip ${statusClass}">${r.pago}</span></td>
+                        <td class="fw-bold" style="color: var(--oro-brillante)">$${parseFloat(r.costo).toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
                         <td class="text-end">
                             <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
                             <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
@@ -310,7 +337,7 @@
         });
 
         document.getElementById("countTotal").innerText = reservaciones.length;
-        document.getElementById("montoTotal").innerText = `$${suma.toLocaleString()}`;
+        document.getElementById("montoTotal").innerText = `$${suma.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
     }
 
     document.getElementById("formReserva").addEventListener("submit", function(e){
@@ -322,6 +349,7 @@
             fecha: document.getElementById("fecha").value,
             costo: document.getElementById("costo").value
         };
+
         const id = document.getElementById("indexReserva").value;
         if(id === "") reservaciones.push(r);
         else reservaciones[id] = r;
@@ -332,7 +360,7 @@
     });
 
     function eliminar(i) {
-        if(confirm("¿Eliminar registro?")) {
+        if(confirm("¿Desea eliminar este registro de reservación?")) {
             reservaciones.splice(i, 1);
             localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
             renderReservas();
@@ -347,19 +375,20 @@
         document.getElementById("pago").value = r.pago;
         document.getElementById("fecha").value = r.fecha;
         document.getElementById("costo").value = r.costo;
-        document.getElementById("btnSubmit").innerText = "Actualizar Registro";
+        
+        document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-sync me-2"></i>Actualizar Registro';
         document.getElementById("btnCancelarEdit").classList.remove("d-none");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function cancelarEdicion() {
         document.getElementById("formReserva").reset();
         document.getElementById("indexReserva").value = "";
-        document.getElementById("btnSubmit").innerText = "Confirmar Reserva";
+        document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-save me-2"></i>Guardar Registro';
         document.getElementById("btnCancelarEdit").classList.add("d-none");
     }
 
     renderReservas();
 </script>
-
 </body>
 </html>
