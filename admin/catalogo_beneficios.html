@@ -2,34 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LK Studio | Catálogo de Beneficios VIP</title>
+    <title>LK Studio | Gestión VIP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
         :root {
             --gold: #D4AF37;
             --gold-light: #F1D592;
-            --rose-gold: #E6B8A2;
-            --deep-black: #050505;
-            --charcoal: #1a1a1a; /* El nuevo gris para las filas */
-            --charcoal-hover: #252525;
-            --sidebar-width: 280px;
+            --rose: #E6B8A2;
+            --deep-black: #080808;
+            --grey-dark: #1A1A1A; /* Color Gris Carbón solicitado */
+            --grey-hover: #252525;
             --text-pure: #FFFFFF;
+            --sidebar-width: 280px;
         }
 
         body {
-            background-color: var(--deep-black);
-            background-image: radial-gradient(circle at 20% 20%, #111 0%, #050505 100%);
+            background: var(--deep-black);
             color: var(--text-pure);
             font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
             margin: 0;
             display: flex;
+            overflow-x: hidden;
         }
 
         .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
@@ -43,53 +42,48 @@
             position: fixed;
             display: flex;
             flex-direction: column;
-            box-shadow: 10px 0 30px rgba(0,0,0,0.5);
         }
 
-        .sidebar-logo-container {
+        .sidebar-logo {
             padding: 40px 20px;
             text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        .sidebar-logo-container img {
-            max-width: 140px;
+        .sidebar-logo img {
+            width: 140px;
             filter: drop-shadow(0 0 5px var(--gold));
         }
 
         .nav-link {
-            color: rgba(255,255,255,0.8) !important;
-            padding: 15px 25px;
-            margin: 5px 15px;
-            border-radius: 12px;
-            transition: 0.3s;
+            color: #bbb !important;
+            padding: 15px 30px;
             font-size: 0.85rem;
+            transition: 0.3s;
             display: flex;
             align-items: center;
-            text-decoration: none;
+            border-radius: 0 50px 50px 0;
+            margin-right: 15px;
         }
 
-        .nav-link i { color: var(--gold); margin-right: 15px; width: 20px; text-align: center; }
+        .nav-link i { width: 30px; color: var(--gold); }
 
         .nav-link:hover, .nav-link.active {
+            color: var(--text-pure) !important;
             background: rgba(212, 175, 55, 0.1);
-            color: var(--gold-light) !important;
-            border-left: 3px solid var(--rose-gold);
+            border-left: 4px solid var(--rose);
         }
 
-        /* --- MAIN CONTENT --- */
+        /* --- CONTENIDO PRINCIPAL --- */
         .main-content {
             margin-left: var(--sidebar-width);
             width: calc(100% - var(--sidebar-width));
             padding: 60px;
         }
 
-        /* --- ESTÉTICA DE LA TABLA (GRIS SIN BLANCO) --- */
-        .luxury-card {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 30px;
-            padding: 35px;
-            backdrop-filter: blur(10px);
+        /* --- TABLA GRIS CARBÓN (ESTILO SOLICITADO) --- */
+        .table-container {
+            background: transparent;
         }
 
         .table {
@@ -100,7 +94,7 @@
 
         .table thead th {
             background: transparent;
-            color: var(--gold);
+            color: var(--rose);
             text-transform: uppercase;
             font-size: 0.75rem;
             letter-spacing: 3px;
@@ -108,266 +102,178 @@
             padding: 10px 25px;
         }
 
-        /* Filas color Gris Carbón */
+        /* FILAS GRISES CON LETRAS CLARAS */
         .table tbody tr {
-            background-color: var(--charcoal) !important; /* El gris que pediste */
-            border: 1px solid rgba(230, 184, 162, 0.1);
-            transition: 0.3s transform ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            background: var(--grey-dark) !important; /* Gris oscuro en lugar de blanco */
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
         .table tbody tr:hover {
-            background-color: var(--charcoal-hover) !important;
+            background: var(--grey-hover) !important;
             transform: scale(1.015);
-            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         .table td {
             padding: 25px !important;
             border: none !important;
             vertical-align: middle;
-            color: var(--text-pure) !important; /* Forzar letras blancas */
+            color: var(--text-pure) !important; /* Forzado de letras blancas */
         }
 
-        /* Bordes redondeados para el efecto de tarjeta en la fila */
-        .table tr td:first-child { border-radius: 20px 0 0 20px; border-left: 2px solid var(--rose-gold) !important; }
-        .table tr td:last-child { border-radius: 0 20px 20px 0; }
+        /* Redondeado de esquinas para el efecto de "tarjeta flotante" */
+        .table td:first-child { border-radius: 15px 0 0 15px; border-left: 3px solid var(--gold); }
+        .table td:last-child { border-radius: 0 15px 15px 0; }
 
-        /* --- DETALLES DE TEXTO --- */
-        .beneficio-titulo {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            margin-bottom: 4px;
-        }
-
-        .beneficio-sub {
-            color: var(--rose-gold);
-            font-size: 0.8rem;
-            font-weight: 400;
-            opacity: 0.9;
-        }
-
-        .pts-badge {
-            background: linear-gradient(45deg, #000, #222);
-            color: var(--gold-light);
-            padding: 10px 18px;
-            border-radius: 14px;
-            border: 1px solid var(--gold);
-            font-weight: 800;
-            font-family: 'Cinzel', serif;
-        }
-
+        /* --- COMPONENTES DE DISEÑO --- */
         .btn-gold {
-            background: linear-gradient(45deg, var(--gold), #f9e2af);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
             color: #000;
             font-weight: 800;
             border: none;
-            border-radius: 15px;
-            padding: 15px 30px;
+            border-radius: 50px;
+            padding: 12px 30px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.4s;
+            font-size: 0.8rem;
         }
 
-        .btn-gold:hover {
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-            transform: translateY(-3px);
-        }
-
-        /* Modal */
-        .modal-content {
-            background: #0f0f0f;
+        .pts-pill {
+            background: #000;
             border: 1px solid var(--gold);
-            border-radius: 30px;
-        }
-        
-        .form-control, .form-select {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            color: #fff !important;
-            border-radius: 12px;
-            padding: 12px;
+            color: var(--gold-light);
+            padding: 6px 15px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
         }
 
-        @media (max-width: 992px) {
-            #sidebarAdmin { display: none; }
-            .main-content { margin-left: 0; width: 100%; }
+        .badge-vip {
+            background: rgba(230, 184, 162, 0.1);
+            color: var(--rose);
+            border: 1px solid var(--rose);
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .action-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            color: var(--text-pure);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover { background: var(--gold); color: #000; }
+
+        .sidebar-divider {
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 30px 30px 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
         }
     </style>
 </head>
 <body>
 
 <nav id="sidebarAdmin">
-    <div class="sidebar-logo-container">
-        <img src="IMG/LKSTUDIO.png" alt="LK STUDIO">
+    <div class="sidebar-logo">
+        <img src="IMG/LKSTUDIO.png" alt="Logo LK Studio">
     </div>
-    <div class="nav flex-column mt-3">
+    <div class="nav flex-column mt-2">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
         <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Agenda VIP</a>
         <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-concierge-bell"></i> Reservaciones</a>
-        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Punto de Venta</a>
         
-        <div style="padding: 20px 30px 10px; font-size: 0.65rem; color: var(--rose-gold); font-weight: 800; letter-spacing: 2px;">CATÁLOGOS</div>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-gem"></i> Servicios</a>
+        <div class="sidebar-divider">Catálogos</div>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-brush"></i> Servicios</a>
         <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Cursos</a>
         <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie"></i> Instructores</a>
-        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-crown"></i> Beneficios VIP</a>
-        
-        <a href="reportes.html" class="nav-link mt-auto mb-4"><i class="fas fa-file-invoice-dollar"></i> Reportes</a>
+        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> Beneficios VIP</a>
     </div>
 </nav>
 
 <main class="main-content">
     <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
         <div>
-            <h1 class="luxury-font text-gold mb-1">MEMBRESÍA ÉLITE</h1>
-            <p style="color: var(--rose-gold); font-weight: 600; font-size: 0.85rem; letter-spacing: 1px;">SISTEMA DE GESTIÓN DE BENEFICIOS VIP</p>
+            <h1 class="luxury-font text-white mb-1">Catálogo de Beneficios</h1>
+            <p class="text-rose small mb-0">ADMINISTRACIÓN DE PRIVILEGIOS ÉLITE</p>
         </div>
-        <button class="btn btn-gold shadow" data-bs-toggle="modal" data-bs-target="#modalBeneficio" onclick="resetForm()">
-            <i class="fas fa-plus-circle me-2"></i> Nuevo Beneficio
+        <button class="btn btn-gold" onclick="openModal()">
+            <i class="fas fa-plus me-2"></i> Crear Recompensa
         </button>
     </div>
 
-    <div class="luxury-card animate__animated animate__fadeInUp">
-        <div class="table-responsive">
-            <table class="table align-middle">
-                <thead>
-                    <tr>
-                        <th style="width: 40%;">RECOMPENSA</th>
-                        <th>NIVEL</th>
-                        <th>CANJE</th>
-                        <th>DISPONIBILIDAD</th>
-                        <th class="text-end">GESTIÓN</th>
-                    </tr>
-                </thead>
-                <tbody id="listaBeneficios">
-                    </tbody>
-            </table>
-        </div>
+    <div class="table-container animate__animated animate__fadeInUp">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="40%">Beneficio VIP</th>
+                    <th>Nivel Acceso</th>
+                    <th>Valor Puntos</th>
+                    <th>Estado</th>
+                    <th class="text-end">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="renderBeneficios">
+                </tbody>
+        </table>
     </div>
 </main>
 
-<div class="modal fade" id="modalBeneficio" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-white">
-            <div class="modal-header border-0 p-4">
-                <h5 class="luxury-font text-gold">REGISTRAR BENEFICIO</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <form id="formBeneficio">
-                <div class="modal-body p-4">
-                    <input type="hidden" id="editIndex">
-                    <div class="mb-4">
-                        <label class="small text-rose-gold fw-bold mb-2">NOMBRE DEL BENEFICIO</label>
-                        <input type="text" class="form-control" id="benNombre" placeholder="Ej: Retoque de Pestañas Gratis" required>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-6">
-                            <label class="small text-rose-gold fw-bold mb-2">NIVEL VIP</label>
-                            <select class="form-select" id="benNivel">
-                                <option>Silver</option>
-                                <option>Gold</option>
-                                <option>Diamond</option>
-                            </select>
-                        </div>
-                        <div class="col-6">
-                            <label class="small text-rose-gold fw-bold mb-2">PUNTOS</label>
-                            <input type="number" class="form-control" id="benPuntos" value="100">
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label class="small text-rose-gold fw-bold mb-2">DESCRIPCIÓN</label>
-                        <textarea class="form-control" id="benDesc" rows="3"></textarea>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="benActivo" checked>
-                        <label class="form-check-label small">Habilitar para canje inmediato</label>
-                    </div>
-                </div>
-                <div class="modal-footer border-0 p-4">
-                    <button type="submit" class="btn btn-gold w-100 py-3">GUARDAR EN CATÁLOGO</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    let beneficios = JSON.parse(localStorage.getItem("LK_BENEFICIOS")) || [
-        {nombre: "Limpieza Profunda", nivel: "Silver", puntos: 150, desc: "Protocolo de higiene lash profesional", activo: true},
-        {nombre: "Copa de Mimosa", nivel: "Gold", puntos: 50, desc: "Servicio de bienvenida premium", activo: true},
-        {nombre: "Kit Aftercare", nivel: "Diamond", puntos: 400, desc: "Kit completo de cuidado en casa", activo: true}
+    // Datos de ejemplo con persistencia en LocalStorage
+    let dataBeneficios = JSON.parse(localStorage.getItem("LK_BENS")) || [
+        { nombre: "Limpieza Profunda Gratis", nivel: "Silver", puntos: 150, desc: "Aplica en cada retoque de 3 semanas.", activo: true },
+        { nombre: "Kit de Aftercare Premium", nivel: "Diamond", puntos: 500, desc: "Incluye shampoo de pestañas y cepillo de cristal.", activo: true },
+        { nombre: "Copa de Mimosa Cortesía", nivel: "Gold", puntos: 50, desc: "Disponible en cabina durante el servicio.", activo: true }
     ];
 
-    const tabla = document.getElementById('listaBeneficios');
-    const form = document.getElementById('formBeneficio');
-
-    function renderTable() {
-        tabla.innerHTML = '';
-        beneficios.forEach((b, index) => {
-            tabla.innerHTML += `
-                <tr>
+    function render() {
+        const tbody = document.getElementById('renderBeneficios');
+        tbody.innerHTML = '';
+        
+        dataBeneficios.forEach((b, i) => {
+            tbody.innerHTML += `
+                <tr class="animate__animated animate__fadeIn">
                     <td>
-                        <div class="beneficio-titulo">${b.nombre}</div>
-                        <div class="beneficio-sub">${b.desc}</div>
+                        <div class="fw-bold fs-5 text-white">${b.nombre}</div>
+                        <div class="small text-rose opacity-75">${b.desc}</div>
                     </td>
-                    <td><span class="badge border border-rose-gold text-rose-gold px-3 py-2" style="font-size: 0.7rem;">${b.nivel.toUpperCase()}</span></td>
-                    <td><span class="pts-badge">${b.puntos} PTS</span></td>
+                    <td><span class="badge-vip">${b.nivel.toUpperCase()}</span></td>
+                    <td><span class="pts-pill"><i class="fas fa-star me-2"></i>${b.puntos}</span></td>
                     <td>
-                        <span class="badge ${b.activo ? 'bg-success text-dark' : 'bg-secondary'} p-2" style="font-size: 0.6rem; font-weight: 800;">
-                            ${b.activo ? 'DISPONIBLE' : 'AGOTADO'}
+                        <span class="small fw-bold ${b.activo ? 'text-success' : 'text-danger'}">
+                            <i class="fas fa-circle me-1" style="font-size: 8px"></i> ${b.activo ? 'ACTIVO' : 'PAUSADO'}
                         </span>
                     </td>
                     <td class="text-end">
-                        <button class="btn btn-link text-gold me-2" onclick="editBen(${index})"><i class="fas fa-pen"></i></button>
-                        <button class="btn btn-link text-danger" onclick="deleteBen(${index})"><i class="fas fa-trash"></i></button>
+                        <button class="action-btn me-2" onclick="edit(${i})"><i class="fas fa-pen"></i></button>
+                        <button class="action-btn text-danger" onclick="del(${i})"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>
             `;
         });
-        localStorage.setItem("LK_BENEFICIOS", JSON.stringify(beneficios));
+        localStorage.setItem("LK_BENS", JSON.stringify(dataBeneficios));
     }
 
-    form.onsubmit = (e) => {
-        e.preventDefault();
-        const index = document.getElementById('editIndex').value;
-        const nuevo = {
-            nombre: document.getElementById('benNombre').value,
-            nivel: document.getElementById('benNivel').value,
-            puntos: document.getElementById('benPuntos').value,
-            desc: document.getElementById('benDesc').value,
-            activo: document.getElementById('benActivo').checked
-        };
-        if(index === "") beneficios.push(nuevo);
-        else beneficios[index] = nuevo;
-        
-        bootstrap.Modal.getInstance(document.getElementById('modalBeneficio')).hide();
-        renderTable();
-    };
-
-    window.editBen = (i) => {
-        const b = beneficios[i];
-        document.getElementById('editIndex').value = i;
-        document.getElementById('benNombre').value = b.nombre;
-        document.getElementById('benNivel').value = b.nivel;
-        document.getElementById('benPuntos').value = b.puntos;
-        document.getElementById('benDesc').value = b.desc;
-        document.getElementById('benActivo').checked = b.activo;
-        new bootstrap.Modal(document.getElementById('modalBeneficio')).show();
-    };
-
-    window.deleteBen = (i) => {
-        if(confirm("¿Retirar este beneficio de la lista VIP?")) {
-            beneficios.splice(i, 1);
-            renderTable();
+    window.del = (i) => {
+        if(confirm("¿Eliminar este beneficio permanentemente?")) {
+            dataBeneficios.splice(i, 1);
+            render();
         }
-    };
+    }
 
-    window.resetForm = () => { form.reset(); document.getElementById('editIndex').value = ""; };
-
-    renderTable();
+    // Inicialización
+    render();
 </script>
+
 </body>
 </html>
