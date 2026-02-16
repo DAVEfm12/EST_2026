@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LK Studio | Elite Management System</title>
+    <title>LK Studio | Panel Administrativo de Élite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,341 +11,285 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
-        /* --- SISTEMA DE DISEÑO GLOBAL --- */
+        /* --- ADN VISUAL LK STUDIO (VARIABLES GLOBALES) --- */
         :root { 
-            /* Paleta Metálica */
-            --gold: #D4AF37; 
-            --gold-light: #F1D592; 
-            --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F1D592 100%);
+            --oro: #D4AF37; 
+            --oro-claro: #F1D592; 
+            --oro-gradiente: linear-gradient(135deg, #D4AF37 0%, #F1D592 100%);
             --rose-gold: #E6B8A2; 
-            
-            /* Escala de Negros y Sombras */
-            --deep-black: #0A0A0A;
-            --soft-black: #161616;
-            --card-bg: #121212;
-            --border-luxury: rgba(212, 175, 55, 0.25);
-            
-            /* Tipografías */
-            --font-luxury: 'Cinzel', serif;
-            --font-main: 'Poppins', sans-serif;
+            --negro-profundo: #0A0A0A;
+            --negro-suave: #161616;
+            --fondo-tarjeta: #121212;
+            --borde-lujo: rgba(212, 175, 55, 0.25);
+            --fuente-lujo: 'Cinzel', serif;
+            --fuente-principal: 'Poppins', sans-serif;
         }
 
-        /* --- ESTILOS DE BASE --- */
+        /* --- ESTILOS BASE REUTILIZABLES --- */
         body { 
-            background-color: var(--deep-black);
-            background-image: 
-                radial-gradient(circle at 50% -20%, #252525, #0a0a0a),
-                url('https://www.transparenttextures.com/patterns/dark-leather.png'); /* Sutil textura de cuero */
+            background-color: var(--negro-profundo);
+            background-image: radial-gradient(circle at 50% -20%, #252525, #0a0a0a);
             color: #ffffff; 
-            font-family: var(--font-main); 
+            font-family: var(--fuente-principal); 
             min-height: 100vh;
             margin: 0;
             padding: 40px 20px;
-            overflow-x: hidden;
         }
 
-        /* Utilidades de Texto */
-        .luxury-font { font-family: var(--font-luxury); letter-spacing: 3px; }
-        .text-gold { color: var(--gold); }
-        .text-rose { color: var(--rose-gold); }
+        .fuente-lujo { font-family: var(--fuente-lujo); letter-spacing: 3px; }
+        .texto-oro { color: var(--oro); }
+        .texto-rose { color: var(--rose-gold); }
 
-        /* --- COMPONENTES GLOBALES --- */
-        
-        /* Contenedor Maestro */
-        .lk-main-wrapper {
-            max-width: 1300px;
+        /* --- CONTENEDOR MAESTRO --- */
+        .contenedor-elite {
+            max-width: 1250px;
             margin: 0 auto;
         }
 
-        /* Tarjeta de Encabezado Elite */
-        .lk-header {
+        /* --- ENCABEZADO GLOBAL --- */
+        .encabezado-vip {
             background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-            border: 1px solid var(--gold);
-            border-radius: 40px;
-            padding: 50px 30px;
-            margin-bottom: 60px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 1px solid var(--oro);
+            border-radius: 35px;
+            padding: 50px 20px;
+            margin-bottom: 50px;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            position: relative;
         }
 
-        .lk-header::before {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
-            pointer-events: none;
+        .logo-premium {
+            max-width: 190px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
         }
 
-        .header-logo {
-            max-width: 200px;
-            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
-            margin-bottom: 25px;
-            transition: transform 0.5s ease;
-        }
-        
-        .header-logo:hover { transform: scale(1.05); }
-
-        /* Módulos (Grid de Navegación) */
-        .module-item {
-            text-decoration: none;
+        /* --- TARJETAS DE MÓDULO (SISTEMA GLOBAL) --- */
+        .enlace-modulo {
+            text-decoration: none !important;
             display: block;
             height: 100%;
         }
 
-        .module-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-luxury);
-            border-radius: 30px;
+        .tarjeta-modulo {
+            background: var(--fondo-tarjeta);
+            border: 1px solid var(--borde-lujo);
+            border-radius: 28px;
             padding: 40px 25px;
             text-align: center;
             height: 100%;
-            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            z-index: 1;
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.22, 1);
         }
 
-        .module-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--gold-gradient);
-            border-radius: inherit;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.4s ease;
-        }
-
-        .module-card:hover {
+        .tarjeta-modulo:hover {
             transform: translateY(-15px);
-            border-color: var(--gold-light);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.2);
+            border-color: var(--rose-gold);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 15px rgba(230, 184, 162, 0.1);
         }
 
-        .module-card:hover .icon-circle {
-            background: #ffffff;
-            color: var(--deep-black);
-            transform: rotateY(360deg) scale(1.1);
-            box-shadow: 0 0 25px var(--gold-light);
-        }
-
-        .module-card:hover .card-title { color: #ffffff; }
-        .module-card:hover .card-desc { color: rgba(255,255,255,0.8); }
-
-        /* Círculos de Iconos */
-        .icon-circle {
-            width: 85px;
-            height: 85px;
-            background: rgba(212, 175, 55, 0.08);
-            border: 2px solid var(--gold);
+        .circulo-icono {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--oro);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 25px;
-            font-size: 2.2rem;
-            color: var(--gold);
-            transition: all 0.6s ease;
+            font-size: 2rem;
+            color: var(--oro);
+            transition: 0.5s;
         }
 
-        .card-title {
-            color: var(--gold-light);
-            font-size: 1.25rem;
+        .tarjeta-modulo:hover .circulo-icono {
+            background: var(--oro);
+            color: var(--negro-profundo);
+            box-shadow: 0 0 20px var(--oro);
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .titulo-modulo {
+            color: var(--oro-claro);
+            font-size: 1.15rem;
             font-weight: 700;
             text-transform: uppercase;
             margin-bottom: 15px;
-            letter-spacing: 1px;
         }
 
-        .card-desc {
-            color: #a0a0a0;
+        .desc-modulo {
+            color: #888;
             font-size: 0.85rem;
-            line-height: 1.6;
-            margin-bottom: 0;
+            line-height: 1.5;
         }
 
-        /* Módulo de Salida */
-        .logout-variant .module-card {
-            background: rgba(255, 50, 50, 0.02);
+        /* --- VARIACIÓN CERRAR SESIÓN --- */
+        .modulo-salir .tarjeta-modulo {
             border-color: rgba(255, 80, 80, 0.2);
         }
-
-        .logout-variant .icon-circle {
+        .modulo-salir .circulo-icono {
             color: #ff4d4d;
             border-color: #ff4d4d;
         }
-
-        .logout-variant:hover .module-card {
-            background: #ff4d4d;
+        .modulo-salir:hover .tarjeta-modulo {
+            background: rgba(255, 0, 0, 0.05);
             border-color: #ff4d4d;
         }
 
-        /* Widgets Temporales */
-        #reloj { 
-            font-size: 3rem;
+        /* --- RELOJ Y FECHA --- */
+        #reloj-digital { 
+            font-size: 2.8rem;
             color: var(--rose-gold); 
-            text-shadow: 0 0 20px rgba(230, 184, 162, 0.4); 
-            font-weight: 900;
-            line-height: 1;
+            text-shadow: 0 0 15px rgba(230, 184, 162, 0.3);
+            font-weight: 700;
         }
 
-        .date-display {
-            color: rgba(255,255,255,0.6);
+        .fecha-actual {
+            color: rgba(255,255,255,0.5);
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             font-size: 0.75rem;
-            margin-top: 10px;
-            display: block;
         }
 
-        /* --- RESPONSIVIDAD --- */
-        @media (max-width: 768px) {
-            .lk-header { padding: 30px 15px; }
-            #reloj { font-size: 2.2rem; }
-            body { padding: 20px 10px; }
-        }
     </style>
 </head>
 <body>
 
-<div class="lk-main-wrapper">
+<div class="contenedor-elite">
     
-    <header class="lk-header animate__animated animate__fadeInDown">
-        <img src="IMG/LKSTUDIO.png" alt="LK Studio Elite" class="header-logo" onerror="this.src='https://via.placeholder.com/240x100/0A0A0A/D4AF37?text=LK+STUDIO'">
+    <header class="encabezado-vip animate__animated animate__fadeIn">
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio" class="logo-premium" onerror="this.src='https://via.placeholder.com/200x80/0A0A0A/D4AF37?text=LK+STUDIO'">
         
-        <h1 class="luxury-font text-gold mb-1">LK STUDIO</h1>
-        <p class="text-rose fw-bold mb-5" style="letter-spacing: 8px; font-size: 0.85rem;">EXECUTIVE ADMINISTRATION</p>
+        <h1 class="fuente-lujo texto-oro mb-1">LK STUDIO</h1>
+        <p class="texto-rose fw-bold mb-4" style="letter-spacing: 6px; font-size: 0.8rem;">SISTEMA DE GESTIÓN EMPRESARIAL</p>
         
         <div class="row justify-content-center">
             <div class="col-auto">
-                <div id="reloj" class="luxury-font">00:00:00</div>
-                <span class="date-display" id="fecha-text">CARGANDO CALENDARIO...</span>
+                <div id="reloj-digital" class="fuente-lujo">00:00:00</div>
+                <div class="fecha-actual" id="fecha-texto">---</div>
             </div>
         </div>
     </header>
 
-    <div class="row g-4">
+    <div class="row g-4 justify-content-center">
         
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
-            <a href="Gestión_Reservaciones.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-receipt"></i></div>
-                    <h3 class="card-title">Reservas</h3>
-                    <p class="card-desc">Administración de depósitos y flujos de agenda VIP.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.1s;">
+            <a href="Gestión_Reservaciones.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-calendar-check"></i></div>
+                    <h3 class="titulo-modulo">Reservaciones</h3>
+                    <p class="desc-modulo">Gestión de depósitos, abonos y estatus de citas premium.</p>
                 </div>
             </a>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
-            <a href="catalogo_beneficios.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-crown"></i></div>
-                    <h3 class="card-title">Loyalty</h3>
-                    <p class="card-desc">Fidelización premium y beneficios exclusivos de socios.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.2s;">
+            <a href="catalogo_beneficios.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-gem"></i></div>
+                    <h3 class="titulo-modulo">Membresías</h3>
+                    <p class="desc-modulo">Programas de lealtad y beneficios exclusivos para socios.</p>
                 </div>
             </a>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
-            <a href="catalogo_cursos.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
-                    <h3 class="card-title">Academy</h3>
-                    <p class="card-desc">Control de certificaciones y trayectorias académicas.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.3s;">
+            <a href="catalogo_cursos.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="titulo-modulo">Academia</h3>
+                    <p class="desc-modulo">Control de cursos, talleres y certificaciones profesionales.</p>
                 </div>
             </a>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
-            <a href="catalogo_instruc.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-star"></i></div>
-                    <h3 class="card-title">Talent</h3>
-                    <p class="card-desc">Gestión de capital humano y especialistas elite.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.4s;">
+            <a href="catalogo_instruc.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-user-tie"></i></div>
+                    <h3 class="titulo-modulo">Instructores</h3>
+                    <p class="desc-modulo">Administración de equipo técnico y especialistas.</p>
                 </div>
             </a>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
-            <a href="catalogo_servicios.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-magic"></i></div>
-                    <h3 class="card-title">Services</h3>
-                    <p class="card-desc">Catálogo maestro de tratamientos y experiencias.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.5s;">
+            <a href="catalogo_servicios.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-concierge-bell"></i></div>
+                    <h3 class="titulo-modulo">Servicios</h3>
+                    <p class="desc-modulo">Configuración de tratamientos y lista de precios oficial.</p>
                 </div>
             </a>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
-            <a href="citas.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-calendar-check"></i></div>
-                    <h3 class="card-title">Agenda</h3>
-                    <p class="card-desc">Planificación en tiempo real de la demanda elite.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.6s;">
+            <a href="citas.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-clock"></i></div>
+                    <h3 class="titulo-modulo">Agenda VIP</h3>
+                    <p class="desc-modulo">Calendario operativo y disponibilidad de cabinas en tiempo real.</p>
                 </div>
             </a>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp" style="animation-delay: 0.7s;">
-            <a href="punto_venta.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-vault"></i></div>
-                    <h3 class="card-title">POS System</h3>
-                    <p class="card-desc">Transacciones seguras y conciliación de caja diaria.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.7s;">
+            <a href="punto_venta.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-cash-register"></i></div>
+                    <h3 class="titulo-modulo">Punto de Venta</h3>
+                    <p class="desc-modulo">Procesamiento de pagos, facturación y flujo de caja.</p>
                 </div>
             </a>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp" style="animation-delay: 0.8s;">
-            <a href="reportes.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-chart-pie"></i></div>
-                    <h3 class="card-title">Analytics</h3>
-                    <p class="card-desc">Métricas de rendimiento e inteligencia de negocio.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn" style="animation-delay: 0.8s;">
+            <a href="reportes.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="titulo-modulo">Reportes</h3>
+                    <p class="desc-modulo">Análisis de rendimiento, KPIs e ingresos mensuales.</p>
                 </div>
             </a>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6 animate__animated animate__fadeInUp logout-variant" style="animation-delay: 0.9s;">
-            <a href="login.html" class="module-item">
-                <div class="module-card">
-                    <div class="icon-circle"><i class="fas fa-power-off"></i></div>
-                    <h3 class="card-title">Exit</h3>
-                    <p class="card-desc">Finalizar sesión de administración segura.</p>
+        <div class="col-xl-3 col-lg-4 col-md-6 animate__animated animate__zoomIn modulo-salir" style="animation-delay: 0.9s;">
+            <a href="login.html" class="enlace-modulo">
+                <div class="tarjeta-modulo">
+                    <div class="circulo-icono"><i class="fas fa-power-off"></i></div>
+                    <h3 class="titulo-modulo" style="color: #ff4d4d;">Cerrar Sesión</h3>
+                    <p class="desc-modulo">Finalizar jornada y asegurar el sistema administrativo.</p>
                 </div>
             </a>
         </div>
 
     </div>
 
-    <footer class="text-center mt-5 py-4">
-        <p class="text-white-50 small mb-0" style="letter-spacing: 2px;">
-            &copy; 2026 <span class="text-gold fw-bold">LK STUDIO</span> | ELITE ENGINE VERSION 3.0
-        </p>
+    <footer class="text-center mt-5 opacity-50 small py-4">
+        <p class="mb-0">© 2026 <span class="texto-oro fw-bold">LK STUDIO</span> - VERSIÓN 3.0 ELITE SYSTEM</p>
     </footer>
 
 </div>
 
 <script>
-    function updateClock() {
-        const now = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    function actualizarReloj() {
+        const ahora = new Date();
+        const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         
-        // Reloj con formato 24h elegante
-        const timeString = now.toLocaleTimeString('en-GB', { 
+        // Formato de hora elegante
+        const horaString = ahora.toLocaleTimeString('es-MX', { 
             hour: '2-digit', 
             minute: '2-digit', 
-            second: '2-digit' 
+            second: '2-digit',
+            hour12: false 
         });
         
-        document.getElementById('reloj').innerText = timeString;
-        document.getElementById('fecha-text').innerText = now.toLocaleDateString('es-MX', options);
+        document.getElementById('reloj-digital').innerText = horaString;
+        document.getElementById('fecha-texto').innerText = ahora.toLocaleDateString('es-MX', opciones);
     }
     
-    setInterval(updateClock, 1000);
-    updateClock();
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj();
 </script>
 
 </body>
