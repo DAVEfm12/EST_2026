@@ -82,69 +82,79 @@
             margin-bottom: 50px;
         }
 
-        .carousel-item { height: 350px; }
-        .carousel-caption {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border-radius: 30px;
+        .carousel-item { height: 300px; }
+        
+        /* --- ESTILOS FORMULARIO ELITE --- */
+        .tarjeta-elite { 
+            background: var(--negro-suave); 
+            border: 1px solid var(--borde-lujo); 
+            border-radius: 30px; 
             padding: 35px;
-            border: 1px solid var(--oro);
-            bottom: 10%;
-            max-width: 70%;
-            margin: 0 auto;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
-        /* --- TABLA ELITE (CORRECCIÓN DE COLOR BLANCO) --- */
-        .tabla-contenedor {
-            background: var(--negro-suave) !important;
-            border-radius: 35px;
-            padding: 30px;
-            border: 1px solid var(--borde-lujo);
+        .form-label { color: var(--oro); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        
+        .form-control, .form-select { 
+            background: rgba(255,255,255,0.03) !important; 
+            border: 1px solid rgba(212, 175, 55, 0.2) !important; 
+            color: #fff !important; 
+            border-radius: 12px; 
+            padding: 12px;
+            transition: 0.3s;
         }
 
-        .table { 
-            background-color: transparent !important; 
-            color: #ffffff !important; 
-            margin-bottom: 0;
+        .form-control:focus, .form-select:focus {
+            background: rgba(212, 175, 55, 0.05) !important;
+            border-color: var(--oro) !important;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            outline: none;
         }
 
-        /* Forzamos a todas las celdas y filas a ser transparentes */
-        .table tr, .table td, .table th {
-            background-color: transparent !important;
-            color: #ffffff !important;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1) !important;
-            padding: 20px 15px !important;
-        }
-
-        .table thead th {
-            color: var(--oro) !important;
+        .btn-oro { 
+            background: linear-gradient(135deg, var(--oro), var(--oro-brillante)); 
+            color: #000 !important; 
+            font-weight: 800; 
+            border: none; 
+            border-radius: 50px; 
+            padding: 15px 30px; 
+            transition: 0.4s; 
             text-transform: uppercase;
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            border-bottom: 2px solid var(--oro) !important;
+            letter-spacing: 1px;
         }
 
-        .icono-preview {
-            width: 45px; height: 45px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--oro);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--oro);
-        }
-
-        /* --- OTROS ESTILOS --- */
-        .tarjeta-elite { background: var(--negro-suave); border: 1px solid var(--borde-lujo); border-radius: 30px; padding: 30px; }
-        .btn-oro { background: linear-gradient(135deg, var(--oro), var(--oro-brillante)); color: #000 !important; font-weight: 800; border: none; border-radius: 50px; padding: 12px 30px; transition: 0.4s; text-transform: uppercase; }
         .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
-        .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-        .form-control, .form-select { background: rgba(0,0,0,0.5) !important; border: 1px solid #333 !important; color: var(--oro-brillante) !important; border-radius: 15px; padding: 12px; }
+
+        .checkbox-lujo {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .checkbox-lujo:hover { background: rgba(212, 175, 55, 0.1); }
+        .checkbox-lujo input { margin-right: 10px; accent-color: var(--oro); }
+
+        .payment-box {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px dashed var(--oro);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
         .widget-total { background: var(--negro-suave); border: 1px solid var(--oro); border-radius: 20px; padding: 15px 25px; display: inline-block; }
 
         @media (max-width: 992px) {
             #sidebar { width: 80px; }
             #sidebar span, #sidebar .mt-2 { display: none; }
-            #content { width: calc(100% - 80px); margin-left: 80px; }
+            #content { width: calc(100% - 80px); margin-left: 80px; padding: 20px; }
         }
     </style>
 </head>
@@ -160,10 +170,10 @@
     </div>
     <div class="nav-menu mt-4 flex-grow-1">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
-        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-receipt"></i> <span>Reservas</span></a>
-        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
+        <a href="#" class="nav-link active"><i class="fas fa-calendar-check"></i> <span>Nueva Reserva</span></a>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-receipt"></i> <span>Lista Reservas</span></a>
+        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
         <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> <span>Ventas</span></a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-concierge-bell"></i> <span>Servicios</span></a>
         <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Reportes</span></a>
     </div>
     <div class="p-4">
@@ -172,145 +182,121 @@
 </nav>
 
 <div id="content">
-    <div class="carousel slide carousel-fade carousel-luxury animate__animated animate__fadeIn" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1500') center/cover;">
-                    <div class="carousel-caption">
-                        <h1 class="fuente-lujo display-5" style="color:var(--oro)">Experiencia Elite</h1>
-                        <p class="text-rose-gold text-uppercase">Configuración de Privilegios</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
         <div class="col-md-8">
-            <h1 class="fuente-lujo mb-1" style="color:var(--oro)">Beneficios VIP</h1>
-        </div>
-        <div class="col-md-4 text-md-end">
-             <div class="widget-total">
-                <small class="text-white-50 d-block text-uppercase fw-bold" style="font-size: 0.6rem;">Total</small>
-                <span class="fw-bold h3 m-0" id="countTotal" style="color:var(--oro)">0</span>
-            </div>
+            <h1 class="fuente-lujo mb-1" style="color:var(--oro)">Registro Elite</h1>
+            <p class="text-rose-gold text-uppercase" style="font-size: 0.8rem; letter-spacing: 2px;">Gestión de Citas y Pagos</p>
         </div>
     </div>
 
-    <div class="row g-4">
-        <div class="col-xl-4">
+    <div class="row g-4 animate__animated animate__fadeInUp">
+        <div class="col-xl-8">
             <div class="tarjeta-elite">
-                <h5 class="fuente-lujo mb-4 border-bottom border-secondary pb-3" style="color:var(--oro)">Editor</h5>
-                <form id="formBeneficio">
-                    <input type="hidden" id="indexBeneficio">
-                    <div class="mb-3">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" id="titulo" class="form-control" required>
+                <form id="formNuevaCita">
+                    <h5 class="fuente-lujo mb-4 text-uppercase" style="color:var(--oro); font-size: 1rem;"><i class="fas fa-user-edit me-2"></i> Datos del Cliente</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" placeholder="Ej. Alejandra Valdéz" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label"><i class="fab fa-whatsapp"></i> WhatsApp de Contacto</label>
+                            <input type="tel" class="form-control" placeholder="+52 ..." required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email (Opcional)</label>
+                            <input type="email" class="form-control" placeholder="cliente@elite.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Cumpleaños</label>
+                            <input type="date" class="form-control">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Icono</label>
-                        <select id="icono" class="form-select">
-                            <option value="fa-glass-cheers">🍷 Bebidas</option>
-                            <option value="fa-spa">🧖‍♀️ Spa</option>
-                            <option value="fa-gem">💎 Elite</option>
-                            <option value="fa-wifi">📶 WiFi</option>
-                        </select>
+
+                    <h5 class="fuente-lujo mb-4 text-uppercase" style="color:var(--oro); font-size: 1rem;"><i class="fas fa-magic me-2"></i> Selección de Servicios</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-4"><label class="checkbox-lujo"><input type="checkbox" name="serv" value="corte"> Corte Estilo</label></div>
+                        <div class="col-md-4"><label class="checkbox-lujo"><input type="checkbox" name="serv" value="tinte"> Tinte Master</label></div>
+                        <div class="col-md-4"><label class="checkbox-lujo"><input type="checkbox" name="serv" value="manicura"> Manicura VIP</label></div>
+                        <div class="col-md-4"><label class="checkbox-lujo"><input type="checkbox" name="serv" value="balayage"> Balayage Elite</label></div>
+                        <div class="col-md-4"><label class="checkbox-lujo"><input type="checkbox" name="serv" value="spa"> Spa Facial</label></div>
+                        <div class="col-md-4"><label class="checkbox-lujo"><input type="checkbox" name="serv" value="peinado"> Peinado Gala</label></div>
                     </div>
-                    <div class="mb-4">
-                        <label class="form-label">Descripción</label>
-                        <textarea id="descripcion" class="form-control" rows="3" required></textarea>
+
+                    <h5 class="fuente-lujo mb-4 text-uppercase" style="color:var(--oro); font-size: 1rem;"><i class="fas fa-clock me-2"></i> Agenda y Staff</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Hora</label>
+                            <input type="time" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Especialista</label>
+                            <select class="form-select">
+                                <option>Cualquier Artista</option>
+                                <option>Erika (Senior)</option>
+                                <option>Marco (Master)</option>
+                            </select>
+                        </div>
                     </div>
-                    <button type="submit" id="btnGuardar" class="btn-oro w-100 py-3">Guardar</button>
+
+                    <h5 class="fuente-lujo mb-4 text-uppercase" style="color:var(--oro); font-size: 1rem;"><i class="fas fa-credit-card me-2"></i> Depósito de Garantía (Anticipo)</h5>
+                    <div class="payment-box">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Método de Pago</label>
+                                <select class="form-select">
+                                    <option value="transferencia">Transferencia</option>
+                                    <option value="efectivo">Efectivo</option>
+                                    <option value="tarjeta">Tarjeta Terminal</option>
+                                    <option value="link">Link de Pago</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Monto Recibido ($)</label>
+                                <input type="number" class="form-control" placeholder="0.00">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Referencia / No. de Ticket</label>
+                                <input type="text" class="form-control" placeholder="Ej. SPEI-99210">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <button type="submit" class="btn-oro w-100">Confirmar Reserva de Lujo</button>
+                    </div>
                 </form>
             </div>
         </div>
 
-        <div class="col-xl-8">
-            <div class="tabla-contenedor shadow-lg">
-                <div class="table-responsive">
-                    <table class="table table-dark">
-                        <thead>
-                            <tr>
-                                <th>Privilegio / Amenidad</th>
-                                <th class="text-end">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaBeneficios">
-                            </tbody>
-                    </table>
+        <div class="col-xl-4">
+            <div class="tarjeta-elite h-100">
+                <h5 class="fuente-lujo mb-4" style="color:var(--oro)">Notas Internas</h5>
+                <textarea class="form-control mb-4" rows="6" placeholder="Detalles sobre alergias, fórmula de coloración anterior o trato preferencial..."></textarea>
+                
+                <div class="p-3 border border-secondary rounded-4 text-center">
+                    <p class="small text-white-50 text-uppercase mb-2">Recordatorios</p>
+                    <div class="d-flex justify-content-around">
+                        <button class="btn btn-outline-light btn-sm rounded-pill"><i class="fab fa-whatsapp"></i> Avisar</button>
+                        <button class="btn btn-outline-light btn-sm rounded-pill"><i class="far fa-envelope"></i> Ticket</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    let beneficios = JSON.parse(localStorage.getItem("lk_vip_items")) || [
-        { titulo: "Barra Gourmet", descripcion: "Mimosas y snacks premium.", icono: "fa-glass-cheers" },
-        { titulo: "Estación de Carga", descripcion: "Carga ultra rápida VIP.", icono: "fa-wifi" }
-    ];
-
-    function renderTabla() {
-        const tabla = document.getElementById("tablaBeneficios");
-        document.getElementById("countTotal").innerText = beneficios.length;
-        
-        tabla.innerHTML = beneficios.map((b, i) => `
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="icono-preview me-3">
-                            <i class="fas ${b.icono}"></i>
-                        </div>
-                        <div>
-                            <div class="fw-bold text-uppercase" style="color: #fff; font-size: 0.85rem;">${b.titulo}</div>
-                            <div style="color: var(--rose-gold); opacity: 0.8; font-size: 0.75rem;">${b.descripcion}</div>
-                        </div>
-                    </div>
-                </td>
-                <td class="text-end">
-                    <button class="btn btn-sm text-warning" onclick="editar(${i})"><i class="fas fa-pen"></i></button>
-                    <button class="btn btn-sm text-danger" onclick="eliminar(${i})"><i class="fas fa-trash-alt"></i></button>
-                </td>
-            </tr>
-        `).join('');
-    }
-
-    document.getElementById("formBeneficio").addEventListener("submit", function(e){
+    document.getElementById('formNuevaCita').addEventListener('submit', function(e) {
         e.preventDefault();
-        const index = document.getElementById("indexBeneficio").value;
-        const item = {
-            titulo: document.getElementById("titulo").value,
-            descripcion: document.getElementById("descripcion").value,
-            icono: document.getElementById("icono").value
-        };
-        if(index === "") beneficios.push(item);
-        else beneficios[index] = item;
-        
-        localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
+        alert('¡Cita Elite registrada con éxito en el sistema!');
         this.reset();
-        document.getElementById("indexBeneficio").value = "";
-        renderTabla();
     });
-
-    function eliminar(i) {
-        if(confirm("¿Eliminar beneficio?")) {
-            beneficios.splice(i, 1);
-            localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
-            renderTabla();
-        }
-    }
-
-    function editar(i) {
-        const b = beneficios[i];
-        document.getElementById("titulo").value = b.titulo;
-        document.getElementById("descripcion").value = b.descripcion;
-        document.getElementById("icono").value = b.icono;
-        document.getElementById("indexBeneficio").value = i;
-        window.scrollTo({ top: 400, behavior: 'smooth' });
-    }
-
-    renderTabla();
 </script>
-
 </body>
 </html>
