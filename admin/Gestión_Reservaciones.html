@@ -177,28 +177,36 @@
 </head>
 <body>
 
-<nav id="sidebarAdmin">
-    <div class="sidebar-header">
-        <img src="IMG/LKSTUDIO.png" alt="Logo" class="sidebar-logo mb-2" onerror="this.src='https://via.placeholder.com/160x60/0A0A0A/D4AF37?text=LK+STUDIO'">
+<nav id="sidebar">
+    <div class="sidebar-logo">
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
         <div class="mt-2 text-center">
-            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Gestión de Élite</small>
+            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Elite System</small>
         </div>
     </div>
-    
-    <div class="nav flex-column mt-4 flex-grow-1">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Inicio</a>
-        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Agenda VIP</a>
-        <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-receipt"></i> Reservaciones</a>
-        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Ventas</a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-concierge-bell"></i> Servicios</a>
-        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Academia</a>
-        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-star"></i> Personal</a>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> Reportes</a>
+
+    <div class="nav-menu mt-3 flex-grow-1" style="overflow-y: auto;">
+        <small class="text-muted px-4 mb-2 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">PRINCIPAL</small>
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+        
+        <small class="text-muted px-4 mb-2 mt-3 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">GESTIÓN</small>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-calendar-check"></i> <span>Reservaciones</span></a>
+        <a href="citas.html" class="nav-link"><i class="fas fa-clock"></i> <span>Citas</span></a>
+        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> <span>Punto de Venta</span></a>
+
+        <small class="text-muted px-4 mb-2 mt-3 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">CATÁLOGOS</small>
+        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-concierge-bell"></i> <span>Servicios</span></a>
+        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> <span>Cursos</span></a>
+        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie"></i> <span>Instructores</span></a>
+
+        <small class="text-muted px-4 mb-2 mt-3 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">ANÁLISIS</small>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> <span>Reportes</span></a>
     </div>
 
-    <div class="p-4 mt-auto">
-        <a href="login.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill">
-            <i class="fas fa-power-off me-2"></i> Cerrar Sesión
+    <div class="p-4 border-top border-secondary">
+        <a href="index.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill">
+            <i class="fas fa-sign-out-alt me-2"></i><span>Cerrar Sesión</span>
         </a>
     </div>
 </nav>
