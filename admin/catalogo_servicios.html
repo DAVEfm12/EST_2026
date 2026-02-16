@@ -8,6 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -69,9 +70,10 @@
       padding: 40px;
     }
 
+    /* --- TARJETAS DE SERVICIOS --- */
     .service-card {
       background: rgba(10, 10, 10, 0.9);
-      border: 1px solid var(--gold);
+      border: 1px solid #333;
       border-radius: 1.5rem;
       transition: 0.3s;
       height: 100%;
@@ -80,14 +82,21 @@
 
     .service-card:hover {
       transform: translateY(-10px);
+      border-color: var(--gold);
       box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
     }
 
-    .service-img-top {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-bottom: 1px solid var(--gold);
+    .img-container {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--gold);
+    }
+
+    .service-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     .badge-category {
@@ -96,19 +105,11 @@
       font-size: 0.7rem;
       font-weight: bold;
       text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 50px;
     }
 
-    /* Previsualización de Imagen */
-    #previewImg {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px dashed var(--gold);
-      margin-top: 10px;
-      display: none;
-    }
-
+    /* Modales y Formularios */
     .modal-content {
       background: var(--deep-black);
       border: 2px solid var(--gold);
@@ -119,6 +120,11 @@
       background: #000 !important;
       border: 1px solid #444 !important;
       color: #fff !important;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--gold) !important;
+        box-shadow: none;
     }
 
     .btn-gold {
@@ -140,7 +146,14 @@
     .btn-add-cat {
         background: var(--gold);
         border: none;
-        color: black;
+        color: #000;
+        padding: 0 15px;
+        border-radius: 0 8px 8px 0;
+    }
+
+    @media (max-width: 992px) {
+      #sidebar { display: none; }
+      #content { width: 100%; margin-left: 0; }
     }
   </style>
 </head>
@@ -154,9 +167,9 @@
     </div>
     <div class="mt-4">
       <a href="POS.html" class="nav-link"><i class="fas fa-cash-register"></i> VENTAS (POS)</a>
-      <a href="#" class="nav-link active"><i class="fas fa-list"></i> SERVICIOS</a>
-      <a href="./catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> CURSOS</a>
-      <a href="./PANEL_ADMIN.html" class="nav-link"><i class="fas fa-arrow-left"></i> VOLVER AL PANEL</a>
+      <a href="catalogo_servicios.html" class="nav-link active"><i class="fas fa-list"></i> SERVICIOS</a>
+      <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> CURSOS</a>
+      <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-arrow-left"></i> VOLVER AL PANEL</a>
     </div>
   </nav>
 
@@ -171,13 +184,13 @@
         <div class="col-md-3">
           <div class="stats-box">
             <small class="text-white opacity-50">TOTAL SERVICIOS</small>
-            <h3 id="countServicios" class="m-0 text-gold">0</h3>
+            <h3 id="countServicios" class="m-0" style="color:var(--gold)">0</h3>
           </div>
         </div>
         <div class="col-md-3">
           <div class="stats-box border-warning">
             <small class="text-white opacity-50">VALOR PROMEDIO</small>
-            <h3 id="avgPrecio" class="m-0 text-gold">$0</h3>
+            <h3 id="avgPrecio" class="m-0" style="color:var(--gold)">$0</h3>
           </div>
         </div>
       </div>
@@ -191,10 +204,12 @@
         </div>
         <div class="col-md-3">
           <select id="filtroCategoria" class="form-select" onchange="filtrarServicios()">
-            <option value="Todos">Todas las categorías</option>
-          </select>
+            </select>
         </div>
         <div class="col-md-5 text-end">
+          <button class="btn btn-outline-warning me-2" onclick="exportarServicios()">
+            <i class="fas fa-download"></i> Respaldar
+          </button>
           <button class="btn btn-gold px-4" data-bs-toggle="modal" data-bs-target="#modalServicio" onclick="limpiarFormulario()">
             <i class="fas fa-plus-circle me-2"></i> NUEVO SERVICIO
           </button>
@@ -206,7 +221,7 @@
   </div>
 
   <div class="modal fade" id="modalServicio" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header border-0">
           <h5 class="modal-title fw-bold" style="color:var(--gold)" id="modalTitulo">Nuevo Servicio</h5>
@@ -214,41 +229,40 @@
         </div>
         <div class="modal-body">
           <input type="hidden" id="servicioId">
-          
-          <div class="mb-3">
-            <label class="form-label" style="color:var(--golden-rose)">Imagen del Servicio</label>
-            <input type="file" id="fotoInput" class="form-control" accept="image/*">
-            <img id="previewImg" src="#" alt="Vista previa">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label" style="color:var(--golden-rose)">Nombre del Servicio</label>
-            <input class="form-control" id="nombre" placeholder="Ej. Retoque Acrílico">
-          </div>
-
           <div class="row">
-            <div class="col-md-7 mb-3">
-              <label class="form-label" style="color:var(--golden-rose)">Categoría</label>
-              <div class="input-group">
-                <select id="categoria" class="form-select"></select>
-                <button class="btn btn-add-cat" type="button" onclick="agregarNuevaCategoria()">
-                    <i class="fas fa-plus"></i>
-                </button>
-              </div>
+            <div class="col-md-8 mb-3">
+              <label class="form-label" style="color:var(--golden-rose)">Nombre del Servicio</label>
+              <input class="form-control" id="nombre" placeholder="Ej. Retoque Acrílico">
             </div>
-            <div class="col-md-5 mb-3">
+            <div class="col-md-4 mb-3">
               <label class="form-label" style="color:var(--golden-rose)">Precio ($)</label>
               <input type="number" class="form-control" id="precio" placeholder="0.00">
             </div>
           </div>
           
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label" style="color:var(--golden-rose)">Categoría</label>
+              <div class="input-group">
+                <select id="categoria" class="form-select"></select>
+                <button type="button" class="btn-add-cat" onclick="agregarNuevaCategoria()">
+                    <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label" style="color:var(--golden-rose)">Imagen del Servicio</label>
+                <input type="file" id="fotoInput" class="form-control" accept="image/*">
+            </div>
+          </div>
+
           <div class="mb-3">
-            <label class="form-label" style="color:var(--golden-rose)">Descripción Corta</label>
-            <textarea class="form-control" id="descripcion" rows="2"></textarea>
+            <label class="form-label" style="color:var(--golden-rose)">Descripción del Servicio</label>
+            <textarea class="form-control" id="descripcion" rows="3" placeholder="Detalla qué incluye el servicio..."></textarea>
           </div>
         </div>
         <div class="modal-footer border-0">
-          <button class="btn btn-gold w-100 py-2" onclick="guardarServicio()">GUARDAR EN CATÁLOGO</button>
+          <button class="btn btn-gold w-100 py-3 fw-bold" onclick="guardarServicio()">GUARDAR EN CATÁLOGO</button>
         </div>
       </div>
     </div>
@@ -257,170 +271,172 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+// --- DATOS INICIALES ---
 let servicios = JSON.parse(localStorage.getItem("servicios")) || [];
-let categorias = JSON.parse(localStorage.getItem("LK_CAT_SERVICIOS")) || ["UÑAS", "CABELLO", "MAQUILLAJE", "PESTAÑAS"];
+let categoriasServicios = JSON.parse(localStorage.getItem("LK_CAT_SERVICIOS")) || ["UÑAS", "CABELLO", "MAQUILLAJE", "PESTAÑAS"];
 let base64Image = "";
 let editando = false;
 
 // --- GESTIÓN DE CATEGORÍAS ---
-function actualizarSelects() {
-    const selects = [document.getElementById("categoria"), document.getElementById("filtroCategoria")];
+function cargarCategoriasUI() {
+    const selectModal = document.getElementById("categoria");
+    const selectFiltro = document.getElementById("filtroCategoria");
     
-    // Select del modal
-    selects[0].innerHTML = categorias.map(c => `<option value="${c}">${c}</option>`).join('');
+    // Llenar select del modal
+    selectModal.innerHTML = categoriasServicios.map(c => `<option value="${c}">${c}</option>`).join('');
     
-    // Select de filtro (con opción "Todos")
-    selects[1].innerHTML = `<option value="Todos">Todas las categorías</option>` + 
-                           categorias.map(c => `<option value="${c}">${c}</option>`).join('');
+    // Llenar select del filtro principal
+    selectFiltro.innerHTML = `<option value="Todos">Todas las categorías</option>` + 
+                             categoriasServicios.map(c => `<option value="${c}">${c}</option>`).join('');
 }
 
 function agregarNuevaCategoria() {
-    const nueva = prompt("Nombre de la nueva categoría:").toUpperCase();
-    if (nueva && !categorias.includes(nueva)) {
-        categorias.push(nueva);
-        localStorage.setItem("LK_CAT_SERVICIOS", JSON.stringify(categorias));
-        actualizarSelects();
+    const nueva = prompt("Nombre de la nueva categoría de servicio:").toUpperCase();
+    if (nueva && !categoriasServicios.includes(nueva)) {
+        categoriasServicios.push(nueva);
+        localStorage.setItem("LK_CAT_SERVICIOS", JSON.stringify(categoriasServicios));
+        cargarCategoriasUI();
         document.getElementById("categoria").value = nueva;
     }
 }
 
-// --- LÓGICA DE IMAGEN ---
+// --- GESTIÓN DE IMÁGENES ---
 document.getElementById('fotoInput').addEventListener('change', function(e) {
     const reader = new FileReader();
-    const preview = document.getElementById("previewImg");
-    
-    reader.onload = function() {
-        base64Image = reader.result;
-        preview.src = reader.result;
-        preview.style.display = "block";
-    };
-    
+    reader.onload = function() { base64Image = reader.result; };
     if(e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
 });
 
-// --- CRUD SERVICIOS ---
+// --- RENDERIZADO DE TARJETAS ---
 function renderServicios(datos = servicios) {
-  const contenedor = document.getElementById("listaServicios");
-  contenedor.innerHTML = "";
-  let totalPrecios = 0;
+    const contenedor = document.getElementById("listaServicios");
+    contenedor.innerHTML = "";
+    let totalPrecios = 0;
 
-  datos.forEach((s, index) => {
-    totalPrecios += parseFloat(s.precio);
-    const imgUrl = s.foto || 'https://via.placeholder.com/300x150?text=SIN+IMAGEN';
-    
-    contenedor.innerHTML += `
-      <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp">
-        <div class="service-card">
-          <img src="${imgUrl}" class="service-img-top">
-          <div class="p-4">
-              <div class="d-flex justify-content-between mb-2">
-                <span class="badge badge-category">${s.categoria}</span>
-                <span class="text-gold fw-bold">ID: #${s.id.toString().slice(-4)}</span>
-              </div>
-              <h4 class="fw-bold text-white mb-1">${s.nombre}</h4>
-              <p class="small text-white opacity-50 mb-3" style="height: 40px; overflow: hidden;">${s.descripcion}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <h3 class="text-gold fw-bold m-0">$${s.precio}</h3>
-                <div class="btn-group">
-                  <button class="btn btn-sm btn-outline-warning" onclick="editarServicio(${s.id})"><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-sm btn-outline-danger" onclick="eliminarServicio(${s.id})"><i class="fas fa-trash"></i></button>
+    datos.forEach((s, index) => {
+        totalPrecios += parseFloat(s.precio);
+        const fotoFinal = s.foto || 'https://via.placeholder.com/300x180?text=SIN+IMAGEN';
+        
+        contenedor.innerHTML += `
+            <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp">
+                <div class="service-card">
+                    <div class="img-container">
+                        <img src="${fotoFinal}" class="service-img">
+                    </div>
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge badge-category">${s.categoria}</span>
+                            <span class="text-gold small fw-bold">#${index + 1}</span>
+                        </div>
+                        <h4 class="fw-bold text-white mb-1">${s.nombre}</h4>
+                        <p class="small text-white opacity-50 mb-4" style="height: 40px; overflow: hidden;">${s.descripcion}</p>
+                        <hr style="border-color: #333">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="text-gold fw-bold m-0">$${s.precio}</h3>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-warning" onclick="editarServicio(${s.id})"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarServicio(${s.id})"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-          </div>
-        </div>
-      </div>`;
-  });
+            </div>`;
+    });
 
-  document.getElementById("countServicios").innerText = datos.length;
-  const avg = datos.length ? (totalPrecios / datos.length).toFixed(0) : 0;
-  document.getElementById("avgPrecio").innerText = `$${avg}`;
+    // Actualizar Estadísticas
+    document.getElementById("countServicios").innerText = datos.length;
+    const avg = datos.length ? (totalPrecios / datos.length).toFixed(0) : 0;
+    document.getElementById("avgPrecio").innerText = `$${avg}`;
 }
 
+// --- CRUD ---
 function guardarServicio() {
-  const nombre = document.getElementById("nombre").value.toUpperCase();
-  const categoria = document.getElementById("categoria").value;
-  const precio = document.getElementById("precio").value;
-  const descripcion = document.getElementById("descripcion").value;
-  const id = document.getElementById("servicioId").value;
+    const nombre = document.getElementById("nombre").value.toUpperCase();
+    const categoria = document.getElementById("categoria").value;
+    const precio = document.getElementById("precio").value;
+    const descripcion = document.getElementById("descripcion").value;
+    const id = document.getElementById("servicioId").value;
 
-  if (!nombre || !precio) return alert("Completa nombre y precio.");
+    if (!nombre || !precio) return alert("El nombre y el precio son obligatorios.");
 
-  const datosServicio = { 
-    id: editando ? Number(id) : Date.now(), 
-    nombre, 
-    categoria, 
-    descripcion, 
-    precio,
-    foto: base64Image
-  };
+    const infoServicio = {
+        id: editando ? Number(id) : Date.now(),
+        nombre,
+        categoria,
+        precio,
+        descripcion,
+        foto: base64Image || (editando ? servicios.find(s => s.id == id).foto : "")
+    };
 
-  if (editando) {
-    const index = servicios.findIndex(s => s.id == id);
-    // Si no subió foto nueva, conservar la anterior
-    if(!base64Image) datosServicio.foto = servicios[index].foto;
-    servicios[index] = datosServicio;
-  } else {
-    servicios.push(datosServicio);
-  }
+    if (editando) {
+        const index = servicios.findIndex(s => s.id == id);
+        servicios[index] = infoServicio;
+    } else {
+        servicios.push(infoServicio);
+    }
 
-  localStorage.setItem("servicios", JSON.stringify(servicios));
-  bootstrap.Modal.getInstance(document.getElementById("modalServicio")).hide();
-  renderServicios();
+    localStorage.setItem("servicios", JSON.stringify(servicios));
+    bootstrap.Modal.getInstance(document.getElementById("modalServicio")).hide();
+    renderServicios();
 }
 
 function editarServicio(id) {
-  const s = servicios.find(s => s.id === id);
-  editando = true;
-  document.getElementById("modalTitulo").innerText = "Editar Servicio";
-  document.getElementById("servicioId").value = s.id;
-  document.getElementById("nombre").value = s.nombre;
-  document.getElementById("categoria").value = s.categoria;
-  document.getElementById("precio").value = s.precio;
-  document.getElementById("descripcion").value = s.descripcion;
-  
-  if(s.foto) {
-      document.getElementById("previewImg").src = s.foto;
-      document.getElementById("previewImg").style.display = "block";
-      base64Image = s.foto;
-  }
-  
-  new bootstrap.Modal(document.getElementById("modalServicio")).show();
-}
-
-function filtrarServicios() {
-  const busqueda = document.getElementById("buscador").value.toLowerCase();
-  const cat = document.getElementById("filtroCategoria").value;
-
-  const filtrados = servicios.filter(s => {
-    const coincideNombre = s.nombre.toLowerCase().includes(busqueda);
-    const coincideCat = (cat === "Todos" || s.categoria === cat);
-    return coincideNombre && coincideCat;
-  });
-
-  renderServicios(filtrados);
+    const s = servicios.find(s => s.id === id);
+    editando = true;
+    document.getElementById("modalTitulo").innerText = "Editar Servicio";
+    document.getElementById("servicioId").value = s.id;
+    document.getElementById("nombre").value = s.nombre;
+    document.getElementById("categoria").value = s.categoria;
+    document.getElementById("precio").value = s.precio;
+    document.getElementById("descripcion").value = s.descripcion;
+    base64Image = s.foto;
+    new bootstrap.Modal(document.getElementById("modalServicio")).show();
 }
 
 function eliminarServicio(id) {
-  if (confirm("¿Eliminar este servicio?")) {
-    servicios = servicios.filter(s => s.id !== id);
-    localStorage.setItem("servicios", JSON.stringify(servicios));
-    renderServicios();
-  }
+    if (confirm("¿Seguro que deseas eliminar este servicio de forma permanente?")) {
+        servicios = servicios.filter(s => s.id !== id);
+        localStorage.setItem("servicios", JSON.stringify(servicios));
+        renderServicios();
+    }
+}
+
+// --- FILTROS ---
+function filtrarServicios() {
+    const busqueda = document.getElementById("buscador").value.toLowerCase();
+    const cat = document.getElementById("filtroCategoria").value;
+
+    const filtrados = servicios.filter(s => {
+        const coincideNombre = s.nombre.toLowerCase().includes(busqueda);
+        const coincideCat = (cat === "Todos" || s.categoria === cat);
+        return coincideNombre && coincideCat;
+    });
+
+    renderServicios(filtrados);
 }
 
 function limpiarFormulario() {
-  editando = false;
-  base64Image = "";
-  document.getElementById("modalTitulo").innerText = "Nuevo Servicio";
-  document.getElementById("nombre").value = "";
-  document.getElementById("precio").value = "";
-  document.getElementById("descripcion").value = "";
-  document.getElementById("previewImg").style.display = "none";
-  document.getElementById("fotoInput").value = "";
+    editando = false;
+    document.getElementById("modalTitulo").innerText = "Nuevo Servicio";
+    document.getElementById("servicioId").value = "";
+    document.getElementById("nombre").value = "";
+    document.getElementById("precio").value = "";
+    document.getElementById("descripcion").value = "";
+    document.getElementById("fotoInput").value = "";
+    base64Image = "";
+    cargarCategoriasUI();
 }
 
-// Inicializar
-actualizarSelects();
+function exportarServicios() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(servicios));
+    const dlAnchor = document.createElement('a');
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download", "respaldo_servicios_lk.json");
+    dlAnchor.click();
+}
+
+// --- INICIO ---
+cargarCategoriasUI();
 renderServicios();
 </script>
 
