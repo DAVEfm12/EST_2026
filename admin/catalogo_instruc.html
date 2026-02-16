@@ -1,380 +1,314 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>LK Studio | Expedientes Pro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="UTF-8">
+    <title>LK Studio | Gestión Académica Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
-  <style>
-    :root {
-      --gold: #D4AF37;
-      --gold-dark: #b38f1d;
-      --gold-light: #f1d592;
-      --golden-rose: #e6b8a2;
-      --deep-black: #050505;
-      --sidebar-width: 260px;
-    }
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-bright: #FFD700;
+            --rose: #E6B8A2;
+            --deep-black: #050505;
+            --grey-row: #1A1A1A; /* Tu gris carbón preferido */
+            --sidebar-width: 260px;
+        }
 
-    body {
-      background: radial-gradient(circle at top, #1a1a1a 0%, var(--deep-black) 100%);
-      color: #ffffff;
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      display: flex;
-      min-height: 100vh;
-    }
+        body {
+            background: var(--deep-black);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
 
-    /* --- SIDEBAR --- */
-    #sidebar {
-      width: var(--sidebar-width);
-      background: rgba(0, 0, 0, 0.98);
-      border-right: 1px solid var(--gold);
-      height: 100vh;
-      position: fixed;
-      z-index: 100;
-    }
+        /* --- SIDEBAR --- */
+        #sidebar {
+            width: var(--sidebar-width);
+            background: #000;
+            border-right: 2px solid var(--gold);
+            height: 100vh;
+            position: fixed;
+            z-index: 1000;
+        }
 
-    .nav-link {
-      color: #fff !important;
-      padding: 15px 25px;
-      display: flex;
-      align-items: center;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      transition: 0.3s;
-      border-left: 4px solid transparent;
-    }
+        .nav-link {
+            color: #fff !important;
+            padding: 15px 25px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
 
-    .nav-link:hover, .nav-link.active {
-      background: rgba(212, 175, 55, 0.1);
-      border-left: 4px solid var(--gold);
-      color: var(--gold) !important;
-    }
+        .nav-link:hover, .nav-link.active {
+            background: rgba(212, 175, 55, 0.15);
+            border-left: 4px solid var(--gold);
+            color: var(--gold-bright) !important;
+        }
 
-    /* --- CONTENIDO --- */
-    #content {
-      width: calc(100% - var(--sidebar-width));
-      margin-left: var(--sidebar-width);
-      padding: 30px;
-    }
+        /* --- CONTENIDO --- */
+        #content {
+            width: calc(100% - var(--sidebar-width));
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+        }
 
-    .card-form {
-      background: rgba(15, 15, 15, 0.95);
-      border: 1px solid var(--gold);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
-    }
+        .luxury-font { font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 2px; }
 
-    .section-title {
-      color: var(--gold);
-      font-weight: 800;
-      font-size: 0.85rem;
-      border-left: 4px solid var(--gold);
-      padding-left: 15px;
-      margin-bottom: 25px;
-      text-transform: uppercase;
-    }
+        /* --- TABLAS GRIS CARBÓN (CON LETRAS BLANCAS) --- */
+        .table-custom {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+        }
 
-    /* TABLA BLANCA ESTILO MINIMALISTA */
-    .table-container-white {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 25px;
-      border: 1px solid #ddd;
-    }
+        .table-custom thead th {
+            color: var(--rose);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 15px;
+            border: none;
+        }
 
-    .table { color: #222 !important; font-size: 0.9rem; }
-    .table thead th { 
-      background: #f8f9fa; 
-      color: #666; 
-      text-transform: uppercase; 
-      font-size: 0.75rem; 
-      border-bottom: 2px solid var(--gold);
-    }
+        .table-custom tbody tr {
+            background: var(--grey-row) !important;
+            transition: 0.3s;
+        }
 
-    /* INPUTS MEJORADOS */
-    .form-label { color: var(--golden-rose) !important; font-size: 0.75rem; font-weight: bold; letter-spacing: 0.5px; }
-    .form-control, .form-select {
-      background: #000 !important;
-      border: 1px solid #333 !important;
-      color: var(--gold-light) !important;
-      border-radius: 10px;
-      padding: 10px;
-    }
+        .table-custom td {
+            padding: 20px !important;
+            color: #FFFFFF !important; /* LETRAS SIEMPRE VISIBLES */
+            vertical-align: middle;
+            border: none;
+        }
 
-    .form-control:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-    }
+        .table-custom tr td:first-child { border-radius: 12px 0 0 12px; border-left: 5px solid var(--gold); }
+        .table-custom tr td:last-child { border-radius: 0 12px 12px 0; }
 
-    /* CARGA DE ARCHIVOS VISUAL */
-    .file-box {
-      background: #0a0a0a;
-      border: 1px dashed #444;
-      padding: 10px;
-      border-radius: 10px;
-      transition: 0.3s;
-    }
-    .file-box:hover { border-color: var(--gold); }
+        /* --- INPUTS --- */
+        .form-control, .form-select {
+            background: #000 !important;
+            border: 1px solid #333 !important;
+            color: var(--gold-bright) !important;
+            padding: 12px;
+        }
 
-    .btn-gold {
-      background: linear-gradient(45deg, var(--gold-dark), var(--gold-light));
-      color: #000; font-weight: 800; border-radius: 50px;
-      border: none; padding: 12px; transition: 0.3s;
-    }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+        /* --- IMÁGENES --- */
+        .img-thumb {
+            width: 60px; height: 60px; object-fit: cover;
+            border-radius: 10px; border: 1px solid var(--gold);
+        }
 
-    /* ESTADO DE DOCUMENTOS */
-    .doc-status {
-      font-size: 1.2rem;
-      margin: 0 5px;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-    .doc-exists { color: var(--gold); filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5)); }
-    .doc-none { color: #e0e0e0; opacity: 0.5; cursor: not-allowed; }
+        .btn-gold {
+            background: linear-gradient(45deg, #b38f1d, var(--gold));
+            color: #000; font-weight: 800; border-radius: 50px; border: none;
+            padding: 12px 25px;
+        }
 
-    .search-bar {
-        background: #fff;
-        border: 2px solid var(--gold);
-        border-radius: 50px;
-        padding: 8px 20px;
-        margin-bottom: 20px;
-    }
-  </style>
+        .doc-icon { font-size: 1.2rem; margin: 0 5px; cursor: pointer; }
+        .exists { color: var(--gold-bright); }
+        .missing { color: #444; }
+    </style>
 </head>
-
 <body>
 
-<nav id="sidebar" class="animate__animated animate__fadeInLeft">
+<nav id="sidebar">
     <div class="p-4 text-center">
-        <h4 style="color:var(--gold); font-weight: 900; letter-spacing: 2px;">LK STUDIO</h4>
-        <div style="height: 2px; background: var(--gold); width: 50px; margin: 10px auto;"></div>
-        <small style="color:var(--golden-rose); font-size: 0.65rem; font-weight: 700;">GESTIÓN ACADÉMICA</small>
+        <h4 class="luxury-font">LK STUDIO</h4>
+        <small style="color:var(--rose)">SISTEMA ACADÉMICO</small>
     </div>
     <div class="mt-4">
-        <a href="#" class="nav-link active"><i class="fas fa-folder-plus me-3"></i> Expedientes</a>
-        <a href="#" class="nav-link"><i class="fas fa-chalkboard-teacher me-3"></i> Plantilla</a>
-        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-certificate me-3"></i> Cursos</a>
-        <div style="position: absolute; bottom: 20px; width: 100%;">
-            <a href="./PANEL_ADMIN.html" class="nav-link"><i class="fas fa-sign-out-alt me-3"></i> Volver</a>
-        </div>
+        <a href="javascript:showSection('instructores')" class="nav-link active" id="btn-ins"><i class="fas fa-user-tie me-3"></i> Expedientes</a>
+        <a href="javascript:showSection('cursos')" class="nav-link" id="btn-cur"><i class="fas fa-certificate me-3"></i> Catálogo Cursos</a>
+        <a href="./PANEL_ADMIN.html" class="nav-link mt-5"><i class="fas fa-sign-out-alt me-3"></i> Volver</a>
     </div>
 </nav>
 
 <div id="content">
-  <div class="container-fluid">
     
-    <div class="row mb-5 animate__animated animate__fadeInDown">
-        <div class="col-md-8">
-            <h2 class="fw-bold mb-0" style="color: var(--gold);">BIBLIOTECA DE EXPEDIENTES</h2>
-            <p style="color: var(--golden-rose); font-size: 0.9rem;">Digitalización de documentos oficiales ICATEP / SEP</p>
-        </div>
-        <div class="col-md-4 text-end">
-            <div class="card bg-dark border-secondary p-2">
-                <small class="text-white-50">Total Instructores</small>
-                <h4 class="text-gold mb-0" id="totalCount">0</h4>
+    <section id="sec-instructores" class="animate__animated animate__fadeIn">
+        <h2 class="luxury-font mb-4">EXPEDIENTES DE INSTRUCTORES</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4 bg-dark rounded-4 border border-secondary">
+                    <h5 class="text-white mb-4">Alta de Instructor</h5>
+                    <form id="formIns">
+                        <div class="mb-3">
+                            <label class="small text-rose">NOMBRE COMPLETO</label>
+                            <input type="text" id="ins-nombre" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small text-rose">ESPECIALIDAD</label>
+                            <input type="text" id="ins-especialidad" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small text-rose">INE (FOTO/PDF)</label>
+                            <input type="file" id="ins-ine" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100">GUARDAR EXPEDIENTE</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Instructor</th>
+                            <th>Especialidad</th>
+                            <th>Docs</th>
+                            <th class="text-end">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaIns"></tbody>
+                </table>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="row g-4">
-      <div class="col-xl-5 col-lg-6">
-        <div class="card-form shadow-lg animate__animated animate__fadeIn">
-          <form id="formInstructor">
-            <input type="hidden" id="indexInstructor">
-            
-            <div class="section-title">Información Básica</div>
-            <div class="mb-4">
-              <label class="form-label">Nombre Completo del Instructor</label>
-              <input type="text" id="nombre" class="form-control" placeholder="Nombre completo" required>
-            </div>
-            
-            <div class="row mb-4">
-                <div class="col-6">
-                    <label class="form-label">RFC</label>
-                    <input type="text" id="rfc" class="form-control" placeholder="13 dígitos">
-                </div>
-                <div class="col-6">
-                    <label class="form-label">Especialidad</label>
-                    <input type="text" id="especialidad" class="form-control" placeholder="Ej. Lashista Pro">
-                </div>
-            </div>
-
-            <div class="section-title">Documentación Escaneada</div>
-            <div class="row g-3 mb-5">
-                <div class="col-md-6">
-                    <div class="file-box">
-                        <label class="form-label"><i class="fas fa-id-card me-2"></i>INE Frente/Vuelta</label>
-                        <input type="file" id="file_ine" class="form-control form-control-sm" accept=".pdf,image/*">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="file-box">
-                        <label class="form-label"><i class="fas fa-file-contract me-2"></i>Constancia RFC</label>
-                        <input type="file" id="file_rfc" class="form-control form-control-sm" accept=".pdf,image/*">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="file-box">
-                        <label class="form-label"><i class="fas fa-graduation-cap me-2"></i>Título / Grado</label>
-                        <input type="file" id="file_titulo" class="form-control form-control-sm" accept=".pdf,image/*">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="file-box">
-                        <label class="form-label"><i class="fas fa-user-tie me-2"></i>CV Actualizado</label>
-                        <input type="file" id="file_cv" class="form-control form-control-sm" accept=".pdf,image/*">
-                    </div>
+    <section id="sec-cursos" class="animate__animated animate__fadeIn" style="display:none;">
+        <h2 class="luxury-font mb-4">CATÁLOGO DE CURSOS</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4 bg-dark rounded-4 border border-secondary">
+                    <h5 class="text-white mb-4">Nuevo Curso</h5>
+                    <form id="formCur">
+                        <div class="mb-3">
+                            <label class="small text-rose">NOMBRE DEL CURSO</label>
+                            <input type="text" id="cur-nombre" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small text-rose">INSTRUCTOR ASIGNADO</label>
+                            <select id="cur-instructor" class="form-select" required>
+                                <option value="">Seleccione Instructor...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small text-rose">FOTO PORTADA</label>
+                            <input type="file" id="cur-foto" class="form-control" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100">PUBLICAR CURSO</button>
+                    </form>
                 </div>
             </div>
-
-            <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-gold py-3 shadow">
-                <i class="fas fa-save me-2"></i> REGISTRAR Y VINCULAR ARCHIVOS
-              </button>
+            <div class="col-md-8">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Curso</th>
+                            <th>Instructor</th>
+                            <th class="text-end">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCur"></tbody>
+                </table>
             </div>
-          </form>
         </div>
-      </div>
-
-      <div class="col-xl-7 col-lg-6">
-        <div class="table-container-white shadow-lg animate__animated animate__fadeInRight">
-          
-          <div class="input-group search-bar mb-4">
-            <span class="input-group-text bg-transparent border-0"><i class="fas fa-search text-muted"></i></span>
-            <input type="text" id="busqueda" class="form-control border-0 bg-transparent text-dark" style="color:#000 !important" placeholder="Buscar por nombre, RFC o especialidad..." onkeyup="filtrar()">
-          </div>
-
-          <div class="table-responsive">
-            <table class="table table-hover align-middle">
-              <thead>
-                <tr>
-                  <th>Instructor</th>
-                  <th>Especialidad</th>
-                  <th class="text-center">Expediente</th>
-                  <th class="text-center">Eliminar</th>
-                </tr>
-              </thead>
-              <tbody id="tablaInstructores">
-                  </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
 </div>
 
 <script>
-let instructores = JSON.parse(localStorage.getItem("lk_expedientes")) || [];
+// --- DATOS CENTRALIZADOS ---
+let dataInstructores = JSON.parse(localStorage.getItem("LK_INS")) || [];
+let dataCursos = JSON.parse(localStorage.getItem("LK_CUR")) || [];
 
-const toBase64 = file => new Promise((resolve, reject) => {
-    if(!file) resolve(null);
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+// Convertidor Universal a Base64
+const getBase64 = file => new Promise((res, rej) => {
+    if(!file) res(null);
+    const r = new FileReader();
+    r.readAsDataURL(file);
+    r.onload = () => res(r.result);
 });
 
-function renderTabla(datos = instructores) {
-  const tabla = document.getElementById("tablaInstructores");
-  document.getElementById("totalCount").innerText = datos.length;
-  tabla.innerHTML = "";
-
-  datos.forEach((i, index) => {
-    tabla.innerHTML += `
-      <tr class="animate__animated animate__fadeIn">
-        <td>
-          <div class="fw-bold mb-0" style="color:#000">${i.nombre}</div>
-          <small class="text-muted" style="font-size: 11px;">RFC: ${i.rfc || '---'}</small>
-        </td>
-        <td>
-          <span class="badge bg-light text-dark border">${i.especialidad}</span>
-        </td>
-        <td class="text-center">
-            <i class="fas fa-id-card doc-status ${i.docs.ine ? 'doc-exists' : 'doc-none'}" onclick="verDoc('${i.docs.ine}')" title="Identificación"></i>
-            <i class="fas fa-file-invoice doc-status ${i.docs.rfc ? 'doc-exists' : 'doc-none'}" onclick="verDoc('${i.docs.rfc}')" title="RFC"></i>
-            <i class="fas fa-graduation-cap doc-status ${i.docs.titulo ? 'doc-exists' : 'doc-none'}" onclick="verDoc('${i.docs.titulo}')" title="Académico"></i>
-            <i class="fas fa-file-pdf doc-status ${i.docs.cv ? 'doc-exists' : 'doc-none'}" onclick="verDoc('${i.docs.cv}')" title="Currículum"></i>
-        </td>
-        <td class="text-center">
-          <button class="btn btn-sm btn-link text-danger p-0" onclick="eliminar(${index})"><i class="fas fa-trash-alt"></i></button>
-        </td>
-      </tr>
-    `;
-  });
+// --- LÓGICA DE SECCIONES ---
+function showSection(sec) {
+    document.getElementById('sec-instructores').style.display = sec === 'instructores' ? 'block' : 'none';
+    document.getElementById('sec-cursos').style.display = sec === 'cursos' ? 'block' : 'none';
+    document.getElementById('btn-ins').classList.toggle('active', sec === 'instructores');
+    document.getElementById('btn-cur').classList.toggle('active', sec === 'cursos');
+    if(sec === 'cursos') actualizarSelectInstructores();
 }
 
-document.getElementById("formInstructor").addEventListener("submit", async function(e){
-  e.preventDefault();
-  
-  // Mostrar carga
-  const btn = this.querySelector('button[type="submit"]');
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando archivos...';
-  btn.disabled = true;
+// --- GESTIÓN DE INSTRUCTORES ---
+document.getElementById('formIns').onsubmit = async (e) => {
+    e.preventDefault();
+    const nuevo = {
+        nombre: document.getElementById('ins-nombre').value,
+        especialidad: document.getElementById('ins-especialidad').value,
+        ine: await getBase64(document.getElementById('ins-ine').files[0])
+    };
+    dataInstructores.push(nuevo);
+    localStorage.setItem("LK_INS", JSON.stringify(dataInstructores));
+    e.target.reset();
+    renderIns();
+};
 
-  const instructor = {
-    nombre: document.getElementById("nombre").value,
-    rfc: document.getElementById("rfc").value,
-    especialidad: document.getElementById("especialidad").value,
-    docs: {
-        ine: await toBase64(document.getElementById("file_ine").files[0]),
-        rfc: await toBase64(document.getElementById("file_rfc").files[0]),
-        titulo: await toBase64(document.getElementById("file_titulo").files[0]),
-        cv: await toBase64(document.getElementById("file_cv").files[0])
-    }
-  };
-
-  instructores.push(instructor);
-  
-  try {
-      localStorage.setItem("lk_expedientes", JSON.stringify(instructores));
-  } catch(e) {
-      alert("Error: El almacenamiento está lleno. Intenta con archivos más ligeros.");
-  }
-  
-  btn.innerHTML = '<i class="fas fa-save me-2"></i> REGISTRAR Y VINCULAR ARCHIVOS';
-  btn.disabled = false;
-  this.reset();
-  renderTabla();
-});
-
-function verDoc(base64) {
-    if (base64 === "null" || !base64) return;
-    const win = window.open();
-    win.document.write(`
-        <title>LK Studio - Visor de Documentos</title>
-        <body style="margin:0; background:#222; display:flex; justify-content:center; align-items:center;">
-            <embed src="${base64}" width="100%" height="100%" type="application/pdf">
-        </body>
-    `);
+function renderIns() {
+    const t = document.getElementById('tablaIns');
+    t.innerHTML = '';
+    dataInstructores.forEach((ins, i) => {
+        t.innerHTML += `
+            <tr>
+                <td><b class="text-white">${ins.nombre}</b></td>
+                <td><span class="badge bg-outline-gold">${ins.especialidad}</span></td>
+                <td><i class="fas fa-file-pdf doc-icon ${ins.ine ? 'exists' : 'missing'}" onclick="verDoc('${ins.ine}')"></i></td>
+                <td class="text-end"><button class="btn btn-link text-danger" onclick="delIns(${i})"><i class="fas fa-trash"></i></button></td>
+            </tr>`;
+    });
 }
 
-function filtrar() {
-    const busqueda = document.getElementById("busqueda").value.toLowerCase();
-    const filtrados = instructores.filter(i => 
-        i.nombre.toLowerCase().includes(busqueda) || 
-        i.rfc.toLowerCase().includes(busqueda) ||
-        i.especialidad.toLowerCase().includes(busqueda)
-    );
-    renderTabla(filtrados);
+// --- GESTIÓN DE CURSOS (LA CONEXIÓN) ---
+function actualizarSelectInstructores() {
+    const sel = document.getElementById('cur-instructor');
+    sel.innerHTML = '<option value="">Seleccione Instructor...</option>';
+    dataInstructores.forEach(ins => {
+        sel.innerHTML += `<option value="${ins.nombre}">${ins.nombre}</option>`;
+    });
 }
 
-function eliminar(index){
-  if(confirm("¿Estás seguro de eliminar permanentemente este expediente digital?")) {
-    instructores.splice(index,1);
-    localStorage.setItem("lk_expedientes", JSON.stringify(instructores));
-    renderTabla();
-  }
+document.getElementById('formCur').onsubmit = async (e) => {
+    e.preventDefault();
+    const nuevo = {
+        nombre: document.getElementById('cur-nombre').value,
+        instructor: document.getElementById('cur-instructor').value,
+        foto: await getBase64(document.getElementById('cur-foto').files[0])
+    };
+    dataCursos.push(nuevo);
+    localStorage.setItem("LK_CUR", JSON.stringify(dataCursos));
+    e.target.reset();
+    renderCur();
+};
+
+function renderCur() {
+    const t = document.getElementById('tablaCur');
+    t.innerHTML = '';
+    dataCursos.forEach((cur, i) => {
+        t.innerHTML += `
+            <tr>
+                <td><img src="${cur.foto || 'https://via.placeholder.com/60'}" class="img-thumb"></td>
+                <td><b class="text-white">${cur.nombre}</b></td>
+                <td><i class="fas fa-user-graduate me-2 text-gold"></i>${cur.instructor}</td>
+                <td class="text-end"><button class="btn btn-link text-danger" onclick="delCur(${i})"><i class="fas fa-trash"></i></button></td>
+            </tr>`;
+    });
 }
 
-renderTabla();
+// --- FUNCIONES COMUNES ---
+window.verDoc = (b64) => { if(b64) { const w = window.open(); w.document.write(`<iframe src="${b64}" frameborder="0" style="border:0; top:0; left:0; bottom:0; right:0; width:100%; height:100%;" allowfullscreen></iframe>`); } }
+window.delIns = (i) => { if(confirm("¿Eliminar instructor?")) { dataInstructores.splice(i,1); localStorage.setItem("LK_INS", JSON.stringify(dataInstructores)); renderIns(); } }
+window.delCur = (i) => { if(confirm("¿Eliminar curso?")) { dataCursos.splice(i,1); localStorage.setItem("LK_CUR", JSON.stringify(dataCursos)); renderCur(); } }
+
+// Inicio
+renderIns();
+renderCur();
 </script>
 
 </body>
