@@ -2,12 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LK Studio | Gestión VIP Funcional</title>
+    <title>LK Studio | Gestión de Cursos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
         :root {
@@ -15,7 +16,7 @@
             --gold-bright: #FFD700;
             --rose: #E6B8A2;
             --deep-black: #000000;
-            --grey-row: #1C1C1C; 
+            --grey-row: #1A1A1A; 
             --white-text: #FFFFFF;
             --sidebar-width: 280px;
         }
@@ -29,130 +30,92 @@
             min-height: 100vh;
         }
 
-        /* --- SIDEBAR MASTER --- */
+        /* --- SIDEBAR (IGUAL AL DE BENEFICIOS) --- */
         #sidebarAdmin {
             width: var(--sidebar-width);
             background: #000;
             border-right: 2px solid var(--gold);
             height: 100vh;
             position: fixed;
-            left: 0;
-            top: 0;
+            left: 0; top: 0;
             display: flex;
             flex-direction: column;
             z-index: 1000;
         }
 
-        .sidebar-logo { 
-            padding: 30px; 
-            text-align: center; 
-            border-bottom: 1px solid #333; 
-        }
+        .sidebar-logo { padding: 30px; text-align: center; border-bottom: 1px solid #222; }
         .sidebar-logo img { width: 140px; filter: drop-shadow(0 0 5px var(--gold)); }
 
+        .sidebar-divider {
+            font-size: 0.65rem; color: var(--gold); padding: 25px 25px 10px;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7;
+        }
+
         .nav-link {
-            color: #FFFFFF !important;
-            padding: 15px 25px;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #111;
-            text-decoration: none;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #FFFFFF !important; padding: 14px 25px; font-size: 0.85rem;
+            display: flex; align-items: center; text-decoration: none; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #111;
         }
 
         .nav-link i { width: 30px; color: var(--gold-bright); font-size: 1.1rem; }
         .nav-link:hover, .nav-link.active { 
-            background: rgba(212, 175, 55, 0.15); 
-            color: var(--gold-bright) !important; 
-            border-left: 4px solid var(--gold);
+            background: rgba(212, 175, 55, 0.12); color: var(--gold-bright) !important; border-left: 5px solid var(--gold);
         }
 
-        .sidebar-divider {
-            font-size: 0.7rem;
-            color: var(--gold);
-            padding: 20px 25px 5px;
-            font-weight: 800;
-            opacity: 0.6;
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
+        /* --- CONTENIDO --- */
         .main-content {
             margin-left: var(--sidebar-width);
             width: calc(100% - var(--sidebar-width));
-            padding: 50px;
+            padding: 60px;
         }
 
         .luxury-font { font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 2px; }
 
         /* --- TABLA GRIS CARBÓN --- */
-        .table-custom {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 12px;
-        }
+        .table-custom { width: 100%; border-collapse: separate; border-spacing: 0 15px; }
 
         .table-custom thead th {
-            color: var(--rose);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 15px;
-            font-size: 0.75rem;
-            border: none;
+            color: var(--rose); text-transform: uppercase; letter-spacing: 2px;
+            padding: 15px; font-size: 0.8rem; border: none;
         }
 
         .table-custom tbody tr {
             background-color: var(--grey-row) !important;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         
-        .table-custom tbody tr:hover {
-            transform: scale(1.01);
-            background-color: #252525 !important;
-        }
+        .table-custom tbody tr:hover { transform: translateY(-5px); background-color: #222 !important; }
 
         .table-custom td {
-            padding: 20px !important;
-            color: #FFFFFF !important; /* FORZADO BLANCO */
-            vertical-align: middle;
-            border: none;
+            padding: 25px !important;
+            color: var(--white-text) !important; 
+            vertical-align: middle; border: none;
         }
 
-        .benefit-title { font-size: 1.05rem; font-weight: 700; color: #FFFFFF !important; display: block; margin-bottom: 3px; }
-        .benefit-desc { font-size: 0.8rem; color: var(--rose) !important; opacity: 0.8; }
+        .course-title { font-size: 1.1rem; font-weight: 700; display: block; color: #FFF !important; }
+        .course-info { font-size: 0.85rem; color: var(--rose) !important; opacity: 0.9; }
 
-        .table-custom tr td:first-child { border-radius: 12px 0 0 12px; border-left: 5px solid var(--gold); }
-        .table-custom tr td:last-child { border-radius: 0 12px 12px 0; }
+        .table-custom tr td:first-child { border-radius: 15px 0 0 15px; border-left: 5px solid var(--gold); }
+        .table-custom tr td:last-child { border-radius: 0 15px 15px 0; }
 
-        /* --- COMPONENTES --- */
+        /* --- BOTONES Y BADGES --- */
         .btn-gold {
             background: linear-gradient(135deg, var(--gold-bright), var(--gold));
-            color: #000;
-            font-weight: 800;
-            border-radius: 50px;
-            padding: 12px 30px;
-            border: none;
-            transition: 0.3s;
+            color: #000; font-weight: 800; border-radius: 50px; padding: 12px 35px; border: none;
         }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
 
-        .pts-badge {
-            background: #000;
-            border: 1px solid var(--gold-bright);
-            color: var(--gold-bright);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.85rem;
+        .price-badge {
+            background: #000; border: 1px solid var(--gold-bright); color: var(--gold-bright);
+            padding: 8px 16px; border-radius: 10px; font-weight: 700;
         }
 
         /* --- MODAL --- */
-        .modal-content { background: #111; border: 2px solid var(--gold); color: #fff; border-radius: 20px; }
-        .form-control, .form-select { background: #000; border: 1px solid #333; color: #fff !important; padding: 12px; }
-        .form-control:focus { border-color: var(--gold); box-shadow: none; background: #050505; }
-        label { font-size: 0.75rem; font-weight: 600; margin-bottom: 5px; color: var(--rose); }
+        .modal-content { background: #111; border: 2px solid var(--gold); color: #fff; border-radius: 25px; }
+        .form-control, .form-select { 
+            background: #050505; border: 1px solid #333; color: #fff !important; 
+            padding: 14px; border-radius: 12px;
+        }
     </style>
 </head>
 <body>
@@ -162,78 +125,77 @@
         <img src="IMG/LKSTUDIO.png" alt="LK STUDIO">
     </div>
     <div class="nav flex-column mt-2">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
-        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Citas VIP</a>
-        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-clock"></i> Reservaciones</a>
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> <span>Citas VIP</span></a>
         
-        <div class="sidebar-divider">ADMINISTRACIÓN</div>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-list"></i> Servicios</a>
-        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Cursos</a>
-        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> Beneficios VIP</a>
+        <div class="sidebar-divider">Catálogos</div>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-magic"></i> <span>Servicios</span></a>
+        <a href="catalogo_cursos.html" class="nav-link active"><i class="fas fa-graduation-cap"></i> <span>Cursos</span></a>
+        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
         
-        <div class="sidebar-divider">REPORTES</div>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-pie"></i> Estadísticas</a>
+        <div class="sidebar-divider">Sistema</div>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadísticas</span></a>
     </div>
 </nav>
 
 <main class="main-content">
-    <div class="d-flex justify-content-between align-items-end mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-5 animate__animated animate__fadeIn">
         <div>
-            <h2 class="luxury-font mb-1">GESTIÓN DE BENEFICIOS</h2>
-            <p class="text-rose small mb-0 uppercase">Catálogo de recompensas para clientes élite</p>
+            <h2 class="luxury-font mb-1">ACADEMIA LK STUDIO</h2>
+            <p class="text-rose small mb-0 uppercase fw-bold">Gestión de formación y másterclasses</p>
         </div>
-        <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#modalBen" onclick="limpiarForm()">
-            <i class="fas fa-plus-circle me-2"></i> AGREGAR RECOMPENSA
+        <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#modalCurso" onclick="limpiarForm()">
+            <i class="fas fa-plus-circle me-2"></i> Nuevo Curso
         </button>
     </div>
 
     <table class="table-custom">
         <thead>
             <tr>
-                <th width="45%">RECOMPENSA / DETALLE</th>
-                <th>NIVEL REQUERIDO</th>
-                <th>CANJE (PUNTOS)</th>
+                <th width="40%">CURSO / MODALIDAD</th>
+                <th>DURACIÓN</th>
+                <th>INVERSIÓN</th>
                 <th class="text-end">ACCIONES</th>
             </tr>
         </thead>
-        <tbody id="tablaBody">
+        <tbody id="tablaCursos">
             </tbody>
     </table>
 </main>
 
-<div class="modal fade" id="modalBen" tabindex="-1">
+<div class="modal fade" id="modalCurso" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content shadow-lg">
-            <div class="modal-header border-secondary">
-                <h5 class="luxury-font text-white">CONFIGURAR BENEFICIO</h5>
+        <div class="modal-content">
+            <div class="modal-header border-0 p-4 pb-0">
+                <h5 class="luxury-font">CONFIGURAR CURSO</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4">
-                <form id="benForm">
+                <form id="cursoForm">
                     <input type="hidden" id="editIndex">
-                    <div class="mb-4">
-                        <label>NOMBRE DE LA RECOMPENSA</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Ej: Retoque de Pestañas Gratis" required>
+                    <div class="mb-3">
+                        <label class="text-rose small">NOMBRE DEL CURSO</label>
+                        <input type="text" id="nombre" class="form-control" required>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                         <div class="col-6">
-                            <label>NIVEL DE ACCESO</label>
-                            <select id="nivel" class="form-select">
-                                <option>Silver</option>
-                                <option>Gold</option>
-                                <option>Diamond</option>
+                            <label class="text-rose small">MODALIDAD</label>
+                            <select id="modalidad" class="form-select">
+                                <option>Presencial</option>
+                                <option>Online</option>
+                                <option>Híbrido</option>
                             </select>
                         </div>
                         <div class="col-6">
-                            <label>COSTO EN PUNTOS</label>
-                            <input type="number" id="puntos" class="form-control" placeholder="0" required>
+                            <label class="text-rose small">DURACIÓN</label>
+                            <input type="text" id="duracion" class="form-control" placeholder="Ej: 2 Días">
                         </div>
                     </div>
-                    <div class="mb-4">
-                        <label>DESCRIPCIÓN DEL BENEFICIO</label>
-                        <textarea id="desc" class="form-control" rows="3" placeholder="¿Qué incluye este beneficio?"></textarea>
+                    <div class="mb-3">
+                        <label class="text-rose small">PRECIO (MXN)</label>
+                        <input type="number" id="precio" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-gold w-100 py-3">GUARDAR EN EL SISTEMA</button>
+                    <button type="submit" class="btn btn-gold w-100 py-3 mt-2">GUARDAR CURSO</button>
                 </form>
             </div>
         </div>
@@ -242,76 +204,70 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Inicializar datos con LocalStorage
-    let beneficios = JSON.parse(localStorage.getItem('LK_BENEFICIOS_DATA')) || [
-        {nombre: "LIMPIEZA PROFUNDA GRATIS", nivel: "Silver", puntos: 150, desc: "Aplica en servicios de aplicación completa."},
-        {nombre: "KIT DE CUIDADO POST-CITA", nivel: "Gold", puntos: 400, desc: "Shampoo especial y cepillo de diseño."},
-        {nombre: "DESCUENTO 50% CURSOS", nivel: "Diamond", puntos: 1000, desc: "Válido para Masterclass presenciales."}
+    let cursos = JSON.parse(localStorage.getItem('LK_CURSOS')) || [
+        {nombre: "MASTER LASH ARTIST", modalidad: "Presencial", duracion: "3 Días", precio: "8500"},
+        {nombre: "DISEÑO DE CEJAS HD", modalidad: "Online", duracion: "1 Día", precio: "2400"}
     ];
 
-    const tabla = document.getElementById('tablaBody');
-    const form = document.getElementById('benForm');
+    const tabla = document.getElementById('tablaCursos');
+    const form = document.getElementById('cursoForm');
 
-    function renderTable() {
+    function render() {
         tabla.innerHTML = '';
-        beneficios.forEach((b, i) => {
+        cursos.forEach((c, i) => {
             tabla.innerHTML += `
                 <tr class="animate__animated animate__fadeIn">
                     <td>
-                        <b class="benefit-title">${b.nombre}</b>
-                        <span class="benefit-desc">${b.desc}</span>
+                        <b class="course-title">${c.nombre}</b>
+                        <span class="course-info">${c.modalidad}</span>
                     </td>
-                    <td><span class="badge" style="background: rgba(230,184,162,0.2); color: var(--rose); border: 1px solid var(--rose); padding: 5px 12px; border-radius: 5px;">${b.nivel.toUpperCase()}</span></td>
-                    <td><span class="pts-badge">${b.puntos} PUNTOS</span></td>
+                    <td><span class="text-white">${c.duracion}</span></td>
+                    <td><span class="price-badge">$${c.precio}</span></td>
                     <td class="text-end">
-                        <button class="btn btn-sm btn-outline-info me-2 border-0" onclick="cargarEdicion(${i})" title="Editar">
+                        <button class="btn btn-outline-info border-0 me-2" onclick="cargarEdicion(${i})" style="color: var(--gold-bright)">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${i})" title="Eliminar">
+                        <button class="btn btn-outline-danger border-0" onclick="eliminar(${i})">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
                 </tr>
             `;
         });
-        localStorage.setItem('LK_BENEFICIOS_DATA', JSON.stringify(beneficios));
+        localStorage.setItem('LK_CURSOS', JSON.stringify(cursos));
     }
 
     form.onsubmit = (e) => {
         e.preventDefault();
         const index = document.getElementById('editIndex').value;
-        const nuevoBen = {
+        const curso = {
             nombre: document.getElementById('nombre').value.toUpperCase(),
-            nivel: document.getElementById('nivel').value,
-            puntos: document.getElementById('puntos').value,
-            desc: document.getElementById('desc').value
+            modalidad: document.getElementById('modalidad').value,
+            duracion: document.getElementById('duracion').value,
+            precio: document.getElementById('precio').value
         };
 
-        if(index === "") {
-            beneficios.push(nuevoBen);
-        } else {
-            beneficios[index] = nuevoBen;
-        }
+        if(index === "") cursos.push(curso);
+        else cursos[index] = curso;
 
-        renderTable();
-        bootstrap.Modal.getInstance(document.getElementById('modalBen')).hide();
-        form.reset();
+        render();
+        bootstrap.Modal.getInstance(document.getElementById('modalCurso')).hide();
     };
 
     window.cargarEdicion = (i) => {
-        const b = beneficios[i];
+        const c = cursos[i];
         document.getElementById('editIndex').value = i;
-        document.getElementById('nombre').value = b.nombre;
-        document.getElementById('nivel').value = b.nivel;
-        document.getElementById('puntos').value = b.puntos;
-        document.getElementById('desc').value = b.desc;
-        new bootstrap.Modal(document.getElementById('modalBen')).show();
+        document.getElementById('nombre').value = c.nombre;
+        document.getElementById('modalidad').value = c.modalidad;
+        document.getElementById('duracion').value = c.duracion;
+        document.getElementById('precio').value = c.precio;
+        new bootstrap.Modal(document.getElementById('modalCurso')).show();
     };
 
     window.eliminar = (i) => {
-        if(confirm("¿Estás seguro de que deseas eliminar este beneficio del catálogo?")) {
-            beneficios.splice(i, 1);
-            renderTable();
+        if(confirm("¿Eliminar este curso de la academia?")) {
+            cursos.splice(i, 1);
+            render();
         }
     };
 
@@ -320,8 +276,7 @@
         document.getElementById('editIndex').value = "";
     };
 
-    // Primera carga
-    renderTable();
+    render();
 </script>
 </body>
 </html>
