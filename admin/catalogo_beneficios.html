@@ -44,6 +44,7 @@
             z-index: 1000;
             display: flex;
             flex-direction: column;
+            transition: 0.3s;
         }
 
         .sidebar-logo { padding: 40px 20px; text-align: center; border-bottom: 1px solid var(--borde-lujo); }
@@ -72,6 +73,7 @@
             width: calc(100% - var(--sidebar-width));
             margin-left: var(--sidebar-width);
             padding: 40px;
+            transition: 0.3s;
         }
 
         /* --- TARJETAS Y FORMULARIO --- */
@@ -100,7 +102,7 @@
         }
         .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
 
-        /* --- TABLA CORREGIDA --- */
+        /* --- TABLA --- */
         .tabla-contenedor {
             background: rgba(22, 22, 22, 0.6);
             border-radius: 30px;
@@ -116,31 +118,47 @@
             border: none; 
             text-transform: uppercase; 
             font-size: 0.75rem;
+            padding-left: 15px;
         }
         
         .table tbody tr { background: rgba(255, 255, 255, 0.03); border-radius: 15px; transition: 0.3s; }
-        .table tbody tr:hover { background: rgba(212, 175, 55, 0.07); }
+        .table tbody tr:hover { background: rgba(212, 175, 55, 0.07); transform: scale(1.005); }
         
         .table td { border: none !important; padding: 15px !important; vertical-align: middle; }
 
-        .nombre-cliente { color: var(--oro-brillante) !important; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; display: block; }
-        .servicio-detalle { color: var(--rose-gold); font-size: 0.75rem; opacity: 0.8; }
+        /* VISIBILIDAD DE NOMBRES MEJORADA */
+        .nombre-cliente { 
+            color: var(--oro-brillante) !important; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            font-size: 0.95rem; 
+            display: block;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        .servicio-detalle { color: var(--rose-gold); font-size: 0.75rem; opacity: 0.9; }
 
         .icono-preview {
-            width: 40px; height: 40px;
+            width: 45px; height: 45px;
             background: rgba(212, 175, 55, 0.1);
             border: 1px solid var(--oro);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             color: var(--oro);
+            font-size: 1.2rem;
         }
 
         .widget-total { background: var(--negro-suave); border: 1px solid var(--oro); border-radius: 20px; padding: 10px 25px; }
 
+        /* Estilo para Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--negro-profundo); }
+        ::-webkit-scrollbar-thumb { background: var(--oro); border-radius: 10px; }
+
         @media (max-width: 992px) {
             #sidebar { width: 80px; }
-            #sidebar span, .mt-2 { display: none; }
+            #sidebar span, .sidebar-logo div { display: none; }
             #content { width: calc(100% - 80px); margin-left: 80px; padding: 20px; }
+            .nombre-cliente { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -161,7 +179,7 @@
         <a href="#" class="nav-link"><i class="fas fa-cash-register"></i> <span>Ventas</span></a>
     </div>
     <div class="p-4">
-        <button class="btn btn-outline-danger btn-sm w-100 rounded-pill">Salir</button>
+        <button class="btn btn-outline-danger btn-sm w-100 rounded-pill" onclick="location.reload()">Salir</button>
     </div>
 </nav>
 
@@ -172,7 +190,7 @@
             <p class="text-rose-gold text-uppercase small">Panel Administrativo LK Studio</p>
         </div>
         <div class="col-md-4 text-md-end">
-            <div class="widget-total">
+            <div class="widget-total shadow">
                 <small class="text-white-50 d-block text-uppercase" style="font-size: 0.6rem;">Citas Activas</small>
                 <span class="fw-bold h3 m-0" id="countTotal" style="color:var(--oro)">0</span>
             </div>
@@ -184,7 +202,7 @@
             <div class="tarjeta-elite animate__animated animate__fadeInLeft">
                 <h5 class="fuente-lujo mb-4 border-bottom border-secondary pb-3" style="color:var(--oro)">Nueva Cita</h5>
                 <form id="reservaForm">
-                    <input type="hidden" id="editIndex">
+                    <input type="hidden" id="editIndex" value="">
                     <div class="mb-3">
                         <label class="form-label">Nombre del Cliente</label>
                         <input type="text" id="clienteNombre" class="form-control" placeholder="Ej. Isabella Martínez" required>
@@ -224,7 +242,7 @@
         <div class="col-xl-8">
             <div class="tabla-contenedor shadow-lg animate__animated animate__fadeInRight">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table align-middle">
                         <thead>
                             <tr>
                                 <th>Cliente / Servicio</th>
@@ -242,7 +260,7 @@
 </div>
 
 <script>
-    // Base de datos local
+    // Inicialización de datos
     let reservas = JSON.parse(localStorage.getItem("lk_reservas")) || [
         { nombre: "Isabella Martínez", whatsapp: "5512345678", servicio: "Balayage Elite", fecha: "2024-05-20", hora: "14:00", pago: "500" },
         { nombre: "Julián Casablancas", whatsapp: "5598765432", servicio: "Corte Master", fecha: "2024-05-21", hora: "10:30", pago: "200" }
@@ -250,37 +268,44 @@
 
     const form = document.getElementById("reservaForm");
     const tabla = document.getElementById("tablaReservas");
+    const countTotal = document.getElementById("countTotal");
 
     function renderTabla() {
-        document.getElementById("countTotal").innerText = reservas.length;
+        countTotal.innerText = reservas.length;
         tabla.innerHTML = "";
 
+        if(reservas.length === 0) {
+            tabla.innerHTML = `<tr><td colspan="3" class="text-center py-5 text-white-50 small">No hay reservas registradas</td></tr>`;
+            return;
+        }
+
         reservas.forEach((r, i) => {
-            const row = `
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="icono-preview me-3">
-                                <i class="fas fa-user-crown"></i>
-                            </div>
-                            <div>
-                                <span class="nombre-cliente">${r.nombre}</span>
-                                <span class="servicio-detalle">${r.servicio} • <span class="text-success">$${r.pago}</span></span>
-                            </div>
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="icono-preview me-3">
+                            <i class="fas fa-crown"></i>
                         </div>
-                    </td>
-                    <td>
-                        <div class="small">${r.fecha}</div>
-                        <div class="fw-bold text-oro">${r.hora}</div>
-                    </td>
-                    <td class="text-end">
-                        <a href="https://wa.me/${r.whatsapp}" target="_blank" class="btn btn-sm text-success"><i class="fab fa-whatsapp"></i></a>
-                        <button class="btn btn-sm text-warning" onclick="editar(${i})"><i class="fas fa-pen"></i></button>
-                        <button class="btn btn-sm text-danger" onclick="eliminar(${i})"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                </tr>
+                        <div>
+                            <span class="nombre-cliente">${r.nombre}</span>
+                            <span class="servicio-detalle">${r.servicio} • <span class="text-success fw-bold">$${r.pago}</span></span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="small text-white-50">${r.fecha}</div>
+                    <div class="fw-bold" style="color:var(--oro)">${r.hora} hrs</div>
+                </td>
+                <td class="text-end">
+                    <div class="btn-group">
+                        <a href="https://wa.me/${r.whatsapp}" target="_blank" class="btn btn-sm" title="WhatsApp" style="color: #25D366"><i class="fab fa-whatsapp fa-lg"></i></a>
+                        <button class="btn btn-sm text-warning" onclick="editar(${i})" title="Editar"><i class="fas fa-pen"></i></button>
+                        <button class="btn btn-sm text-danger" onclick="eliminar(${i})" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </td>
             `;
-            tabla.innerHTML += row;
+            tabla.appendChild(row);
         });
     }
 
@@ -294,7 +319,7 @@
             servicio: document.getElementById("servicioTipo").value,
             fecha: document.getElementById("citaFecha").value,
             hora: document.getElementById("citaHora").value,
-            pago: document.getElementById("pagoMonto").value
+            pago: document.getElementById("pagoMonto").value || 0
         };
 
         if(index === "") {
@@ -311,7 +336,7 @@
     });
 
     window.eliminar = function(i) {
-        if(confirm("¿Desea cancelar esta reserva?")) {
+        if(confirm("¿Estás seguro de cancelar la reserva de " + reservas[i].nombre + "?")) {
             reservas.splice(i, 1);
             localStorage.setItem("lk_reservas", JSON.stringify(reservas));
             renderTabla();
@@ -329,9 +354,12 @@
         
         document.getElementById("editIndex").value = i;
         document.getElementById("btnGuardar").innerText = "Actualizar Cita";
+        
+        // Efecto scroll suave al formulario
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
+    // Carga inicial
     renderTabla();
 </script>
 
