@@ -11,18 +11,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
+        /* --- ADN VISUAL LK STUDIO --- */
         :root {
-            --gold: #D4AF37;
-            --gold-dark: #b38f1d;
-            --gold-light: #f1d592;
-            --golden-rose: #e6b8a2;
-            --deep-black: #050505;
-            --soft-black: #0d0d0d;
+            --oro: #D4AF37;
+            --oro-brillante: #f1d592;
+            --rose-gold: #e6b8a2;
+            --negro-profundo: #0A0A0A;
+            --negro-suave: #121212;
             --sidebar-width: 280px;
+            --borde-lujo: rgba(212, 175, 55, 0.25);
         }
 
         body {
-            background: radial-gradient(circle at top, #1a1a1a 0%, var(--deep-black) 100%);
+            background: radial-gradient(circle at top, #1a1a1a 0%, var(--negro-profundo) 100%);
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -31,126 +32,152 @@
             overflow-x: hidden;
         }
 
-        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
+        .fuente-lujo { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-        /* --- SIDEBAR --- */
+        /* --- SIDEBAR ELITE --- */
         #sidebar {
             width: var(--sidebar-width);
-            background: rgba(0, 0, 0, 0.98);
-            border-right: 1px solid var(--gold);
+            background: var(--negro-profundo);
+            border-right: 1px solid var(--oro);
             height: 100vh;
             position: fixed;
             z-index: 1000;
             display: flex;
             flex-direction: column;
+            transition: 0.4s;
         }
 
-        .sidebar-logo { padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
-        .sidebar-logo img { max-width: 150px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3)); }
+        .sidebar-logo { padding: 40px 20px; text-align: center; border-bottom: 1px solid var(--borde-lujo); }
+        .sidebar-logo img { max-width: 160px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4)); }
 
         .nav-link {
-            color: rgba(255,255,255,0.7) !important;
-            padding: 15px 30px;
+            color: rgba(255,255,255,0.6) !important;
+            padding: 15px 25px;
             display: flex;
             align-items: center;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: 0.3s;
-            text-decoration: none;
-            border-left: 4px solid transparent;
+            border-radius: 50px;
+            margin: 4px 15px;
         }
 
         .nav-link:hover, .nav-link.active {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
-            border-left: 4px solid var(--gold);
-            color: var(--gold) !important;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--oro-brillante) !important;
         }
 
-        .nav-link i { width: 30px; }
+        .nav-link.active {
+            border: 1px solid var(--oro);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), transparent) !important;
+            font-weight: 700;
+        }
+
+        .nav-link i { width: 30px; font-size: 1.1rem; color: var(--oro); }
 
         /* --- CONTENIDO --- */
         #content {
             width: calc(100% - var(--sidebar-width));
             margin-left: var(--sidebar-width);
-            padding: 40px;
+            padding: 50px;
+            transition: 0.4s;
         }
 
-        /* --- SLIDER LUXURY --- */
+        /* --- CAROUSEL LUXURY --- */
         .carousel-luxury {
-            border-radius: 25px;
+            border-radius: 35px;
             overflow: hidden;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
-            margin-bottom: 60px;
+            border: 1px solid var(--borde-lujo);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            margin-bottom: 50px;
         }
 
-        .carousel-item { height: 400px; }
+        .carousel-item { height: 350px; }
 
         .carousel-caption {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
             padding: 40px;
-            border: 1px solid var(--gold);
-            bottom: 15%;
-            max-width: 80%;
+            border: 1px solid var(--oro);
+            bottom: 10%;
+            max-width: 85%;
             margin: 0 auto;
         }
 
-        /* --- BOTONES Y CARDS --- */
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
-            color: #000 !important;
-            font-weight: 800; border: none; border-radius: 50px;
-            padding: 12px 30px; transition: 0.4s;
-            text-transform: uppercase;
+        /* --- CARDS Y FORMS --- */
+        .tarjeta-elite {
+            background: var(--negro-suave);
+            border: 1px solid var(--borde-lujo);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
-        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
-
-        .card-luxury {
-            background: var(--soft-black);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
         .form-control, .form-select {
-            background: #000 !important;
+            background: rgba(0,0,0,0.4) !important;
             border: 1px solid #333 !important;
-            color: var(--gold-light) !important;
-            border-radius: 12px;
+            color: #fff !important;
+            border-radius: 15px;
             padding: 12px;
         }
 
-        /* --- TABLA LUXURY --- */
-        .table-container {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 25px;
-            overflow: hidden;
+        .form-control:focus { border-color: var(--oro) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+
+        .btn-oro {
+            background: linear-gradient(135deg, var(--oro), var(--oro-brillante));
+            color: #000 !important;
+            font-weight: 800; border: none; border-radius: 50px;
+            padding: 14px 30px; transition: 0.4s;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
+        .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
+
+        /* --- TABLA ELITE --- */
+        .tabla-contenedor {
+            background: var(--negro-suave);
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid var(--borde-lujo);
+        }
+
+        .table { color: white !important; vertical-align: middle; margin-bottom: 0; }
         .table thead th {
-            background: #000;
-            color: var(--gold);
-            font-family: 'Cinzel', serif;
-            border: none;
+            color: var(--oro);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--oro);
             padding: 15px;
         }
 
-        .table tbody td {
-            color: #222;
-            font-weight: 600;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
+        .table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+        .icono-preview {
+            width: 50px; height: 50px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--oro);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--oro); font-size: 1.2rem;
+        }
+
+        .widget-stats {
+            background: var(--negro-suave);
+            border: 1px solid var(--borde-lujo);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
         }
 
         @media (max-width: 992px) {
-            #sidebar { width: 80px; }
-            #sidebar span, #sidebar .mt-2 { display: none; }
-            #content { width: calc(100% - 80px); margin-left: 80px; }
+            #sidebar { transform: translateX(-100%); }
+            #content { width: 100%; margin-left: 0; padding: 20px; }
         }
     </style>
 </head>
@@ -159,24 +186,24 @@
 
 <nav id="sidebar">
     <div class="sidebar-logo">
-        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
-        <div class="mt-2">
-            <small style="color:var(--golden-rose); font-size: 0.6rem; letter-spacing: 2px;">ELITE SYSTEM</small>
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/160x60/0A0A0A/D4AF37?text=LK+STUDIO'">
+        <div class="mt-2 text-center">
+            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Elite System</small>
         </div>
     </div>
 
-    <div class="nav-menu mt-4 flex-grow-1">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
-        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-calendar-check"></i> <span>Reservas</span></a>
-        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
-        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> <span>Ventas</span></a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-spa"></i> <span>Servicios</span></a>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> <span>Reportes</span></a>
+    <div class="nav flex-column mt-4 flex-grow-1">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-calendar-check"></i> Reservas</a>
+        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> Beneficios VIP</a>
+        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Ventas</a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-spa"></i> Servicios</a>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> Reportes</a>
     </div>
 
-    <div class="p-4 border-top border-secondary">
-        <a href="index.html" class="nav-link text-danger p-0 border-0">
-            <i class="fas fa-power-off me-2"></i> <span>Cerrar Sesión</span>
+    <div class="p-4 mt-auto">
+        <a href="index.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill">
+            <i class="fas fa-power-off me-2"></i> Salir
         </a>
     </div>
 </nav>
@@ -184,44 +211,44 @@
 <div id="content">
     
     <div id="luxurySlider" class="carousel slide carousel-fade carousel-luxury animate__animated animate__fadeIn" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1500') center/cover;">
+        <div class="carousel-inner h-100">
+            <div class="carousel-item active h-100">
+                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1500') center/cover;">
                     <div class="carousel-caption">
-                        <h1 class="luxury-font text-gold">EXPERIENCIA ELITE</h1>
-                        <p class="text-rose-gold">Personaliza los privilegios exclusivos para nuestras clientas VIP.</p>
-                        <button class="btn btn-gold" onclick="document.getElementById('titulo').focus()">AÑADIR NUEVO</button>
+                        <h1 class="fuente-lujo texto-oro">Experiencia Elite</h1>
+                        <p class="text-rose-gold text-uppercase" style="letter-spacing: 2px;">Configuración de Privilegios para Clientes VIP</p>
+                        <button class="btn-oro btn-sm mt-3" onclick="document.getElementById('titulo').focus()">Crear Nueva Amenidad</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div class="row mb-5 align-items-end">
         <div class="col-md-8">
-            <h1 class="luxury-font text-gold mb-0">Gestión de Beneficios</h1>
-            <p class="text-rose-gold small text-uppercase">Catálogo Maestro de Amenidades</p>
+            <p class="text-rose-gold fw-bold mb-0" style="letter-spacing: 4px; font-size: 0.8rem;">CATÁLOGO MAESTRO</p>
+            <h1 class="fuente-lujo texto-oro display-5 fw-bold">Gestión de Beneficios</h1>
         </div>
-        <div class="col-md-4 text-end">
-             <div class="p-3 bg-black border border-warning rounded-4 d-inline-block">
-                <small class="text-white-50 d-block">TOTAL ACTIVOS</small>
-                <span class="text-gold fw-bold h3 m-0" id="countTotal">0</span>
+        <div class="col-md-4">
+            <div class="widget-stats">
+                <small class="text-rose-gold text-uppercase d-block mb-1 fw-bold">Beneficios Activos</small>
+                <span class="fuente-lujo texto-oro h2" id="countTotal">0</span>
             </div>
         </div>
     </div>
 
     <div class="row g-4">
         <div class="col-xl-4">
-            <div class="card card-luxury p-4 animate__animated animate__fadeInLeft">
-                <h5 class="text-gold luxury-font mb-4 border-bottom border-secondary pb-3"><i class="fas fa-edit me-2"></i>Editor VIP</h5>
+            <div class="tarjeta-elite animate__animated animate__fadeInLeft">
+                <h5 class="fuente-lujo texto-oro mb-4 border-bottom border-secondary pb-3"><i class="fas fa-edit me-2"></i>Editor VIP</h5>
                 <form id="formBeneficio">
                     <input type="hidden" id="indexBeneficio">
                     <div class="mb-3">
-                        <label class="form-label text-rose-gold small fw-bold">NOMBRE DEL PRIVILEGIO</label>
+                        <label class="form-label">Nombre del Privilegio</label>
                         <input type="text" id="titulo" class="form-control" placeholder="Ej. Copa de Cortesía" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label text-rose-gold small fw-bold">CATEGORÍA</label>
+                        <label class="form-label">Categoría / Ícono</label>
                         <select id="icono" class="form-select">
                             <option value="fa-glass-cheers">🍷 Bebidas & Brindis</option>
                             <option value="fa-spa">🧖‍♀️ Spa & Relax</option>
@@ -231,27 +258,29 @@
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label class="form-label text-rose-gold small fw-bold">DESCRIPCIÓN BREVE</label>
-                        <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del beneficio..." required></textarea>
+                        <label class="form-label">Descripción del Beneficio</label>
+                        <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles exclusivos..." required></textarea>
                     </div>
-                    <button type="submit" id="btnGuardar" class="btn btn-gold w-100 py-3">
-                        <i class="fas fa-save me-2"></i>ACTUALIZAR CATÁLOGO
+                    <button type="submit" id="btnGuardar" class="btn-oro w-100">
+                        <i class="fas fa-save me-2"></i>Actualizar Catálogo
                     </button>
+                    <button type="button" id="btnCancelarEdit" class="btn btn-sm btn-link text-white-50 w-100 mt-2 d-none" onclick="cancelarEdicion()">Cancelar</button>
                 </form>
             </div>
         </div>
 
         <div class="col-xl-8">
-            <div class="table-container animate__animated animate__fadeInRight shadow-lg">
+            <div class="tabla-contenedor animate__animated animate__fadeInRight">
                 <div class="table-responsive">
                     <table class="table align-middle">
                         <thead>
                             <tr>
-                                <th>AMENIDAD / PRIVILEGIO</th>
-                                <th class="text-end">GESTIÓN</th>
+                                <th>Privilegio & Descripción</th>
+                                <th class="text-end">Gestión</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaBeneficios"></tbody>
+                        <tbody id="tablaBeneficios">
+                            </tbody>
                     </table>
                 </div>
             </div>
@@ -270,24 +299,25 @@
     function renderTabla() {
         const tabla = document.getElementById("tablaBeneficios");
         document.getElementById("countTotal").innerText = beneficios.length;
+        
         tabla.innerHTML = beneficios.map((b, i) => `
             <tr>
                 <td>
                     <div class="d-flex align-items-center">
-                        <div class="p-3 rounded-circle me-3 text-gold bg-black border border-warning" style="width:50px; height:50px; display:flex; align-items:center; justify-content:center;">
+                        <div class="icono-preview me-3">
                             <i class="fas ${b.icono}"></i>
                         </div>
                         <div>
-                            <div class="text-dark fw-bold text-uppercase" style="letter-spacing:1px;">${b.titulo}</div>
-                            <div class="text-muted small">${b.descripcion}</div>
+                            <div class="fw-bold text-white text-uppercase" style="letter-spacing:1px;">${b.titulo}</div>
+                            <div class="text-white-50 small">${b.descripcion}</div>
                         </div>
                     </div>
                 </td>
                 <td class="text-end">
-                    <button class="btn btn-sm btn-outline-dark rounded-pill px-3 me-1" onclick="editar(${i})">
+                    <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${i})">
                         <i class="fas fa-pen"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-danger rounded-pill px-3" onclick="eliminar(${i})">
+                    <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${i})">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>
@@ -303,18 +333,17 @@
             descripcion: document.getElementById("descripcion").value,
             icono: document.getElementById("icono").value
         };
+        
         if(index === "") beneficios.push(item);
         else beneficios[index] = item;
         
         localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
-        this.reset();
-        document.getElementById("indexBeneficio").value = "";
-        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-save me-2"></i>ACTUALIZAR CATÁLOGO';
+        cancelarEdicion();
         renderTabla();
     });
 
     function eliminar(i) {
-        if(confirm("¿Segura que desea eliminar este privilegio de la lista?")) {
+        if(confirm("¿Segura que desea eliminar este privilegio de la lista de élite?")) {
             beneficios.splice(i, 1);
             localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
             renderTabla();
@@ -327,8 +356,16 @@
         document.getElementById("descripcion").value = b.descripcion;
         document.getElementById("icono").value = b.icono;
         document.getElementById("indexBeneficio").value = i;
-        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-sync-alt me-2"></i>GUARDAR CAMBIOS';
+        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-sync-alt me-2"></i>Guardar Cambios';
+        document.getElementById("btnCancelarEdit").classList.remove("d-none");
         window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+
+    function cancelarEdicion() {
+        document.getElementById("formBeneficio").reset();
+        document.getElementById("indexBeneficio").value = "";
+        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-save me-2"></i>Actualizar Catálogo';
+        document.getElementById("btnCancelarEdit").classList.add("d-none");
     }
 
     renderTabla();
