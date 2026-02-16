@@ -18,6 +18,9 @@
             --rose: #E6B8A2;
             --deep: #050505;
             --sidebar-width: 280px;
+            --success: #1d976c;
+            --danger: #8b0000;
+            --warning: #b8860b;
         }
 
         body {
@@ -27,6 +30,7 @@
             min-height: 100vh;
             margin: 0;
             display: flex;
+            overflow-x: hidden;
         }
 
         .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 1px; }
@@ -75,25 +79,40 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.7);
         }
 
-        /* FullCalendar Customization */
         .fc { --fc-border-color: #333; --fc-today-bg-color: rgba(212, 175, 55, 0.05); }
         .fc-toolbar-title { font-family: 'Cinzel'; color: var(--gold-br) !important; text-transform: uppercase; }
+        
+        /* Botones del Calendario */
         .fc-button { 
             background: #111 !important; border: 1px solid var(--gold) !important; 
             color: var(--gold) !important; text-transform: capitalize !important;
             border-radius: 10px !important; font-size: 0.8rem !important;
+            transition: 0.3s !important;
         }
+        .fc-button:hover { background: var(--gold) !important; color: #000 !important; }
         .fc-button-active { background: var(--gold) !important; color: #000 !important; }
-        .fc-col-header-cell { background: #000; padding: 10px 0 !important; }
-        .fc-col-header-cell-cushion { color: var(--rose); font-size: 0.7rem; text-transform: uppercase; }
-        .fc-daygrid-day-number { color: #fff; font-weight: 300; padding: 10px !important; }
+
+        /* Celdas de Día */
+        .fc-daygrid-day { transition: 0.3s; }
+        .fc-daygrid-day:hover { background: rgba(255,255,255,0.03); }
+        
+        /* Indicadores de Disponibilidad */
+        .day-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+        }
+        .status-full { background-color: #ff4d4d; box-shadow: 0 0 10px #ff4d4d; }
+        .status-medium { background-color: #ffd700; }
+        .status-free { background-color: #2ecc71; }
 
         /* Eventos */
-        .event-pagado { background: linear-gradient(45deg, #1d976c, #111) !important; border-left: 4px solid #93f9b9 !important; border-top: none; border-right: none; border-bottom: none; color: white !important; }
-        .event-pendiente { background: linear-gradient(45deg, #b8860b, #111) !important; border-left: 4px solid #ffd700 !important; border-top: none; border-right: none; border-bottom: none; color: white !important; }
-        .event-cancelado { background: linear-gradient(45deg, #8b0000, #111) !important; border-left: 4px solid #ff4d4d !important; border-top: none; border-right: none; border-bottom: none; color: white !important; }
+        .event-pagado { border-left: 4px solid #93f9b9 !important; background: rgba(29, 151, 108, 0.2) !important; color: #fff !important; }
+        .event-pendiente { border-left: 4px solid #ffd700 !important; background: rgba(184, 134, 11, 0.2) !important; color: #fff !important; }
 
-        /* --- LEGEND & QUICK ACTIONS --- */
+        /* --- QUICK CARDS --- */
         .quick-card {
             background: #111;
             border-radius: 20px;
@@ -101,6 +120,13 @@
             border: 1px solid #222;
         }
 
+        .stat-box {
+            border-left: 3px solid var(--gold);
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* --- MODAL --- */
         .modal-content {
             background: #0a0a0a;
             border: 1px solid var(--gold);
@@ -109,7 +135,7 @@
 
         @media (max-width: 992px) {
             #sidebarAdmin { display: none; }
-            .main-content { margin-left: 0; width: 100%; }
+            .main-content { margin-left: 0; width: 100%; padding: 20px; }
         }
     </style>
 </head>
@@ -125,8 +151,18 @@
         <a href="citas.html" class="nav-link active"><i class="fas fa-calendar-alt me-2"></i> Agenda VIP</a>
         <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-edit me-2"></i> Reservaciones</a>
         <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register me-2"></i> Punto de Venta</a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut me-2"></i> Servicios</a>
         <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line me-2"></i> Reportes</a>
+    </div>
+
+    <div class="mt-auto p-4">
+        <div class="stat-box">
+            <small class="text-white-50 d-block">Clases Mañana</small>
+            <span id="clasesCount" class="fw-bold text-gold">0 / 5 Cupos</span>
+        </div>
+        <div class="stat-box">
+            <small class="text-white-50 d-block">Servicios Tarde</small>
+            <span id="serviciosCount" class="fw-bold text-rose">0 / 8 Cupos</span>
+        </div>
     </div>
 </nav>
 
@@ -134,32 +170,38 @@
     <div class="d-flex justify-content-between align-items-end mb-4 animate__animated animate__fadeInDown">
         <div>
             <h1 class="luxury-font text-gold fw-bold mb-0">CALENDARIO MAESTRO</h1>
-            <p class="text-rose small fw-bold mb-0">VISUALIZACIÓN GLOBAL DE OPERACIONES</p>
+            <p class="text-rose small fw-bold mb-0">GESTIÓN DE TURNOS: 10AM-1PM | 4PM-7PM</p>
         </div>
         <div class="text-end">
             <h4 id="clock" class="luxury-font mb-0">00:00:00</h4>
-            <span id="date-now" class="text-white-50 small"></span>
+            <span id="date-now" class="text-white-50 small text-uppercase"></span>
         </div>
     </div>
 
     <div class="row g-4">
         <div class="col-xl-3">
             <div class="quick-card mb-4 animate__animated animate__fadeInLeft">
-                <h6 class="text-gold fw-bold mb-3 small"><i class="fas fa-filter me-2"></i>FILTROS DE ESTADO</h6>
-                <div class="d-grid gap-2 mb-4">
-                    <button class="btn btn-sm btn-outline-success text-start" onclick="filtrar('Pagado')"><i class="fas fa-circle me-2"></i> Pagado / Listo</button>
-                    <button class="btn btn-sm btn-outline-warning text-start" onclick="filtrar('Pendiente')"><i class="fas fa-circle me-2"></i> Pendientes</button>
-                    <button class="btn btn-sm btn-outline-danger text-start" onclick="filtrar('Cancelado')"><i class="fas fa-circle me-2"></i> Cancelados</button>
+                <h6 class="text-gold fw-bold mb-3 small text-uppercase"><i class="fas fa-eye me-2"></i>Disponibilidad</h6>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="day-status-dot status-free me-2"></span> <small>Disponible (Baja)</small>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="day-status-dot status-medium me-2"></span> <small>Moderado (Media)</small>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                    <span class="day-status-dot status-full me-2"></span> <small>Saturado (Full)</small>
                 </div>
 
+                <hr class="border-secondary">
+
                 <h6 class="text-gold fw-bold mb-3 small"><i class="fas fa-bolt me-2"></i>ACCIONES RÁPIDAS</h6>
-                <button class="btn btn-pro w-100 py-3 mb-3" style="background: linear-gradient(45deg, var(--gold), #fff); color:#000; font-weight:800; border-radius:15px;" onclick="location.href='Gestión_Reservaciones.html'">
+                <button class="btn w-100 py-3 mb-3" style="background: linear-gradient(45deg, var(--gold), #fff); color:#000; font-weight:800; border-radius:15px; border:none;" onclick="location.href='Gestión_Reservaciones.html'">
                     <i class="fas fa-plus-circle me-2"></i> NUEVA CITA VIP
                 </button>
                 
-                <div class="p-3 rounded bg-dark border border-secondary">
-                    <small class="text-white-50 d-block mb-2">Próxima Cita:</small>
-                    <div id="nextAppointment" class="fw-bold text-rose">Sin citas hoy</div>
+                <div class="p-3 rounded bg-dark border border-secondary shadow-sm">
+                    <small class="text-white-50 d-block mb-1">Próximo Compromiso:</small>
+                    <div id="nextAppointment" class="fw-bold text-rose animate__animated animate__pulse animate__infinite">Calculando...</div>
                 </div>
             </div>
         </div>
@@ -176,13 +218,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header border-secondary">
-                <h5 class="modal-title luxury-font text-gold" id="modalTitle">Detalles del Servicio</h5>
+                <h5 class="modal-title luxury-font text-gold" id="modalTitle">Detalle de Operación</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body py-4">
                 <div class="row g-4">
                     <div class="col-6">
-                        <label class="text-rose small fw-bold d-block">CLIENTA</label>
+                        <label class="text-rose small fw-bold d-block">CLIENTA / ALUMNA</label>
                         <span id="mCliente" class="fw-bold fs-5 text-white"></span>
                     </div>
                     <div class="col-6 text-end">
@@ -190,22 +232,12 @@
                         <span id="mEstado" class="badge rounded-pill"></span>
                     </div>
                     <div class="col-6">
-                        <label class="text-rose small fw-bold d-block">SERVICIO</label>
-                        <span id="mServicio" class="text-white"></span>
+                        <label class="text-rose small fw-bold d-block">HORARIO</label>
+                        <span id="mHora" class="text-white"></span>
                     </div>
                     <div class="col-6 text-end">
-                        <label class="text-rose small fw-bold d-block">TOTAL</label>
+                        <label class="text-rose small fw-bold d-block">COSTO</label>
                         <span id="mCosto" class="text-gold fw-bold"></span>
-                    </div>
-                    <div class="col-12">
-                        <hr class="border-secondary">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="fas fa-user-sparkles text-gold me-2"></i>
-                                <span id="mInstructor" class="small text-white-50"></span>
-                            </div>
-                            <button class="btn btn-sm btn-gold px-3" onclick="alert('Abriendo WhatsApp...')"><i class="fab fa-whatsapp"></i> Contactar</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -219,77 +251,96 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Reloj Dinámico
+        // 1. Reloj y Fecha
         setInterval(() => {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString();
-            document.getElementById('date-now').innerText = now.toLocaleDateString('es-MX', {weekday:'long', day:'numeric', month:'long'});
+            document.getElementById('date-now').innerText = now.toLocaleDateString('es-MX', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
         }, 1000);
 
+        // 2. Cargar Datos
+        const reservaciones = JSON.parse(localStorage.getItem("Gestión_Reservaciones")) || [];
         const calendarEl = document.getElementById('calendar');
         const eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
 
-        // Cargar Reservaciones Reales
-        const reservaciones = JSON.parse(localStorage.getItem("Gestión_Reservaciones")) || [];
-        
+        // 3. Mapeo de Eventos
         const eventos = reservaciones.map(res => ({
             title: res.cliente,
             start: `${res.fecha}T${res.hora}`,
-            className: res.pago === 'Pagado' ? 'event-pagado' : 
-                       (res.pago === 'Cancelado' ? 'event-cancelado' : 'event-pendiente'),
-            extendedProps: {
-                instructor: res.instructor,
-                servicio: res.servicio,
-                costo: res.costo,
-                pago: res.pago,
-                telefono: res.telefono
-            }
+            className: res.pago === 'Pagado' ? 'event-pagado' : 'event-pendiente',
+            extendedProps: { ...res }
         }));
 
+        // 4. Inicializar FullCalendar
         const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'es',
+            firstDay: 1, // Lunes
+            fixedWeekCount: false, // Muestra solo las semanas necesarias del mes (normalmente 5)
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,listMonth'
+                right: 'dayGridMonth,timeGridDay,listMonth'
             },
             events: eventos,
-            editable: true,
-            dayMaxEvents: true,
+            
+            // Función para personalizar el contenido del día (Saturación)
+            dayCellContent: function(arg) {
+                const dateStr = arg.date.toISOString().split('T')[0];
+                const appointments = reservaciones.filter(r => r.fecha === dateStr);
+                
+                // Contenedor personalizado
+                let dotClass = 'status-free';
+                if(appointments.length >= 5) dotClass = 'status-full';
+                else if(appointments.length >= 3) dotClass = 'status-medium';
+
+                const dot = document.createElement('div');
+                dot.className = `day-status-dot ${dotClass}`;
+                
+                const dayNum = document.createElement('span');
+                dayNum.innerText = arg.dayNumberText;
+
+                const container = document.createElement('div');
+                container.appendChild(dayNum);
+                container.appendChild(dot);
+                
+                return { domNodes: [container] };
+            },
+
             eventClick: function(info) {
                 const p = info.event.extendedProps;
                 document.getElementById('mCliente').innerText = info.event.title;
-                document.getElementById('mServicio').innerText = p.servicio;
+                document.getElementById('mHora').innerText = p.hora + " hrs";
                 document.getElementById('mCosto').innerText = `$${p.costo}`;
-                document.getElementById('mInstructor').innerText = `Especialista: ${p.instructor}`;
                 
                 const badge = document.getElementById('mEstado');
                 badge.innerText = p.pago;
                 badge.className = `badge rounded-pill ${p.pago === 'Pagado' ? 'bg-success' : 'bg-warning'}`;
                 
                 eventModal.show();
-            },
-            dateClick: function(info) {
-                if(confirm("¿Agendar nueva cita para el " + info.dateStr + "?")) {
-                    window.location.href = 'Gestión_Reservaciones.html';
-                }
             }
         });
 
         calendar.render();
 
-        // Mostrar próxima cita hoy
-        const hoy = new Date().toISOString().split('T')[0];
-        const hoyCita = reservaciones.find(r => r.fecha === hoy);
-        if(hoyCita) {
-            document.getElementById('nextAppointment').innerText = `${hoyCita.hora} - ${hoyCita.cliente}`;
+        // 5. Lógica de Status Operativo
+        actualizarStats();
+
+        function actualizarStats() {
+            const hoy = new Date().toISOString().split('T')[0];
+            const hoyCitas = reservaciones.filter(r => r.fecha === hoy);
+            
+            // Separar por bloques
+            const clases = hoyCitas.filter(r => r.hora >= "10:00" && r.hora <= "13:00").length;
+            const servicios = hoyCitas.filter(r => r.hora >= "16:00" && r.hora <= "19:00").length;
+
+            document.getElementById('clasesCount').innerText = `${clases} / 5 Cupos`;
+            document.getElementById('serviciosCount').innerText = `${servicios} / 8 Cupos`;
+
+            const proxima = hoyCitas.sort((a,b) => a.hora.localeCompare(b.hora))[0];
+            document.getElementById('nextAppointment').innerText = proxima ? `${proxima.hora} - ${proxima.cliente}` : "Sin citas para hoy";
         }
     });
-
-    function filtrar(tipo) {
-        alert("Filtrando citas por: " + tipo + " (Función en desarrollo para conexión de base de datos)");
-    }
 </script>
 
 </body>
