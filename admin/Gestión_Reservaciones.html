@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
-        /* --- ADN VISUAL LK STUDIO (SISTEMA GLOBAL) --- */
+        /* --- ADN VISUAL LK STUDIO --- */
         :root {
             --oro: #D4AF37;
             --oro-brillante: #F1D592;
@@ -34,9 +34,10 @@
         }
 
         .fuente-lujo { font-family: 'Cinzel', serif; letter-spacing: 2px; }
+        .texto-oro { color: var(--oro); }
 
         /* --- SIDEBAR ELITE --- */
-        #sidebarAdmin {
+        #sidebar {
             width: var(--sidebar-width); 
             background: var(--negro-profundo);
             border-right: 1px solid var(--oro); 
@@ -48,31 +49,38 @@
             transition: 0.4s;
         }
 
-        .sidebar-header {
+        .sidebar-logo-container {
             padding: 40px 20px;
             text-align: center;
             border-bottom: 1px solid var(--borde-lujo);
         }
 
         .sidebar-logo {
-            max-width: 160px;
+            max-width: 150px;
             filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+        }
+
+        .nav-menu {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-top: 20px;
         }
 
         .nav-link {
             color: rgba(255,255,255,0.6) !important; 
-            padding: 14px 25px;
+            padding: 12px 25px;
             transition: 0.4s; 
-            font-size: 0.8rem; 
+            font-size: 0.75rem; 
             margin: 4px 15px; 
             border-radius: 50px;
             display: flex;
             align-items: center;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-decoration: none;
         }
 
-        .nav-link i { width: 30px; font-size: 1.1rem; color: var(--oro); }
+        .nav-link i { width: 25px; font-size: 1rem; color: var(--oro); margin-right: 10px; }
 
         .nav-link:hover, .nav-link.active {
             color: var(--oro-brillante) !important; 
@@ -93,7 +101,6 @@
             transition: 0.4s;
         }
 
-        /* --- COMPONENTES DE LUJO --- */
         .tarjeta-elite {
             background: var(--negro-suave);
             border: 1px solid var(--borde-lujo);
@@ -102,15 +109,15 @@
             padding: 30px;
         }
 
+        /* --- FORMULARIOS --- */
         .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         
         .form-control, .form-select {
-            background-color: rgba(0,0,0,0.4) !important; 
+            background-color: rgba(0,0,0,0.5) !important; 
             border: 1px solid #333 !important;
-            color: white !important; 
+            color: var(--oro-brillante) !important; 
             border-radius: 15px;
             padding: 12px;
-            font-size: 0.9rem;
         }
 
         .form-control:focus { border-color: var(--oro) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
@@ -123,14 +130,13 @@
             border: 1px solid var(--borde-lujo);
         }
 
-        .table { color: white !important; vertical-align: middle; margin-bottom: 0; }
+        .table { background: transparent !important; color: white !important; margin-bottom: 0; }
         .table thead th { 
             color: var(--oro); 
             text-transform: uppercase; 
             font-size: 0.7rem; 
             border-bottom: 2px solid var(--oro);
             padding: 15px;
-            letter-spacing: 1px;
         }
 
         .table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
@@ -138,9 +144,9 @@
 
         /* --- ESTADOS --- */
         .badge-vip {
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 50px;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 800;
             text-transform: uppercase;
         }
@@ -149,17 +155,10 @@
 
         .btn-oro {
             background: linear-gradient(45deg, var(--oro), var(--oro-brillante));
-            color: #000;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 25px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            color: #000 !important;
+            font-weight: 700; border: none; border-radius: 50px;
+            padding: 12px 25px; text-transform: uppercase;
         }
-
-        .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); color: #000; }
 
         .widget-stats {
             background: var(--negro-suave);
@@ -170,32 +169,31 @@
         }
 
         @media (max-width: 992px) {
-            #sidebarAdmin { transform: translateX(-100%); }
-            .main-content { margin-left: 0; width: 100%; padding: 20px; }
+            #sidebar { width: 80px; }
+            #sidebar span, #sidebar small { display: none; }
+            .main-content { margin-left: 80px; width: calc(100% - 80px); padding: 20px; }
         }
     </style>
 </head>
 <body>
 
 <nav id="sidebar">
-    <div class="sidebar-logo">
-        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
-        <div class="mt-2 text-center">
-            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Elite System</small>
-        </div>
+    <div class="sidebar-logo-container">
+        <img src="IMG/LKSTUDIO.png" class="sidebar-logo" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
+        <div class="mt-2"><small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.5rem; letter-spacing: 2px;">Elite System</small></div>
     </div>
 
-    <div class="nav-menu mt-3 flex-grow-1" style="overflow-y: auto;">
+    <div class="nav-menu">
         <small class="text-muted px-4 mb-2 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">PRINCIPAL</small>
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
         
         <small class="text-muted px-4 mb-2 mt-3 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">GESTIÓN</small>
-        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-calendar-check"></i> <span>Reservaciones</span></a>
+        <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-calendar-check"></i> <span>Reservaciones</span></a>
         <a href="citas.html" class="nav-link"><i class="fas fa-clock"></i> <span>Citas</span></a>
         <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> <span>Punto de Venta</span></a>
 
         <small class="text-muted px-4 mb-2 mt-3 d-block" style="font-size: 0.6rem; letter-spacing: 2px;">CATÁLOGOS</small>
-        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
+        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
         <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-concierge-bell"></i> <span>Servicios</span></a>
         <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> <span>Cursos</span></a>
         <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie"></i> <span>Instructores</span></a>
@@ -204,42 +202,36 @@
         <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> <span>Reportes</span></a>
     </div>
 
-    <div class="p-4 border-top border-secondary">
-        <a href="index.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill">
-            <i class="fas fa-sign-out-alt me-2"></i><span>Cerrar Sesión</span>
-        </a>
+    <div class="p-3 border-top border-secondary text-center">
+        <a href="index.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill" style="font-size: 0.7rem;">SALIR</a>
     </div>
 </nav>
 
 <main class="main-content">
     <header class="mb-5 animate__animated animate__fadeInDown">
-        <p class="text-rose-gold fw-bold mb-0" style="letter-spacing: 4px; font-size: 0.8rem;">SISTEMA ADMINISTRATIVO</p>
-        <h1 class="fuente-lujo texto-oro display-5 fw-bold">Gestión de Reservaciones</h1>
+        <p class="text-rose-gold fw-bold mb-0" style="letter-spacing: 4px; font-size: 0.8rem;">RESERVACIONES</p>
+        <h1 class="fuente-lujo texto-oro display-5 fw-bold">Gestión Elite</h1>
     </header>
 
     <div class="row g-4">
         <div class="col-xl-4">
             <div class="tarjeta-elite animate__animated animate__fadeInLeft">
-                <h5 class="fuente-lujo texto-oro mb-4"><i class="fas fa-plus-circle me-2"></i>Nueva Reserva</h5>
+                <h5 class="fuente-lujo texto-oro mb-4 border-bottom border-secondary pb-3">Nuevo Registro</h5>
                 <form id="formReserva">
                     <input type="hidden" id="indexReserva">
-                    
                     <div class="mb-3">
-                        <label class="form-label">Cliente Premium</label>
-                        <input type="text" id="cliente" class="form-control" placeholder="Nombre completo" required>
+                        <label class="form-label">Cliente</label>
+                        <input type="text" id="cliente" class="form-control" required>
                     </div>
-
                     <div class="mb-3">
-                        <label class="form-label">Servicio Elite</label>
+                        <label class="form-label">Servicio</label>
                         <select id="servicio" class="form-select" required>
-                            <option value="" selected disabled>Seleccione...</option>
+                            <option value="" disabled selected>Seleccione...</option>
                             <option value="Uñas Acrílicas">Uñas Acrílicas</option>
-                            <option value="Balayage Elite">Balayage Elite</option>
-                            <option value="Diseño Mariposa">Diseño Mariposa</option>
-                            <option value="Curso Master Gel">Curso Master Gel</option>
+                            <option value="Manicure VIP">Manicure VIP</option>
+                            <option value="Pedicure Elite">Pedicure Elite</option>
                         </select>
                     </div>
-
                     <div class="row mb-3">
                         <div class="col-6">
                             <label class="form-label">Fecha</label>
@@ -253,30 +245,18 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="mb-4">
                         <label class="form-label">Inversión ($)</label>
-                        <input type="number" id="costo" class="form-control fw-bold" style="color: var(--oro-brillante) !important;" placeholder="0.00" required>
+                        <input type="number" id="costo" class="form-control" placeholder="0.00" required>
                     </div>
-
-                    <button type="submit" id="btnSubmit" class="btn-oro w-100">
-                        <i class="fas fa-save me-2"></i>Guardar Registro
-                    </button>
-                    <button type="button" id="btnCancelarEdit" class="btn btn-sm btn-link text-white-50 w-100 mt-2 d-none" onclick="cancelarEdicion()">Cancelar Edición</button>
+                    <button type="submit" id="btnSubmit" class="btn-oro w-100">Guardar Reserva</button>
+                    <button type="button" id="btnCancelarEdit" class="btn btn-link text-white-50 w-100 mt-2 d-none" onclick="cancelarEdicion()">Cancelar</button>
                 </form>
             </div>
         </div>
 
         <div class="col-xl-8">
             <div class="tabla-contenedor animate__animated animate__fadeInRight">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-                    <h5 class="fuente-lujo text-white mb-0">Listado Maestro</h5>
-                    <div class="position-relative">
-                        <input type="text" id="busqueda" class="form-control ps-5" placeholder="Buscar cliente..." onkeyup="renderReservas()">
-                        <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-white-50"></i>
-                    </div>
-                </div>
-
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -288,8 +268,7 @@
                                 <th class="text-end">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaReservas">
-                            </tbody>
+                        <tbody id="tablaReservas"></tbody>
                     </table>
                 </div>
             </div>
@@ -297,13 +276,13 @@
             <div class="row g-3 mt-3">
                 <div class="col-md-6">
                     <div class="widget-stats">
-                        <small class="text-rose-gold text-uppercase d-block mb-1 fw-bold">Reservaciones Totales</small>
+                        <small class="text-rose-gold text-uppercase d-block mb-1">Total Reservas</small>
                         <span id="countTotal" class="h2 fuente-lujo texto-oro">0</span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="widget-stats">
-                        <small class="text-rose-gold text-uppercase d-block mb-1 fw-bold">Ingresos Proyectados</small>
+                        <small class="text-rose-gold text-uppercase d-block mb-1">Total Proyectado</small>
                         <span id="montoTotal" class="h2 fuente-lujo texto-oro">$0.00</span>
                     </div>
                 </div>
@@ -313,39 +292,36 @@
 </main>
 
 <script>
-    let reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
+    let reservaciones = JSON.parse(localStorage.getItem("lk_reservas")) || [];
 
     function renderReservas() {
         const tabla = document.getElementById("tablaReservas");
-        const filtro = document.getElementById("busqueda").value.toLowerCase();
         tabla.innerHTML = "";
         let suma = 0;
 
         reservaciones.forEach((r, index) => {
-            if (r.cliente.toLowerCase().includes(filtro)) {
-                suma += parseFloat(r.costo);
-                const statusClass = r.pago === 'Pagado' ? 'bg-pagado' : 'bg-pendiente';
-                
-                tabla.innerHTML += `
-                    <tr class="animate__animated animate__fadeIn">
-                        <td>
-                            <div class="fw-bold text-white">${r.cliente}</div>
-                            <small class="text-rose-gold">${r.servicio}</small>
-                        </td>
-                        <td class="small">${r.fecha}</td>
-                        <td><span class="badge-vip ${statusClass}">${r.pago}</span></td>
-                        <td class="fw-bold" style="color: var(--oro-brillante)">$${parseFloat(r.costo).toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `;
-            }
+            suma += parseFloat(r.costo);
+            const statusClass = r.pago === 'Pagado' ? 'bg-pagado' : 'bg-pendiente';
+            
+            tabla.innerHTML += `
+                <tr>
+                    <td>
+                        <div class="fw-bold text-white text-uppercase" style="font-size:0.8rem">${r.cliente}</div>
+                        <small class="text-rose-gold">${r.servicio}</small>
+                    </td>
+                    <td class="small">${r.fecha}</td>
+                    <td><span class="badge-vip ${statusClass}">${r.pago}</span></td>
+                    <td class="fw-bold texto-oro">$${parseFloat(r.costo).toFixed(2)}</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm text-warning me-2" onclick="editar(${index})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm text-danger" onclick="eliminar(${index})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `;
         });
 
         document.getElementById("countTotal").innerText = reservaciones.length;
-        document.getElementById("montoTotal").innerText = `$${suma.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+        document.getElementById("montoTotal").innerText = `$${suma.toFixed(2)}`;
     }
 
     document.getElementById("formReserva").addEventListener("submit", function(e){
@@ -362,15 +338,15 @@
         if(id === "") reservaciones.push(r);
         else reservaciones[id] = r;
 
-        localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
+        localStorage.setItem("lk_reservas", JSON.stringify(reservaciones));
         cancelarEdicion();
         renderReservas();
     });
 
     function eliminar(i) {
-        if(confirm("¿Desea eliminar este registro de reservación?")) {
+        if(confirm("¿Eliminar registro?")) {
             reservaciones.splice(i, 1);
-            localStorage.setItem("reservaciones", JSON.stringify(reservaciones));
+            localStorage.setItem("lk_reservas", JSON.stringify(reservaciones));
             renderReservas();
         }
     }
@@ -383,16 +359,14 @@
         document.getElementById("pago").value = r.pago;
         document.getElementById("fecha").value = r.fecha;
         document.getElementById("costo").value = r.costo;
-        
-        document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-sync me-2"></i>Actualizar Registro';
+        document.getElementById("btnSubmit").innerText = 'Actualizar Registro';
         document.getElementById("btnCancelarEdit").classList.remove("d-none");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function cancelarEdicion() {
         document.getElementById("formReserva").reset();
         document.getElementById("indexReserva").value = "";
-        document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-save me-2"></i>Guardar Registro';
+        document.getElementById("btnSubmit").innerText = 'Guardar Reserva';
         document.getElementById("btnCancelarEdit").classList.add("d-none");
     }
 
