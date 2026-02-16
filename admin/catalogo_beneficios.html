@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LK Studio | Gestión de Beneficios VIP</title>
+    <title>LK Studio | Gestión Elite de Beneficios</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,10 +14,12 @@
         :root {
             --gold: #D4AF37;
             --gold-br: #F1D592;
-            --rose: #E6B8A2; 
+            --rose: #E6B8A2; /* Golden Rose */
             --deep: #050505;
             --sidebar-width: 280px;
-            --table-row-bg: #121212;
+            --card-bg: #0f0f0f;
+            --row-bg: #151515;
+            --rose-gradient: linear-gradient(90deg, #2c1f1a 0%, #4d362d 100%);
         }
 
         body {
@@ -27,11 +29,12 @@
             min-height: 100vh;
             margin: 0;
             display: flex;
+            overflow-x: hidden;
         }
 
-        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+        .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-        /* --- SIDEBAR UNIFICADO --- */
+        /* --- SIDEBAR MAESTRO --- */
         #sidebarAdmin {
             width: var(--sidebar-width);
             background: var(--deep);
@@ -43,15 +46,14 @@
             flex-direction: column;
         }
 
-        .sidebar-logo-container {
-            padding: 30px;
+        .sidebar-logo {
+            padding: 40px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
-        .sidebar-logo-container img {
-            max-width: 140px;
-            height: auto;
+        .sidebar-logo img {
+            max-width: 160px;
             filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
         }
 
@@ -59,10 +61,10 @@
             font-size: 0.65rem;
             text-transform: uppercase;
             color: var(--rose);
-            padding: 20px 25px 5px;
-            letter-spacing: 2px;
+            padding: 25px 25px 10px;
+            letter-spacing: 3px;
             font-weight: 800;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         .nav-link {
@@ -71,81 +73,85 @@
             transition: 0.3s;
             font-size: 0.85rem;
             margin: 2px 15px;
-            border-radius: 8px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
         }
 
-        .nav-link i { width: 25px; color: var(--gold); font-size: 1rem; }
+        .nav-link i { width: 30px; color: var(--gold); font-size: 1.1rem; }
 
-        .nav-link:hover {
+        .nav-link:hover, .nav-link.active {
             color: var(--gold-br) !important;
-            background: rgba(212, 175, 55, 0.05);
+            background: rgba(212, 175, 55, 0.08);
         }
 
         .nav-link.active { 
             border-left: 4px solid var(--rose); 
-            background: rgba(230, 184, 162, 0.1);
             color: var(--rose) !important;
-            font-weight: 600;
+            background: rgba(230, 184, 162, 0.05);
         }
 
-        /* --- MAIN CONTENT --- */
+        /* --- CONTENIDO PRINCIPAL --- */
         .main-content {
             margin-left: var(--sidebar-width);
             width: calc(100% - var(--sidebar-width));
-            padding: 40px;
+            padding: 50px;
         }
 
-        /* --- ESTÉTICA DE TABLA ELITE (FLOTANTE) --- */
+        /* --- ESTÉTICA DE LA TABLA (NUEVO COLOR) --- */
         .luxury-card {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 25px;
-            padding: 10px;
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
         }
 
         .table { 
+            color: #fff; 
             border-collapse: separate; 
-            border-spacing: 0 12px; 
-            color: #fff;
+            border-spacing: 0 10px; 
+            margin-top: -10px;
         }
 
         .table thead { 
-            background: linear-gradient(90deg, #2c1f1a 0%, #4d362d 100%);
+            background: var(--rose-gradient);
             color: var(--rose); 
-            text-transform: uppercase; 
-            font-size: 0.75rem; 
-            letter-spacing: 2px;
         }
 
         .table thead th {
             border: none;
-            padding: 15px;
-            border-bottom: 2px solid var(--rose) !important;
+            padding: 18px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 900;
+            text-transform: uppercase;
         }
 
         .table tbody tr {
-            background: var(--table-row-bg);
-            transition: 0.3s all ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background: var(--row-bg);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
 
         .table tbody tr:hover {
-            background: #1a1a1a;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
+            background: #1e1e1e !important;
+            transform: translateY(-3px) scale(1.005);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
         .table td {
-            padding: 20px 15px !important;
+            padding: 20px 18px !important;
             border: none !important;
             vertical-align: middle;
         }
 
-        .table tbody tr td:first-child { border-radius: 15px 0 0 15px; border-left: 3px solid var(--gold) !important; }
+        /* Bordes redondeados por fila */
+        .table tbody tr td:first-child { border-radius: 15px 0 0 15px; border-left: 2px solid transparent; }
         .table tbody tr td:last-child { border-radius: 0 15px 15px 0; }
+        .table tbody tr:hover td:first-child { border-left: 2px solid var(--gold); }
 
-        /* BADGES */
+        /* Componentes de Celda */
         .pts-badge {
             background: rgba(212, 175, 55, 0.1);
             color: var(--gold-br);
@@ -153,96 +159,110 @@
             border-radius: 10px;
             border: 1px solid rgba(212, 175, 55, 0.3);
             font-weight: 800;
-            font-size: 0.9rem;
+            display: inline-block;
         }
 
         .badge-vip {
             border: 1px solid var(--rose);
             color: var(--rose);
-            padding: 4px 12px;
+            padding: 5px 15px;
             border-radius: 50px;
             font-size: 0.7rem;
             font-weight: 700;
-            text-transform: uppercase;
+            background: rgba(230, 184, 162, 0.05);
         }
 
-        /* FORMULARIOS */
+        .status-pill {
+            font-size: 0.65rem;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* --- BOTONES Y FORMULARIOS --- */
+        .btn-gold {
+            background: linear-gradient(45deg, var(--gold), #f1d592);
+            color: #000;
+            font-weight: 800;
+            border: none;
+            border-radius: 15px;
+            padding: 12px 25px;
+            transition: 0.3s;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            color: #000;
+        }
+
         .form-control, .form-select {
             background: #111;
             border: 1px solid #333;
             color: #fff;
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 15px;
+            padding: 12px 18px;
         }
 
         .form-control:focus {
-            background: #151515;
-            color: #fff;
+            background: #161616;
             border-color: var(--rose);
-            box-shadow: 0 0 15px rgba(230, 184, 162, 0.2);
+            box-shadow: 0 0 15px rgba(230, 184, 162, 0.1);
+            color: #fff;
         }
-
-        .btn-gold {
-            background: linear-gradient(45deg, var(--gold), var(--gold-br));
-            color: #000;
-            font-weight: 800;
-            border: none;
-            border-radius: 12px;
-            transition: 0.4s;
-        }
-
-        .btn-gold:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
 
         @media (max-width: 992px) {
             #sidebarAdmin { display: none; }
-            .main-content { margin-left: 0; width: 100%; }
+            .main-content { margin-left: 0; width: 100%; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
 <nav id="sidebarAdmin">
-    <div class="sidebar-logo-container">
+    <div class="sidebar-logo">
         <img src="IMG/LKSTUDIO.png" alt="LK STUDIO">
     </div>
+    
     <div class="nav flex-column overflow-auto mt-2">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-pie me-2"></i> Dashboard</a>
-        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-check me-2"></i> Agenda VIP</a>
-        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-concierge-bell me-2"></i> Reservaciones</a>
-        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register me-2"></i> Punto de Venta</a>
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-columns"></i> Dashboard</a>
+        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-star"></i> Agenda VIP</a>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-clock"></i> Reservaciones</a>
+        <a href="punto_venta.html" class="nav-link"><i class="fas fa-wallet"></i> Punto de Venta</a>
         
         <div class="sidebar-divider">Catálogos Master</div>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-sparkles me-2"></i> Servicios</a>
-        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap me-2"></i> Cursos</a>
-        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie me-2"></i> Instructores</a>
-        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-crown me-2"></i> Beneficios VIP</a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-sparkles"></i> Servicios</a>
+        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Academia</a>
+        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie"></i> Instructores</a>
+        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-crown"></i> Beneficios VIP</a>
         
-        <div class="sidebar-divider">Inteligencia de Negocio</div>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar me-2"></i> Reportes</a>
+        <div class="sidebar-divider">Inteligencia</div>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-pie"></i> Reportes</a>
     </div>
 </nav>
 
 <main class="main-content">
     <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeIn">
         <div>
-            <h1 class="luxury-font text-gold fw-bold mb-0">CATÁLOGO VIP</h1>
-            <p class="text-rose small fw-bold mb-0">GESTIÓN DE RECOMPENSAS EXCLUSIVAS</p>
+            <h1 class="luxury-font text-gold fw-900 mb-0">CATÁLOGO VIP</h1>
+            <p class="text-rose fw-bold small mb-0 text-uppercase" style="letter-spacing: 4px;">Exclusive Rewards Management</p>
         </div>
-        <button class="btn btn-gold px-4 py-3" data-bs-toggle="modal" data-bs-target="#modalBeneficio" onclick="resetForm()">
+        <button class="btn btn-gold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalBeneficio" onclick="resetForm()">
             <i class="fas fa-plus-circle me-2"></i> NUEVO BENEFICIO
         </button>
     </div>
 
     <div class="luxury-card animate__animated animate__fadeInUp">
         <div class="table-responsive">
-            <table class="table align-middle">
+            <table class="table table-hover align-middle">
                 <thead>
                     <tr>
-                        <th style="width: 35%;">RECOMPENSA</th>
-                        <th>NIVEL</th>
-                        <th>COSTO</th>
-                        <th>ESTADO</th>
-                        <th class="text-end">ACCIONES</th>
+                        <th>Detalle del Beneficio</th>
+                        <th>Nivel Acceso</th>
+                        <th>Costo Canje</th>
+                        <th>Estado</th>
+                        <th class="text-end">Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="listaBeneficios">
@@ -254,21 +274,21 @@
 
 <div class="modal fade" id="modalBeneficio" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark" style="border: 2px solid var(--gold); border-radius: 30px;">
-            <div class="modal-header border-0 p-4">
-                <h5 class="modal-title luxury-font text-gold"><i class="fas fa-edit me-2"></i> CONFIGURAR RECOMPENSA</h5>
+        <div class="modal-content bg-dark" style="border: 1px solid var(--gold); border-radius: 30px;">
+            <div class="modal-header border-0 p-4 pb-0">
+                <h5 class="modal-title luxury-font text-gold">CONFIGURAR BENEFICIO</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <form id="formBeneficio">
-                <div class="modal-body p-4 pt-0">
+                <div class="modal-body p-4">
                     <input type="hidden" id="editIndex">
                     <div class="mb-3">
-                        <label class="text-rose small fw-bold mb-2">NOMBRE DEL BENEFICIO</label>
+                        <label class="text-rose small fw-bold mb-2">NOMBRE DEL PREMIO</label>
                         <input type="text" class="form-control" id="benNombre" required>
                     </div>
                     <div class="row g-3 mb-3">
                         <div class="col-6">
-                            <label class="text-rose small fw-bold mb-2">NIVEL VIP</label>
+                            <label class="text-rose small fw-bold mb-2">NIVEL ELITE</label>
                             <select class="form-select" id="benNivel">
                                 <option>Silver</option>
                                 <option>Gold</option>
@@ -276,21 +296,21 @@
                             </select>
                         </div>
                         <div class="col-6">
-                            <label class="text-rose small fw-bold mb-2">PUNTOS</label>
+                            <label class="text-rose small fw-bold mb-2">COSTO PUNTOS</label>
                             <input type="number" class="form-control" id="benPuntos" required>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="text-rose small fw-bold mb-2">DESCRIPCIÓN BREVE</label>
+                    <div class="mb-4">
+                        <label class="text-rose small fw-bold mb-2">DESCRIPCIÓN CORTA</label>
                         <textarea class="form-control" id="benDesc" rows="2"></textarea>
                     </div>
-                    <div class="form-check form-switch mt-3">
+                    <div class="form-check form-switch custom-switch">
                         <input class="form-check-input" type="checkbox" id="benActivo" checked>
-                        <label class="form-check-label text-white small">Beneficio Activo en Sistema</label>
+                        <label class="form-check-label text-white-50">Activar para canje inmediato</label>
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-4">
-                    <button type="submit" class="btn btn-gold w-100 py-3">GUARDAR EN CATÁLOGO</button>
+                    <button type="submit" class="btn btn-gold w-100 py-3">GUARDAR EN EL SISTEMA</button>
                 </div>
             </form>
         </div>
@@ -300,37 +320,35 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     let beneficios = JSON.parse(localStorage.getItem("LK_BENEFICIOS")) || [
-        {nombre: "Limpieza Profunda Gratis", nivel: "Silver", puntos: 100, desc: "Protocolo de higiene lash profesional.", activo: true},
-        {nombre: "Parches de Hidrogel Premium", nivel: "Gold", puntos: 250, desc: "Sustitución de cinta médica por colágeno.", activo: true},
-        {nombre: "Retoque Express 20min", nivel: "Diamond", puntos: 600, desc: "Relleno rápido entre aplicaciones.", activo: true}
+        {nombre: "Limpieza Profunda Gratis", nivel: "Diamond", puntos: 350, desc: "Servicio de spa para extensiones.", activo: true},
+        {nombre: "Parches de Hidratación", nivel: "Silver", puntos: 100, desc: "Colágeno durante la aplicación.", activo: true}
     ];
 
     const tabla = document.getElementById('listaBeneficios');
-    const form = document.getElementById('formBeneficio');
 
     function renderTable() {
         tabla.innerHTML = '';
         beneficios.forEach((b, index) => {
             tabla.innerHTML += `
-                <tr>
+                <tr class="animate__animated animate__fadeIn">
                     <td>
                         <div class="fw-bold text-white fs-6">${b.nombre}</div>
                         <div class="text-rose opacity-75 small">${b.desc}</div>
                     </td>
-                    <td><span class="badge-vip">${b.nivel}</span></td>
+                    <td><span class="badge-vip text-uppercase">${b.nivel}</span></td>
                     <td><span class="pts-badge">${b.puntos} PTS</span></td>
                     <td>
-                        <span class="badge ${b.activo ? 'bg-success text-dark' : 'bg-danger'} py-2 px-3" style="font-size: 0.6rem; border-radius: 8px;">
+                        <span class="status-pill ${b.activo ? 'bg-success text-dark' : 'bg-danger text-white'}">
                             ${b.activo ? 'ACTIVO' : 'PAUSADO'}
                         </span>
                     </td>
                     <td class="text-end">
-                        <div class="btn-group shadow">
-                            <button class="btn btn-sm btn-dark text-gold border-secondary" onclick="editBen(${index})">
-                                <i class="fas fa-pen-nib"></i>
+                        <div class="btn-group shadow-sm">
+                            <button class="btn btn-sm btn-dark border-secondary text-gold" onclick="editBen(${index})">
+                                <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-dark text-danger border-secondary" onclick="deleteBen(${index})">
-                                <i class="fas fa-trash"></i>
+                            <button class="btn btn-sm btn-dark border-secondary text-danger" onclick="deleteBen(${index})">
+                                <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
                     </td>
@@ -340,7 +358,7 @@
         localStorage.setItem("LK_BENEFICIOS", JSON.stringify(beneficios));
     }
 
-    form.onsubmit = (e) => {
+    document.getElementById('formBeneficio').onsubmit = (e) => {
         e.preventDefault();
         const index = document.getElementById('editIndex').value;
         const data = {
@@ -350,11 +368,12 @@
             desc: document.getElementById('benDesc').value,
             activo: document.getElementById('benActivo').checked
         };
+
         if(index === "") beneficios.push(data);
         else beneficios[index] = data;
-        
-        bootstrap.Modal.getInstance(document.getElementById('modalBeneficio')).hide();
+
         renderTable();
+        bootstrap.Modal.getInstance(document.getElementById('modalBeneficio')).hide();
     };
 
     window.editBen = (i) => {
@@ -369,10 +388,16 @@
     };
 
     window.deleteBen = (i) => {
-        if(confirm("¿Retirar beneficio?")) { beneficios.splice(i,1); renderTable(); }
+        if(confirm("¿Eliminar este beneficio permanentemente?")) {
+            beneficios.splice(i, 1);
+            renderTable();
+        }
     };
 
-    window.resetForm = () => { form.reset(); document.getElementById('editIndex').value = ""; };
+    window.resetForm = () => {
+        document.getElementById('formBeneficio').reset();
+        document.getElementById('editIndex').value = "";
+    };
 
     renderTable();
 </script>
