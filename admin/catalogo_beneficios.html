@@ -14,27 +14,28 @@
         /* --- ADN VISUAL LK STUDIO --- */
         :root {
             --oro: #D4AF37;
-            --oro-brillante: #f1d592;
-            --rose-gold: #e6b8a2;
+            --oro-brillante: #F1D592;
+            --rose-gold: #E6B8A2; 
             --negro-profundo: #0A0A0A;
-            --negro-suave: #121212;
+            --negro-suave: #161616;
             --sidebar-width: 280px;
             --borde-lujo: rgba(212, 175, 55, 0.25);
         }
 
         body {
-            background: radial-gradient(circle at top, #1a1a1a 0%, var(--negro-profundo) 100%);
+            background-color: var(--negro-profundo);
+            background-image: radial-gradient(circle at top right, #1e1e1e, var(--negro-profundo));
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            display: flex;
             min-height: 100vh;
+            display: flex;
+            margin: 0;
             overflow-x: hidden;
         }
 
         .fuente-lujo { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-        /* --- SIDEBAR ELITE --- */
+        /* --- SIDEBAR --- */
         #sidebar {
             width: var(--sidebar-width);
             background: var(--negro-profundo);
@@ -44,23 +45,23 @@
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            transition: 0.4s;
         }
 
         .sidebar-logo { padding: 40px 20px; text-align: center; border-bottom: 1px solid var(--borde-lujo); }
-        .sidebar-logo img { max-width: 160px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4)); }
+        .sidebar-logo img { max-width: 150px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4)); }
 
         .nav-link {
             color: rgba(255,255,255,0.6) !important;
-            padding: 15px 25px;
+            padding: 14px 25px;
             display: flex;
             align-items: center;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: 0.3s;
-            border-radius: 50px;
+            transition: 0.4s;
+            text-decoration: none;
             margin: 4px 15px;
+            border-radius: 50px;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -89,7 +90,7 @@
             border-radius: 35px;
             overflow: hidden;
             border: 1px solid var(--borde-lujo);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
             margin-bottom: 50px;
         }
 
@@ -99,48 +100,48 @@
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
             border-radius: 30px;
-            padding: 40px;
+            padding: 35px;
             border: 1px solid var(--oro);
             bottom: 10%;
-            max-width: 85%;
+            max-width: 70%;
             margin: 0 auto;
         }
 
-        /* --- CARDS Y FORMS --- */
+        /* --- TARJETAS Y FORMULARIOS --- */
         .tarjeta-elite {
             background: var(--negro-suave);
             border: 1px solid var(--borde-lujo);
             border-radius: 30px;
-            padding: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            padding: 30px;
         }
+
+        .btn-oro {
+            background: linear-gradient(135deg, var(--oro), var(--oro-brillante));
+            color: #000 !important;
+            font-weight: 800; border: none; border-radius: 50px;
+            padding: 12px 30px; transition: 0.4s;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
 
         .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
         .form-control, .form-select {
             background: rgba(0,0,0,0.4) !important;
             border: 1px solid #333 !important;
-            color: #fff !important;
+            color: var(--oro-brillante) !important;
             border-radius: 15px;
             padding: 12px;
         }
 
         .form-control:focus { border-color: var(--oro) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 
-        .btn-oro {
-            background: linear-gradient(135deg, var(--oro), var(--oro-brillante));
-            color: #000 !important;
-            font-weight: 800; border: none; border-radius: 50px;
-            padding: 14px 30px; transition: 0.4s;
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-
-        .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
-
-        /* --- TABLA ELITE --- */
+        /* --- TABLA ELITE (CORREGIDA) --- */
         .tabla-contenedor {
             background: var(--negro-suave);
-            border-radius: 30px;
+            border-radius: 35px;
             padding: 30px;
             border: 1px solid var(--borde-lujo);
         }
@@ -150,9 +151,9 @@
             color: var(--oro);
             text-transform: uppercase;
             font-size: 0.75rem;
-            letter-spacing: 1px;
             border-bottom: 2px solid var(--oro);
             padding: 15px;
+            letter-spacing: 1px;
         }
 
         .table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
@@ -167,17 +168,18 @@
             color: var(--oro); font-size: 1.2rem;
         }
 
-        .widget-stats {
+        .widget-total {
             background: var(--negro-suave);
-            border: 1px solid var(--borde-lujo);
+            border: 1px solid var(--oro);
             border-radius: 20px;
-            padding: 20px;
-            text-align: center;
+            padding: 15px 25px;
+            display: inline-block;
         }
 
         @media (max-width: 992px) {
-            #sidebar { transform: translateX(-100%); }
-            #content { width: 100%; margin-left: 0; padding: 20px; }
+            #sidebar { width: 80px; }
+            #sidebar span, #sidebar .mt-2 { display: none; }
+            #content { width: calc(100% - 80px); margin-left: 80px; padding: 20px; }
         }
     </style>
 </head>
@@ -186,24 +188,24 @@
 
 <nav id="sidebar">
     <div class="sidebar-logo">
-        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/160x60/0A0A0A/D4AF37?text=LK+STUDIO'">
+        <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
         <div class="mt-2 text-center">
             <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Elite System</small>
         </div>
     </div>
 
-    <div class="nav flex-column mt-4 flex-grow-1">
-        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
-        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-calendar-check"></i> Reservas</a>
-        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> Beneficios VIP</a>
-        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> Ventas</a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-spa"></i> Servicios</a>
-        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> Reportes</a>
+    <div class="nav-menu mt-4 flex-grow-1">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-receipt"></i> <span>Reservas</span></a>
+        <a href="catalogo_beneficios.html" class="nav-link active"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
+        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> <span>Ventas</span></a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-concierge-bell"></i> <span>Servicios</span></a>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Reportes</span></a>
     </div>
 
-    <div class="p-4 mt-auto">
+    <div class="p-4">
         <a href="index.html" class="btn btn-outline-danger btn-sm w-100 rounded-pill">
-            <i class="fas fa-power-off me-2"></i> Salir
+            <i class="fas fa-power-off me-2"></i> <span>Salir</span>
         </a>
     </div>
 </nav>
@@ -211,28 +213,30 @@
 <div id="content">
     
     <div id="luxurySlider" class="carousel slide carousel-fade carousel-luxury animate__animated animate__fadeIn" data-bs-ride="carousel">
-        <div class="carousel-inner h-100">
-            <div class="carousel-item active h-100">
-                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1500') center/cover;">
-                    <div class="carousel-caption">
-                        <h1 class="fuente-lujo texto-oro">Experiencia Elite</h1>
-                        <p class="text-rose-gold text-uppercase" style="letter-spacing: 2px;">Configuración de Privilegios para Clientes VIP</p>
-                        <button class="btn-oro btn-sm mt-3" onclick="document.getElementById('titulo').focus()">Crear Nueva Amenidad</button>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1500') center/cover;">
+                    <div class="carousel-caption animate__animated animate__zoomIn">
+                        <h1 class="fuente-lujo texto-oro display-5">Experiencia Elite</h1>
+                        <p class="text-rose-gold text-uppercase mb-4" style="letter-spacing: 3px;">Personalización de privilegios exclusivos</p>
+                        <button class="btn-oro" onclick="document.getElementById('titulo').focus()">
+                            <i class="fas fa-plus me-2"></i>Añadir Nuevo
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row mb-5 align-items-end">
+    <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
         <div class="col-md-8">
-            <p class="text-rose-gold fw-bold mb-0" style="letter-spacing: 4px; font-size: 0.8rem;">CATÁLOGO MAESTRO</p>
-            <h1 class="fuente-lujo texto-oro display-5 fw-bold">Gestión de Beneficios</h1>
+            <h1 class="fuente-lujo texto-oro mb-1">Gestión de Beneficios</h1>
+            <p class="text-rose-gold small text-uppercase fw-bold" style="letter-spacing: 4px;">Catálogo Maestro de Amenidades</p>
         </div>
-        <div class="col-md-4">
-            <div class="widget-stats">
-                <small class="text-rose-gold text-uppercase d-block mb-1 fw-bold">Beneficios Activos</small>
-                <span class="fuente-lujo texto-oro h2" id="countTotal">0</span>
+        <div class="col-md-4 text-md-end">
+             <div class="widget-total">
+                <small class="text-white-50 d-block text-uppercase fw-bold" style="font-size: 0.6rem;">Total Activos</small>
+                <span class="texto-oro fw-bold h3 m-0" id="countTotal">0</span>
             </div>
         </div>
     </div>
@@ -240,43 +244,50 @@
     <div class="row g-4">
         <div class="col-xl-4">
             <div class="tarjeta-elite animate__animated animate__fadeInLeft">
-                <h5 class="fuente-lujo texto-oro mb-4 border-bottom border-secondary pb-3"><i class="fas fa-edit me-2"></i>Editor VIP</h5>
+                <h5 class="fuente-lujo texto-oro mb-4 border-bottom border-secondary pb-3">
+                    <i class="fas fa-edit me-2"></i>Editor VIP
+                </h5>
                 <form id="formBeneficio">
                     <input type="hidden" id="indexBeneficio">
+                    
                     <div class="mb-3">
                         <label class="form-label">Nombre del Privilegio</label>
                         <input type="text" id="titulo" class="form-control" placeholder="Ej. Copa de Cortesía" required>
                     </div>
+
                     <div class="mb-3">
-                        <label class="form-label">Categoría / Ícono</label>
+                        <label class="form-label">Categoría & Icono</label>
                         <select id="icono" class="form-select">
                             <option value="fa-glass-cheers">🍷 Bebidas & Brindis</option>
                             <option value="fa-spa">🧖‍♀️ Spa & Relax</option>
                             <option value="fa-star">✨ Servicio Premium</option>
                             <option value="fa-wifi">📶 Conexión VIP</option>
                             <option value="fa-gift">🎁 Regalos</option>
+                            <option value="fa-gem">💎 Exclusividad</option>
                         </select>
                     </div>
+
                     <div class="mb-4">
                         <label class="form-label">Descripción del Beneficio</label>
-                        <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles exclusivos..." required></textarea>
+                        <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles de la amenidad..." required></textarea>
                     </div>
-                    <button type="submit" id="btnGuardar" class="btn-oro w-100">
-                        <i class="fas fa-save me-2"></i>Actualizar Catálogo
+
+                    <button type="submit" id="btnGuardar" class="btn-oro w-100 py-3">
+                        <i class="fas fa-save me-2"></i>Guardar en Catálogo
                     </button>
-                    <button type="button" id="btnCancelarEdit" class="btn btn-sm btn-link text-white-50 w-100 mt-2 d-none" onclick="cancelarEdicion()">Cancelar</button>
+                    <button type="button" id="btnCancelarEdit" class="btn btn-sm btn-link text-white-50 w-100 mt-2 d-none" onclick="resetForm()">Cancelar</button>
                 </form>
             </div>
         </div>
 
         <div class="col-xl-8">
-            <div class="tabla-contenedor animate__animated animate__fadeInRight">
+            <div class="tabla-contenedor animate__animated animate__fadeInRight shadow-lg">
                 <div class="table-responsive">
-                    <table class="table align-middle">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th>Privilegio & Descripción</th>
-                                <th class="text-end">Gestión</th>
+                                <th>Privilegio / Amenidad</th>
+                                <th class="text-end">Acciones Elite</th>
                             </tr>
                         </thead>
                         <tbody id="tablaBeneficios">
@@ -301,20 +312,20 @@
         document.getElementById("countTotal").innerText = beneficios.length;
         
         tabla.innerHTML = beneficios.map((b, i) => `
-            <tr>
+            <tr class="animate__animated animate__fadeIn">
                 <td>
                     <div class="d-flex align-items-center">
                         <div class="icono-preview me-3">
                             <i class="fas ${b.icono}"></i>
                         </div>
                         <div>
-                            <div class="fw-bold text-white text-uppercase" style="letter-spacing:1px;">${b.titulo}</div>
+                            <div class="text-white fw-bold text-uppercase" style="letter-spacing:1px; font-size: 0.9rem;">${b.titulo}</div>
                             <div class="text-white-50 small">${b.descripcion}</div>
                         </div>
                     </div>
                 </td>
                 <td class="text-end">
-                    <button class="btn btn-sm btn-outline-warning border-0" onclick="editar(${i})">
+                    <button class="btn btn-sm btn-outline-warning border-0 me-1" onclick="editar(${i})">
                         <i class="fas fa-pen"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminar(${i})">
@@ -333,17 +344,20 @@
             descripcion: document.getElementById("descripcion").value,
             icono: document.getElementById("icono").value
         };
-        
-        if(index === "") beneficios.push(item);
-        else beneficios[index] = item;
+
+        if(index === "") {
+            beneficios.push(item);
+        } else {
+            beneficios[index] = item;
+        }
         
         localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
-        cancelarEdicion();
+        resetForm();
         renderTabla();
     });
 
     function eliminar(i) {
-        if(confirm("¿Segura que desea eliminar este privilegio de la lista de élite?")) {
+        if(confirm("¿Segura que desea retirar este beneficio del catálogo elite?")) {
             beneficios.splice(i, 1);
             localStorage.setItem("lk_vip_items", JSON.stringify(beneficios));
             renderTabla();
@@ -356,15 +370,16 @@
         document.getElementById("descripcion").value = b.descripcion;
         document.getElementById("icono").value = b.icono;
         document.getElementById("indexBeneficio").value = i;
-        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-sync-alt me-2"></i>Guardar Cambios';
+        
+        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-sync-alt me-2"></i>Actualizar Cambios';
         document.getElementById("btnCancelarEdit").classList.remove("d-none");
-        window.scrollTo({ top: 300, behavior: 'smooth' });
+        window.scrollTo({ top: 400, behavior: 'smooth' });
     }
 
-    function cancelarEdicion() {
+    function resetForm() {
         document.getElementById("formBeneficio").reset();
         document.getElementById("indexBeneficio").value = "";
-        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-save me-2"></i>Actualizar Catálogo';
+        document.getElementById("btnGuardar").innerHTML = '<i class="fas fa-save me-2"></i>Guardar en Catálogo';
         document.getElementById("btnCancelarEdit").classList.add("d-none");
     }
 
