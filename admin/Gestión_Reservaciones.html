@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Elite Management | LK Studio</title>
+    <title>LK Studio | Elite Management System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +34,7 @@
 
         .fuente-lujo { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-        /* --- SIDEBAR --- */
+        /* --- SIDEBAR MEJORADO --- */
         #sidebar {
             width: var(--sidebar-width);
             background: var(--negro-profundo);
@@ -44,122 +44,89 @@
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            transition: 0.3s;
+            overflow-y: auto;
         }
 
-        .sidebar-logo { padding: 40px 20px; text-align: center; border-bottom: 1px solid var(--borde-lujo); }
-        .sidebar-logo img { max-width: 150px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4)); }
+        .sidebar-logo { padding: 30px 20px; text-align: center; border-bottom: 1px solid var(--borde-lujo); }
+        .sidebar-logo img { max-width: 140px; filter: drop-shadow(0 0 5px var(--oro)); }
 
+        .nav-menu { padding: 15px 0; }
         .nav-link {
-            color: rgba(255,255,255,0.6) !important;
-            padding: 14px 25px;
+            color: rgba(255,255,255,0.7) !important;
+            padding: 12px 25px;
             display: flex;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: 0.4s;
+            transition: 0.3s;
             text-decoration: none;
-            margin: 4px 15px;
-            border-radius: 50px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.05);
         }
 
-        .nav-link:hover, .nav-link.active { background: rgba(212, 175, 55, 0.1); color: var(--oro-brillante) !important; }
-        .nav-link.active { border: 1px solid var(--oro); background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), transparent) !important; font-weight: 700; }
-        .nav-link i { width: 30px; font-size: 1.1rem; color: var(--oro); }
+        .nav-link:hover { 
+            background: rgba(212, 175, 55, 0.1); 
+            color: var(--oro-brillante) !important;
+            padding-left: 35px;
+        }
+
+        .nav-link.active { 
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
+            color: var(--oro) !important;
+            border-left: 4px solid var(--oro);
+            font-weight: 700;
+        }
+
+        .nav-link i { width: 25px; font-size: 1rem; color: var(--oro); margin-right: 10px; }
 
         /* --- CONTENIDO --- */
         #content {
             width: calc(100% - var(--sidebar-width));
             margin-left: var(--sidebar-width);
             padding: 40px;
-            transition: 0.3s;
         }
 
-        /* --- TARJETAS Y FORMULARIO --- */
+        /* --- COMPONENTES ELITE --- */
         .tarjeta-elite {
             background: var(--negro-suave);
             border: 1px solid var(--borde-lujo);
-            border-radius: 30px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .form-label { color: var(--rose-gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
         .form-control, .form-select { 
-            background: rgba(0,0,0,0.4) !important; 
+            background: rgba(0,0,0,0.3) !important; 
             border: 1px solid #333 !important; 
             color: #fff !important; 
-            border-radius: 12px; 
-            padding: 10px;
+            border-radius: 10px; 
         }
-        .form-control:focus { border-color: var(--oro) !important; box-shadow: 0 0 8px rgba(212, 175, 55, 0.2); }
 
         .btn-oro { 
             background: linear-gradient(135deg, var(--oro), var(--oro-brillante)); 
-            color: #000 !important; font-weight: 800; border: none; border-radius: 50px; 
-            padding: 12px 30px; transition: 0.4s; text-transform: uppercase; 
-        }
-        .btn-oro:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
-
-        /* --- TABLA --- */
-        .tabla-contenedor {
-            background: rgba(22, 22, 22, 0.6);
-            border-radius: 30px;
-            padding: 25px;
-            border: 1px solid var(--borde-lujo);
-            backdrop-filter: blur(10px);
+            color: #000 !important; font-weight: 700; border: none; border-radius: 50px; 
+            padding: 10px 20px; transition: 0.3s; text-transform: uppercase;
         }
 
-        .table { color: #fff !important; border-collapse: separate; border-spacing: 0 10px; }
-        .table thead th { 
-            color: var(--oro) !important; 
-            font-family: 'Cinzel', serif; 
-            border: none; 
-            text-transform: uppercase; 
-            font-size: 0.75rem;
-            padding-left: 15px;
-        }
-        
-        .table tbody tr { background: rgba(255, 255, 255, 0.03); border-radius: 15px; transition: 0.3s; }
-        .table tbody tr:hover { background: rgba(212, 175, 55, 0.07); transform: scale(1.005); }
-        
-        .table td { border: none !important; padding: 15px !important; vertical-align: middle; }
-
-        /* VISIBILIDAD DE NOMBRES MEJORADA */
         .nombre-cliente { 
             color: var(--oro-brillante) !important; 
             font-weight: 600; 
-            text-transform: uppercase; 
-            font-size: 0.95rem; 
-            display: block;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-        .servicio-detalle { color: var(--rose-gold); font-size: 0.75rem; opacity: 0.9; }
-
-        .icono-preview {
-            width: 45px; height: 45px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--oro);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--oro);
-            font-size: 1.2rem;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px #000;
         }
 
-        .widget-total { background: var(--negro-suave); border: 1px solid var(--oro); border-radius: 20px; padding: 10px 25px; }
-
-        /* Estilo para Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--negro-profundo); }
-        ::-webkit-scrollbar-thumb { background: var(--oro); border-radius: 10px; }
-
-        @media (max-width: 992px) {
-            #sidebar { width: 80px; }
-            #sidebar span, .sidebar-logo div { display: none; }
-            #content { width: calc(100% - 80px); margin-left: 80px; padding: 20px; }
-            .nombre-cliente { font-size: 0.85rem; }
+        .tabla-contenedor {
+            background: rgba(22, 22, 22, 0.5);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid var(--borde-lujo);
         }
+
+        .table tr { background: rgba(255,255,255,0.02); margin-bottom: 8px; display: table-row; }
+        
+        /* Scrollbar Personalizado */
+        #sidebar::-webkit-scrollbar { width: 5px; }
+        #sidebar::-webkit-scrollbar-thumb { background: var(--oro); }
     </style>
 </head>
 
@@ -168,31 +135,39 @@
 <nav id="sidebar">
     <div class="sidebar-logo">
         <img src="IMG/LKSTUDIO.png" alt="LK Studio" onerror="this.src='https://via.placeholder.com/150x50/000?text=LK+STUDIO'">
-        <div class="mt-2 text-center">
-            <small class="text-rose-gold text-uppercase fw-bold" style="font-size: 0.6rem; letter-spacing: 3px;">Elite System</small>
-        </div>
     </div>
-    <div class="nav-menu mt-4 flex-grow-1">
-        <a href="#" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
-        <a href="#" class="nav-link active"><i class="fas fa-calendar-check"></i> <span>Reservas</span></a>
-        <a href="#" class="nav-link"><i class="fas fa-gem"></i> <span>Beneficios VIP</span></a>
-        <a href="#" class="nav-link"><i class="fas fa-cash-register"></i> <span>Ventas</span></a>
+    
+    <div class="nav-menu">
+        <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> PANEL ADMIN</a>
+        <a href="Gestión_Reservaciones.html" class="nav-link active"><i class="fas fa-edit"></i> GESTIÓN RESERVAS</a>
+        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt"></i> CITAS</a>
+        <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register"></i> PUNTO DE VENTA</a>
+        
+        <div class="px-4 mt-3 mb-2"><small class="text-muted text-uppercase" style="font-size:0.6rem">Catálogos Elite</small></div>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut"></i> SERVICIOS</a>
+        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem"></i> BENEFICIOS VIP</a>
+        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> CURSOS</a>
+        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie"></i> INSTRUCTORES</a>
+        
+        <div class="px-4 mt-3 mb-2"><small class="text-muted text-uppercase" style="font-size:0.6rem">Inteligencia</small></div>
+        <a href="reportes.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> REPORTES</a>
     </div>
-    <div class="p-4">
-        <button class="btn btn-outline-danger btn-sm w-100 rounded-pill" onclick="location.reload()">Salir</button>
+
+    <div class="mt-auto p-4">
+        <button class="btn btn-outline-danger btn-sm w-100 rounded-pill" onclick="alert('Cerrando Sesión...')">SALIR</button>
     </div>
 </nav>
 
 <div id="content">
     <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
-        <div class="col-md-8">
-            <h1 class="fuente-lujo mb-1" style="color:var(--oro)">Gestión de Reservas</h1>
-            <p class="text-rose-gold text-uppercase small">Panel Administrativo LK Studio</p>
+        <div class="col-md-7">
+            <h1 class="fuente-lujo mb-1" style="color:var(--oro)">Gestión de Reservaciones</h1>
+            <p class="text-rose-gold text-uppercase small">Administración de Servicios y Clientes</p>
         </div>
-        <div class="col-md-4 text-md-end">
-            <div class="widget-total shadow">
-                <small class="text-white-50 d-block text-uppercase" style="font-size: 0.6rem;">Citas Activas</small>
-                <span class="fw-bold h3 m-0" id="countTotal" style="color:var(--oro)">0</span>
+        <div class="col-md-5 text-md-end">
+            <div class="d-inline-block p-3 border border-warning rounded-4 bg-dark">
+                <small class="text-white-50 d-block">TOTAL REGISTROS</small>
+                <span class="h2 fw-bold m-0" id="countTotal" style="color:var(--oro)">0</span>
             </div>
         </div>
     </div>
@@ -200,57 +175,68 @@
     <div class="row g-4">
         <div class="col-xl-4">
             <div class="tarjeta-elite animate__animated animate__fadeInLeft">
-                <h5 class="fuente-lujo mb-4 border-bottom border-secondary pb-3" style="color:var(--oro)">Nueva Cita</h5>
-                <form id="reservaForm">
+                <h5 class="fuente-lujo mb-4 text-center" style="color:var(--oro)">Nuevo Registro</h5>
+                <form id="mainForm">
                     <input type="hidden" id="editIndex" value="">
+                    
                     <div class="mb-3">
-                        <label class="form-label">Nombre del Cliente</label>
-                        <input type="text" id="clienteNombre" class="form-control" placeholder="Ej. Isabella Martínez" required>
+                        <label class="small text-rose-gold fw-bold">CLIENTE ELITE</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Nombre completo" required>
                     </div>
+
                     <div class="mb-3">
-                        <label class="form-label">WhatsApp</label>
-                        <input type="tel" id="clienteWhatsApp" class="form-control" placeholder="+52 1..." required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Servicio Principal</label>
-                        <select id="servicioTipo" class="form-select">
-                            <option value="Corte Master">Corte Master</option>
-                            <option value="Coloración">Coloración Premium</option>
-                            <option value="Balayage">Balayage Elite</option>
-                            <option value="Manicura">Manicura Pro</option>
+                        <label class="small text-rose-gold fw-bold">SERVICIO / CATEGORÍA</label>
+                        <select id="servicio" class="form-select">
+                            <optgroup label="Salón">
+                                <option value="Corte Master">Corte Master</option>
+                                <option value="Color Premium">Color Premium</option>
+                                <option value="Balayage Elite">Balayage Elite</option>
+                            </optgroup>
+                            <optgroup label="Academia">
+                                <option value="Curso Colorimetría">Curso Colorimetría</option>
+                                <option value="Masterclass Corte">Masterclass Corte</option>
+                            </optgroup>
                         </select>
                     </div>
-                    <div class="row">
-                        <div class="col-6 mb-3">
-                            <label class="form-label">Fecha</label>
-                            <input type="date" id="citaFecha" class="form-control" required>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="small text-rose-gold fw-bold">FECHA</label>
+                            <input type="date" id="fecha" class="form-control" required>
                         </div>
-                        <div class="col-6 mb-3">
-                            <label class="form-label">Hora</label>
-                            <input type="time" id="citaHora" class="form-control" required>
+                        <div class="col-6">
+                            <label class="small text-rose-gold fw-bold">HORA</label>
+                            <input type="time" id="hora" class="form-control" required>
                         </div>
                     </div>
+
+                    <div class="mb-3">
+                        <label class="small text-rose-gold fw-bold">CONTACTO WHATSAPP</label>
+                        <input type="tel" id="whatsapp" class="form-control" placeholder="10 dígitos">
+                    </div>
+
                     <div class="mb-4">
-                        <label class="form-label">Anticipo / Pago ($)</label>
-                        <input type="number" id="pagoMonto" class="form-control" placeholder="0.00">
+                        <label class="small text-rose-gold fw-bold">PAGO / ANTICIPO ($)</label>
+                        <input type="number" id="pago" class="form-control" placeholder="0.00">
                     </div>
-                    <button type="submit" id="btnGuardar" class="btn-oro w-100">Registrar Reserva</button>
+
+                    <button type="submit" id="btnAccion" class="btn-oro w-100 shadow">Guardar Registro</button>
                 </form>
             </div>
         </div>
 
         <div class="col-xl-8">
-            <div class="tabla-contenedor shadow-lg animate__animated animate__fadeInRight">
+            <div class="tabla-contenedor animate__animated animate__fadeInRight">
                 <div class="table-responsive">
-                    <table class="table align-middle">
+                    <table class="table align-middle text-white">
                         <thead>
-                            <tr>
-                                <th>Cliente / Servicio</th>
-                                <th>Fecha y Hora</th>
-                                <th class="text-end">Acciones</th>
+                            <tr class="text-oro">
+                                <th>CLIENTE / SERVICIO</th>
+                                <th>CITA</th>
+                                <th class="text-end">ACCIONES</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaReservas">
+                        <tbody id="listaRegistros">
                             </tbody>
                     </table>
                 </div>
@@ -260,109 +246,100 @@
 </div>
 
 <script>
-    // Inicialización de datos
-    let reservas = JSON.parse(localStorage.getItem("lk_reservas")) || [
-        { nombre: "Isabella Martínez", whatsapp: "5512345678", servicio: "Balayage Elite", fecha: "2024-05-20", hora: "14:00", pago: "500" },
-        { nombre: "Julián Casablancas", whatsapp: "5598765432", servicio: "Corte Master", fecha: "2024-05-21", hora: "10:30", pago: "200" }
-    ];
+    // Base de Datos en LocalStorage
+    let db = JSON.parse(localStorage.getItem("LK_DATA")) || [];
 
-    const form = document.getElementById("reservaForm");
-    const tabla = document.getElementById("tablaReservas");
-    const countTotal = document.getElementById("countTotal");
+    const mainForm = document.getElementById("mainForm");
+    const lista = document.getElementById("listaRegistros");
 
-    function renderTabla() {
-        countTotal.innerText = reservas.length;
-        tabla.innerHTML = "";
+    // Función para Dibujar la Tabla
+    function actualizarTabla() {
+        document.getElementById("countTotal").innerText = db.length;
+        lista.innerHTML = "";
 
-        if(reservas.length === 0) {
-            tabla.innerHTML = `<tr><td colspan="3" class="text-center py-5 text-white-50 small">No hay reservas registradas</td></tr>`;
-            return;
-        }
-
-        reservas.forEach((r, i) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="icono-preview me-3">
-                            <i class="fas fa-crown"></i>
+        db.forEach((item, index) => {
+            const row = `
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning text-dark rounded-circle me-3 d-flex align-items-center justify-content-center" style="width:40px; height:40px">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <div class="nombre-cliente">${item.nombre}</div>
+                                <small class="text-rose-gold">${item.servicio} • <b>$${item.pago}</b></small>
+                            </div>
                         </div>
-                        <div>
-                            <span class="nombre-cliente">${r.nombre}</span>
-                            <span class="servicio-detalle">${r.servicio} • <span class="text-success fw-bold">$${r.pago}</span></span>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="small text-white-50">${r.fecha}</div>
-                    <div class="fw-bold" style="color:var(--oro)">${r.hora} hrs</div>
-                </td>
-                <td class="text-end">
-                    <div class="btn-group">
-                        <a href="https://wa.me/${r.whatsapp}" target="_blank" class="btn btn-sm" title="WhatsApp" style="color: #25D366"><i class="fab fa-whatsapp fa-lg"></i></a>
-                        <button class="btn btn-sm text-warning" onclick="editar(${i})" title="Editar"><i class="fas fa-pen"></i></button>
-                        <button class="btn btn-sm text-danger" onclick="eliminar(${i})" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-                </td>
+                    </td>
+                    <td>
+                        <div class="small">${item.fecha}</div>
+                        <div class="fw-bold text-oro">${item.hora}</div>
+                    </td>
+                    <td class="text-end">
+                        <a href="https://wa.me/52${item.whatsapp}" target="_blank" class="btn btn-sm text-success"><i class="fab fa-whatsapp fa-lg"></i></a>
+                        <button class="btn btn-sm text-warning mx-2" onclick="prepararEdicion(${index})"><i class="fas fa-pen"></i></button>
+                        <button class="btn btn-sm text-danger" onclick="eliminarRegistro(${index})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
             `;
-            tabla.appendChild(row);
+            lista.innerHTML += row;
         });
     }
 
-    form.addEventListener("submit", function(e) {
+    // Guardar o Editar
+    mainForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const index = document.getElementById("editIndex").value;
         
-        const nuevaReserva = {
-            nombre: document.getElementById("clienteNombre").value,
-            whatsapp: document.getElementById("clienteWhatsApp").value,
-            servicio: document.getElementById("servicioTipo").value,
-            fecha: document.getElementById("citaFecha").value,
-            hora: document.getElementById("citaHora").value,
-            pago: document.getElementById("pagoMonto").value || 0
+        const data = {
+            nombre: document.getElementById("nombre").value,
+            servicio: document.getElementById("servicio").value,
+            fecha: document.getElementById("fecha").value,
+            hora: document.getElementById("hora").value,
+            whatsapp: document.getElementById("whatsapp").value,
+            pago: document.getElementById("pago").value
         };
 
         if(index === "") {
-            reservas.push(nuevaReserva);
+            db.push(data);
         } else {
-            reservas[index] = nuevaReserva;
+            db[index] = data;
             document.getElementById("editIndex").value = "";
-            document.getElementById("btnGuardar").innerText = "Registrar Reserva";
+            document.getElementById("btnAccion").innerText = "Guardar Registro";
         }
 
-        localStorage.setItem("lk_reservas", JSON.stringify(reservas));
-        form.reset();
-        renderTabla();
+        localStorage.setItem("LK_DATA", JSON.stringify(db));
+        mainForm.reset();
+        actualizarTabla();
     });
 
-    window.eliminar = function(i) {
-        if(confirm("¿Estás seguro de cancelar la reserva de " + reservas[i].nombre + "?")) {
-            reservas.splice(i, 1);
-            localStorage.setItem("lk_reservas", JSON.stringify(reservas));
-            renderTabla();
+    // Eliminar
+    window.eliminarRegistro = (i) => {
+        if(confirm("¿Eliminar este registro de forma permanente?")) {
+            db.splice(i, 1);
+            localStorage.setItem("LK_DATA", JSON.stringify(db));
+            actualizarTabla();
         }
     }
 
-    window.editar = function(i) {
-        const r = reservas[i];
-        document.getElementById("clienteNombre").value = r.nombre;
-        document.getElementById("clienteWhatsApp").value = r.whatsapp;
-        document.getElementById("servicioTipo").value = r.servicio;
-        document.getElementById("citaFecha").value = r.fecha;
-        document.getElementById("citaHora").value = r.hora;
-        document.getElementById("pagoMonto").value = r.pago;
+    // Editar
+    window.prepararEdicion = (i) => {
+        const item = db[i];
+        document.getElementById("nombre").value = item.nombre;
+        document.getElementById("servicio").value = item.servicio;
+        document.getElementById("fecha").value = item.fecha;
+        document.getElementById("hora").value = item.hora;
+        document.getElementById("whatsapp").value = item.whatsapp;
+        document.getElementById("pago").value = item.pago;
         
         document.getElementById("editIndex").value = i;
-        document.getElementById("btnGuardar").innerText = "Actualizar Cita";
-        
-        // Efecto scroll suave al formulario
+        document.getElementById("btnAccion").innerText = "Actualizar Registro";
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
-    // Carga inicial
-    renderTabla();
+    // Carga Inicial
+    actualizarTabla();
 </script>
 
 </body>
 </html>
-
