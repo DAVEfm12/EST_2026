@@ -9,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         :root { 
@@ -31,7 +32,7 @@
 
         .luxury-font { font-family: 'Cinzel', serif; letter-spacing: 1px; }
 
-        /* --- SIDEBAR CUSTOM --- */
+        /* --- SIDEBAR --- */
         #sidebarAdmin {
             width: var(--sidebar-width);
             background: var(--deep);
@@ -50,6 +51,7 @@
             border-radius: 0 50px 50px 0;
             margin-right: 15px;
             font-size: 0.9rem;
+            text-decoration: none;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -70,13 +72,13 @@
             padding: 40px;
         }
 
-        /* --- KPI CARDS ELITE --- */
+        /* --- KPI CARDS --- */
         .kpi-card { 
             background: var(--soft-black); 
             border: 1px solid rgba(212, 175, 55, 0.2);
             padding: 25px; 
             border-radius: 20px; 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s;
             position: relative;
             overflow: hidden;
         }
@@ -85,45 +87,52 @@
             content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--gold);
         }
 
-        .kpi-card:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .kpi-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--rose); font-weight: 700; }
 
-        /* --- TABLA DE LUJO --- */
+        /* --- TABLA --- */
         .table-container {
             background: white; 
             border-radius: 20px; 
-            padding: 10px;
+            padding: 15px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            margin-top: 20px;
         }
 
         .table-luxury { color: #000 !important; margin-bottom: 0; }
-        
         .table-luxury thead th { 
             background: var(--deep) !important; 
             color: var(--gold-br) !important; 
             text-transform: uppercase; 
             font-size: 0.75rem; 
             padding: 18px;
-            border: none;
             font-family: 'Cinzel', serif;
         }
 
-        .table-luxury tbody td { 
-            padding: 18px; 
-            border-bottom: 1px solid #eee; 
-            font-weight: 600;
-        }
+        .table-luxury tbody td { padding: 15px; border-bottom: 1px solid #eee; font-weight: 600; font-size: 0.85rem; }
 
         .method-badge {
             font-size: 0.65rem; padding: 4px 10px; border-radius: 50px; font-weight: 800;
         }
 
-        /* Ajustes Móviles */
+        /* --- CHART CONTAINER --- */
+        .chart-container {
+            background: var(--soft-black);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            height: 350px;
+        }
+
         @media (max-width: 992px) {
-            #sidebarAdmin { transform: translateX(-100%); transition: 0.3s; }
+            #sidebarAdmin { transform: translateX(-100%); }
             .main-content { margin-left: 0; width: 100%; padding: 20px; }
             #sidebarAdmin.active { transform: translateX(0); }
+        }
+
+        @media print {
+            #sidebarAdmin, .btn-group, .filters-section { display: none !important; }
+            .main-content { margin-left: 0; width: 100%; }
         }
     </style>
 </head>
@@ -137,86 +146,96 @@
     
     <div class="nav flex-column mt-2">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-th-large me-3"></i> Dashboard</a>
-        <a href="citas.html" class="nav-link"><i class="fas fa-calendar-alt me-3"></i> Agenda VIP</a>
-        <a href="Gestión_Reservaciones.html" class="nav-link"><i class="fas fa-edit me-3"></i> Reservaciones</a>
         <a href="punto_venta.html" class="nav-link"><i class="fas fa-cash-register me-3"></i> Caja</a>
-        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut me-3"></i> Servicios</a>
-        <a href="catalogo_instruc.html" class="nav-link"><i class="fas fa-user-tie me-3"></i> Staff</a>
-        <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap me-3"></i> Academia</a>
-        <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem me-3"></i> Beneficios</a>
         <a href="reportes.html" class="nav-link active"><i class="fas fa-chart-line me-3"></i> Reportes</a>
+        <a href="catalogo_servicios.html" class="nav-link"><i class="fas fa-cut me-3"></i> Servicios</a>
     </div>
 
     <div class="mt-auto p-4 border-top border-secondary">
-        <button class="btn btn-sm btn-outline-danger w-100 rounded-pill"><i class="fas fa-power-off me-2"></i>SALIR</button>
+        <button class="btn btn-sm btn-outline-danger w-100 rounded-pill" onclick="location.href='index.html'"><i class="fas fa-power-off me-2"></i>SALIR</button>
     </div>
 </nav>
 
 <main class="main-content">
     
     <div class="row align-items-center mb-5 animate__animated animate__fadeInDown">
-        <div class="col-md-7">
+        <div class="col-md-6">
             <h6 class="text-rose fw-bold mb-1" style="letter-spacing: 3px;">ESTADÍSTICAS GLOBALES</h6>
             <h1 class="luxury-font text-gold display-5 fw-bold">INTELIGENCIA FINANCIERA</h1>
         </div>
-        <div class="col-md-5 text-md-end mt-3 mt-md-0">
-            <div class="btn-group shadow">
-                <button class="btn btn-dark border-gold text-gold px-4" onclick="window.print()">
-                    <i class="fas fa-print me-2"></i>IMPRIMIR
-                </button>
-                <button class="btn btn-warning fw-bold px-4 text-black">
-                    <i class="fas fa-download me-2"></i>PDF
-                </button>
+        <div class="col-md-6 text-md-end filters-section">
+            <div class="d-flex gap-2 justify-content-md-end align-items-center">
+                <select id="filtroTiempo" class="form-select bg-dark border-gold text-white w-auto rounded-pill" onchange="cargarReportes()">
+                    <option value="todos">Historial Completo</option>
+                    <option value="hoy">Ventas de Hoy</option>
+                    <option value="mes">Mes Actual</option>
+                </select>
+                <div class="btn-group shadow">
+                    <button class="btn btn-dark border-gold text-gold px-3" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                    </button>
+                    <button class="btn btn-warning fw-bold px-4 text-black" onclick="exportarCSV()">
+                        <i class="fas fa-file-excel me-2"></i>EXCEL
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="row g-4 mb-5 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+    <div class="row g-4 mb-5 animate__animated animate__fadeInUp">
         <div class="col-md-4">
             <div class="kpi-card">
                 <span class="kpi-title">Ingresos Brutos</span>
                 <h2 class="text-gold fw-bold mt-2 mb-0" id="totalIngresos">$0.00</h2>
-                <small class="text-success"><i class="fas fa-caret-up"></i> +4.2% este mes</small>
+                <small class="text-success" id="subtituloIngresos">Cálculo en tiempo real</small>
             </div>
         </div>
         <div class="col-md-4">
             <div class="kpi-card" style="border-left-color: var(--rose);">
-                <span class="kpi-title">Volumen de Citas</span>
+                <span class="kpi-title">Tickets Generados</span>
                 <h2 class="text-white fw-bold mt-2 mb-0" id="totalCitas">0</h2>
-                <small class="text-white-50">Reservas registradas</small>
+                <small class="text-white-50">Transacciones totales</small>
             </div>
         </div>
         <div class="col-md-4">
             <div class="kpi-card" style="border-left-color: #00ff87;">
-                <span class="kpi-title">Servicio Estrella</span>
-                <h2 class="text-white fw-bold mt-2 mb-0" id="mejorServicio">-</h2>
-                <small class="text-white-50">Mayor demanda</small>
+                <span class="kpi-title">Ticket Promedio</span>
+                <h2 class="text-white fw-bold mt-2 mb-0" id="ticketPromedio">$0.00</h2>
+                <small class="text-white-50">Gasto por cliente</small>
             </div>
         </div>
     </div>
 
-    <div class="animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+    <div class="row mb-5 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+        <div class="col-12">
+            <div class="chart-container">
+                <span class="kpi-title d-block mb-3">Flujo de Efectivo Mensual</span>
+                <canvas id="graficaIngresos"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="luxury-font text-white mb-0"><i class="fas fa-history me-2 text-gold"></i>Historial de Transacciones</h4>
+            <h4 class="luxury-font text-white mb-0"><i class="fas fa-history me-2 text-gold"></i>Auditoría de Movimientos</h4>
             <div class="badge bg-dark border border-secondary p-2 px-3">
-                <i class="fas fa-circle text-success me-2 small"></i>Sistema Live
+                <i class="fas fa-circle text-success me-2 small"></i>Sincronizado
             </div>
         </div>
         
-        <div class="table-container shadow-lg">
+        <div class="table-container shadow-lg text-dark">
             <div class="table-responsive">
                 <table class="table table-luxury align-middle">
                     <thead>
                         <tr>
-                            <th>Fecha y Registro</th>
+                            <th>Registro</th>
                             <th>Clienta VIP</th>
-                            <th>Servicio / Tratamiento</th>
-                            <th>Métricas</th>
-                            <th class="text-end">Importe Total</th>
+                            <th>Concepto</th>
+                            <th>Metodo</th>
+                            <th class="text-end">Monto</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaReporte">
-                        </tbody>
+                    <tbody id="tablaReporte"></tbody>
                 </table>
             </div>
         </div>
@@ -224,78 +243,138 @@
 </main>
 
 <script>
+    let miGrafica;
+
     function cargarReportes() {
+        // Unimos datos de Reservaciones y del POS para un reporte global
         const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
-        const tabla = document.getElementById("tablaReporte");
-        const totalIngresosElem = document.getElementById("totalIngresos");
-        const totalCitasElem = document.getElementById("totalCitas");
+        const ventasPOS = JSON.parse(localStorage.getItem("ventas_dia")) || [];
         
-        let sumaTotal = 0;
+        // Normalizar ventas POS al formato de reservaciones para la tabla
+        const ventasNormalizadas = ventasPOS.map(v => ({
+            fecha: new Date().toISOString().split('T')[0], // Asumimos hoy para el POS
+            cliente: v.cliente,
+            servicio: "Venta POS",
+            costo: v.total,
+            metodo: v.metodo || "Efectivo",
+            hora: v.hora
+        }));
+
+        const todosLosDatos = [...reservaciones, ...ventasNormalizadas];
+        const filtro = document.getElementById("filtroTiempo").value;
+        const hoy = new Date().toISOString().split('T')[0];
+        const mesActual = hoy.substring(0, 7);
+
+        // Aplicar Filtro
+        const datosFiltrados = todosLosDatos.filter(d => {
+            if (filtro === "hoy") return d.fecha === hoy;
+            if (filtro === "mes") return d.fecha.startsWith(mesActual);
+            return true;
+        });
+
+        renderTabla(datosFiltrados);
+        actualizarKPIs(datosFiltrados);
+        actualizarGrafica(datosFiltrados);
+    }
+
+    function renderTabla(datos) {
+        const tabla = document.getElementById("tablaReporte");
         tabla.innerHTML = "";
 
-        if (reservaciones.length === 0) {
-            tabla.innerHTML = `<tr><td colspan="5" class="text-center py-5 text-muted">No hay datos financieros registrados hoy.</td></tr>`;
+        if (datos.length === 0) {
+            tabla.innerHTML = `<tr><td colspan="5" class="text-center py-5 text-muted">No se encontraron registros en este periodo.</td></tr>`;
             return;
         }
 
-        reservaciones.forEach((r, index) => {
+        datos.forEach((r, index) => {
             const costo = parseFloat(r.costo) || 0;
-            sumaTotal += costo;
-            
-            // Alternamos colores para las filas para máxima legibilidad
-            const bgColor = index % 2 === 0 ? '#ffffff' : '#f9f9f9';
-
             tabla.innerHTML += `
-                <tr style="background-color: ${bgColor}">
+                <tr>
                     <td>
-                        <div class="fw-bold">${r.fecha}</div>
-                        <div class="text-muted small"><i class="far fa-clock me-1"></i>${r.hora} hrs</div>
+                        <div class="fw-bold text-dark">${r.fecha}</div>
+                        <div class="text-muted small">${r.hora || '--:--'}</div>
                     </td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <div class="rounded-circle bg-dark text-gold d-flex align-items-center justify-content-center me-2" style="width: 30px; height: 30px; font-size: 0.7rem;">
+                            <div class="rounded-circle bg-dark text-gold d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px; font-size: 0.7rem;">
                                 ${r.cliente.substring(0,2).toUpperCase()}
                             </div>
-                            <span class="text-uppercase small fw-bold">${r.cliente}</span>
+                            <span class="text-uppercase small fw-bold text-dark">${r.cliente}</span>
                         </div>
                     </td>
-                    <td>
-                        <span class="badge bg-black text-gold py-2 px-3" style="font-size: 0.7rem;">${r.servicio}</span>
-                    </td>
-                    <td>
-                        <span class="method-badge" style="background: #e3f2fd; color: #1976d2;">
-                            <i class="fas fa-check-circle me-1"></i>VERIFICADO
-                        </span>
-                    </td>
-                    <td class="text-end fw-bold" style="font-size: 1.1rem; color: #000;">
-                        $${costo.toLocaleString('es-MX', {minimumFractionDigits: 2})}
-                    </td>
+                    <td><span class="badge bg-light text-dark border py-2 px-3">${r.servicio}</span></td>
+                    <td><span class="method-badge text-white bg-dark">${r.metodo || 'EFECTIVO'}</span></td>
+                    <td class="text-end fw-bold text-dark" style="font-size: 1rem;">$${costo.toFixed(2)}</td>
                 </tr>
             `;
         });
-
-        // Actualizar KPIs con animación de conteo básica
-        totalIngresosElem.innerText = `$${sumaTotal.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
-        totalCitasElem.innerText = reservaciones.length;
-        
-        // Lógica para determinar el servicio más popular
-        if(reservaciones.length > 0) {
-            const conteoServicios = {};
-            reservaciones.forEach(r => {
-                conteoServicios[r.servicio] = (conteoServicios[r.servicio] || 0) + 1;
-            });
-            
-            const masFrecuente = Object.keys(conteoServicios).reduce((a, b) => 
-                conteoServicios[a] > conteoServicios[b] ? a : b
-            );
-            
-            document.getElementById("mejorServicio").innerText = masFrecuente;
-        }
     }
 
-    // Ejecutar al cargar
+    function actualizarKPIs(datos) {
+        const total = datos.reduce((acc, curr) => acc + (parseFloat(curr.costo) || 0), 0);
+        const promedio = datos.length > 0 ? total / datos.length : 0;
+
+        document.getElementById("totalIngresos").innerText = `$${total.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+        document.getElementById("totalCitas").innerText = datos.length;
+        document.getElementById("ticketPromedio").innerText = `$${promedio.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+    }
+
+    function actualizarGrafica(datos) {
+        // Agrupar por fecha para la gráfica
+        const agrupados = {};
+        datos.slice(0, 10).reverse().forEach(d => {
+            agrupados[d.fecha] = (agrupados[d.fecha] || 0) + parseFloat(d.costo);
+        });
+
+        const ctx = document.getElementById('graficaIngresos').getContext('2d');
+        if (miGrafica) miGrafica.destroy();
+
+        miGrafica = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Object.keys(agrupados),
+                datasets: [{
+                    label: 'Ventas $',
+                    data: Object.values(agrupados),
+                    borderColor: '#D4AF37',
+                    backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#E6B8A2' } },
+                    x: { grid: { display: false }, ticks: { color: '#E6B8A2' } }
+                }
+            }
+        });
+    }
+
+    function exportarCSV() {
+        const reservaciones = JSON.parse(localStorage.getItem("reservaciones")) || [];
+        if (reservaciones.length === 0) return alert("No hay datos para exportar");
+
+        let csv = "Fecha,Hora,Cliente,Servicio,Costo\n";
+        reservaciones.forEach(r => {
+            csv += `${r.fecha},${r.hora},${r.cliente},${r.servicio},${r.costo}\n`;
+        });
+
+        const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", `Reporte_Financiero_LK.csv`);
+        link.click();
+    }
+
     window.onload = cargarReportes;
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
