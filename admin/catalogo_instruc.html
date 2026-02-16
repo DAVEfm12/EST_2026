@@ -119,11 +119,13 @@
         }
         .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
 
-        .doc-icon { font-size: 1rem; margin-right: 5px; transition: 0.3s; cursor: pointer; }
-        .doc-active { color: var(--gold-bright); }
-        .doc-inactive { color: #222; }
+        .doc-icon { font-size: 1.1rem; margin-right: 8px; transition: 0.3s; cursor: pointer; }
+        .doc-active { color: var(--gold-bright); filter: drop-shadow(0 0 2px var(--gold)); }
+        .doc-inactive { color: #333; opacity: 0.5; }
 
-        .scroll-form { max-height: 80vh; overflow-y: auto; padding-right: 10px; }
+        .scroll-form { max-height: 75vh; overflow-y: auto; padding-right: 15px; }
+        .scroll-form::-webkit-scrollbar { width: 5px; }
+        .scroll-form::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
     </style>
 </head>
 
@@ -136,7 +138,7 @@
     <div class="mt-4">
         <a href="PANEL_ADMIN.html" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
         <a href="catalogo_cursos.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Cursos</a>
-        <a href="#" class="nav-link active"><i class="fas fa-user-tie"></i> Instructores</a>
+        <a href="catalogo_instruc.html" class="nav-link active"><i class="fas fa-user-tie"></i> Instructores</a>
         <a href="catalogo_beneficios.html" class="nav-link"><i class="fas fa-gem"></i> Beneficios</a>
     </div>
 </nav>
@@ -166,72 +168,64 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">CURP (Vigencia < 3 meses)</label>
+                            <label class="form-label">CURP</label>
                             <input type="text" id="curp" class="form-control" maxlength="18" placeholder="18 caracteres" oninput="this.value = this.value.toUpperCase()">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label d-flex justify-content-between">
                                 RFC <span class="text-gold" style="cursor:pointer; font-size: 0.6rem;" onclick="generarRFC()">
-                                    <i class="fas fa-magic"></i> GENERAR DESDE CURP
+                                    <i class="fas fa-magic"></i> GENERAR
                                 </span>
                             </label>
-                            <input type="text" id="rfc" class="form-control" maxlength="13" placeholder="RFC con Homoclave" oninput="this.value = this.value.toUpperCase()">
+                            <input type="text" id="rfc" class="form-control" maxlength="13" placeholder="Con Homoclave" oninput="this.value = this.value.toUpperCase()">
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">¿ES MENOR DE EDAD? (15-17 AÑOS)</label>
+                        <label class="form-label">¿ES MENOR DE EDAD?</label>
                         <select id="esMenor" class="form-select" onchange="toggleMenor()">
                             <option value="no">No, es mayor de edad</option>
                             <option value="si">Sí, requiere tutor</option>
                         </select>
                     </div>
 
-                    <div class="section-title">2. Documentación General (Copias)</div>
+                    <div class="section-title">2. Documentación General (Archivos)</div>
                     <div class="row g-2">
                         <div class="col-12 mb-2">
-                            <label class="form-label">1. INE o PASAPORTE VIGENTE</label>
+                            <label class="form-label">1. INE / PASAPORTE</label>
                             <input type="file" id="f_ine" class="form-control form-control-sm">
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label">2. ACTA DE NACIMIENTO</label>
+                            <label class="form-label">2. ACTA NACIMIENTO</label>
                             <input type="file" id="f_acta" class="form-control form-control-sm">
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label">3. CURP ACTUALIZADA</label>
-                            <input type="file" id="f_curp" class="form-control form-control-sm">
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label">4. COMP. DOMICILIO</label>
+                            <label class="form-label">3. COMP. DOMICILIO</label>
                             <input type="file" id="f_domicilio" class="form-control form-control-sm">
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label">5. ÚLTIMO GRADO ESTUDIOS</label>
-                            <input type="file" id="f_estudios" class="form-control form-control-sm">
                         </div>
                     </div>
 
                     <div id="seccionTutor" style="display:none;" class="mt-2 p-3 border border-warning rounded">
-                        <div class="text-warning mb-2 small fw-bold">6. REQUISITO PARA MENORES</div>
-                        <label class="form-label">INE DEL PADRE, MADRE O TUTOR</label>
+                        <div class="text-warning mb-2 small fw-bold"><i class="fas fa-exclamation-triangle"></i> REQUISITO PARA MENORES</div>
+                        <label class="form-label">INE DEL PADRE O TUTOR</label>
                         <input type="file" id="f_tutor" class="form-control form-control-sm">
                     </div>
 
-                    <div class="section-title">3. Trámite Diploma Especialidad</div>
+                    <div class="section-title">3. Especialidad</div>
                     <div class="row g-2">
                         <div class="col-md-6 mb-2">
-                            <label class="form-label">7. FOTO ÓVALO MIGNON (B/N)</label>
+                            <label class="form-label">FOTO ÓVALO MIGNON</label>
                             <input type="file" id="f_foto" class="form-control form-control-sm">
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label">8. DIPLOMAS PREVIOS (PDF)</label>
+                            <label class="form-label">DIPLOMAS PREVIOS</label>
                             <input type="file" id="f_diplomas" class="form-control form-control-sm">
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <button type="submit" class="btn btn-gold w-100" id="btnSubmit">
-                            <i class="fas fa-save me-2"></i> GUARDAR EN BASE DE DATOS
+                            <i class="fas fa-save me-2"></i> GUARDAR INSTRUCTOR
                         </button>
                         <button type="button" class="btn btn-outline-light w-100 mt-2 btn-sm" onclick="resetForm()" id="btnCancel" style="display:none;">CANCELAR EDICIÓN</button>
                     </div>
@@ -245,8 +239,8 @@
                     <thead>
                         <tr>
                             <th>INSTRUCTOR</th>
-                            <th class="text-center">CHECKLIST EXPEDIENTE</th>
-                            <th class="text-end">ACCIONES</th>
+                            <th class="text-center">EXPEDIENTE</th>
+                            <th class="text-end">GESTIÓN</th>
                         </tr>
                     </thead>
                     <tbody id="tablaInstructores"></tbody>
@@ -260,30 +254,38 @@
 // Base de datos sincronizada
 let instructores = JSON.parse(localStorage.getItem("LK_INSTRUCTORES_MASTER")) || [];
 
+// Generar RFC básico
 function generarRFC() {
     const curp = document.getElementById("curp").value.trim();
     if (curp.length >= 10) {
-        const homoclave = (curp.length === 18) ? curp.substring(15, 18) : "XX1";
-        document.getElementById("rfc").value = curp.substring(0, 10) + homoclave;
-    } else { alert("Ingresa primero el CURP (al menos 10 caracteres)."); }
+        document.getElementById("rfc").value = curp.substring(0, 10) + "XX1";
+    } else { 
+        alert("Ingresa los primeros 10 caracteres del CURP."); 
+    }
 }
 
 function toggleMenor() {
     document.getElementById("seccionTutor").style.display = (document.getElementById("esMenor").value === "si") ? "block" : "none";
 }
 
+// Convertidor de archivos a Base64 para guardado local
 const toBase64 = file => new Promise((resolve) => {
     if(!file) resolve(null);
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
+    else {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+    }
 });
 
-// CRUD: GUARDAR / EDITAR
+// CRUD: GUARDAR / ACTUALIZAR
 document.getElementById("formInstructor").onsubmit = async function(e) {
     e.preventDefault();
     const idx = parseInt(document.getElementById("editIndex").value);
     
+    // Mostramos feedback visual de carga
+    document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESANDO...';
+
     const instructor = {
         nombre: document.getElementById("nombre").value.toUpperCase(),
         curp: document.getElementById("curp").value.toUpperCase(),
@@ -292,23 +294,29 @@ document.getElementById("formInstructor").onsubmit = async function(e) {
         docs: {
             ine: await toBase64(document.getElementById("f_ine").files[0]) || (idx > -1 ? instructores[idx].docs.ine : null),
             acta: await toBase64(document.getElementById("f_acta").files[0]) || (idx > -1 ? instructores[idx].docs.acta : null),
-            curp_doc: await toBase64(document.getElementById("f_curp").files[0]) || (idx > -1 ? instructores[idx].docs.curp_doc : null),
             domicilio: await toBase64(document.getElementById("f_domicilio").files[0]) || (idx > -1 ? instructores[idx].docs.domicilio : null),
-            estudios: await toBase64(document.getElementById("f_estudios").files[0]) || (idx > -1 ? instructores[idx].docs.estudios : null),
             tutor: await toBase64(document.getElementById("f_tutor").files[0]) || (idx > -1 ? instructores[idx].docs.tutor : null),
             foto: await toBase64(document.getElementById("f_foto").files[0]) || (idx > -1 ? instructores[idx].docs.foto : null),
             diplomas: await toBase64(document.getElementById("f_diplomas").files[0]) || (idx > -1 ? instructores[idx].docs.diplomas : null)
         }
     };
 
-    if(idx === -1) instructores.push(instructor);
-    else instructores[idx] = instructor;
+    if(idx === -1) {
+        instructores.push(instructor);
+    } else {
+        instructores[idx] = instructor;
+    }
 
-    localStorage.setItem("LK_INSTRUCTORES_MASTER", JSON.stringify(instructores));
-    resetForm();
-    renderTable();
+    try {
+        localStorage.setItem("LK_INSTRUCTORES_MASTER", JSON.stringify(instructores));
+        resetForm();
+        renderTable();
+    } catch (e) {
+        alert("Error: El archivo es demasiado pesado para el navegador. Intenta con imágenes más pequeñas.");
+    }
 };
 
+// CRUD: LEER / MOSTRAR
 function renderTable() {
     const tbody = document.getElementById("tablaInstructores");
     document.getElementById("totalCount").innerText = instructores.length;
@@ -319,14 +327,15 @@ function renderTable() {
             <tr class="animate__animated animate__fadeIn">
                 <td>
                     <div class="fw-bold text-white">${inst.nombre}</div>
-                    <div class="text-rose small" style="font-size:0.7rem">${inst.rfc} | ${inst.curp}</div>
+                    <div class="text-rose small" style="font-size:0.7rem">${inst.rfc} | CURP: ${inst.curp}</div>
                 </td>
                 <td class="text-center">
-                    <i class="fas fa-id-card doc-icon ${inst.docs.ine ? 'doc-active' : 'doc-inactive'}" title="INE" onclick="verDoc('${inst.docs.ine}')"></i>
-                    <i class="fas fa-baby doc-icon ${inst.docs.acta ? 'doc-active' : 'doc-inactive'}" title="Acta" onclick="verDoc('${inst.docs.acta}')"></i>
-                    <i class="fas fa-home doc-icon ${inst.docs.domicilio ? 'doc-active' : 'doc-inactive'}" title="Domicilio" onclick="verDoc('${inst.docs.domicilio}')"></i>
-                    <i class="fas fa-graduation-cap doc-icon ${inst.docs.estudios ? 'doc-active' : 'doc-inactive'}" title="Estudios" onclick="verDoc('${inst.docs.estudios}')"></i>
-                    <i class="fas fa-camera doc-icon ${inst.docs.foto ? 'doc-active' : 'doc-inactive'}" title="Foto Mignon" onclick="verDoc('${inst.docs.foto}')"></i>
+                    <i class="fas fa-id-card doc-icon ${inst.docs.ine ? 'doc-active' : 'doc-inactive'}" title="INE" onclick="verDoc(${i}, 'ine')"></i>
+                    <i class="fas fa-file-invoice doc-icon ${inst.docs.acta ? 'doc-active' : 'doc-inactive'}" title="Acta" onclick="verDoc(${i}, 'acta')"></i>
+                    <i class="fas fa-home doc-icon ${inst.docs.domicilio ? 'doc-active' : 'doc-inactive'}" title="Comp. Domicilio" onclick="verDoc(${i}, 'domicilio')"></i>
+                    <i class="fas fa-user-shield doc-icon ${inst.docs.tutor ? 'doc-active' : 'doc-inactive'}" title="Tutor" onclick="verDoc(${i}, 'tutor')"></i>
+                    <i class="fas fa-camera doc-icon ${inst.docs.foto ? 'doc-active' : 'doc-inactive'}" title="Foto Mignon" onclick="verDoc(${i}, 'foto')"></i>
+                    <i class="fas fa-certificate doc-icon ${inst.docs.diplomas ? 'doc-active' : 'doc-inactive'}" title="Diplomas" onclick="verDoc(${i}, 'diplomas')"></i>
                 </td>
                 <td class="text-end">
                     <button class="btn btn-link text-gold p-1" onclick="prepararEdit(${i})"><i class="fas fa-edit"></i></button>
@@ -337,6 +346,7 @@ function renderTable() {
     });
 }
 
+// CRUD: EDITAR
 function prepararEdit(i) {
     const inst = instructores[i];
     document.getElementById("editIndex").value = i;
@@ -344,13 +354,15 @@ function prepararEdit(i) {
     document.getElementById("curp").value = inst.curp;
     document.getElementById("rfc").value = inst.rfc;
     document.getElementById("esMenor").value = inst.menor;
-    document.getElementById("btnSubmit").innerText = "ACTUALIZAR DATOS";
+    document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-sync me-2"></i> ACTUALIZAR EXPEDIENTE';
     document.getElementById("btnCancel").style.display = "block";
     toggleMenor();
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
+// CRUD: ELIMINAR
 function eliminar(i) {
-    if(confirm("¿Eliminar expediente de " + instructores[i].nombre + "?")) {
+    if(confirm("¿Estás seguro de eliminar el expediente de " + instructores[i].nombre + "? Esta acción no se puede deshacer.")) {
         instructores.splice(i, 1);
         localStorage.setItem("LK_INSTRUCTORES_MASTER", JSON.stringify(instructores));
         renderTable();
@@ -360,17 +372,28 @@ function eliminar(i) {
 function resetForm() {
     document.getElementById("formInstructor").reset();
     document.getElementById("editIndex").value = "-1";
-    document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-save me-2"></i> GUARDAR EN BASE DE DATOS';
+    document.getElementById("btnSubmit").innerHTML = '<i class="fas fa-save me-2"></i> GUARDAR INSTRUCTOR';
     document.getElementById("btnCancel").style.display = "none";
     toggleMenor();
 }
 
-function verDoc(b64) {
-    if(!b64) return alert("No se cargó este documento.");
+// VISUALIZADOR DE DOCUMENTOS
+function verDoc(idx, tipo) {
+    const b64 = instructores[idx].docs[tipo];
+    if(!b64) {
+        alert("Este documento no ha sido cargado aún.");
+        return;
+    }
     const win = window.open();
-    win.document.write(`<iframe src="${b64}" frameborder="0" style="width:100%; height:100%;"></iframe>`);
+    win.document.write(`
+        <title>Documento - LK Studio</title>
+        <body style="margin:0; background:#111; display:flex; justify-content:center; align-items:center; height:100vh;">
+            <img src="${b64}" style="max-width:100%; max-height:100%; box-shadow: 0 0 50px #000; border: 2px solid #D4AF37;">
+        </body>
+    `);
 }
 
+// Inicialización
 renderTable();
 </script>
 </body>
